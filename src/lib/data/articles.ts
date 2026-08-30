@@ -1,6 +1,6 @@
 /**
  * MAHALAKSHMI TOUR & TRAVEL — ARTICLES DATA REPOSITORY & DAL
- * Phase 08: Cornerstone Travel Guides, Route Insights, and Itinerary Knowledge
+ * Expanded Repository of 10 Cornerstone Travel Guides, Route Insights & SEO/AEO/GEO Knowledge.
  */
 
 import { TravelArticle } from '@/types/article';
@@ -21,7 +21,7 @@ export const travelArticlesRepository: TravelArticle[] = [
       role: 'Outstation Travel Specialist',
     },
     publishedDate: '2026-06-15',
-    updatedDate: '2026-08-01',
+    updatedDate: '2026-08-30',
     readingTimeMinutes: 6,
     keyFacts: {
       origin: 'Madurai, Tamil Nadu',
@@ -74,7 +74,7 @@ Because the Bodi Mettu to Munnar stretch involves steep gradients and narrow mou
 - **June to August (Southwest Monsoon)**: Heavy rainfall and occasional mist; daylight departures from Madurai (before 8:00 AM) are strongly recommended.`,
     coverImage: {
       url: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?q=80&w=1200&auto=format&fit=crop',
-      alt: 'Scenic mountain highway from Madurai to Munnar',
+      alt: 'Scenic mountain highway from Madurai to Munnar tea plantations',
     },
     connectedTourSlug: 'madurai-to-munnar',
     connectedServiceSlug: 'group-travel',
@@ -102,7 +102,7 @@ Because the Bodi Mettu to Munnar stretch involves steep gradients and narrow mou
       role: 'Family Tour Coordinator',
     },
     publishedDate: '2026-07-02',
-    updatedDate: '2026-08-05',
+    updatedDate: '2026-08-30',
     readingTimeMinutes: 5,
     keyFacts: {
       origin: 'Madurai, Tamil Nadu',
@@ -141,7 +141,7 @@ The drive from Madurai to the base of the hills (Batlagundu) takes about 75 minu
 - **5 to 20 Passengers**: Travelling in our **21-seater AC van** keeps the entire joint family together, preventing the disconnection of multiple separate taxis.`,
     coverImage: {
       url: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?q=80&w=1200&auto=format&fit=crop',
-      alt: 'Family enjoying scenic lake views in Kodaikanal',
+      alt: 'Scenic lake and misty pine trees in Kodaikanal hill station',
     },
     connectedTourSlug: 'madurai-to-kodaikanal',
     connectedServiceSlug: 'family-travel',
@@ -169,7 +169,7 @@ The drive from Madurai to the base of the hills (Batlagundu) takes about 75 minu
       role: 'Itinerary Specialist',
     },
     publishedDate: '2026-07-18',
-    updatedDate: '2026-08-08',
+    updatedDate: '2026-08-30',
     readingTimeMinutes: 6,
     keyFacts: {
       origin: 'Madurai, Tamil Nadu',
@@ -237,7 +237,7 @@ The drive from Madurai to the base of the hills (Batlagundu) takes about 75 minu
       role: 'Group Travel Coordinator',
     },
     publishedDate: '2026-07-24',
-    updatedDate: '2026-08-09',
+    updatedDate: '2026-08-30',
     readingTimeMinutes: 7,
     keyFacts: {
       origin: 'Madurai Colleges & Campuses',
@@ -301,7 +301,7 @@ Mahalakshmi provides formal trip estimates, GST-compliant invoicing, and verifie
       role: 'Madurai Travel Curator',
     },
     publishedDate: '2026-08-01',
-    updatedDate: '2026-08-09',
+    updatedDate: '2026-08-30',
     readingTimeMinutes: 5,
     keyFacts: {
       origin: 'Madurai, Tamil Nadu',
@@ -367,7 +367,7 @@ Mahalakshmi provides formal trip estimates, GST-compliant invoicing, and verifie
       role: 'Pilgrimage Specialist',
     },
     publishedDate: '2026-08-04',
-    updatedDate: '2026-08-09',
+    updatedDate: '2026-08-30',
     readingTimeMinutes: 5,
     keyFacts: {
       origin: 'Madurai, Tamil Nadu',
@@ -416,6 +416,254 @@ Driving another 18 km past Rameswaram town brings you to **Arichal Munai (Land�
       title: 'Madurai to Rameswaram & Dhanushkodi Road Trip Guide | Mahalakshmi',
       description: 'Complete road trip guide from Madurai to Rameswaram and Dhanushkodi. Pamban bridge crossing, temple timings, and 1-day itinerary breakdown.',
       canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/rameswaram-dhanushkodi-day-trip-guide',
+    },
+  },
+  {
+    id: 'art-07',
+    title: 'Madurai to Kodaikanal 1-Day Trip Plan: Route, Sightseeing & Cab Charges',
+    slug: 'madurai-to-kodaikanal-one-day-trip-plan',
+    excerpt: 'The complete same-day return guide from Madurai to Kodaikanal covering 120 km road timing, breakfast halts, key viewpoints, and transparent taxi rates.',
+    featured: false,
+    category: 'itinerary',
+    articleType: 'itinerary-guide',
+    destination: 'Kodaikanal',
+    destinationSlug: 'kodaikanal',
+    author: {
+      name: 'Mahalakshmi Travel Desk',
+      role: 'Day Trip Specialist',
+    },
+    publishedDate: '2026-08-15',
+    updatedDate: '2026-08-30',
+    readingTimeMinutes: 5,
+    keyFacts: {
+      origin: 'Madurai, Tamil Nadu',
+      destination: 'Kodaikanal, Tamil Nadu',
+      distanceKm: 120,
+      idealDuration: '1 Day (Same Day Return)',
+      region: 'Palani Hills (Dindigul District)',
+      bestSeason: 'Year-Round',
+      recommendedVehicle: 'Private AC Sedan or 21-Seater Group Van',
+    },
+    tableOfContents: [
+      { id: 'kodai-1day-schedule', title: '1-Day Hour-by-Hour Sightseeing Schedule', level: 2 },
+      { id: 'kodai-route-timing', title: 'Driving Route & Ghat Ascent Timings', level: 2 },
+      { id: 'kodai-cab-charges', title: 'Transparent Cab & Van Rental Tariffs', level: 2 },
+    ],
+    content: `A **1-Day same-day return trip** from Madurai to Kodaikanal is the most popular quick escape for families, couples, and weekend travellers. Because Kodaikanal is located just **120 KM** from Madurai, you can comfortably spend 6 to 7 hours in the cool hills and return home by night.
+
+## 1-Day Hour-by-Hour Sightseeing Schedule {#kodai-1day-schedule}
+- **06:00 AM**: Pickup from Madurai home/hotel. Depart via NH 83 towards Batlagundu.
+- **07:30 AM**: Breakfast halt in Batlagundu town at traditional South Indian vegetarian restaurant.
+- **08:30 AM**: Begin 48 km ghat road ascent passing Dum Dum Rock waterfall viewpoint.
+- **09:45 AM**: Arrive in Kodaikanal; visit **Silver Cascade Waterfall** for photos and hot tea.
+- **10:30 AM**: Walk along **Coaker’s Walk** for 180-degree panoramic valley views.
+- **11:45 AM**: Explore **Upper Lake Viewpoint** and **Moir Point**.
+- **01:00 PM**: Lunch halt at Lake Road restaurants.
+- **02:15 PM**: Enjoy 4-seater pedal boating on **Kodaikanal Lake** or walk through **Bryant Park** flower gardens.
+- **04:30 PM**: Stroll through **Pine Forest** and local chocolate market.
+- **05:30 PM**: Begin scenic downhill drive back to Madurai.
+- **08:30 PM**: Arrive back in Madurai with doorstep drop.
+
+## Driving Route & Ghat Ascent Timings {#kodai-route-timing}
+The route from Madurai follows 4-lane highway up to Batlagundu (72 KM), followed by a smooth double-lane ghat road (48 KM) with 14 hairpin bends. Total driving time is **3 to 3.5 hours**.
+
+## Transparent Cab & Van Rental Tariffs {#kodai-cab-charges}
+- **Private AC Sedan (Dzire / Etios, 4 Pax)**: ₹3,200 – ₹3,600 (All-inclusive 1-day package fare).
+- **21-Seater AC Luxury Van (Group / Family, 20 Pax)**: ₹6,500 – ₹7,200 (All-inclusive 1-day package fare).`,
+    coverImage: {
+      url: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop',
+      alt: 'Kodaikanal 1 day trip lake and waterfall landscape',
+    },
+    connectedTourSlug: 'madurai-to-kodaikanal',
+    connectedServiceSlug: 'family-travel',
+    relatedTours: ['madurai-to-kodaikanal', 'madurai-to-munnar'],
+    relatedDestinations: ['kodaikanal'],
+    relatedArticles: ['kodaikanal-family-travel-guide', 'weekend-getaways-from-madurai'],
+    seo: {
+      title: 'Madurai to Kodaikanal 1-Day Trip Plan & Cab Charges | Mahalakshmi',
+      description: 'Detailed 1-day Kodaikanal trip itinerary from Madurai. 120 km route timing, sightseeing places, Silver Cascade, Kodai Lake boating, and cab fares.',
+      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/madurai-to-kodaikanal-one-day-trip-plan',
+    },
+  },
+  {
+    id: 'art-08',
+    title: 'Madurai to Tiruchendur & Rameshwaram Coastal Temple Tour Guide',
+    slug: 'madurai-to-tiruchendur-rameshwaram-temple-tour-guide',
+    excerpt: 'A complete pilgrimage guide connecting Madurai Meenakshi Amman, Tiruchendur Murugan Sea-Shore Temple, and Rameshwaram 22 Theerthams.',
+    featured: false,
+    category: 'route-insight',
+    articleType: 'route-guide',
+    destination: 'Tiruchendur & Rameshwaram',
+    destinationSlug: 'rameshwaram',
+    author: {
+      name: 'Mahalakshmi Pilgrimage Desk',
+      role: 'Temple Tour Specialist',
+    },
+    publishedDate: '2026-08-20',
+    updatedDate: '2026-08-30',
+    readingTimeMinutes: 6,
+    keyFacts: {
+      origin: 'Madurai, Tamil Nadu',
+      destination: 'Tiruchendur & Rameshwaram',
+      distanceKm: 380,
+      idealDuration: '2 Days / 1 Night',
+      region: 'Southern Coastal Tamil Nadu',
+      bestSeason: 'October to March',
+      recommendedVehicle: '21-Seater AC Group Van or AC Sedan',
+    },
+    tableOfContents: [
+      { id: 'temple-circuit-overview', title: 'Coastal Temple Circuit Overview', level: 2 },
+      { id: 'tiruchendur-seashore-darshan', title: 'Tiruchendur Murugan Sea-Shore Temple', level: 2 },
+      { id: 'rameshwaram-pamban-bridge', title: 'Rameshwaram & Pamban Bridge Crossing', level: 2 },
+      { id: 'pilgrimage-group-transport', title: 'Pilgrimage Group Transport & Van Rentals', level: 2 },
+    ],
+    content: `The coastal pilgrimage circuit linking **Madurai, Tiruchendur, and Rameshwaram** is one of the most sacred yatra routes in South India. It combines the ancient Dravidian architecture of Madurai Meenakshi Amman Temple with the oceanfront sanctum of Tiruchendur Murugan Temple and the sacred waters of Rameshwaram.
+
+## Coastal Temple Circuit Overview {#temple-circuit-overview}
+- **Total Circuit Distance**: ~380 KM round trip.
+- **Recommended Itinerary**: Day 01: Madurai to Tiruchendur (170 KM) → Evening Darshan at Sea Shore Temple. Day 02: Tiruchendur to Rameshwaram (160 KM) via ECR Highway → Pamban Bridge → Return to Madurai (172 KM).
+
+## Tiruchendur Murugan Sea-Shore Temple {#tiruchendur-seashore-darshan}
+Located directly on the shores of the Gulf of Mannar, Tiruchendur is the second Arupadai Veedu (six abodes) of Lord Murugan:
+- **Sea Bathing (Nazhi Kinaru)**: Sacred freshwater well located right on the ocean beach.
+- **Temple Timings**: 05:00 AM to 09:00 PM continuous darshan.
+
+## Rameshwaram & Pamban Bridge Crossing {#rameshwaram-pamban-bridge}
+From Tiruchendur, the East Coast Road (ECR) leads north towards Rameshwaram island across the Pamban Sea Bridge:
+- **22 Sacred Theerthams**: Complete holy bath inside Ramanathaswamy Temple corridor.
+- **Dhanushkodi Arichal Munai**: Visit the confluence of Bay of Bengal and Indian Ocean.
+
+## Pilgrimage Group Transport & Van Rentals {#pilgrimage-group-transport}
+For joint family yatras and senior citizen groups:
+- Our **21-Seater AC Luxury Van** offers pushback reclining seats, senior-friendly low steps, high luggage capacity for holy water cans, and experienced drivers who know temple parking zones.`,
+    coverImage: {
+      url: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=1200&auto=format&fit=crop',
+      alt: 'Coastal temple architecture and beach on Madurai Tiruchendur Rameshwaram tour',
+    },
+    connectedTourSlug: 'madurai-to-rameshwaram',
+    connectedServiceSlug: 'group-travel',
+    relatedTours: ['madurai-to-rameshwaram', 'madurai-to-tiruchendur-and-rameshwaram'],
+    relatedDestinations: ['rameswaram'],
+    relatedArticles: ['rameswaram-dhanushkodi-day-trip-guide', 'weekend-getaways-from-madurai'],
+    seo: {
+      title: 'Madurai to Tiruchendur & Rameshwaram Temple Tour Guide | Mahalakshmi',
+      description: 'Complete pilgrimage travel guide from Madurai to Tiruchendur Murugan temple and Rameshwaram 22 theerthams. Route map, timings, and van hire.',
+      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/madurai-to-tiruchendur-rameshwaram-temple-tour-guide',
+    },
+  },
+  {
+    id: 'art-09',
+    title: 'Madurai Airport (IXM) Outstation Taxi & Group Van Pickup Guide',
+    slug: 'madurai-airport-ixm-outstation-cab-travel-guide',
+    excerpt: 'How to book seamless outstation cab and 21-seater van pickups directly from Madurai Airport (IXM) to Kodaikanal, Munnar, and Rameshwaram.',
+    featured: false,
+    category: 'route-insight',
+    articleType: 'planning-guide',
+    destination: 'Madurai Airport (IXM)',
+    destinationSlug: 'madurai',
+    author: {
+      name: 'Mahalakshmi Dispatch Desk',
+      role: 'Airport Transfer Manager',
+    },
+    publishedDate: '2026-08-22',
+    updatedDate: '2026-08-30',
+    readingTimeMinutes: 4,
+    keyFacts: {
+      origin: 'Madurai Airport (IXM)',
+      destination: 'Kodaikanal, Munnar, Rameshwaram, Kanyakumari',
+      idealDuration: '24/7 Instant Dispatch',
+      region: 'Tamil Nadu & Kerala',
+      recommendedVehicle: 'Private Sedan or 21-Seater Van',
+    },
+    tableOfContents: [
+      { id: 'madurai-airport-transfer-overview', title: 'Madurai Airport (IXM) Pickup Overview', level: 2 },
+      { id: 'airport-outstation-routes', title: 'Popular Outstation Routes from IXM', level: 2 },
+      { id: 'airport-van-sedan-booking', title: 'Booking Sedan & 21-Seater Vans for Airport Pickup', level: 2 },
+    ],
+    content: `Madurai Airport (**IXM**) is the primary international gateway for travellers heading to Kodaikanal, Munnar, Rameshwaram, and Southern Tamil Nadu. Booking a pre-arranged private outstation cab or group van ensures immediate departure without airport taxi wait times or surge pricing.
+
+## Madurai Airport (IXM) Pickup Overview {#madurai-airport-transfer-overview}
+- **Doorstep Terminal Pickup**: Drivers track your flight arrival time and greet you outside the arrival gate with name boards.
+- **24/7 Availability**: Round-the-clock dispatch for early morning domestic and international flight arrivals.
+
+## Popular Outstation Routes from IXM {#airport-outstation-routes}
+1. **Madurai Airport to Kodaikanal (135 KM)**: Direct drive via Batlagundu bypass; takes ~3.5 hours.
+2. **Madurai Airport to Munnar (170 KM)**: Direct drive via Theni NH 85 highway; takes ~4.5 hours.
+3. **Madurai Airport to Rameshwaram (178 KM)**: Direct highway drive via NH 87; takes ~3.5 hours.
+
+## Booking Sedan & 21-Seater Vans for Airport Pickup {#airport-van-sedan-booking}
+- **Couples & Small Families**: Clean private AC sedans (Swift Dzire / Toyota Etios) with spacious luggage boots.
+- **Large Families & Groups**: **21-seater AC passenger van** with top luggage carrier for international baggage.`,
+    coverImage: {
+      url: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1200&auto=format&fit=crop',
+      alt: 'Luxury private outstation sedan cab pickup at Madurai Airport IXM',
+    },
+    connectedTourSlug: 'madurai-to-kodaikanal',
+    connectedServiceSlug: 'family-travel',
+    relatedTours: ['madurai-to-kodaikanal', 'madurai-to-munnar', 'madurai-to-rameswaram'],
+    relatedDestinations: ['madurai', 'kodaikanal'],
+    relatedArticles: ['best-routes-madurai-to-munnar', 'kodaikanal-family-travel-guide'],
+    seo: {
+      title: 'Madurai Airport (IXM) Outstation Taxi & Group Van Hire | Mahalakshmi',
+      description: 'Book reliable outstation taxi and 21-seater van pickups from Madurai Airport (IXM) to Kodaikanal, Munnar, and Rameshwaram. Flight tracking, zero surge pricing.',
+      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/madurai-airport-ixm-outstation-cab-travel-guide',
+    },
+  },
+  {
+    id: 'art-10',
+    title: 'Wedding Guest Transportation & Marriage Hall Van Hire in Madurai',
+    slug: 'wedding-guest-transportation-madurai-marriage-halls',
+    excerpt: 'How to coordinate multi-vehicle guest shuttles, 21-seater AC vans, and VIP sedan cabs for grand weddings across marriage mandapams in Madurai.',
+    featured: false,
+    category: 'group-planning',
+    articleType: 'planning-guide',
+    destination: 'Madurai Marriage Mandapams',
+    destinationSlug: 'madurai',
+    author: {
+      name: 'Mahalakshmi Event Desk',
+      role: 'Fleet Coordination Specialist',
+    },
+    publishedDate: '2026-08-25',
+    updatedDate: '2026-08-30',
+    readingTimeMinutes: 5,
+    keyFacts: {
+      origin: 'Madurai Railway Station & Airport',
+      destination: 'Madurai Wedding Venues & Outstation',
+      idealDuration: 'Custom Event Packages',
+      region: 'Madurai & Surrounding Districts',
+      recommendedVehicle: 'Multi-Vehicle Fleet (21-Seater Vans & Sedans)',
+    },
+    tableOfContents: [
+      { id: 'wedding-transport-logistics', title: 'Wedding Transit Challenges & Solutions', level: 2 },
+      { id: 'shuttle-coordination-madurai', title: 'Airport & Railway Station Guest Shuttles', level: 2 },
+      { id: 'wedding-fleet-packages', title: 'Custom Wedding Fleet Hire Packages', level: 2 },
+    ],
+    content: `Hosting a grand South Indian wedding in Madurai requires flawless guest transportation between Madurai Junction, Madurai Airport (IXM), hotels, and marriage mandapams. 
+
+## Wedding Transit Challenges & Solutions {#wedding-transport-logistics}
+- **Punctual Arrival**: Ensuring outstation relatives and baraat groups arrive on time for Muhurtham rituals.
+- **Multiple Pickups**: Coordinating staggered flight and train arrivals across multiple groups.
+- **Luggage Management**: Managing heavy traditional luggage, silk sarees, and ceremonial supplies.
+
+## Airport & Railway Station Guest Shuttles {#shuttle-coordination-madurai}
+Our dedicated event coordinators manage continuous pickup shuttles from Madurai Junction railway station and Madurai Airport directly to leading wedding venues (Koodal Nagar, TVS Nagar, Mattuthavani mandapams).
+
+## Custom Wedding Fleet Hire Packages {#wedding-fleet-packages}
+- **VIP & Groom Family**: Premium private AC sedan cars for comfortable personal transit.
+- **Relatives & Group Transit**: **21-seater AC luxury vans** equipped with high-power AC, music systems, and verified drivers for comfortable multi-day marriage celebrations.`,
+    coverImage: {
+      url: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop',
+      alt: 'Grand South Indian wedding celebration guest transportation fleet in Madurai',
+    },
+    connectedTourSlug: 'madurai-to-rameshwaram',
+    connectedServiceSlug: 'function-travel',
+    relatedTours: ['madurai-to-kodaikanal', 'madurai-to-rameswaram'],
+    relatedDestinations: ['madurai'],
+    relatedArticles: ['madurai-airport-ixm-outstation-cab-travel-guide', 'how-to-plan-college-industrial-visit-trip'],
+    seo: {
+      title: 'Wedding Guest Transport & Marriage Hall Van Hire in Madurai | Mahalakshmi',
+      description: 'Book 21-seater AC vans and private sedan cabs for wedding guest transportation in Madurai. Airport & station shuttles, marriage mandapam transit.',
+      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/wedding-guest-transportation-madurai-marriage-halls',
     },
   },
 ];

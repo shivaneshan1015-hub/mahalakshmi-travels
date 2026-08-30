@@ -105,7 +105,11 @@ const queries = [
   { q: "best route from madurai to munnar by car", type: "Informational", matched: true },
   { q: "kodaikanal family travel guide places to visit", type: "Informational", matched: true },
   { q: "madurai airport IXM cab pickup service", type: "Local SEO / Rental", matched: true },
-  { q: "21 seater bus rental rate madurai", type: "Local SEO / Rental", matched: true }
+  { q: "21 seater bus rental rate madurai", type: "Local SEO / Rental", matched: true },
+  { q: "madurai to kodaikanal one day trip plan", type: "SEO / Travel Guide", matched: true },
+  { q: "madurai to tiruchendur seashore temple cab", type: "SEO / Pilgrimage", matched: true },
+  { q: "madurai airport taxi pickup to munnar", type: "Local SEO / Airport", matched: true },
+  { q: "wedding guest van hire madurai mandapam", type: "Commercial / Wedding", matched: true }
 ];
 
 let matchedCount = 0;
