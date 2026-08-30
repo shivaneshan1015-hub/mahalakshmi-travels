@@ -34,20 +34,23 @@ export function Header() {
           <LogoHorizontal variant="light" size="md" showTagline />
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-2" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center space-x-7" aria-label="Main Navigation">
             {mainNavItems.map((item) => {
               const active = item.href === '/' ? pathname === '/' : pathname?.startsWith(item.href);
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`text-xs font-semibold uppercase tracking-wider transition-all px-3 py-2 rounded-[4px] ${
+                  className={`type-nav transition-colors relative py-1 ${
                     active
-                      ? 'text-[var(--color-terracotta-600)] bg-[var(--color-terracotta-100)] border border-[var(--color-terracotta-300)] shadow-xs font-bold'
-                      : 'text-[var(--color-ink-800)] hover:text-[var(--color-terracotta-500)] hover:bg-[var(--color-paper-100)]'
+                      ? 'text-[var(--color-terracotta-500)] font-extrabold'
+                      : 'text-[var(--color-ink-800)] hover:text-[var(--color-terracotta-500)]'
                   }`}
                 >
-                  {item.label}
+                  <span>{item.label}</span>
+                  {active && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--color-terracotta-500)] rounded-full" />
+                  )}
                 </Link>
               );
             })}

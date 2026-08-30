@@ -208,8 +208,8 @@ The drive from Madurai to the base of the hills (Batlagundu) takes about 75 minu
 - **Light Woollens**: Temperatures hover between 12°C and 18°C in the evenings; carry a light jacket or shawl.
 - **Advance Vehicle Reservation**: Weekend slots for our 21-seater van and sedans book quickly during school holidays.`,
     coverImage: {
-      url: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1200&auto=format&fit=crop',
-      alt: 'Munnar tea plantation landscape on 2 day tour',
+      url: 'https://images.unsplash.com/photo-1597659840241-37e2b9c2f55f?q=80&w=1200&auto=format&fit=crop',
+      alt: 'Munnar green tea estate rolling hills on 2 day tour from Madurai',
     },
     connectedTourSlug: 'madurai-to-munnar',
     connectedServiceSlug: 'family-travel',
@@ -272,8 +272,8 @@ The drive from Madurai to the base of the hills (Batlagundu) takes about 75 minu
 ## Institutional Invoicing & Documentation {#documentation-billing}
 Mahalakshmi provides formal trip estimates, GST-compliant invoicing, and verified vehicle permits to ensure seamless college committee approvals and prompt department reimbursements.`,
     coverImage: {
-      url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1200&auto=format&fit=crop',
-      alt: 'College students on educational industrial visit travel',
+      url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200&auto=format&fit=crop',
+      alt: 'College students group travelling on educational industrial visit',
     },
     connectedTourSlug: 'madurai-to-ooty',
     connectedServiceSlug: 'college-trips',

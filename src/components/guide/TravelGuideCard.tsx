@@ -16,7 +16,7 @@ interface TravelGuideCardProps {
 
 export function TravelGuideCard({ article }: TravelGuideCardProps) {
   return (
-    <article className="bg-[var(--color-paper-100)] rounded-[4px] border border-[var(--border-default)] hover:border-[var(--color-terracotta-400)] transition-editorial overflow-hidden flex flex-col justify-between group shadow-editorial-xs">
+    <article className="relative bg-[var(--color-paper-100)] rounded-[4px] border border-[var(--border-default)] hover:border-[var(--color-terracotta-400)] transition-editorial overflow-hidden flex flex-col justify-between group shadow-editorial-xs">
       <div>
         {/* Cover Image */}
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--color-ink-900)]">
