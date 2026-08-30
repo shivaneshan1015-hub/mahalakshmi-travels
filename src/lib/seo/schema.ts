@@ -23,9 +23,10 @@ export function generateLocalBusinessSchema() {
     url: siteConfig.url,
     telephone: siteConfig.contact.phonePrimary,
     email: siteConfig.contact.email,
+    hasMap: siteConfig.contact.googleMapsUrl,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: siteConfig.contact.address.street,
+      streetAddress: siteConfig.contact.address.fullAddress,
       addressLocality: siteConfig.contact.address.city,
       addressRegion: siteConfig.contact.address.state,
       postalCode: siteConfig.contact.address.pincode,

@@ -80,12 +80,23 @@ export default function ContactPage() {
             <p className="text-sm text-[var(--color-ink-950)] font-medium">
               {siteConfig.name}
             </p>
-            <p className="text-sm text-[var(--text-secondary)] mt-1">
-              {siteConfig.contact.address.street}, {siteConfig.contact.address.city}, {siteConfig.contact.address.state} — {siteConfig.contact.address.pincode}
+            <p className="text-sm text-[var(--text-secondary)] mt-1 leading-relaxed">
+              {siteConfig.contact.address.fullAddress}
             </p>
-            <div className="flex items-center gap-2 text-xs text-[var(--text-muted)] mt-4">
-              <Clock className="w-3.5 h-3.5 text-[var(--color-terracotta-500)]" />
-              <span>Desk Hours: Monday – Sunday • 6:00 AM – 10:00 PM</span>
+            <div className="mt-3 pt-3 border-t border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+                <Clock className="w-3.5 h-3.5 text-[var(--color-terracotta-500)]" />
+                <span>Desk Hours: Monday – Sunday • 6:00 AM – 10:00 PM</span>
+              </div>
+              <a
+                href={siteConfig.contact.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold text-[var(--color-terracotta-600)] hover:underline inline-flex items-center gap-1"
+              >
+                <span>Google Maps Location</span>
+                <MapPin className="w-3 h-3" />
+              </a>
             </div>
           </div>
         </div>

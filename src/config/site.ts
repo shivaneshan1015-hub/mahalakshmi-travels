@@ -14,21 +14,25 @@ export const siteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://mahalakshmitravels.com',
   ogImage: '/brand/og-cover.jpg',
   contact: {
-    phonePrimary: '+91 98421 23456',
-    phoneSecondary: '+91 98421 65432',
-    phoneRaw: '919842123456', // For tel: and whatsapp links
-    whatsapp: '919842123456',
+    phonePrimary: '+91 63801 92145',
+    phoneSecondary: '+91 63801 92145',
+    phoneRaw: '916380192145', // For tel: and whatsapp links
+    whatsapp: '916380192145',
     email: 'contact@mahalakshmitravels.com',
+    googleMapsUrl: 'https://share.google/kweZPlga3uiRKgVsA',
     address: {
-      street: 'Perumal Kovil Street, Simmakkal',
+      doorNo: 'Door No: 3',
+      building: 'RK MLA Plaza 28 D',
+      street: 'Alanganallur Main Road, Opposite to Sulthan Biriyani, Sikandharsavadi',
       city: 'Madurai',
       state: 'Tamil Nadu',
-      pincode: '625001',
+      pincode: '625018',
       country: 'India',
+      fullAddress: 'Door No: 3, RK MLA Plaza 28 D, Alanganallur Main Road, Opposite to Sulthan Biriyani, Sikandharsavadi, Madurai, Tamil Nadu 625018, India',
     },
     geo: {
-      latitude: 9.9252,
-      longitude: 78.1198,
+      latitude: 9.9678,
+      longitude: 78.1065,
     },
   },
   social: {
