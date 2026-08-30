@@ -9,6 +9,8 @@ import Image from 'next/image';
 import { ArrowRight, Compass, Shield } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 
+import { HeroDualIntentBar } from './HeroDualIntentBar';
+
 export function HeroSection() {
   return (
     <section className="relative pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden border-b border-[var(--border-default)]">
@@ -33,26 +35,12 @@ export function HeroSection() {
               Starts Here.
             </h1>
 
-            <p className="type-body-large text-[var(--text-secondary)] mb-8 max-w-xl leading-relaxed">
+            <p className="type-body-large text-[var(--text-secondary)] mb-2 max-w-xl leading-relaxed">
               Curated South India tour packages, outstation <strong>21-seater AC van rentals</strong>, and private sedan cab services—driven by verified local drivers from <strong>Madurai</strong>.
             </p>
 
-            {/* Action CTAs — Direct Clickable Links */}
-            <div className="flex flex-wrap items-center gap-4 mb-10">
-              <Link
-                href="/tours"
-                className="inline-flex items-center justify-center font-semibold tracking-[0.06em] uppercase text-sm px-7 py-3.5 rounded-[4px] gap-2.5 bg-[var(--color-terracotta-500)] text-[#FFFFFF] hover:bg-[var(--color-terracotta-600)] active:bg-[var(--color-terracotta-700)] shadow-editorial-sm transition-editorial group"
-              >
-                <span>Tour Packages</span>
-                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </Link>
-              <Link
-                href="/vehicles"
-                className="inline-flex items-center justify-center font-semibold tracking-[0.06em] uppercase text-sm px-7 py-3.5 rounded-[4px] gap-2.5 bg-transparent text-[var(--color-ink-950)] border border-[var(--color-ink-950)] hover:bg-[var(--color-ink-950)] hover:text-[var(--color-paper-100)] transition-editorial"
-              >
-                Vehicle Rentals
-              </Link>
-            </div>
+            {/* Interactive Dual Intent Rental & Tour Booking Bar */}
+            <HeroDualIntentBar />
 
             {/* Incomplete Route Motif Line */}
             <div className="relative pt-6 border-t border-[var(--border-subtle)] flex items-center gap-3">

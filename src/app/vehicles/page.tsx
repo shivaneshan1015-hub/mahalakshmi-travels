@@ -30,6 +30,8 @@ import {
   HelpCircle,
 } from 'lucide-react';
 
+import { PassengerFleetSelector } from '@/components/vehicles/PassengerFleetSelector';
+
 export const metadata: Metadata = constructMetadata({
   title: 'Vehicle Rental in Madurai | 21 Seater Van & Sedan Car Hire with Driver',
   description: 'Book 21-seater AC van rentals and private sedan cars in Madurai for outstation family trips, college IV, wedding transportation, and temple pilgrimages. Transparent per-KM rates, commercial permits, verified drivers.',
@@ -173,6 +175,9 @@ export default function VehiclesPage() {
             </div>
           ))}
         </div>
+
+        {/* Interactive Passenger-to-Vehicle Selector */}
+        <PassengerFleetSelector />
 
         {/* Vehicle Showcase List */}
         <div className="mb-16">
