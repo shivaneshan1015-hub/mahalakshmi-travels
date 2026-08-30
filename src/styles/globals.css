@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./typography.css";
+@import "./motion.css";
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    border-color: var(--border-subtle);
+  }
+
+  html {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Accessible Focus States */
+  :focus-visible {
+    outline: 2px solid var(--color-terracotta-500);
+    outline-offset: 3px;
+  }
+
+  /* Selection highlight */
+  ::selection {
+    background-color: var(--color-terracotta-100);
+    color: var(--color-ink-950);
+  }
+}
+
+@layer utilities {
+  /* Container utility */
+  .container-editorial {
+    width: 100%;
+    max-width: var(--container-editorial);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1rem, 3vw, 2.5rem);
+    padding-right: clamp(1rem, 3vw, 2.5rem);
+  }
+
+  .container-narrow {
+    width: 100%;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  /* Incomplete Journey / Continuing Route Graphic motifs */
+  .route-line-incomplete {
+    position: relative;
+    overflow: visible;
+  }
+
+  .route-line-incomplete::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -24px;
+    width: 24px;
+    height: 1.5px;
+    background: repeating-linear-gradient(
+      to right,
+      var(--color-terracotta-500) 0,
+      var(--color-terracotta-500) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  }
+
+  /* Sharp Editorial Border Rules */
+  .border-editorial-t {
+    border-top: 1px solid var(--border-default);
+  }
+
+  .border-editorial-b {
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .border-editorial-y {
+    border-top: 1px solid var(--border-default);
+    border-bottom: 1px solid var(--border-default);
+  }
+}

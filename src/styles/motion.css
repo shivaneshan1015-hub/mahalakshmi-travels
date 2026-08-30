@@ -1,0 +1,237 @@
+/**
+ * MAHALAKSHMI TOUR & TRAVEL — MOTION ARCHITECTURE
+ * Principle: "Motion should explain the journey, not decorate the website."
+ * Full respect for prefers-reduced-motion.
+ */
+
+:root {
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-journey: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-sharp: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --duration-fast: 150ms;
+  --duration-normal: 260ms;
+  --duration-medium: 400ms;
+  --duration-slow: 650ms;
+  --duration-journey: 1200ms;
+}
+
+/* Base Transitions */
+.transition-editorial {
+  transition-property: color, background-color, border-color, opacity, transform;
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--ease-editorial);
+}
+
+.transition-slow {
+  transition-property: color, background-color, border-color, opacity, transform;
+  transition-duration: var(--duration-medium);
+  transition-timing-function: var(--ease-editorial);
+}
+
+/* Route Drawing Animation */
+@keyframes routeStroke {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-route-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: routeStroke var(--duration-journey) var(--ease-journey) forwards;
+}
+
+/* Route Pulse (Milestone Node) */
+@keyframes nodePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.75;
+  }
+}
+
+.animate-node-pulse {
+  animation: nodePulse 2.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Flowing Route Dash Animation */
+@keyframes routeDashFlow {
+  to {
+    stroke-dashoffset: -40;
+  }
+}
+
+.animate-route-flow {
+  animation: routeDashFlow 1.5s linear infinite;
+}
+
+
+/* Route Underline on Links */
+.route-link-underline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.route-link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--color-terracotta-500);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform var(--duration-normal) var(--ease-editorial);
+}
+
+.route-link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Arrow Slide on Hover */
+.group:hover .group-hover-arrow-slide {
+  transform: translateX(4px);
+}
+
+.group-hover-arrow-slide {
+  transition: transform var(--duration-fast) var(--ease-editorial);
+}
+
+/* Subtle Card Image Zoom */
+.editorial-image-zoom {
+  transition: transform var(--duration-medium) var(--ease-editorial);
+}
+
+.group:hover .editorial-image-zoom {
+  transform: scale(1.03);
+}
+
+/* Tactile Button Feedback */
+.btn-tactile {
+  transition: transform var(--duration-fast) var(--ease-sharp), box-shadow var(--duration-fast) var(--ease-sharp);
+}
+
+.btn-tactile:active {
+  transform: scale(0.975) translateY(1px);
+}
+
+/* Card Interactive Hover Lift & Glow */
+.card-interactive {
+  transition: transform var(--duration-normal) var(--ease-editorial), 
+              box-shadow var(--duration-normal) var(--ease-editorial),
+              border-color var(--duration-normal) var(--ease-editorial);
+}
+
+.card-interactive:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-editorial-lift);
+  border-color: var(--color-terracotta-300);
+}
+
+/* Radar Beacon for Active Cartographic Nodes */
+@keyframes radarBeacon {
+  0% {
+    r: 6;
+    opacity: 0.9;
+    stroke-width: 2;
+  }
+  50% {
+    r: 18;
+    opacity: 0.4;
+    stroke-width: 1.5;
+  }
+  100% {
+    r: 28;
+    opacity: 0;
+    stroke-width: 0.5;
+  }
+}
+
+.animate-radar-beacon {
+  animation: radarBeacon 2.2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+  transform-origin: center;
+}
+
+/* Progress Shimmer */
+@keyframes progressShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-progress-shimmer {
+  background: linear-gradient(90deg, var(--color-terracotta-500) 0%, var(--color-terracotta-200) 50%, var(--color-terracotta-500) 100%);
+  background-size: 200% 100%;
+  animation: progressShimmer 2.5s ease-in-out infinite;
+}
+
+/* Step Fade & Slide In */
+@keyframes stepFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-step-enter {
+  animation: stepFadeIn 320ms var(--ease-editorial) forwards;
+}
+
+/* Accessibility: Strict Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-route-draw,
+  .animate-node-pulse,
+  .animate-radar-beacon,
+  .animate-progress-shimmer,
+  .animate-step-enter {
+    animation: none !important;
+  }
+
+  .route-link-underline::after {
+    transition: none !important;
+  }
+
+  .group:hover .group-hover-arrow-slide {
+    transform: none !important;
+  }
+
+  .group:hover .editorial-image-zoom {
+    transform: none !important;
+  }
+
+  .card-interactive:hover {
+    transform: none !important;
+  }
+
+  .btn-tactile:active {
+    transform: none !important;
+  }
+}

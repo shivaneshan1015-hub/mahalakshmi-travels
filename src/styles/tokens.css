@@ -1,0 +1,170 @@
+/**
+ * MAHALAKSHMI TOUR & TRAVEL — DESIGN SYSTEM TOKENS
+ * Brand Foundation: Ink (#171716) + Terracotta (#A65F43) + Warm Paper (#F2EEE5)
+ * Concept: THE JOURNEY STARTS HERE. | Your Journey. Our Care.
+ */
+
+:root {
+  /* ==========================================================================
+     CORE BRAND PALETTE
+     ========================================================================== */
+  --color-ink: #171716;
+  --color-terracotta: #A65F43;
+  --color-warm-paper: #F2EEE5;
+
+  /* Ink Scale (Dark Surfaces, Typography, High-contrast lines) */
+  --color-ink-950: #171716;
+  --color-ink-900: #21211F;
+  --color-ink-800: #33322F;
+  --color-ink-700: #4B4A46;
+  --color-ink-600: #66645F;
+  --color-ink-500: #63615C;
+  --color-ink-400: #7E7B75;
+  --color-ink-300: #C2BFBA;
+  --color-ink-200: #DDD9D3;
+  --color-ink-100: #EDE9E3;
+
+  /* Terracotta Scale (Journey Routes, Accent CTA, Active States) */
+  --color-terracotta-800: #6E3924;
+  --color-terracotta-700: #86462E;
+  --color-terracotta-600: #975338;
+  --color-terracotta-500: #A65F43; /* Brand Primary Accent */
+  --color-terracotta-400: #BC765A;
+  --color-terracotta-300: #D3957C;
+  --color-terracotta-200: #E7B8A6;
+  --color-terracotta-100: #F6E6DF;
+  --color-terracotta-50:  #FAF2EE;
+
+  /* Warm Paper Scale (Editorial Light Surfaces, Cards, Journal feel) */
+  --color-paper-50:  #FCFAF7;
+  --color-paper-100: #F7F4ED;
+  --color-paper-200: #F2EEE5; /* Brand Primary Light Base */
+  --color-paper-300: #E6DFCFA;
+  --color-paper-400: #D6CCB7;
+  --color-paper-500: #BFB39B;
+
+  /* Functional Status (Muted, non-competing) */
+  --color-status-success: #43664C;
+  --color-status-success-bg: #EAF0EC;
+  --color-status-warning: #946C2B;
+  --color-status-warning-bg: #F7F2E8;
+  --color-status-error: #93382F;
+  --color-status-error-bg: #F7ECEB;
+  --color-status-info: #465866;
+  --color-status-info-bg: #EBF0F4;
+
+  /* ==========================================================================
+     SEMANTIC TOKENS (Default Light / Warm Paper Theme)
+     ========================================================================== */
+  --bg-primary: var(--color-paper-200);
+  --bg-secondary: var(--color-paper-100);
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: var(--color-paper-50);
+  --bg-accent: var(--color-terracotta-500);
+  --bg-accent-subtle: var(--color-terracotta-50);
+  --bg-ink: var(--color-ink-950);
+
+  --text-primary: var(--color-ink-950);
+  --text-secondary: var(--color-ink-700);
+  --text-muted: var(--color-ink-500);
+  --text-subtle: var(--color-ink-400);
+  --text-accent: var(--color-terracotta-500);
+  --text-inverse: var(--color-paper-100);
+  --text-inverse-muted: var(--color-ink-300);
+
+  --border-subtle: rgba(23, 23, 22, 0.08);
+  --border-default: rgba(23, 23, 22, 0.16);
+  --border-strong: var(--color-ink-950);
+  --border-accent: var(--color-terracotta-500);
+  --border-inverse: rgba(242, 238, 229, 0.18);
+
+  /* ==========================================================================
+     ROUTE & JOURNEY TOKENS
+     ========================================================================== */
+  --route-stroke-default: var(--color-ink-900);
+  --route-stroke-accent: var(--color-terracotta-500);
+  --route-stroke-subtle: rgba(23, 23, 22, 0.22);
+  --route-node-active: var(--color-terracotta-500);
+  --route-node-origin: var(--color-ink-950);
+
+  /* ==========================================================================
+     SPACING & LAYOUT TOKENS
+     ========================================================================== */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+  --space-20: 5rem;    /* 80px */
+  --space-24: 6rem;    /* 96px */
+  --space-32: 8rem;    /* 128px */
+
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1440px;
+  --container-editorial: 1360px;
+
+  /* ==========================================================================
+     SHAPE & RADIUS TOKENS (Subtle, architectural, never overly bubbly)
+     ========================================================================== */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-pill: 9999px; /* Reserved strictly for tags, status badges */
+
+  /* Shadows (Subtle, print-inspired depth) */
+  --shadow-editorial-sm: 0 1px 2px rgba(23, 23, 22, 0.05);
+  --shadow-editorial-md: 0 4px 12px rgba(23, 23, 22, 0.08);
+  --shadow-editorial-lg: 0 12px 32px rgba(23, 23, 22, 0.12);
+  --shadow-editorial-lift: 0 16px 40px -8px rgba(23, 23, 22, 0.14);
+
+  /* Z-Index Hierarchy */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 20;
+  --z-sticky: 30;
+  --z-header: 40;
+  --z-modal-backdrop: 50;
+  --z-modal: 60;
+  --z-toast: 70;
+}
+
+/* Dark / Ink Surface Variant */
+[data-theme="ink"],
+.theme-ink {
+  --bg-primary: var(--color-ink-950);
+  --bg-secondary: var(--color-ink-900);
+  --bg-surface: #1C1C1A;
+  --bg-surface-elevated: var(--color-ink-800);
+  --bg-accent: var(--color-terracotta-500);
+  --bg-accent-subtle: rgba(166, 95, 67, 0.15);
+
+  --text-primary: var(--color-paper-100);
+  --text-secondary: var(--color-ink-200);
+  --text-muted: var(--color-ink-400);
+  --text-subtle: var(--color-ink-500);
+  --text-accent: var(--color-terracotta-300);
+  --text-inverse: var(--color-ink-950);
+  --text-inverse-muted: var(--color-ink-700);
+
+  --border-subtle: rgba(242, 238, 229, 0.08);
+  --border-default: rgba(242, 238, 229, 0.16);
+  --border-strong: var(--color-paper-200);
+  --border-accent: var(--color-terracotta-400);
+
+  --route-stroke-default: var(--color-paper-200);
+  --route-stroke-accent: var(--color-terracotta-400);
+  --route-stroke-subtle: rgba(242, 238, 229, 0.2);
+  --route-node-active: var(--color-terracotta-400);
+  --route-node-origin: var(--color-paper-100);
+}
