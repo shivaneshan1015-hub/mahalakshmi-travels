@@ -34,16 +34,23 @@ export function Header() {
           <LogoHorizontal variant="light" size="md" showTagline />
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-7" aria-label="Main Navigation">
-            {mainNavItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="type-nav text-[var(--color-ink-800)] hover:text-[var(--color-terracotta-500)] transition-colors relative py-1"
-              >
-                {item.label}
-              </Link>
-            ))}
+          <nav className="hidden lg:flex items-center space-x-2" aria-label="Main Navigation">
+            {mainNavItems.map((item) => {
+              const active = item.href === '/' ? pathname === '/' : pathname?.startsWith(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`text-xs font-semibold uppercase tracking-wider transition-all px-3 py-2 rounded-[4px] ${
+                    active
+                      ? 'text-[var(--color-terracotta-600)] bg-[var(--color-terracotta-100)] border border-[var(--color-terracotta-300)] shadow-xs font-bold'
+                      : 'text-[var(--color-ink-800)] hover:text-[var(--color-terracotta-500)] hover:bg-[var(--color-paper-100)]'
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Right Action CTAs */}
@@ -79,17 +86,25 @@ export function Header() {
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[var(--color-paper-100)] border-b border-[var(--border-default)] px-6 py-6 shadow-editorial-lg animate-in slide-in-from-top duration-200">
-          <nav className="flex flex-col space-y-4" aria-label="Mobile Navigation">
-            {mainNavItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="type-h4 text-[var(--color-ink-950)] hover:text-[var(--color-terracotta-500)] transition-colors py-1"
-              >
-                {item.label}
-              </Link>
-            ))}
+          <nav className="flex flex-col space-y-2" aria-label="Mobile Navigation">
+            {mainNavItems.map((item) => {
+              const active = item.href === '/' ? pathname === '/' : pathname?.startsWith(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`type-h4 transition-all py-2.5 px-3 rounded-[4px] flex items-center justify-between ${
+                    active
+                      ? 'text-[var(--color-terracotta-600)] bg-[var(--color-terracotta-100)] border-l-4 border-[var(--color-terracotta-500)] font-bold'
+                      : 'text-[var(--color-ink-950)] hover:text-[var(--color-terracotta-500)]'
+                  }`}
+                >
+                  <span>{item.label}</span>
+                  {active && <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-terracotta-500)]" />}
+                </Link>
+              );
+            })}
             <div className="pt-4 mt-2 border-t border-[var(--border-default)] flex flex-col gap-3">
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full">
                 <Button variant="primary" size="md" fullWidth icon={<MessageSquare className="w-4 h-4" />} iconPosition="left">
