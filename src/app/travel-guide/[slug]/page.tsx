@@ -122,122 +122,136 @@ export default async function TravelArticleDetailPage({ params }: ArticlePagePro
 
             {/* Long-Form Editorial Prose with Proper Typographic Hierarchy */}
             <div className="type-body text-[var(--color-ink-900)] space-y-6 leading-relaxed">
-              {article.content.split('\n\n').map((block, index) => {
-                const trimmed = block.trim();
-                if (!trimmed) return null;
+              {(() => {
+                // Ensure headings are surrounded by double newlines so they split into distinct blocks
+                const normalizedContent = article.content.replace(/^(#{2,3}\s+.*)$/gm, '\n\n$1\n\n');
+                const blocks = normalizedContent.split(/\n{2,}/);
 
-                // Heading 2
-                if (trimmed.startsWith('## ')) {
-                  const headingMatch = trimmed.match(/^## (.+?)(?: \{#(.+?)\})?$/);
-                  const title = headingMatch ? headingMatch[1] : trimmed.replace('## ', '');
-                  const id = headingMatch && headingMatch[2] ? headingMatch[2] : undefined;
+                return blocks.map((block, index) => {
+                  const trimmed = block.trim();
+                  if (!trimmed) return null;
+
+                  // Heading 2
+                  if (trimmed.startsWith('## ')) {
+                    const rawTitle = trimmed.replace(/^##\s+/, '').trim();
+                    const match = rawTitle.match(/^(.*?)\s*\{#([a-zA-Z0-9_-]+)\}\s*$/);
+                    const title = match ? match[1].trim() : rawTitle;
+                    const id = match ? match[2].trim() : undefined;
+                    return (
+                      <h2
+                        key={index}
+                        id={id}
+                        className="type-h2 text-[var(--color-ink-950)] mt-10 mb-4 pt-6 border-t border-[var(--border-subtle)] scroll-mt-24"
+                      >
+                        {renderInlineText(title)}
+                      </h2>
+                    );
+                  }
+
+                  // Heading 3
+                  if (trimmed.startsWith('### ')) {
+                    const rawTitle = trimmed.replace(/^###\s+/, '').trim();
+                    const match = rawTitle.match(/^(.*?)\s*\{#([a-zA-Z0-9_-]+)\}\s*$/);
+                    const title = match ? match[1].trim() : rawTitle;
+                    const id = match ? match[2].trim() : undefined;
+                    return (
+                      <h3
+                        key={index}
+                        id={id}
+                        className="type-h3 text-[var(--color-ink-950)] mt-6 mb-3 scroll-mt-24"
+                      >
+                        {renderInlineText(title)}
+                      </h3>
+                    );
+                  }
+
+                  // Check for bullets and numbered lists within block
+                  const lines = trimmed.split('\n');
+                  const hasBullets = lines.some((l) => l.trim().startsWith('- ') || l.trim().startsWith('* '));
+                  const hasNumbered = lines.some((l) => /^\d+\.\s/.test(l.trim()));
+
+                  if (hasBullets) {
+                    const introLines: string[] = [];
+                    const bulletLines: string[] = [];
+                    let inList = false;
+
+                    lines.forEach((line) => {
+                      const lineTrim = line.trim();
+                      if (lineTrim.startsWith('- ') || lineTrim.startsWith('* ')) {
+                        inList = true;
+                        bulletLines.push(lineTrim.replace(/^[-*]\s+/, ''));
+                      } else if (!inList && lineTrim) {
+                        introLines.push(lineTrim);
+                      } else if (inList && lineTrim) {
+                        bulletLines.push(lineTrim);
+                      }
+                    });
+
+                    return (
+                      <div key={index} className="space-y-3">
+                        {introLines.length > 0 && (
+                          <p className="text-base text-[var(--text-secondary)] leading-relaxed">
+                            {renderInlineText(introLines.join(' '))}
+                          </p>
+                        )}
+                        <ul className="space-y-2.5 my-3 pl-2 sm:pl-4 text-sm text-[var(--text-secondary)]">
+                          {bulletLines.map((it, i) => (
+                            <li key={i} className="flex items-start gap-2.5 leading-relaxed">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-terracotta-500)] shrink-0 mt-2" />
+                              <span>{renderInlineText(it)}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    );
+                  }
+
+                  if (hasNumbered) {
+                    const introLines: string[] = [];
+                    const numberItems: string[] = [];
+                    let inList = false;
+
+                    lines.forEach((line) => {
+                      const lineTrim = line.trim();
+                      if (/^\d+\.\s/.test(lineTrim)) {
+                        inList = true;
+                        numberItems.push(lineTrim.replace(/^\d+\.\s+/, ''));
+                      } else if (!inList && lineTrim) {
+                        introLines.push(lineTrim);
+                      } else if (inList && lineTrim) {
+                        numberItems.push(lineTrim);
+                      }
+                    });
+
+                    return (
+                      <div key={index} className="space-y-3">
+                        {introLines.length > 0 && (
+                          <p className="text-base text-[var(--text-secondary)] leading-relaxed">
+                            {renderInlineText(introLines.join(' '))}
+                          </p>
+                        )}
+                        <ol className="space-y-3 my-3 pl-1 text-sm text-[var(--text-secondary)]">
+                          {numberItems.map((it, i) => (
+                            <li key={i} className="flex items-start gap-3 leading-relaxed">
+                              <span className="w-5 h-5 rounded-full bg-[var(--color-terracotta-100)] text-[var(--color-terracotta-700)] font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                {i + 1}
+                              </span>
+                              <span>{renderInlineText(it)}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
+                    );
+                  }
+
+                  // Regular Paragraph
                   return (
-                    <h2
-                      key={index}
-                      id={id}
-                      className="type-h2 text-[var(--color-ink-950)] mt-10 mb-4 pt-6 border-t border-[var(--border-subtle)] scroll-mt-24"
-                    >
-                      {renderInlineText(title)}
-                    </h2>
+                    <p key={index} className="text-base text-[var(--text-secondary)] leading-relaxed">
+                      {renderInlineText(trimmed)}
+                    </p>
                   );
-                }
-
-                // Heading 3
-                if (trimmed.startsWith('### ')) {
-                  const title = trimmed.replace('### ', '');
-                  return (
-                    <h3 key={index} className="type-h3 text-[var(--color-ink-950)] mt-6 mb-3">
-                      {renderInlineText(title)}
-                    </h3>
-                  );
-                }
-
-                // Check for bullets and numbered lists within block
-                const lines = trimmed.split('\n');
-                const hasBullets = lines.some((l) => l.trim().startsWith('- ') || l.trim().startsWith('* '));
-                const hasNumbered = lines.some((l) => /^\d+\.\s/.test(l.trim()));
-
-                if (hasBullets) {
-                  const introLines: string[] = [];
-                  const bulletLines: string[] = [];
-                  let inList = false;
-
-                  lines.forEach((line) => {
-                    const lineTrim = line.trim();
-                    if (lineTrim.startsWith('- ') || lineTrim.startsWith('* ')) {
-                      inList = true;
-                      bulletLines.push(lineTrim.replace(/^[-*]\s+/, ''));
-                    } else if (!inList && lineTrim) {
-                      introLines.push(lineTrim);
-                    } else if (inList && lineTrim) {
-                      bulletLines.push(lineTrim);
-                    }
-                  });
-
-                  return (
-                    <div key={index} className="space-y-3">
-                      {introLines.length > 0 && (
-                        <p className="text-base text-[var(--text-secondary)] leading-relaxed">
-                          {renderInlineText(introLines.join(' '))}
-                        </p>
-                      )}
-                      <ul className="space-y-2.5 my-3 pl-2 sm:pl-4 text-sm text-[var(--text-secondary)]">
-                        {bulletLines.map((it, i) => (
-                          <li key={i} className="flex items-start gap-2.5 leading-relaxed">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-terracotta-500)] shrink-0 mt-2" />
-                            <span>{renderInlineText(it)}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  );
-                }
-
-                if (hasNumbered) {
-                  const introLines: string[] = [];
-                  const numberItems: string[] = [];
-                  let inList = false;
-
-                  lines.forEach((line) => {
-                    const lineTrim = line.trim();
-                    if (/^\d+\.\s/.test(lineTrim)) {
-                      inList = true;
-                      numberItems.push(lineTrim.replace(/^\d+\.\s+/, ''));
-                    } else if (!inList && lineTrim) {
-                      introLines.push(lineTrim);
-                    } else if (inList && lineTrim) {
-                      numberItems.push(lineTrim);
-                    }
-                  });
-
-                  return (
-                    <div key={index} className="space-y-3">
-                      {introLines.length > 0 && (
-                        <p className="text-base text-[var(--text-secondary)] leading-relaxed">
-                          {renderInlineText(introLines.join(' '))}
-                        </p>
-                      )}
-                      <ol className="space-y-3 my-3 pl-1 text-sm text-[var(--text-secondary)]">
-                        {numberItems.map((it, i) => (
-                          <li key={i} className="flex items-start gap-3 leading-relaxed">
-                            <span className="w-5 h-5 rounded-full bg-[var(--color-terracotta-100)] text-[var(--color-terracotta-700)] font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
-                              {i + 1}
-                            </span>
-                            <span>{renderInlineText(it)}</span>
-                          </li>
-                        ))}
-                      </ol>
-                    </div>
-                  );
-                }
-
-                // Regular Paragraph
-                return (
-                  <p key={index} className="text-base text-[var(--text-secondary)] leading-relaxed">
-                    {renderInlineText(trimmed)}
-                  </p>
-                );
-              })}
+                });
+              })()}
             </div>
 
             {/* 03 — Contextual Connected Tour */}
