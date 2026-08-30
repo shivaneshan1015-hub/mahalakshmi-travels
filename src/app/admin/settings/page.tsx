@@ -55,7 +55,7 @@ export default function AdminSettingsPage() {
                   Meta Ads Lead Forms (Instagram & Facebook)
                 </h2>
                 <p className="text-xs text-[#8A8780]">
-                  Instantly ingest leads when travelers submit an Instagram Instant Form.
+                  Directly ingest leads when travelers submit an Instagram Lead Form.
                 </p>
               </div>
             </div>
@@ -275,7 +275,7 @@ export default function AdminSettingsPage() {
                 <span>Instagram / Meta Simulation</span>
               </div>
               <p className="text-[11px] text-[#8A8780] leading-relaxed">
-                Sends a simulated Instagram Instant Lead Form event for 21-Seater college trip.
+                Sends a simulated Instagram Lead Form event for 21-Seater college trip.
               </p>
               <button
                 type="button"

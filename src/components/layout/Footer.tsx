@@ -18,7 +18,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-[var(--color-ink-950)] text-[var(--color-paper-100)] border-t border-[var(--color-ink-800)] pt-16 pb-12">
+    <footer className="bg-[#0F172A] text-[#F8FAFC] border-t border-[#1E293B] pt-16 pb-12">
       <div className="container-editorial">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-14">
           {/* Brand Col */}
@@ -27,22 +27,22 @@ export function Footer() {
               <LogoHorizontal variant="dark" size="lg" />
             </div>
 
-            <p className="type-body-small text-[var(--color-ink-400)] mt-2 max-w-sm">
+            <p className="type-body-small text-[#94A3B8] mt-2 max-w-sm leading-relaxed">
               Curated short-format journeys and dedicated group transportation originating from Madurai across Tamil Nadu, Kerala, Karnataka, and Andhra Pradesh.
             </p>
 
-            <div className="mt-6 pt-4 border-t border-[var(--color-ink-800)] text-xs text-[var(--color-ink-400)] space-y-2">
-              <p className="font-semibold text-[var(--color-paper-100)] uppercase tracking-wider">
+            <div className="mt-6 pt-4 border-t border-[#1E293B] text-xs text-[#94A3B8] space-y-2">
+              <p className="font-bold text-[#F8FAFC] uppercase tracking-wider">
                 Madurai Office & Depot
               </p>
-              <p className="leading-relaxed text-[var(--color-ink-300)]">
+              <p className="leading-relaxed text-[#CBD5E1]">
                 {siteConfig.contact.address.fullAddress}
               </p>
               
               <div className="flex flex-wrap items-center gap-4 pt-1">
                 <a
                   href={`tel:${siteConfig.contact.phoneRaw}`}
-                  className="inline-flex items-center gap-1.5 text-[var(--color-terracotta-300)] hover:text-white font-mono font-semibold transition-colors"
+                  className="inline-flex items-center gap-1.5 text-[#F59E0B] hover:text-[#FFFFFF] font-mono font-bold transition-colors"
                 >
                   <Phone className="w-3.5 h-3.5" />
                   <span>{siteConfig.contact.phonePrimary}</span>
@@ -52,7 +52,7 @@ export function Footer() {
                   href={siteConfig.contact.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs text-[var(--color-terracotta-400)] hover:underline font-medium"
+                  className="inline-flex items-center gap-1 text-xs text-[var(--color-terracotta-300)] hover:underline font-semibold"
                 >
                   <MapPin className="w-3.5 h-3.5" />
                   <span>View on Google Maps</span>
@@ -65,7 +65,7 @@ export function Footer() {
           {/* Navigation Links Columns */}
           {footerNavSections.map((section) => (
             <div key={section.title} className="flex flex-col">
-              <h4 className="type-eyebrow text-[var(--color-terracotta-300)] mb-4">
+              <h4 className="type-eyebrow text-[#F59E0B] mb-4 font-bold tracking-widest">
                 {section.title}
               </h4>
               <ul className="space-y-2.5">
@@ -73,7 +73,7 @@ export function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm text-[var(--color-ink-300)] hover:text-[var(--color-paper-100)] transition-colors"
+                      className="text-sm text-[#CBD5E1] hover:text-[#FFFFFF] transition-colors font-medium"
                     >
                       {item.label}
                     </Link>
@@ -85,17 +85,17 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-[var(--color-ink-800)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--color-ink-500)]">
+        <div className="pt-8 border-t border-[#1E293B] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#94A3B8]">
           <p>© {currentYear} {siteConfig.name}. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-6">
-            <span className="italic font-serif text-[var(--color-ink-400)]">
+            <span className="italic font-serif text-[#CBD5E1]">
               “Your Journey. Our Care.”
             </span>
             <a
               href="https://redwolf-website.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[var(--color-ink-400)] hover:text-[var(--color-terracotta-300)] transition-colors inline-flex items-center gap-1 group font-medium"
+              className="text-[#CBD5E1] hover:text-[var(--color-terracotta-300)] transition-colors inline-flex items-center gap-1 group font-medium"
               title="Designed & Developed by Red Wolf"
             >
               <span>Designed by</span>

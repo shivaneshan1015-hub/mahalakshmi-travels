@@ -35,16 +35,16 @@ export function WhyMahalakshmiSection() {
   ];
 
   return (
-    <section className="py-16 md:py-24 border-b border-[var(--border-default)]">
+    <section className="py-16 md:py-24 border-b border-[var(--border-default)] bg-[#F1F5F9]">
       <div className="container-editorial">
         <div className="max-w-2xl mb-14">
-          <span className="type-eyebrow text-[var(--color-terracotta-500)] block mb-2">
+          <span className="type-eyebrow text-[#EA580C] block mb-2 font-bold tracking-widest">
             07 — LOCAL EXPERTISE & CARE
           </span>
           <h2 className="type-display-l text-[var(--text-primary)] mb-4">
             Made for Real Journeys.
           </h2>
-          <p className="type-body text-[var(--text-secondary)]">
+          <p className="type-body text-[var(--color-ink-700)] font-medium">
             We operate our own vehicles with verified drivers who know South Indian roads, mountain ghats, and family pacing from years of local experience in Madurai.
           </p>
         </div>
@@ -54,7 +54,7 @@ export function WhyMahalakshmiSection() {
           {trustPoints.map((point) => (
             <div
               key={point.sublabel}
-              className="p-6 bg-[var(--color-paper-100)] rounded-[4px] border border-[var(--border-default)] flex flex-col justify-between shadow-editorial-xs hover:border-[var(--color-terracotta-400)] transition-editorial group"
+              className="p-6 bg-[#FFFFFF] rounded-[8px] border-2 border-[var(--border-default)] flex flex-col justify-between shadow-md hover:border-[var(--color-terracotta-500)] transition-all group"
             >
               <div className="mb-4">
                 <DataAnchor
@@ -63,7 +63,7 @@ export function WhyMahalakshmiSection() {
                   sublabel={point.sublabel}
                 />
               </div>
-              <p className="type-body-small text-[var(--text-secondary)] pt-4 border-t border-[var(--border-subtle)] leading-relaxed">
+              <p className="type-body-small text-[var(--color-ink-700)] pt-4 border-t border-[var(--border-default)] leading-relaxed font-medium">
                 {point.description}
               </p>
             </div>

@@ -46,7 +46,7 @@ export default function VehiclesPage() {
   const rentalFaqs = [
     {
       question: 'How do I rent a 21-seater van or sedan car from Mahalakshmi Tours and Travels in Madurai?',
-      answer: 'Booking is quick and straightforward. You can connect with our Madurai travel desk directly via WhatsApp (+91 98421 23456) or phone call. Share your travel dates, pickup location in Madurai, passenger count, and desired route. We will provide an instant, all-inclusive or per-KM tariff quote and reserve your vehicle immediately.',
+      answer: 'Booking is quick and straightforward. You can connect with our Madurai travel desk directly via WhatsApp (+91 98421 23456) or phone call. Share your travel dates, pickup location in Madurai, passenger count, and desired route. We will provide a quick, all-inclusive or per-KM tariff quote and reserve your vehicle immediately.',
     },
     {
       question: 'What are the charges for outstation vehicle hire from Madurai?',
@@ -85,7 +85,7 @@ export default function VehiclesPage() {
     {
       icon: <Clock className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
       title: '24/7 On-Demand Dispatch',
-      description: 'Instant booking confirmations with backup driver coordination for uninterrupted outstation journeys.',
+      description: 'Quick booking confirmations with backup driver coordination for uninterrupted outstation journeys.',
     },
   ];
 
@@ -145,8 +145,8 @@ export default function VehiclesPage() {
           {/* Quick Action Buttons */}
           <div className="flex flex-wrap items-center gap-4 mt-8">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-              <Button variant="primary" size="md" icon={<MessageSquare className="w-4 h-4" />} iconPosition="left">
-                Get Instant Rental Quote
+              <Button variant="emerald" size="md" icon={<MessageSquare className="w-4 h-4" />} iconPosition="left">
+                Get Rental Quote
               </Button>
             </a>
             <a href={phoneUrl}>
@@ -373,7 +373,7 @@ export default function VehiclesPage() {
                 STEP 02
               </span>
               <h4 className="text-sm font-semibold text-white mb-1">
-                Instant WhatsApp Quotation
+                WhatsApp Quotation
               </h4>
               <p className="text-xs text-[var(--color-ink-300)] leading-relaxed">
                 Receive transparent tariff estimates, driver details, and itinerary assistance within minutes on WhatsApp.

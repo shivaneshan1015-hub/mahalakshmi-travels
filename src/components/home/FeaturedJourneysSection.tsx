@@ -14,18 +14,18 @@ export function FeaturedJourneysSection() {
   const featuredTours = getFeaturedTours();
 
   return (
-    <section className="py-16 md:py-24 border-b border-[var(--border-default)]">
+    <section className="py-16 md:py-24 border-b border-[var(--border-default)] bg-[#FFFFFF]">
       <div className="container-editorial">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <span className="type-eyebrow text-[var(--color-terracotta-500)] block mb-2">
+            <span className="type-eyebrow text-[#D97706] block mb-2 font-bold tracking-widest">
               04 — CURATED TOUR PACKAGES
             </span>
             <h2 className="type-display-l text-[var(--text-primary)]">
               Start Somewhere.
             </h2>
-            <p className="text-xs uppercase tracking-widest font-semibold text-[var(--color-terracotta-500)] mt-1">
+            <p className="text-xs uppercase tracking-widest font-extrabold text-[var(--color-terracotta-500)] mt-1">
               Short journeys. Long memories.
             </p>
           </div>
@@ -56,8 +56,8 @@ export function FeaturedJourneysSection() {
         </div>
 
         {/* Bottom Explore All Tours CTA Block (Visible on all devices) */}
-        <div className="pt-6 text-center border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs font-mono text-[var(--text-muted)]">
+        <div className="pt-6 text-center border-t border-[var(--border-default)] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs font-mono font-semibold text-[var(--color-ink-700)]">
             Viewing 3 featured routes • 41 Total South India tour packages available from Madurai
           </p>
           <Link href="/tours" className="w-full sm:w-auto">

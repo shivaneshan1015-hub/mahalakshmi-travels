@@ -271,7 +271,7 @@ export default function AdminDashboardPage() {
                 Live Incoming Enquiries
               </h2>
               <p className="text-[11px] text-[#8A8780] font-mono">
-                Click 1-Click WhatsApp to open instant personalized chat
+                Click 1-Click WhatsApp to open personalized chat
               </p>
             </div>
             <Link

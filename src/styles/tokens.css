@@ -13,70 +13,90 @@
   --color-warm-paper: #F2EEE5;
 
   /* Ink Scale (Dark Surfaces, Typography, High-contrast lines) */
-  --color-ink-950: #171716;
-  --color-ink-900: #21211F;
-  --color-ink-800: #33322F;
-  --color-ink-700: #4B4A46;
-  --color-ink-600: #66645F;
+  --color-ink-950: #0F172A; /* Deep Royal Midnight Ink */
+  --color-ink-900: #1E293B;
+  --color-ink-800: #334155;
+  --color-ink-700: #475569;
+  --color-ink-600: #64748B;
   --color-ink-500: #63615C;
-  --color-ink-400: #7E7B75;
-  --color-ink-300: #C2BFBA;
-  --color-ink-200: #DDD9D3;
-  --color-ink-100: #EDE9E3;
+  --color-ink-400: #94A3B8;
+  --color-ink-300: #CBD5E1;
+  --color-ink-200: #E2E8F0;
+  --color-ink-100: #F1F5F9;
 
-  /* Terracotta Scale (Journey Routes, Accent CTA, Active States) */
-  --color-terracotta-800: #6E3924;
-  --color-terracotta-700: #86462E;
-  --color-terracotta-600: #975338;
-  --color-terracotta-500: #A65F43; /* Brand Primary Accent */
-  --color-terracotta-400: #BC765A;
-  --color-terracotta-300: #D3957C;
-  --color-terracotta-200: #E7B8A6;
-  --color-terracotta-100: #F6E6DF;
-  --color-terracotta-50:  #FAF2EE;
+  /* Terracotta Scale (Vibrant Heritage Accent, Active States, CTAs) */
+  --color-terracotta-800: #7C2D12;
+  --color-terracotta-700: #9A3412;
+  --color-terracotta-600: #C2410C;
+  --color-terracotta-500: #C85227; /* Rich Vibrant Heritage Terracotta */
+  --color-terracotta-400: #EA580C;
+  --color-terracotta-300: #F97316;
+  --color-terracotta-200: #FDBA74;
+  --color-terracotta-100: #FFEDD5;
+  --color-terracotta-50:  #FFF7ED;
+
+  /* Emerald & WhatsApp Green (Live Dispatch, Trust Badges, WhatsApp CTAs) */
+  --color-emerald-700: #047857;
+  --color-emerald-600: #059669;
+  --color-emerald-500: #10B981;
+  --color-emerald-100: #D1FAE5;
+  --color-emerald-50:  #ECFDF5;
+
+  /* Amber & Gold (Royal Circuit Tags, Star Ratings, Luxury Fleet) */
+  --color-amber-700: #B45309;
+  --color-amber-600: #D97706;
+  --color-amber-500: #F59E0B;
+  --color-amber-100: #FEF3C7;
+  --color-amber-50:  #FFFBEB;
 
   /* Warm Paper Scale (Editorial Light Surfaces, Cards, Journal feel) */
-  --color-paper-50:  #FCFAF7;
-  --color-paper-100: #F7F4ED;
-  --color-paper-200: #F2EEE5; /* Brand Primary Light Base */
-  --color-paper-300: #E6DFCFA;
-  --color-paper-400: #D6CCB7;
-  --color-paper-500: #BFB39B;
+  --color-paper-50:  #FFFFFF;
+  --color-paper-100: #F8FAFC;
+  --color-paper-200: #F1F5F9; /* High-contrast clean light base */
+  --color-paper-300: #E2E8F0;
+  --color-paper-400: #CBD5E1;
+  --color-paper-500: #94A3B8;
 
-  /* Functional Status (Muted, non-competing) */
-  --color-status-success: #43664C;
-  --color-status-success-bg: #EAF0EC;
-  --color-status-warning: #946C2B;
-  --color-status-warning-bg: #F7F2E8;
-  --color-status-error: #93382F;
-  --color-status-error-bg: #F7ECEB;
-  --color-status-info: #465866;
-  --color-status-info-bg: #EBF0F4;
+  /* Functional Status */
+  --color-status-success: #059669;
+  --color-status-success-bg: #ECFDF5;
+  --color-status-warning: #D97706;
+  --color-status-warning-bg: #FFFBEB;
+  --color-status-error: #DC2626;
+  --color-status-error-bg: #FEF2F2;
+  --color-status-info: #0284C7;
+  --color-status-info-bg: #F0F9FF;
+
+  /* Multi-tone Gradients */
+  --gradient-terracotta: linear-gradient(135deg, #EA580C 0%, #C85227 50%, #9A3412 100%);
+  --gradient-emerald: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  --gradient-amber: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  --gradient-ink: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
 
   /* ==========================================================================
      SEMANTIC TOKENS (Default Light / Warm Paper Theme)
      ========================================================================== */
-  --bg-primary: var(--color-paper-200);
-  --bg-secondary: var(--color-paper-100);
+  --bg-primary: #F8FAFC;
+  --bg-secondary: #FFFFFF;
   --bg-surface: #FFFFFF;
-  --bg-surface-elevated: var(--color-paper-50);
+  --bg-surface-elevated: #FFFFFF;
   --bg-accent: var(--color-terracotta-500);
   --bg-accent-subtle: var(--color-terracotta-50);
   --bg-ink: var(--color-ink-950);
 
   --text-primary: var(--color-ink-950);
   --text-secondary: var(--color-ink-700);
-  --text-muted: var(--color-ink-500);
+  --text-muted: var(--color-ink-600);
   --text-subtle: var(--color-ink-400);
   --text-accent: var(--color-terracotta-500);
-  --text-inverse: var(--color-paper-100);
+  --text-inverse: #FFFFFF;
   --text-inverse-muted: var(--color-ink-300);
 
-  --border-subtle: rgba(23, 23, 22, 0.08);
-  --border-default: rgba(23, 23, 22, 0.16);
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-default: rgba(15, 23, 42, 0.14);
   --border-strong: var(--color-ink-950);
   --border-accent: var(--color-terracotta-500);
-  --border-inverse: rgba(242, 238, 229, 0.18);
+  --border-inverse: rgba(255, 255, 255, 0.16);
 
   /* ==========================================================================
      ROUTE & JOURNEY TOKENS

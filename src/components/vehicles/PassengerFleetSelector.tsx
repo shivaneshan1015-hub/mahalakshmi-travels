@@ -18,7 +18,7 @@ export function PassengerFleetSelector() {
       boot: '400+ Litres Luggage Boot',
       slug: 'sedan-car',
       link: '/vehicles/sedan-car',
-      whatsappMsg: 'Hi Mahalakshmi Travels, I want to book a Private AC Sedan Car (1-4 Passengers) from Madurai. Please send instant tariff quote.',
+      whatsappMsg: 'Hi Mahalakshmi Travels, I want to book a Private AC Sedan Car (1-4 Passengers) from Madurai. Please send tariff quote.',
     },
     suv: {
       paxLabel: '5 - 7 Passengers',
@@ -29,7 +29,7 @@ export function PassengerFleetSelector() {
       boot: 'Comfortable Luggage Space',
       slug: 'sedan-car',
       link: '/vehicles/sedan-car',
-      whatsappMsg: 'Hi Mahalakshmi Travels, I want to book an AC SUV Cab (5-7 Passengers) from Madurai. Please send instant tariff quote.',
+      whatsappMsg: 'Hi Mahalakshmi Travels, I want to book an AC SUV Cab (5-7 Passengers) from Madurai. Please send tariff quote.',
     },
     van: {
       paxLabel: '8 - 21 Passengers',
@@ -40,7 +40,7 @@ export function PassengerFleetSelector() {
       boot: 'Deep Rear Boot + Rooftop Carrier',
       slug: '21-seater-van',
       link: '/vehicles/21-seater-van',
-      whatsappMsg: 'Hi Mahalakshmi Travels, I want to book a 21-Seater AC Group Van (8-21 Passengers) from Madurai. Please send instant tariff quote.',
+      whatsappMsg: 'Hi Mahalakshmi Travels, I want to book a 21-Seater AC Group Van (8-21 Passengers) from Madurai. Please send tariff quote.',
     },
   };
 
@@ -56,7 +56,7 @@ export function PassengerFleetSelector() {
           Find the Perfect Rental Vehicle for Your Group Size
         </h3>
         <p className="text-xs text-[var(--text-secondary)]">
-          Select how many travellers are in your party to view recommended vehicles, tariffs, and instant booking options.
+          Select how many travellers are in your party to view recommended vehicles, tariffs, and direct booking options.
         </p>
       </div>
 

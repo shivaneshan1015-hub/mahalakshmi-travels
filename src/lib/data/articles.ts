@@ -571,7 +571,7 @@ For joint family yatras and senior citizen groups:
     keyFacts: {
       origin: 'Madurai Airport (IXM)',
       destination: 'Kodaikanal, Munnar, Rameshwaram, Kanyakumari',
-      idealDuration: '24/7 Instant Dispatch',
+      idealDuration: '24/7 Express Dispatch',
       region: 'Tamil Nadu & Kerala',
       recommendedVehicle: 'Private Sedan or 21-Seater Van',
     },

@@ -237,7 +237,7 @@ export function CustomJourneyBuilder() {
       <div className="mb-6 px-4 py-3 bg-[var(--color-terracotta-50)] border border-[var(--color-terracotta-200)] rounded-[4px] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-editorial-sm">
         <div className="flex items-center gap-2 text-xs text-[var(--color-terracotta-800)] font-medium">
           <Zap className="w-4 h-4 text-[var(--color-terracotta-600)] shrink-0" />
-          <span>In a hurry? Get an instant travel quote without 6 steps:</span>
+          <span>In a hurry? Get a direct travel quote without 6 steps:</span>
         </div>
         <div className="flex items-center gap-2">
           <button

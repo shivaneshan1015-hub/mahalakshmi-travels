@@ -132,8 +132,8 @@ export function VehicleInfoBlock({
           <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[var(--border-subtle)]">
             <div className="flex flex-wrap items-center gap-3">
               <a href={whatsappHref} target="_blank" rel="noopener noreferrer">
-                <Button variant="primary" size="sm" withArrow>
-                  Instant Rental Quote
+                <Button variant="emerald" size="sm" withArrow>
+                  Get Rental Quote
                 </Button>
               </a>
               <a href={`/vehicles/${vehicle.slug}`}>

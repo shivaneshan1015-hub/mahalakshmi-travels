@@ -220,8 +220,8 @@ export default async function VehicleDetailPage({ params }: VehiclePageProps) {
               {/* Booking CTAs */}
               <div className="flex flex-wrap items-center gap-4 p-5 bg-[var(--color-paper-200)] rounded-[4px] border border-[var(--border-subtle)]">
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[200px]">
-                  <Button variant="primary" size="md" fullWidth icon={<MessageSquare className="w-4 h-4" />} iconPosition="left">
-                    Instant WhatsApp Quote
+                  <Button variant="emerald" size="md" fullWidth icon={<MessageSquare className="w-4 h-4" />} iconPosition="left">
+                    WhatsApp Quote
                   </Button>
                 </a>
                 <a href={phoneUrl} className="flex-1 min-w-[200px]">

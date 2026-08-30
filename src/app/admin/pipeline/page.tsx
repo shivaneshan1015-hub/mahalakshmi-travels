@@ -235,7 +235,7 @@ export default function PipelineKanbanPage() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="p-1 rounded bg-emerald-950/70 text-emerald-300 hover:bg-emerald-900"
-                          title="Instant WhatsApp"
+                          title="Direct WhatsApp"
                         >
                           <MessageSquare className="w-3.5 h-3.5" />
                         </a>

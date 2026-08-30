@@ -27,9 +27,9 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-[var(--z-header)] bg-[var(--color-paper-200)]/95 backdrop-blur-md border-b border-[var(--border-default)]">
+    <header className="sticky top-0 z-[var(--z-header)] bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[var(--border-default)] shadow-sm">
       <div className="container-editorial">
-        <div className="flex items-center justify-between h-22 sm:h-24 md:h-28">
+        <div className="flex items-center justify-between h-20 sm:h-22 md:h-24">
           {/* Brand Logo */}
           <LogoHorizontal variant="light" size="md" showTagline />
 
@@ -41,7 +41,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`type-nav transition-colors relative py-1 ${
+                  className={`type-nav transition-colors relative py-1 text-xs font-bold uppercase tracking-wider ${
                     active
                       ? 'text-[var(--color-terracotta-500)] font-extrabold'
                       : 'text-[var(--color-ink-800)] hover:text-[var(--color-terracotta-500)]'
@@ -58,17 +58,17 @@ export function Header() {
 
           {/* Right Action CTAs */}
           <div className="hidden md:flex items-center gap-3">
-            <a href={phoneUrl} className="p-2 text-[var(--color-ink-800)] hover:text-[var(--color-terracotta-500)]" title="Call Us">
-              <Phone className="w-4 h-4" />
+            <a href={phoneUrl} className="p-2 text-[var(--color-ink-800)] hover:text-[var(--color-terracotta-500)] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full bg-[#F1F5F9]" title="Call Travel Desk">
+              <Phone className="w-4 h-4 text-[#D97706]" />
             </a>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               <Button
-                variant="primary"
+                variant="emerald"
                 size="sm"
                 icon={<MessageSquare className="w-3.5 h-3.5" />}
                 iconPosition="left"
               >
-                Enquire
+                WhatsApp Enquiry
               </Button>
             </a>
           </div>
@@ -77,7 +77,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-[var(--color-ink-950)] focus-visible:outline-none"
+            className="lg:hidden p-2 text-[var(--color-ink-950)] focus-visible:outline-none min-h-[44px] min-w-[44px] flex items-center justify-center rounded-[6px] hover:bg-[#F1F5F9]"
             aria-expanded={mobileMenuOpen}
             aria-label="Toggle navigation menu"
           >
@@ -88,7 +88,7 @@ export function Header() {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[var(--color-paper-100)] border-b border-[var(--border-default)] px-6 py-6 shadow-editorial-lg animate-in slide-in-from-top duration-200">
+        <div className="lg:hidden bg-[#FFFFFF] border-b border-[var(--border-default)] px-6 py-6 shadow-2xl animate-in slide-in-from-top duration-200">
           <nav className="flex flex-col space-y-2" aria-label="Mobile Navigation">
             {mainNavItems.map((item) => {
               const active = item.href === '/' ? pathname === '/' : pathname?.startsWith(item.href);
@@ -97,10 +97,10 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`type-h4 transition-all py-2.5 px-3 rounded-[4px] flex items-center justify-between ${
+                  className={`transition-all py-3 px-4 rounded-[6px] flex items-center justify-between min-h-[48px] text-sm ${
                     active
-                      ? 'text-[var(--color-terracotta-600)] bg-[var(--color-terracotta-100)] border-l-4 border-[var(--color-terracotta-500)] font-bold'
-                      : 'text-[var(--color-ink-950)] hover:text-[var(--color-terracotta-500)]'
+                      ? 'text-[var(--color-terracotta-600)] bg-[#FFF7ED] border-l-4 border-[var(--color-terracotta-500)] font-bold'
+                      : 'text-[var(--color-ink-950)] hover:bg-[#F8FAFC] font-semibold'
                   }`}
                 >
                   <span>{item.label}</span>
@@ -110,7 +110,7 @@ export function Header() {
             })}
             <div className="pt-4 mt-2 border-t border-[var(--border-default)] flex flex-col gap-3">
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full">
-                <Button variant="primary" size="md" fullWidth icon={<MessageSquare className="w-4 h-4" />} iconPosition="left">
+                <Button variant="emerald" size="md" fullWidth icon={<MessageSquare className="w-4 h-4" />} iconPosition="left">
                   WhatsApp Enquiry
                 </Button>
               </a>

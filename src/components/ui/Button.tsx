@@ -8,7 +8,8 @@ import { ArrowRight, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils/cn';
 
 export type ButtonVariant = 
-  | 'primary'       // Terracotta fill
+  | 'primary'       // Terracotta gradient fill
+  | 'emerald'       // WhatsApp Emerald fill
   | 'secondary'     // Ink outline
   | 'tertiary'      // Minimal route-arrow link button
   | 'ink-solid'     // Solid ink button
@@ -44,21 +45,22 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const baseStyles = 'inline-flex items-center justify-center font-semibold tracking-[0.06em] uppercase transition-editorial btn-tactile focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-terracotta-500)] focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed group cursor-pointer';
+    const baseStyles = 'inline-flex items-center justify-center font-semibold tracking-[0.06em] uppercase transition-all duration-200 btn-tactile focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-terracotta-500)] focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed group cursor-pointer active:scale-[0.98]';
 
     const sizeStyles = {
-      sm: 'text-xs px-3.5 py-2 rounded-[3px] gap-1.5',
-      md: 'text-xs px-5 py-3 rounded-[4px] gap-2',
-      lg: 'text-sm px-7 py-3.5 rounded-[4px] gap-2.5',
+      sm: 'text-xs px-3.5 py-2.5 rounded-[4px] gap-1.5 min-h-[38px]',
+      md: 'text-xs px-5 py-3 rounded-[6px] gap-2 min-h-[44px]',
+      lg: 'text-sm px-7 py-3.5 rounded-[6px] gap-2.5 min-h-[48px]',
     };
 
     const variantStyles = {
-      primary: 'bg-[var(--color-terracotta-500)] text-[#FFFFFF] hover:bg-[var(--color-terracotta-600)] active:bg-[var(--color-terracotta-700)] shadow-editorial-sm',
-      secondary: 'bg-transparent text-[var(--color-ink-950)] border border-[var(--color-ink-950)] hover:bg-[var(--color-ink-950)] hover:text-[var(--color-paper-100)]',
-      'ink-solid': 'bg-[var(--color-ink-950)] text-[var(--color-paper-100)] hover:bg-[var(--color-ink-900)]',
-      'paper-solid': 'bg-[var(--color-paper-100)] text-[var(--color-ink-950)] hover:bg-[#FFFFFF]',
-      'paper-outline': 'bg-transparent text-[var(--color-paper-100)] border border-[var(--color-paper-100)] hover:bg-[var(--color-paper-100)] hover:text-[var(--color-ink-950)]',
-      tertiary: 'bg-transparent text-[var(--color-terracotta-500)] p-0 hover:text-[var(--color-terracotta-700)] normal-case tracking-normal font-medium',
+      primary: 'bg-gradient-to-r from-[#EA580C] via-[#C85227] to-[#9A3412] text-[#FFFFFF] hover:shadow-md hover:brightness-110 active:brightness-95 shadow-editorial-sm border border-transparent',
+      emerald: 'bg-gradient-to-r from-[#10B981] to-[#059669] text-[#FFFFFF] hover:shadow-md hover:brightness-110 active:brightness-95 shadow-editorial-sm border border-transparent',
+      secondary: 'bg-[#FFFFFF] text-[var(--color-ink-950)] border-2 border-[var(--color-ink-950)] hover:bg-[var(--color-ink-950)] hover:text-[#FFFFFF] shadow-xs',
+      'ink-solid': 'bg-[var(--color-ink-950)] text-[#FFFFFF] hover:bg-[#1E293B] hover:shadow-md shadow-editorial-sm',
+      'paper-solid': 'bg-[#FFFFFF] text-[var(--color-ink-950)] hover:bg-[var(--color-paper-100)] shadow-sm border border-[var(--border-default)]',
+      'paper-outline': 'bg-transparent text-[#FFFFFF] border-2 border-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[var(--color-ink-950)]',
+      tertiary: 'bg-transparent text-[var(--color-terracotta-500)] p-0 hover:text-[var(--color-terracotta-700)] normal-case tracking-normal font-bold',
     };
 
     return (

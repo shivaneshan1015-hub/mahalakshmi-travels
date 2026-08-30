@@ -23,35 +23,41 @@ export function MobileStickyBar() {
   }
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[var(--z-sticky)] bg-[var(--color-paper-100)]/95 backdrop-blur-md border-t border-[var(--border-default)] px-4 py-2.5 shadow-editorial-lift">
-      <div className="flex items-center justify-between gap-2 max-w-md mx-auto">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[var(--z-sticky)] bg-[#0F172A]/95 backdrop-blur-lg border-t border-[#334155] px-4 pt-2.5 pb-[calc(0.625rem+env(safe-area-inset-bottom,0px))] shadow-2xl">
+      <div className="flex items-center justify-evenly gap-3 max-w-md mx-auto">
         {/* WhatsApp Action */}
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-[3px] bg-[var(--color-terracotta-500)] text-[#FFFFFF] text-xs font-semibold uppercase tracking-wider shadow-editorial-sm active:scale-95 transition-transform"
+          className="flex-1 min-h-[48px] flex items-center justify-center gap-2 py-2.5 px-4 rounded-[6px] bg-gradient-to-r from-[#10B981] to-[#059669] text-[#FFFFFF] shadow-md active:scale-95 transition-transform"
+          aria-label="WhatsApp Travel Desk"
+          title="WhatsApp Travel Desk"
         >
-          <MessageSquare className="w-3.5 h-3.5" />
-          <span>WhatsApp</span>
+          <MessageSquare className="w-5 h-5 shrink-0" />
+          <span className="hidden sm:inline text-xs font-bold uppercase tracking-wider">WhatsApp</span>
         </a>
 
         {/* Call Action */}
         <a
           href={phoneUrl}
-          className="flex items-center justify-center p-2 rounded-[3px] bg-[#FFFFFF] border border-[var(--border-default)] text-[var(--color-ink-950)] active:bg-[var(--color-paper-200)] transition-colors"
+          className="flex-1 min-h-[48px] flex items-center justify-center gap-2 py-2.5 px-4 rounded-[6px] bg-[#1E293B] border border-[#334155] text-[#FFFFFF] hover:bg-[#334155] active:scale-95 transition-all shadow-sm"
+          aria-label="Call Madurai Desk"
           title="Call Madurai Desk"
         >
-          <Phone className="w-4 h-4" />
+          <Phone className="w-5 h-5 shrink-0 text-[#F59E0B]" />
+          <span className="hidden sm:inline text-xs font-bold uppercase tracking-wider">Call Desk</span>
         </a>
 
         {/* Plan Custom Journey */}
         <Link
           href="/customised-tours"
-          className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-[3px] bg-[var(--color-ink-950)] text-[var(--color-paper-100)] text-xs font-semibold uppercase tracking-wider active:scale-95 transition-transform"
+          className="flex-1 min-h-[48px] flex items-center justify-center gap-2 py-2.5 px-4 rounded-[6px] bg-gradient-to-r from-[#EA580C] to-[#C85227] text-[#FFFFFF] shadow-md active:scale-95 transition-transform"
+          aria-label="Plan Custom Trip"
+          title="Plan Custom Trip"
         >
-          <Compass className="w-3.5 h-3.5" />
-          <span>Plan Trip</span>
+          <Compass className="w-5 h-5 shrink-0" />
+          <span className="hidden sm:inline text-xs font-bold uppercase tracking-wider">Plan Trip</span>
         </Link>
       </div>
     </div>

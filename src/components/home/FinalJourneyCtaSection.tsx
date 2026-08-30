@@ -16,17 +16,17 @@ export function FinalJourneyCtaSection() {
   const displayPhone = getDisplayPhone();
 
   return (
-    <section className="py-20 md:py-32 bg-[var(--color-ink-950)] text-[var(--color-paper-100)] relative overflow-hidden">
+    <section className="py-20 md:py-32 bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] text-[#F8FAFC] relative overflow-hidden border-t border-[#334155]">
       <div className="container-editorial relative z-10 text-center">
-        <span className="type-eyebrow text-[var(--color-terracotta-300)] block mb-3">
+        <span className="type-eyebrow text-[#F59E0B] block mb-3 font-bold tracking-widest">
           MADURAI • SOUTH INDIA
         </span>
 
-        <h2 className="type-display-xl text-[#FFFFFF] mb-6 max-w-3xl mx-auto text-balance">
+        <h2 className="type-display-xl text-[#FFFFFF] mb-6 max-w-3xl mx-auto text-balance font-bold">
           Where Will the Road Take You Next?
         </h2>
 
-        <p className="type-body-large text-[var(--color-ink-300)] max-w-xl mx-auto mb-10 leading-relaxed">
+        <p className="type-body-large text-[#CBD5E1] max-w-xl mx-auto mb-10 leading-relaxed font-medium">
           From the hill ranges of Munnar and Kodaikanal to group pilgrimages across Tamil Nadu and Andhra Pradesh—your journey begins in Madurai.
         </p>
 
@@ -39,36 +39,36 @@ export function FinalJourneyCtaSection() {
           </Link>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
             <Button
-              variant="paper-outline"
+              variant="emerald"
               size="lg"
               icon={<MessageSquare className="w-4 h-4" />}
               iconPosition="left"
             >
-              Talk to Mahalakshmi
+              Talk to Travel Desk
             </Button>
           </a>
         </div>
 
         {/* Route Line Continuing Beyond Viewport Frame */}
         <div className="relative flex items-center justify-center max-w-xl mx-auto">
-          <div className="w-full h-px bg-[var(--color-ink-800)]" />
+          <div className="w-full h-px bg-[#334155]" />
           <div className="absolute left-0 flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-paper-100)]" />
-            <span className="text-[11px] font-mono uppercase tracking-widest text-[var(--color-ink-400)]">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#FFFFFF]" />
+            <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#94A3B8]">
               MADURAI
             </span>
           </div>
 
           <div className="absolute -right-12 flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-terracotta-400)]" />
-            <span className="text-[11px] font-mono uppercase tracking-widest text-[var(--color-terracotta-300)]">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]" />
+            <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#F59E0B]">
               BEYOND
             </span>
-            <span className="w-12 h-px border-b border-dashed border-[var(--color-terracotta-400)]" />
+            <span className="w-12 h-px border-b border-dashed border-[#F59E0B]" />
           </div>
         </div>
 
-        <p className="text-xs text-[var(--color-ink-400)] italic font-serif mt-12">
+        <p className="text-xs text-[#94A3B8] italic font-serif mt-12 font-medium">
           “Your Journey. Our Care.” • Headquarters: Madurai, Tamil Nadu
         </p>
       </div>

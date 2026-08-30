@@ -101,8 +101,8 @@ export function TravelTogetherSection() {
 
               <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-[var(--border-subtle)]">
                 <a href={getQuickWhatsAppLink('21-Seater Van Rental Quote')} target="_blank" rel="noopener noreferrer">
-                  <Button variant="primary" size="md" withArrow>
-                    Instant Van Rental Quote
+                  <Button variant="emerald" size="md" withArrow>
+                    Van Rental Quote
                   </Button>
                 </a>
                 <Link href="/vehicles/21-seater-van">
@@ -122,7 +122,7 @@ export function TravelTogetherSection() {
             <div>
               <div className="flex justify-between items-start mb-2">
                 <Badge variant="paper">Private Outstation Cab</Badge>
-                <span className="font-mono text-xs text-[var(--color-terracotta-500)] font-semibold">24x7 Instant Dispatch</span>
+                <span className="font-mono text-xs text-[var(--color-emerald-600)] font-bold">24x7 Express Dispatch</span>
               </div>
               <h3 className="type-h3 text-[var(--color-ink-950)] mt-2 mb-2">
                 Sedan Car Rental (AC Prime / Dzire / Etios)

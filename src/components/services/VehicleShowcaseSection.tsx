@@ -92,8 +92,8 @@ export function VehicleShowcaseSection() {
             <div>
               <div className="flex justify-between items-center mb-3">
                 <Badge variant="paper">Private Outstation Cab</Badge>
-                <span className="text-xs font-mono text-[var(--color-terracotta-500)] font-semibold">
-                  24x7 Instant Dispatch
+                <span className="text-xs font-mono text-[var(--color-emerald-600)] font-bold">
+                  24x7 Express Dispatch
                 </span>
               </div>
 
@@ -128,8 +128,8 @@ export function VehicleShowcaseSection() {
 
             <div className="pt-4 border-t border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-3">
               <a href={getQuickWhatsAppLink('Sedan Car Rental Quote')} target="_blank" rel="noopener noreferrer">
-                <Button variant="primary" size="md" withArrow>
-                  Instant Sedan Quote
+                <Button variant="emerald" size="md" withArrow>
+                  Get Sedan Quote
                 </Button>
               </a>
               <Link href="/vehicles/sedan-car">

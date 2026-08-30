@@ -50,7 +50,7 @@ export const vehiclesRepository: Vehicle[] = [
     faqs: [
       {
         question: 'How do I book a 21-seater van in Madurai with Mahalakshmi Tours and Travels?',
-        answer: 'You can book directly via WhatsApp (+91 98421 23456) or phone call. Share your travel dates, passenger count, pickup point in Madurai, and itinerary. We will provide an instant, transparent quote with vehicle confirmation.',
+        answer: 'You can book directly via WhatsApp (+91 98421 23456) or phone call. Share your travel dates, passenger count, pickup point in Madurai, and itinerary. We will provide a quick, transparent quote with vehicle confirmation.',
       },
       {
         question: 'What is the pricing model for outstation 21-seater van hire?',
@@ -99,7 +99,7 @@ export const vehiclesRepository: Vehicle[] = [
     tagline: 'QUIET COMFORT & OUTSTATION CAB SERVICE FROM MADURAI.',
     rentalHeading: 'Sedan Car Rental in Madurai for Outstation & Local Taxi',
     description: 'Book well-maintained private AC sedan cars (Swift Dzire, Toyota Etios class) in Madurai for small family vacations, temple darshans, Madurai airport (IXM) pickups, and outstation weekend hill escapes. Travel with polite, non-smoking, professional local drivers with deep knowledge of South Indian roads.',
-    availabilityBadge: '24x7 Instant Dispatch',
+    availabilityBadge: '24x7 Express Dispatch',
     tariff: {
       ratePerKm: '₹12 - ₹14 / KM (AC)',
       driverBataPerDay: '₹400 - ₹500 / Day',
