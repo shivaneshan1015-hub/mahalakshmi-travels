@@ -88,9 +88,6 @@ export function Footer() {
               <span className="font-bold text-[var(--color-terracotta-400)] group-hover:underline">RedWolf</span>
               <ExternalLink className="h-3 w-3 text-[var(--color-terracotta-400)] opacity-70 group-hover:opacity-100" />
             </a>
-            <Link href="/design-system" className="hover:text-[var(--color-terracotta-300)]">
-              Design System
-            </Link>
           </div>
         </div>
       </div>
