@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ExternalLink } from 'lucide-react';
 import { LogoSymbol } from '../brand/LogoSymbol';
 import { footerNavSections } from '@/config/navigation';
 import { siteConfig } from '@/config/site';
@@ -72,10 +73,21 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[var(--color-ink-800)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--color-ink-500)]">
           <p>© {currentYear} {siteConfig.name}. All rights reserved.</p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-6">
             <span className="italic font-serif text-[var(--color-ink-400)]">
               “Your Journey. Our Care.”
             </span>
+            <a
+              href="https://redwolf-website.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-ink-400)] hover:text-[var(--color-terracotta-300)] transition-colors inline-flex items-center gap-1 group font-medium"
+              title="Designed & Developed by Red Wolf"
+            >
+              <span>Designed by</span>
+              <span className="font-bold text-[var(--color-terracotta-400)] group-hover:underline">RedWolf</span>
+              <ExternalLink className="h-3 w-3 text-[var(--color-terracotta-400)] opacity-70 group-hover:opacity-100" />
+            </a>
             <Link href="/design-system" className="hover:text-[var(--color-terracotta-300)]">
               Design System
             </Link>
