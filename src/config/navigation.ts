@@ -10,7 +10,7 @@ export interface NavItem {
 
 export const mainNavItems: NavItem[] = [
   { label: 'Tour Packages', href: '/tours' },
-  { label: 'Vehicle Rentals & Services', href: '/vehicles' },
+  { label: 'Vehicle Rental Services', href: '/vehicles' },
   { label: 'Customised Tours', href: '/customised-tours' },
   { label: 'Travel Guide', href: '/travel-guide' },
   { label: 'About Us', href: '/about' },
