@@ -12,7 +12,7 @@ export const mockTravelServices: TravelService[] = [
     title: 'Group Travel & Transportation',
     serviceType: 'group-travel',
     shortDescription: 'Dedicated 21-seater AC passenger van and coordinated travel arrangements for associations, pilgrimage batches, and large family groups.',
-    description: 'When traveling as a group, keeping everyone in a single spacious vehicle transforms the entire journey. Our flagship 21-seater (20+1) AC passenger van is based in Madurai and operated by experienced drivers who understand outstation highways, temple corridors, and mountain routes across South India.',
+    description: 'When traveling as a group, keeping everyone in a single spacious vehicle transforms the entire journey. Our flagship 21-seater (20+1) AC passenger van is based in Madurai and operated with local route familiarity across outstation highways, temple corridors, and mountain routes in South India.',
     idealFor: ['group', 'family', 'corporate'],
     vehicleOptions: ['21-seater-van'],
     benefits: [
@@ -25,8 +25,8 @@ export const mockTravelServices: TravelService[] = [
         description: 'Dedicated rear storage bay easily accommodates bags and supplies for multi-day outstation circuits.',
       },
       {
-        title: 'Experienced Interstate Drivers',
-        description: 'Drivers familiar with ghat roads, hill permits, and highway routes across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.',
+        title: 'Regional Route Coverage',
+        description: 'Vehicle support for ghat roads and highway routes across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.',
       },
       {
         title: 'Custom Pickups & Halts',
@@ -46,7 +46,7 @@ export const mockTravelServices: TravelService[] = [
       },
       {
         question: 'Do you cover interstate travel to Kerala, Karnataka, and Andhra Pradesh?',
-        answer: 'Yes. All our vehicles and experienced drivers operate across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.',
+        answer: 'Yes. All our vehicles operate across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.',
       },
       {
         question: 'How do we book or check availability for our dates?',
@@ -74,7 +74,7 @@ export const mockTravelServices: TravelService[] = [
     title: 'College Trips & Industrial Visits',
     serviceType: 'college-trips',
     shortDescription: 'Reliable, well-maintained 21-seater group transportation for student industrial visits, department tours, and hill station excursions.',
-    description: 'Planning a department tour or educational industrial visit requires dependable transportation, route discipline, and trusted drivers. Mahalakshmi provides well-maintained 21-seater AC group vans with dedicated luggage space for student batches departing from Madurai colleges and institutions.',
+    description: 'Planning a department tour or educational industrial visit requires dependable transportation and route discipline. Mahalakshmi provides well-maintained 21-seater AC group vans with dedicated luggage space for student batches departing from Madurai colleges and institutions.',
     idealFor: ['college', 'group'],
     vehicleOptions: ['21-seater-van'],
     benefits: [
@@ -84,7 +84,7 @@ export const mockTravelServices: TravelService[] = [
       },
       {
         title: 'Safety-First Road Pacing',
-        description: 'Experienced drivers trained in highway discipline and daylight hill ascent guidelines.',
+        description: 'Vehicle scheduling aligned with highway route planning and daylight hill ascent guidelines.',
       },
       {
         title: 'Flexible Outstation Routing',

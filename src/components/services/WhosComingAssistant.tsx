@@ -60,7 +60,7 @@ export function WhosComingAssistant() {
       recommendedVehicleName: '21-Seater AC Flagship Van',
       recommendedVehicleSlug: '21-seater-van',
       capacityText: '20+1 Seats • High-Roof Group Van',
-      description: 'Specially suited for college industrial visits (IV), department tours, and student expeditions with experienced highway drivers.',
+      description: 'Specially suited for college industrial visits (IV), department tours, and student expeditions with dedicated vehicle support.',
       bestSuitedFor: ['Industrial Visits (IV)', 'Department Outings', 'Student Weekend Trips'],
       suggestedCircuits: ['Madurai → Bangalore / Mysore (435 KM)', 'Madurai → Kodaikanal (120 KM)', 'Madurai → Ooty Nilgiris (280 KM)'],
     },

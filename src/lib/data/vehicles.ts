@@ -21,7 +21,7 @@ export const vehiclesRepository: Vehicle[] = [
     features: [
       { iconName: 'Users', title: '20+1 Pushback Reclining Seats', description: 'Ergonomic 2x1 high-back seating layout with armrests and generous legroom for long-distance highway travel.' },
       { iconName: 'Wind', title: 'High-Power Dual Air Conditioning', description: 'Evenly distributed roof AC louvers ensuring rapid cooling across all rows in hot weather.' },
-      { iconName: 'ShieldCheck', title: 'Highway & Hill Route Drivers', description: 'Drivers with experience traversing Kodaikanal, Munnar, Ooty, and Valparai routes.' },
+      { iconName: 'ShieldCheck', title: 'Highway & Hill Route Transit', description: 'Vehicle support for traversing Kodaikanal, Munnar, Ooty, and Valparai routes.' },
       { iconName: 'Luggage', title: 'Massive Luggage Capacity', description: 'Heavy-duty rooftop carrier with protective cover plus deep under-chassis boot space for group luggage.' },
     ],
     specifications: [
@@ -37,7 +37,7 @@ export const vehiclesRepository: Vehicle[] = [
     serviceAreas: ['Tamil Nadu', 'Kerala', 'Karnataka', 'Andhra Pradesh', 'Telangana'],
     popularRoutes: [
       { route: 'Madurai to Kodaikanal Outstation', distance: '120 KM (3.5 Hrs)', drivingTime: '3.5 Hours', fitNote: 'Ideal for 15–20 family members or student batches ascending Palani Ghats' },
-      { route: 'Madurai to Munnar Hill Trip', distance: '157 KM (4.5 Hrs)', drivingTime: '4.5 Hours', fitNote: 'Smooth climbing via Bodi Mettu pass with mountain drivers' },
+      { route: 'Madurai to Munnar Hill Trip', distance: '157 KM (4.5 Hrs)', drivingTime: '4.5 Hours', fitNote: 'Smooth climbing via Bodi Mettu pass' },
       { route: 'Madurai to Rameshwaram & Dhanushkodi', distance: '172 KM (3.5 Hrs)', drivingTime: '3.5 Hours', fitNote: 'Spacious coastal day/night tour crossing the historic Pamban Sea Bridge' },
       { route: 'Madurai to Kanyakumari Highway', distance: '242 KM (4.5 Hrs)', drivingTime: '4.5 Hours', fitNote: 'Comfortable highway cruising for joint family temple and sunrise excursions' },
       { route: 'Madurai to Tirupati Balaji Pilgrimage', distance: '480 KM (8.5 Hrs)', drivingTime: '8.5 Hours', fitNote: 'Dedicated group darshan travel with night halt flexibility and luggage comfort' },
@@ -94,19 +94,19 @@ export const vehiclesRepository: Vehicle[] = [
     luggageCapacityText: 'Spacious 400+ Litre boot accommodating 3–4 standard suitcases',
     tagline: 'QUIET COMFORT & OUTSTATION CAB SERVICE FROM MADURAI.',
     rentalHeading: 'Sedan Car Rental in Madurai for Outstation & Local Taxi',
-    description: 'Book well-maintained private AC sedan cars in Madurai for small family vacations, temple darshans, Madurai airport (IXM) pickups, and outstation weekend hill escapes. Travel with courteous local drivers with knowledge of South Indian roads.',
+    description: 'Book well-maintained private AC sedan cars in Madurai for small family vacations, temple darshans, Madurai airport (IXM) pickups, and outstation weekend hill escapes. Travel with courteous local support across South Indian roads.',
     availabilityBadge: 'Express Booking Available',
     features: [
       { iconName: 'Users', title: '4 Passenger Comfort', description: 'Clean, cushioned seating with ample legroom for couples and families of 3–4 members.' },
       { iconName: 'Wind', title: 'Effective Climate Control', description: 'Powerful all-weather air conditioning ensuring relaxing long-distance journeys.' },
-      { iconName: 'Navigation', title: 'Courteous Local Madurai Drivers', description: 'Courteous drivers who know clean highway stops, viewpoints, and temples.' },
+      { iconName: 'Navigation', title: 'Local Madurai Route Support', description: 'Coverage of clean highway stops, viewpoints, and temples.' },
       { iconName: 'Sparkles', title: 'Vehicle Inspection & Cleanliness', description: 'Thoroughly vacuumed and washed before departure.' },
     ],
     specifications: [
       { label: 'Seating Capacity', value: '4 Passengers + 1 Driver' },
       { label: 'Boot / Luggage Space', value: '400+ Litres (3-4 Large Bags + Handbags)' },
       { label: 'Air Conditioning', value: 'Full Cabin AC' },
-      { label: 'Driver Standard', value: 'Local Madurai Driver' },
+      { label: 'Vehicle Service', value: 'Local Madurai Transit' },
       { label: 'Ownership', value: 'Business Owned Fleet' },
       { label: 'Booking Availability', value: 'Outstation & City Dispatch by Schedule' },
       { label: 'Service Coverage', value: 'Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, Telangana' },

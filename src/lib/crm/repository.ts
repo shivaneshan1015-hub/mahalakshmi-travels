@@ -104,7 +104,7 @@ const initialEnquiries: CrmEnquiry[] = [
       fbclid: 'fbclid_vignesh_klce_998',
       landingPage: '/college-trips',
     },
-    internalNotes: 'Advance of ₹20,000 received via GPay. Permit and hill permit included. Assigned 21S Coach.',
+    internalNotes: 'Advance of ₹20,000 received via GPay. All journey arrangements included. Assigned 21S Coach.',
     activityLog: [
       {
         id: 'act-4',

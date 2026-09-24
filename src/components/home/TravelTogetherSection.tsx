@@ -38,7 +38,7 @@ export function TravelTogetherSection() {
               Vehicle Rental with Driver.
             </h2>
             <p className="type-body text-[var(--text-secondary)]">
-              Looking for a dependable vehicle for your own custom itinerary? Rent our verified commercial AC vans and private sedans from Madurai with experienced South Indian highway drivers.
+              Looking for a dependable vehicle for your own custom itinerary? Rent our verified commercial AC vans and private sedans from Madurai with South Indian highway route support.
             </p>
           </div>
           <Link href="/vehicles" className="shrink-0">

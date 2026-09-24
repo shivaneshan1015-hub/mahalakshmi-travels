@@ -1,6 +1,6 @@
 /**
  * MAHALAKSHMI TOURS AND TRAVELS — DYNAMIC VEHICLE RENTAL DETAIL PAGE
- * Search-optimized vehicle rental landing page with specifications, tariffs, routes, and FAQs.
+ * Search-optimized vehicle rental landing page with specifications, routes, and FAQs.
  */
 
 import { Metadata } from 'next';

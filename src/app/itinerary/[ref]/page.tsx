@@ -230,7 +230,7 @@ export default async function CustomerItineraryPage(props: {
 
             <div className="p-3 bg-[#FAF8F5] border border-[rgba(23,23,22,0.08)] rounded">
               <span className="text-[10px] font-mono uppercase text-[#7E7B75] block">
-                Package Tariff
+                Package Quote
               </span>
               <span className="font-bold text-sm text-emerald-700 font-mono">
                 ₹{quote.toLocaleString('en-IN')}
@@ -264,7 +264,7 @@ export default async function CustomerItineraryPage(props: {
             </div>
           </div>
 
-          {/* Pricing & Transparent Tariff Inclusions */}
+          {/* Package Inclusions & Breakdown */}
           <div className="p-5 bg-[#FAF8F5] border border-[rgba(23,23,22,0.1)] rounded-lg space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[rgba(23,23,22,0.1)] pb-3">
               <div>
@@ -292,7 +292,7 @@ export default async function CustomerItineraryPage(props: {
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-                <span>All Highway Toll Taxes & State Border Permits</span>
+                <span>All Highway Toll Taxes & Route Charges</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />

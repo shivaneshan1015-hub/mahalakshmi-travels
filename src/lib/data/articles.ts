@@ -56,7 +56,7 @@ The transition begins at **Bodinayakanur (Bodi)**, known as the Cardamom Capital
 As you ascend:
 - The temperature drops noticeably by 6°C to 10°C compared to Madurai.
 - The dry scrub gives way to thick cardamom estates, silver oak canopies, and pepper vines.
-- The interstate checkpost at Bodi Mettu is smooth for commercial vehicles with valid interstate permits.
+- The checkpost at Bodi Mettu is smooth for commercial tourist vehicles.
 
 ## Recommended Halts Along the Route {#recommended-halts}
 1. **Theni Market Belt (Km 75)**: An excellent point for a traditional Tamil Nadu breakfast (hot idlis and filter coffee) and fresh banana/coconut supplies.
@@ -67,7 +67,7 @@ As you ascend:
 Because the Bodi Mettu to Munnar stretch involves steep gradients and narrow mountain curves:
 - **Small Families**: Private sedan cars provide nimble maneuverability and quiet cabin comfort.
 - **Groups & College Trips**: Our **21-seater AC van** provides high ground clearance, dedicated luggage storage, and ample power for full-passenger hill climbs.
-- **Driver Expertise**: Mahalakshmi drivers regularly traverse this route and understand the mountain right-of-way rules and safe daylight ascent timings.
+- **Route Familiarity**: Our vehicle service covers mountain right-of-way awareness and safe daylight ascent timings.
 
 ## Seasonal Driving & Monsoons {#seasonal-driving-notes}
 - **September to March (Peak Season)**: Clear skies, crisp mountain air, and lush green tea slopes after the rains.
@@ -128,7 +128,7 @@ Unlike sprawling hill stations that require extensive intra-city driving, Kodaik
 The drive from Madurai to the base of the hills (Batlagundu) takes about 75 minutes. The 48 km ghat climb from Batlagundu to Kodaikanal features smooth double-lane roads:
 - **Recommended Departure**: Leave Madurai between **6:30 AM and 7:30 AM**.
 - **Dum Dum Rock Waterfall Halt**: An easy roadside view stop for tea and leg stretching without requiring stairs.
-- **Gentle Driving Pace**: Our experienced drivers maintain steady, nausea-free speeds on hairpin bends.
+- **Gentle Driving Pace**: Vehicle speed is maintained at steady, comfortable levels on mountain hairpin bends.
 
 ## Senior & Child-Friendly Sightseeing {#accessible-sightseeing-spots}
 1. **Coaker’s Walk**: A flat, paved pedestrian pathway with guardrails offering breathtaking valley views without steep climbs.
@@ -257,12 +257,12 @@ The drive from Madurai to the base of the hills (Batlagundu) takes about 75 minu
 ## Coordination & Approval Essentials {#college-planning-essentials}
 1. **Fix Student & Faculty Count Early**: Knowing whether your batch is 15 or 20 students determines whether a single 21-seater van is sufficient.
 2. **Synchronize Company Timings**: Confirm industrial visit slots (tech parks in Bengaluru or tea processing plants in Nilgiris) before locking daily road halts.
-3. **Emergency Contact Protocol**: Share dedicated driver credentials and travel coordinator contacts with department heads.
+3. **Emergency Contact Protocol**: Share travel coordinator contacts with department heads.
 
 ## Why 21-Seater Transport Works Best {#vehicle-capacity-safety}
 - **Single Group Cohesion**: Keeps up to 20 students and faculty coordinator in one high-roof, air-conditioned vehicle.
 - **Deep Rear Luggage Bay**: Easily accommodates student backpacks and presentation kits for 3 to 4 day circuits.
-- **Experienced Interstate Drivers**: Drivers familiar with highway toll plazas, interstate border permits, and mountain roads.
+- **Highway Route Support**: Coverage of highway toll plazas, state border transit, and mountain roads.
 
 ## Top Industrial Visit Circuits from Madurai {#top-college-circuits}
 - **Madurai → Bangalore / Mysore (435 KM)**: IT hubs, electronics manufacturing, Mysore Palace heritage.
@@ -447,7 +447,7 @@ Driving another 18 km past Rameswaram town brings you to **Arichal Munai (Land�
     tableOfContents: [
       { id: 'kodai-1day-schedule', title: '1-Day Hour-by-Hour Sightseeing Schedule', level: 2 },
       { id: 'kodai-route-timing', title: 'Driving Route & Ghat Ascent Timings', level: 2 },
-      { id: 'kodai-cab-charges', title: 'Transparent Cab & Van Rental Tariffs', level: 2 },
+      { id: 'kodai-cab-charges', title: 'Vehicle Options for Your Journey', level: 2 },
     ],
     content: `A **1-Day same-day return trip** from Madurai to Kodaikanal is the most popular quick escape for families, couples, and weekend travellers. Because Kodaikanal is located just **120 KM** from Madurai, you can comfortably spend 6 to 7 hours in the cool hills and return home by night.
 
@@ -467,7 +467,7 @@ Driving another 18 km past Rameswaram town brings you to **Arichal Munai (Land�
 ## Driving Route & Ghat Ascent Timings {#kodai-route-timing}
 The route from Madurai follows 4-lane highway up to Batlagundu (72 KM), followed by a smooth double-lane ghat road (48 KM) with 14 hairpin bends. Total driving time is **3 to 3.5 hours**.
 
-## Transparent Cab & Van Rental Options {#kodai-cab-charges}
+## Vehicle Options for Your Journey {#kodai-cab-charges}
 - **Private AC Sedan**: Comfortable personal transport for small families (1-4 passengers).
 - **21-Seater AC Luxury Van**: Spacious group option with pushback seating and luggage bay for larger groups.`,
     coverImage: {
@@ -535,7 +535,7 @@ From Tiruchendur, the East Coast Road (ECR) leads north towards Rameshwaram isla
 
 ## Pilgrimage Group Transport & Van Rentals {#pilgrimage-group-transport}
 For joint family yatras and senior citizen groups:
-- Our **21-Seater AC Luxury Van** offers pushback reclining seats, senior-friendly low steps, high luggage capacity for holy water cans, and experienced drivers who know temple parking zones.`,
+- Our **21-Seater AC Luxury Van** offers pushback reclining seats, senior-friendly low steps, high luggage capacity for holy water cans, and route planning taking temple parking zones into account.`,
     coverImage: {
       url: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=1200&auto=format&fit=crop',
       alt: 'Coastal temple architecture and beach on Madurai Tiruchendur Rameshwaram tour',
@@ -650,7 +650,7 @@ Our dedicated event coordinators manage continuous pickup shuttles from Madurai 
 
 ## Custom Wedding Fleet Hire Packages {#wedding-fleet-packages}
 - **VIP & Groom Family**: Premium private AC sedan cars for comfortable personal transit.
-- **Relatives & Group Transit**: **21-seater AC luxury vans** equipped with high-power AC, music systems, and experienced drivers for comfortable multi-day marriage celebrations.`,
+- **Relatives & Group Transit**: **21-seater AC luxury vans** equipped with high-power AC and music systems for comfortable multi-day marriage celebrations.`,
     coverImage: {
       url: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop',
       alt: 'Grand South Indian wedding celebration guest transportation fleet in Madurai',

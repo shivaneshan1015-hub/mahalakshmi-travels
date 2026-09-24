@@ -51,7 +51,7 @@ export async function dispatchAutomatedWhatsAppWelcome(enquiry: CrmEnquiry): Pro
             type: 'text',
             text: {
               preview_url: true,
-              body: `Vanakkam ${customerName}! 🙏\n\nThank you for choosing *${siteConfig.name}, Madurai*.\n\nWe have received your enquiry for *${destinations}* (${enquiry.travelDate || 'Upcoming'}).\n\n📄 *Download Tariff & Tour Brochure:* ${brochurePdfUrl}\n\nOur Madurai travel desk will assist you shortly. Have a great day!`,
+              body: `Vanakkam ${customerName}! 🙏\n\nThank you for choosing *${siteConfig.name}, Madurai*.\n\nWe have received your enquiry for *${destinations}* (${enquiry.travelDate || 'Upcoming'}).\n\n📄 *Download Tour Brochure:* ${brochurePdfUrl}\n\nOur Madurai travel desk will assist you shortly. Have a great day!`,
             },
           }),
         }

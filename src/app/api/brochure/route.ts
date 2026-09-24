@@ -1,7 +1,7 @@
 /**
- * MAHALAKSHMI TOUR & TRAVEL — BROCHURE & TARIFF SERVICE
+ * MAHALAKSHMI TOUR & TRAVEL — BROCHURE SERVICE
  * GET /api/brochure
- * Generates an official, printable company profile, vehicle fleet overview, and tour tariff sheet.
+ * Generates an official, printable company profile and vehicle fleet overview.
  */
 
 import { NextResponse } from 'next/server';
@@ -202,7 +202,7 @@ export async function GET() {
 
     <h2>🛡️ The Mahalakshmi Assurance</h2>
     <p style="font-size: 13px; color: #444; margin-bottom: 12px;">
-      • Experienced drivers familiar with South India routes.<br>
+      • Local drivers familiar with South India routes.<br>
       • Clear and transparent custom tour quotations.<br>
       • Direct contact with Madurai Travel Desk for all journeys.
     </p>

@@ -111,7 +111,7 @@ export default function ContactPage() {
               Chat Directly on WhatsApp
             </h3>
             <p className="type-body-small text-[var(--color-ink-300)] mb-6 leading-relaxed">
-              We respond promptly on WhatsApp with detailed vehicle availability, transparent kilometer tariffs, and recommended route timings for South India journeys.
+              We respond promptly on WhatsApp with detailed vehicle availability, custom journey quotes, and recommended route timings for South India journeys.
             </p>
             <div className="flex items-center gap-2 text-xs text-[var(--color-ink-400)] mb-8">
               <Mail className="w-3.5 h-3.5 text-[var(--color-terracotta-400)]" />

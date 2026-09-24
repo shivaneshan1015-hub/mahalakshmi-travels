@@ -37,7 +37,7 @@ export function ArticleConnectedTour({ tour }: ArticleConnectedTourProps) {
       </h3>
 
       <p className="type-body-small text-[var(--text-secondary)] mb-6 leading-relaxed">
-        Prefer having the driving, vehicle permits, and sightseeing schedule organized from Madurai? Explore our complete package.
+        Prefer having the vehicle transit and sightseeing schedule organized from Madurai? Explore our tour details.
       </p>
 
       <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[var(--border-subtle)]">

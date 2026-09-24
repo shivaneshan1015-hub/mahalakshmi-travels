@@ -45,7 +45,7 @@ export function WhyMahalakshmiSection() {
             Made for Real Journeys.
           </h2>
           <p className="type-body text-[var(--color-ink-700)] font-medium">
-            We operate our own vehicles with verified drivers who know South Indian roads, mountain ghats, and family pacing from years of local experience in Madurai.
+            We operate our own vehicles with local route familiarity across South Indian roads, mountain ghats, and family pacing.
           </p>
         </div>
 

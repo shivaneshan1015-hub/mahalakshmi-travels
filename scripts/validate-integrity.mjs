@@ -252,11 +252,11 @@ for (const file of publicScanFiles) {
   const relPath = path.relative(rootDir, file);
 
   // Exclude non-public CRM/Webhook background files if any
-  if (relPath.includes('api/webhooks') || relPath.includes('lib/crm/repository.ts')) continue;
+  if (relPath.includes('api/webhooks')) continue;
 
   if (/\b24\/7\b|\b24x7\b/i.test(content)) claims247Count++;
-  if (/\bexperienced driver\b|\bexperienced local driver\b|\bseasoned driver\b|\bprofessional driver\b|\bnon-smoking driver\b/i.test(content)) driverClaimsCount++;
-  if (/\bAll-India permit\b|\bCommercial All-India\b|\bguaranteed permit\b/i.test(content)) permitClaimsCount++;
+  if (/\bexperienced driver\b|\bexperienced drivers\b|\bseasoned driver\b|\bseasoned drivers\b|\bverified driver\b|\bverified drivers\b|\bprofessional driver\b|\bprofessional drivers\b|\btrained driver\b|\bexpert driver\b|\btrusted driver\b/i.test(content)) driverClaimsCount++;
+  if (/\bpermit\b|\bpermits\b/i.test(content)) permitClaimsCount++;
   if (/\bcomprehensive insurance coverage\b|\bfull insurance guarantee\b/i.test(content)) unsupportedInsuranceCount++;
   if (/\bguaranteed availability\b|\bfabricated reviews\b/i.test(content)) otherUnsupportedClaimsCount++;
 }

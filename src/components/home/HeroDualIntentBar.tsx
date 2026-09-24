@@ -12,7 +12,7 @@ export function HeroDualIntentBar() {
 
   const whatsappRentalMessage = `Hi Mahalakshmi Travels, I want to rent a vehicle from Madurai. Type: ${
     vehicleType === '21-seater' ? '21-Seater AC Group Van' : '4-Seater Private AC Sedan'
-  }, Group Size: ${passengerCount} Passengers. Please send tariff quote.`;
+  }, Group Size: ${passengerCount} Passengers. Please send journey quote.`;
 
   const rentalWhatsappUrl = getQuickWhatsAppLink(whatsappRentalMessage);
 
@@ -83,7 +83,7 @@ export function HeroDualIntentBar() {
             </div>
           </div>
 
-          {/* Tariff Highlights */}
+          {/* Vehicle Highlights */}
           <div className="p-3.5 bg-[#FFF7ED] rounded-[6px] border border-[#FDBA74] flex flex-wrap items-center justify-between text-xs text-[var(--color-ink-950)] gap-2">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-[var(--color-terracotta-600)] shrink-0" />

@@ -202,22 +202,22 @@ export default function VehiclesPage() {
           </div>
         </div>
 
-        {/* Transparent Tariff & Pricing Guidelines */}
+        {/* Vehicle Rental Guidelines */}
         <div className="p-8 md:p-10 bg-[var(--color-paper-100)] rounded-[4px] border border-[var(--border-default)] mb-16 shadow-editorial-xs">
           <div className="max-w-2xl mb-8">
             <span className="type-eyebrow text-[var(--color-terracotta-500)] block mb-1">
-              FAIR & TRANSPARENT PRICING
+              RENTAL GUIDELINES
             </span>
             <h2 className="type-h2 text-[var(--text-primary)] mb-2">
-              Vehicle Rental Tariff & Rate Guidelines
+              Planning Your Vehicle Rental
             </h2>
             <p className="type-body text-[var(--text-secondary)]">
-              We operate on an honest, transparent billing structure with zero surprise charges.
+              We provide transparent journey quotes tailored to your route, duration, and group requirements.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            {/* 21 Seater Tariff Box */}
+            {/* 21 Seater Rental Box */}
             <div className="p-6 bg-[#FFFFFF] rounded-[4px] border border-[var(--border-subtle)] flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center mb-3">
@@ -234,11 +234,11 @@ export default function VehiclesPage() {
                 <ul className="space-y-2.5 text-xs text-[var(--text-secondary)]">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Outstation Pricing:</strong> Custom Quote based on Route & Dates</span>
+                    <span><strong>Outstation Quote:</strong> Custom Quote based on Route & Dates</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Pricing Inclusions:</strong> Fuel, Vehicle AC, Driver Charges & Music System</span>
+                    <span><strong>Quote Inclusions:</strong> Fuel, Vehicle AC, Driver Allowances & Music System</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
@@ -254,13 +254,13 @@ export default function VehiclesPage() {
                 <Link href="/vehicles/21-seater-van" className="text-xs font-semibold uppercase tracking-wider text-[var(--color-terracotta-500)] hover:underline">
                   View Van Details →
                 </Link>
-                <a href={getQuickWhatsAppLink('21-Seater Van Tariff Enquiry')} target="_blank" rel="noopener noreferrer">
+                <a href={getQuickWhatsAppLink('21-Seater Van Quote Enquiry')} target="_blank" rel="noopener noreferrer">
                   <Button variant="primary" size="sm">Get Van Quote</Button>
                 </a>
               </div>
             </div>
 
-            {/* Sedan Tariff Box */}
+            {/* Sedan Rental Box */}
             <div className="p-6 bg-[#FFFFFF] rounded-[4px] border border-[var(--border-subtle)] flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center mb-3">
@@ -277,11 +277,11 @@ export default function VehiclesPage() {
                 <ul className="space-y-2.5 text-xs text-[var(--text-secondary)]">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Outstation Pricing:</strong> Custom Quote based on Route & Dates</span>
+                    <span><strong>Outstation Quote:</strong> Custom Quote based on Route & Dates</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Pricing Inclusions:</strong> Fuel, Vehicle AC & Driver Charges</span>
+                    <span><strong>Quote Inclusions:</strong> Fuel, Vehicle AC & Driver Allowances</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
@@ -297,7 +297,7 @@ export default function VehiclesPage() {
                 <Link href="/vehicles/sedan-car" className="text-xs font-semibold uppercase tracking-wider text-[var(--color-terracotta-500)] hover:underline">
                   View Sedan Details →
                 </Link>
-                <a href={getQuickWhatsAppLink('Sedan Car Tariff Enquiry')} target="_blank" rel="noopener noreferrer">
+                <a href={getQuickWhatsAppLink('Sedan Car Quote Enquiry')} target="_blank" rel="noopener noreferrer">
                   <Button variant="primary" size="sm">Get Sedan Quote</Button>
                 </a>
               </div>
@@ -305,7 +305,7 @@ export default function VehiclesPage() {
           </div>
 
           <p className="text-[11px] font-mono text-[var(--text-muted)]">
-            * Note: Toll plaza charges, state border entry permits (Kerala, Karnataka, AP), and parking tickets are billed at actuals against valid receipts.
+            * Note: Toll plaza charges, parking tickets, and incidental expenses are billed against valid receipts.
           </p>
         </div>
 
@@ -376,7 +376,7 @@ export default function VehiclesPage() {
                 WhatsApp Quotation
               </h4>
               <p className="text-xs text-[var(--color-ink-300)] leading-relaxed">
-                Receive transparent tariff estimates, driver details, and itinerary assistance within minutes on WhatsApp.
+                Receive transparent journey quotes, driver details, and itinerary assistance within minutes on WhatsApp.
               </p>
             </div>
 

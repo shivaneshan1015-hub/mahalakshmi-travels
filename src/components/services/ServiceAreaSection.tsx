@@ -48,7 +48,7 @@ export function ServiceAreaSection() {
             From Madurai, Outward.
           </h2>
           <p className="type-body text-[var(--text-secondary)]">
-            Our depot is in Madurai, but our travel network spans across South India with experienced local drivers.
+            Our depot is in Madurai, but our travel network spans across South India with dedicated vehicle support.
           </p>
         </div>
 
