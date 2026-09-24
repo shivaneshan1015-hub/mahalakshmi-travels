@@ -30,6 +30,11 @@ export function ServiceAreaSection() {
       tagline: 'Pilgrimage Corridors',
       hubs: ['Tirupati', 'Tirumala Hills', 'Chittoor'],
     },
+    {
+      state: 'Telangana',
+      tagline: 'Nizami Heritage & Tech Hubs',
+      hubs: ['Hyderabad', 'Charminar', 'Ramoji Film City'],
+    },
   ];
 
   return (
@@ -43,12 +48,12 @@ export function ServiceAreaSection() {
             From Madurai, Outward.
           </h2>
           <p className="type-body text-[var(--text-secondary)]">
-            Our depot is in Madurai, but our travel network spans across South India with licensed commercial permits and experienced drivers.
+            Our depot is in Madurai, but our travel network spans across South India with experienced local drivers.
           </p>
         </div>
 
-        {/* 4 States Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4 border-t border-[var(--border-subtle)]">
+        {/* 5 States Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 pt-4 border-t border-[var(--border-subtle)]">
           {regions.map((reg) => (
             <div key={reg.state} className="p-4 bg-[#FFFFFF] rounded-[3px] border border-[var(--border-subtle)]">
               <h3 className="type-h4 text-[var(--color-ink-950)] mb-1">

@@ -1928,7 +1928,7 @@ export const mockTours: Tour[] = [
     category: 'heritage-cities',
     destination: 'Hyderabad',
     destinationSlug: 'hyderabad',
-    state: 'Andhra Pradesh',
+    state: 'Telangana',
     startingLocation: 'Madurai',
     distanceKm: 990,
     duration: {
@@ -1993,7 +1993,7 @@ export const mockTours: Tour[] = [
     category: 'adventure-theme-parks',
     destination: 'Hyderabad',
     destinationSlug: 'hyderabad',
-    state: 'Andhra Pradesh',
+    state: 'Telangana',
     startingLocation: 'Madurai',
     distanceKm: 980,
     duration: {

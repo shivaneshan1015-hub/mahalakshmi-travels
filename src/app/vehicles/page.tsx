@@ -34,7 +34,7 @@ import { PassengerFleetSelector } from '@/components/vehicles/PassengerFleetSele
 
 export const metadata: Metadata = constructMetadata({
   title: 'Vehicle Rental in Madurai | 21 Seater Van & Sedan Car Hire with Driver',
-  description: 'Book 21-seater AC van rentals and private sedan cars in Madurai for outstation family trips, college IV, wedding transportation, and temple pilgrimages. Transparent custom quotes and experienced local drivers.',
+  description: 'Book 21-seater AC van rentals and private sedan cars in Madurai for outstation family trips, college IV, wedding transportation, and temple pilgrimages. Transparent custom quotes and local drivers.',
   canonicalPath: '/vehicles',
 });
 
@@ -54,7 +54,7 @@ export default function VehiclesPage() {
     },
     {
       question: 'Do your rental vehicles cover travel to Kerala, Karnataka, and Andhra Pradesh?',
-      answer: 'Yes. All our vehicles and experienced drivers operate across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana. Our drivers have extensive driving experience across Western Ghats mountain roads and interstate highways.',
+      answer: 'Yes. All our vehicles and drivers operate across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana. Our drivers have extensive driving experience across Western Ghats mountain roads and interstate highways.',
     },
     {
       question: 'Can we book vehicles for college industrial visits (IV) and department tours?',
@@ -62,15 +62,15 @@ export default function VehiclesPage() {
     },
     {
       question: 'Are the drivers experienced with hill stations like Kodaikanal, Munnar, and Ooty?',
-      answer: 'Absolutely. All our full-time drivers are seasoned locals with over 10+ years of driving on mountain ghat sections including Batlagundu–Kodaikanal, Bodi Mettu–Munnar, Mettupalayam–Ooty, and Valparai passes.',
+      answer: 'Absolutely. All our full-time drivers are familiar with mountain ghat sections including Batlagundu–Kodaikanal, Bodi Mettu–Munnar, Mettupalayam–Ooty, and Valparai passes.',
     },
   ];
 
   const rentalFeatures = [
     {
       icon: <ShieldCheck className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
-      title: 'Experienced Local Drivers',
-      description: 'Courteous, non-smoking local drivers with deep route mastery across Tamil Nadu, Kerala, and Karnataka.',
+      title: 'Local Drivers',
+      description: 'Courteous local drivers with deep route mastery across Tamil Nadu, Kerala, and Karnataka.',
     },
     {
       icon: <Coins className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
@@ -84,7 +84,7 @@ export default function VehiclesPage() {
     },
     {
       icon: <Clock className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
-      title: '24/7 On-Demand Dispatch',
+      title: 'On-Demand Dispatch',
       description: 'Quick booking confirmations with backup driver coordination for uninterrupted outstation journeys.',
     },
   ];
@@ -139,7 +139,7 @@ export default function VehiclesPage() {
             Vehicle Rental Services in Madurai
           </h1>
           <p className="type-body-large text-[var(--text-secondary)] leading-relaxed">
-            Rent our verified commercial <strong>21-Seater AC passenger vans</strong> and <strong>private sedan cars</strong> with seasoned South Indian highway drivers. Transparent per-kilometer billing, spotless hygiene, and round-the-clock dispatch from our central Madurai depot.
+            Rent our verified commercial <strong>21-Seater AC passenger vans</strong> and <strong>private sedan cars</strong> with South Indian highway drivers. Transparent per-kilometer billing, spotless hygiene, and prompt dispatch from our central Madurai depot.
           </p>
 
           {/* Quick Action Buttons */}
@@ -388,7 +388,7 @@ export default function VehiclesPage() {
                 Confirmed Doorstep Dispatch
               </h4>
               <p className="text-xs text-[var(--color-ink-300)] leading-relaxed">
-                Your clean, sanitized vehicle and experienced driver arrive promptly at your Madurai doorstep.
+                Your clean, sanitized vehicle and driver arrive promptly at your Madurai doorstep.
               </p>
             </div>
           </div>

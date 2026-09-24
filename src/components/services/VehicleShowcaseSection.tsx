@@ -67,8 +67,8 @@ export function VehicleShowcaseSection() {
                   <span className="text-[10px] text-[var(--text-muted)]">Even cooling for all 20 passenger seats</span>
                 </div>
                 <div className="p-3 bg-[var(--color-paper-100)] rounded-[3px] border border-[var(--border-subtle)]">
-                  <span className="text-xs font-semibold block text-[var(--color-ink-950)]">Western Ghats Permits</span>
-                  <span className="text-[10px] text-[var(--text-muted)]">Permits for TN, Kerala, Karnataka, AP</span>
+                  <span className="text-xs font-semibold block text-[var(--color-ink-950)]">Western Ghats Coverage</span>
+                  <span className="text-[10px] text-[var(--text-muted)] font-mono">TN, Kerala, Karnataka, AP, Telangana</span>
                 </div>
               </div>
             </div>
@@ -93,7 +93,7 @@ export function VehicleShowcaseSection() {
               <div className="flex justify-between items-center mb-3">
                 <Badge variant="paper">Private Outstation Cab</Badge>
                 <span className="text-xs font-mono text-[var(--color-emerald-600)] font-bold">
-                  24x7 Express Dispatch
+                  Express Dispatch
                 </span>
               </div>
 
@@ -134,7 +134,7 @@ export function VehicleShowcaseSection() {
               </a>
               <Link href="/vehicles/sedan-car">
                 <Button variant="secondary" size="md">
-                  View Rates & Specs
+                  View Vehicle Specs
                 </Button>
               </Link>
             </div>

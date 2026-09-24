@@ -48,7 +48,6 @@ export function RelatedTours({ currentTourId, relatedTours }: RelatedToursProps)
             distanceKm={tour.distanceKm}
             imageUrl={tour.heroImage.url}
             href={`/tours/${tour.slug}`}
-            pricePerPersonText={tour.pricePerPersonText}
             customisable={tour.customisable}
             size="sm"
           />

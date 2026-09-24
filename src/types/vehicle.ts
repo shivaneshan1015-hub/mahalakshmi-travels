@@ -1,5 +1,7 @@
 import { TravelAudience, TourImage, TourSeo } from './tour';
 
+export type VehicleOwnership = 'OWNED' | 'PARTNER_COORDINATED';
+
 export type VehicleCategory = '21-seater-van' | 'sedan-car';
 
 export interface VehicleFeature {
@@ -13,14 +15,6 @@ export interface VehicleSpecification {
   value: string;
 }
 
-export interface VehicleTariff {
-  ratePerKm?: string;
-  driverBataPerDay?: string;
-  minKmPerDay?: string;
-  tollParkingTerms?: string;
-  startingPrice?: string;
-}
-
 export interface VehicleFaq {
   question: string;
   answer: string;
@@ -31,6 +25,7 @@ export interface Vehicle {
   name: string;
   slug: string;
   category: VehicleCategory;
+  ownership: VehicleOwnership;
   seatingCapacity: number; // e.g. 21 or 4
   luggageCapacityText: string;
   tagline: string;
@@ -38,7 +33,6 @@ export interface Vehicle {
   rentalHeading?: string;
   fleetCount?: number;
   availabilityBadge?: string;
-  tariff?: VehicleTariff;
   features: VehicleFeature[];
   specifications: VehicleSpecification[];
   idealFor: TravelAudience[];

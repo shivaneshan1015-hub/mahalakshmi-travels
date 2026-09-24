@@ -56,7 +56,7 @@ export function VehicleInfoBlock({
           )}
           <div className="absolute top-3 left-3">
             <Badge variant="terracotta" size="sm">
-              {vehicle.availabilityBadge || 'Verified Commercial Fleet'}
+              {vehicle.availabilityBadge || 'Available with Driver'}
             </Badge>
           </div>
         </div>
@@ -83,23 +83,6 @@ export function VehicleInfoBlock({
             <p className="type-body-small text-[var(--text-secondary)] mb-4">
               {vehicle.description}
             </p>
-
-            {vehicle.tariff && (
-              <div className="mb-5 p-3 rounded-[3px] bg-[var(--color-paper-200)] border border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-2 text-xs">
-                <div>
-                  <span className="text-[var(--text-muted)] block text-[10px] uppercase font-mono tracking-wider">Estimated Outstation Rate</span>
-                  <span className="font-semibold text-[var(--color-terracotta-500)] text-sm">{vehicle.tariff.ratePerKm}</span>
-                </div>
-                <div>
-                  <span className="text-[var(--text-muted)] block text-[10px] uppercase font-mono tracking-wider">Driver Bata</span>
-                  <span className="font-semibold text-[var(--text-primary)]">{vehicle.tariff.driverBataPerDay}</span>
-                </div>
-                <div>
-                  <span className="text-[var(--text-muted)] block text-[10px] uppercase font-mono tracking-wider">Min. Outstation</span>
-                  <span className="font-semibold text-[var(--text-primary)]">{vehicle.tariff.minKmPerDay}</span>
-                </div>
-              </div>
-            )}
 
             {/* Feature Points Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
@@ -138,12 +121,12 @@ export function VehicleInfoBlock({
               </a>
               <a href={`/vehicles/${vehicle.slug}`}>
                 <Button variant="secondary" size="sm">
-                  View Full Rates & Specs
+                  View Vehicle Specs
                 </Button>
               </a>
             </div>
             <span className="text-xs font-mono text-[var(--text-muted)]">
-              All South India Permits
+              South India Coverage
             </span>
           </div>
         </div>

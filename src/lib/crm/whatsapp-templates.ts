@@ -24,7 +24,7 @@ export function generateWhatsAppMessage(enquiry: CrmEnquiry, options: WhatsAppTe
       return `Vanakkam ${customerName}! 🙏\n\nThank you for reaching out to *${siteConfig.name}, Madurai*.\n\nWe have received your enquiry for:\n📍 *Route:* ${enquiry.origin} → ${destinations}\n📅 *Travel Date:* ${travelDate}\n👥 *Travellers:* ${pax} Persons\n🔖 *Ref Code:* ${refCode}\n\nOur Madurai travel desk is preparing your customized itinerary. You can also view our fleet and travel packages here:\n🌐 ${siteConfig.url}/tours\n\nHow can we help you further?`;
 
     case 'brochure':
-      return `Vanakkam ${customerName}! 🙏\n\nHere are the details and company profile for *${siteConfig.name}*:\n\n✨ *Specialties:*\n• Curated Kerala & Tamil Nadu Holiday Tours\n• 21-Seater Luxury Coaches & Executive Vans\n• Hill Station Specialists (Munnar, Kodaikanal, Ooty, Coorg)\n• 24/7 Madurai Desk Support & Verified Drivers\n\n📄 *Download Tariff & Tour Brochure:* ${siteConfig.url}/docs/mahalakshmi-travels-brochure.pdf\n\nWould you like us to customize a day-wise itinerary for ${destinations}?`;
+      return `Vanakkam ${customerName}! 🙏\n\nHere are the details and company profile for *${siteConfig.name}*:\n\n✨ *Specialties:*\n• Curated Kerala & Tamil Nadu Holiday Tours\n• 21-Seater Luxury Coaches & Executive Vans\n• Hill Station Specialists (Munnar, Kodaikanal, Ooty, Coorg)\n• Madurai Desk Support & Local Drivers\n\n📄 *Download Tariff & Tour Brochure:* ${siteConfig.url}/docs/mahalakshmi-travels-brochure.pdf\n\nWould you like us to customize a day-wise itinerary for ${destinations}?`;
 
     case 'quote':
       const amount = options.customQuoteAmount || enquiry.quotedAmount || enquiry.estimatedValue || 0;

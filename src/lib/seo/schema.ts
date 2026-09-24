@@ -41,7 +41,6 @@ export function generateLocalBusinessSchema() {
       '@type': 'AdministrativeArea',
       name: state,
     })),
-    priceRange: '$$',
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
@@ -54,8 +53,8 @@ export function generateLocalBusinessSchema() {
           'Saturday',
           'Sunday',
         ],
-        opens: '06:00',
-        closes: '22:00',
+        opens: '09:00',
+        closes: '19:00',
       },
     ],
   };
@@ -165,7 +164,6 @@ export function generateVehicleRentalSchema(vehicle: {
   seatingCapacity: number;
   category: string;
   images: Array<{ url: string }>;
-  tariff?: { startingPrice?: string; ratePerKm?: string };
 }) {
   return {
     '@context': 'https://schema.org',
@@ -176,7 +174,6 @@ export function generateVehicleRentalSchema(vehicle: {
     image: vehicle.images[0]?.url,
     url: `${siteConfig.url}/vehicles/${vehicle.slug}`,
     telephone: siteConfig.contact.phonePrimary,
-    priceRange: vehicle.tariff?.startingPrice || '₹₹',
     address: {
       '@type': 'PostalAddress',
       streetAddress: siteConfig.contact.address.street,

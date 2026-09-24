@@ -136,13 +136,13 @@ export default async function VehicleDetailPage({ params }: VehiclePageProps) {
                 <span className="text-sm font-semibold text-[var(--text-primary)]">Full AC</span>
               </div>
               <div className="text-center">
-                <span className="text-[10px] uppercase font-mono tracking-wider text-[var(--text-muted)] block">Permits</span>
-                <span className="text-sm font-semibold text-[var(--text-primary)]">All-India</span>
+                <span className="text-[10px] uppercase font-mono tracking-wider text-[var(--text-muted)] block">Coverage</span>
+                <span className="text-sm font-semibold text-[var(--text-primary)]">South India</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Narrative, Rental Tariff, and Actions */}
+          {/* Right Column: Narrative and Actions */}
           <div className="lg:col-span-6 flex flex-col justify-between">
             <div>
               <div className="flex items-baseline justify-between mb-2">
@@ -163,39 +163,6 @@ export default async function VehicleDetailPage({ params }: VehiclePageProps) {
               <p className="type-body text-[var(--text-secondary)] mb-6 leading-relaxed">
                 {vehicle.description}
               </p>
-
-              {/* Tariff Card */}
-              {vehicle.tariff && (
-                <div className="p-5 rounded-[4px] bg-[var(--color-paper-100)] border border-[var(--border-default)] mb-8 shadow-editorial-xs">
-                  <div className="flex justify-between items-center mb-3">
-                    <span className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--color-terracotta-500)]">
-                      Transparent Outstation Tariff
-                    </span>
-                    <span className="text-xs text-[var(--text-muted)] font-mono">
-                      No Hidden Surcharges
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pb-4 border-b border-[var(--border-subtle)]">
-                    <div>
-                      <span className="text-[10px] uppercase font-mono text-[var(--text-muted)] block">Per KM Rate</span>
-                      <span className="text-base font-semibold text-[var(--color-terracotta-500)]">{vehicle.tariff.ratePerKm}</span>
-                    </div>
-                    <div>
-                      <span className="text-[10px] uppercase font-mono text-[var(--text-muted)] block">Driver Bata</span>
-                      <span className="text-base font-semibold text-[var(--text-primary)]">{vehicle.tariff.driverBataPerDay}</span>
-                    </div>
-                    <div>
-                      <span className="text-[10px] uppercase font-mono text-[var(--text-muted)] block">Min. Distance</span>
-                      <span className="text-base font-semibold text-[var(--text-primary)]">{vehicle.tariff.minKmPerDay}</span>
-                    </div>
-                  </div>
-
-                  <p className="text-[11px] text-[var(--text-muted)] font-mono mt-3">
-                    * {vehicle.tariff.tollParkingTerms}
-                  </p>
-                </div>
-              )}
 
               {/* Key Features Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -320,7 +287,6 @@ export default async function VehicleDetailPage({ params }: VehiclePageProps) {
                   distanceKm={t.distanceKm}
                   imageUrl={t.heroImage.url}
                   href={`/tours/${t.slug}`}
-                  pricePerPersonText={t.pricePerPersonText}
                   size="sm"
                 />
               ))}

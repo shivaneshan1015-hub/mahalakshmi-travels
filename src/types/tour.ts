@@ -7,7 +7,8 @@ export type SouthIndiaState =
   | 'Tamil Nadu' 
   | 'Kerala' 
   | 'Karnataka' 
-  | 'Andhra Pradesh';
+  | 'Andhra Pradesh'
+  | 'Telangana';
 
 export type TravelAudience = 
   | 'family' 
@@ -89,8 +90,6 @@ export interface Tour {
   idealFor: TravelAudience[];
   travelOptions: VehicleOptionId[];
   customisable: boolean;
-  pricePerPerson?: number;
-  pricePerPersonText?: string;
   featured?: boolean;
   faqs?: TourFaq[];
   relatedTours: string[]; // Slugs of related tours

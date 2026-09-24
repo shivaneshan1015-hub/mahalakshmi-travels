@@ -55,7 +55,6 @@ export interface JourneyCardProps {
   distanceKm: number;
   imageUrl: string;
   href: string;
-  pricePerPersonText?: string;
   startingLocation?: string;
   customisable?: boolean;
   tags?: string[];
@@ -70,7 +69,6 @@ export function JourneyCard({
   distanceKm,
   imageUrl,
   href,
-  pricePerPersonText,
   startingLocation = 'Madurai',
   customisable = true,
   tags = [],
@@ -104,16 +102,11 @@ export function JourneyCard({
           )}
         </div>
 
-        {/* Bottom Distance & Price Flag */}
+        {/* Bottom Distance Flag */}
         <div className="absolute bottom-2.5 left-2.5 right-2.5 flex justify-between items-end text-white gap-2">
           <span className="text-[11px] font-mono tracking-wider bg-black/60 px-2 py-0.5 rounded backdrop-blur-sm truncate">
             {distanceKm} KM
           </span>
-          {pricePerPersonText && (
-            <span className="text-[11px] font-mono font-bold tracking-wider bg-[var(--color-terracotta-600)] text-white px-2 py-0.5 rounded shadow-sm whitespace-nowrap">
-              {pricePerPersonText}
-            </span>
-          )}
         </div>
       </div>
 

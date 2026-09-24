@@ -411,7 +411,7 @@ Driving another 18 km past Rameswaram town brings you to **Arichal Munai (Landâ€
     connectedServiceSlug: 'service-group-travel',
     relatedTours: ['tour-rameshwaram'],
     relatedDestinations: ['dest-rameswaram'],
-    relatedArticles: ['weekend-getaways-from-madurai', 'best-routes-madurai-to-munnar'],
+    relatedArticles: ['art-05', 'art-01'],
     seo: {
       title: 'Madurai to Rameswaram & Dhanushkodi Road Trip Guide | Mahalakshmi',
       description: 'Complete road trip guide from Madurai to Rameswaram and Dhanushkodi. Pamban bridge crossing, temple timings, and 1-day itinerary breakdown.',

@@ -35,6 +35,17 @@ export const siteConfig = {
       longitude: 78.098129,
     },
   },
+  operatingSince: 2021,
+  businessHours: {
+    opens: '09:00',
+    closes: '19:00',
+    display: '09:00–19:00',
+  },
+  ownedFleet: [
+    { name: '21-Seater Tourist Van', category: '21-seater-van', count: 2, ownership: 'OWNED' },
+    { name: 'Sedan Car', category: 'sedan-car', ownership: 'OWNED' },
+  ],
+  partnerNetwork: 'Additional vehicle requirements coordinated through suitable local vehicle/driver partners.',
   social: {
     instagram: 'https://instagram.com/mahalakshmitravels_madurai',
     facebook: 'https://facebook.com/mahalakshmitravelsmadurai',

@@ -43,10 +43,10 @@ export default function AboutPage() {
             Based in the historic temple city of <strong>Madurai, Tamil Nadu</strong>, <strong>Mahalakshmi Tours and Travels</strong> was established with a singular principle: travel is not merely about reaching a destination—it is about the human experience of the journey itself.
           </p>
           <p>
-            We operate our own dedicated fleet of vehicles—including our signature <strong>21-seater passenger van</strong> for group travel and <strong>sedan cars</strong> for families. By owning and maintaining our fleet directly, we ensure safety standards, spotless cleanliness, and experienced local drivers who understand South Indian routes intimately.
+            We operate our own dedicated fleet of vehicles—including our signature <strong>21-seater passenger van</strong> for group travel and <strong>sedan cars</strong> for families. By owning and maintaining our fleet directly, we ensure safety standards, spotless cleanliness, and local drivers who understand South Indian routes intimately.
           </p>
           <p id="madurai-origin">
-            From our central depot in Madurai, our journeys expand into the mist-covered hills of Munnar and Kodaikanal, the coastal shores of Rameswaram and Kanyakumari, and the cultural circuits of Kerala, Karnataka, and Andhra Pradesh.
+            From our central depot in Madurai, our journeys expand into the mist-covered hills of Munnar and Kodaikanal, the coastal shores of Rameswaram and Kanyakumari, and the cultural circuits of Kerala, Karnataka, Andhra Pradesh, and Telangana.
           </p>
         </div>
       </div>

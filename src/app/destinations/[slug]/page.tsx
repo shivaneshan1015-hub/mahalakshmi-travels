@@ -159,7 +159,6 @@ export default async function DestinationDetailPage({ params }: DestinationPageP
                   distanceKm={t.distanceKm}
                   imageUrl={t.heroImage.url}
                   href={`/tours/${t.slug}`}
-                  pricePerPersonText={t.pricePerPersonText}
                   size="sm"
                 />
               ))}

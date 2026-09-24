@@ -288,7 +288,7 @@ export default async function CustomerItineraryPage(props: {
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-                <span>Verified Hill-Expert Driver & Daily Allowances</span>
+                <span>Driver & Daily Allowances</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
@@ -296,7 +296,7 @@ export default async function CustomerItineraryPage(props: {
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
-                <span>24/7 Madurai Travel Desk Journey Tracking</span>
+                <span>Madurai Travel Desk Journey Support</span>
               </div>
             </div>
 

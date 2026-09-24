@@ -15,10 +15,10 @@ export function WhyMahalakshmiSection() {
       description: 'Centrally based in Madurai, coordinating departures, pickups, and driver allocations directly without middlemen.',
     },
     {
-      value: '04',
+      value: '05',
       unit: 'STATES',
       sublabel: 'SOUTH INDIA REACH',
-      description: 'Complete tour and vehicle permit coverage across Tamil Nadu, Kerala, Karnataka, and Andhra Pradesh.',
+      description: 'Complete tour and vehicle coverage across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.',
     },
     {
       value: '21',

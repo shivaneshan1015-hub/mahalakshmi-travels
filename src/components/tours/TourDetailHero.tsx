@@ -142,18 +142,15 @@ export function TourDetailHero({ tour }: TourDetailHeroProps) {
                 </span>
               </div>
 
-              {/* Spec 3: Price */}
+              {/* Spec 3: Quote Request */}
               <div className="flex flex-col justify-between text-right">
                 <div className="flex items-baseline justify-end gap-1">
-                  <span className="text-xl sm:text-2xl lg:text-3xl font-display font-bold text-[var(--color-terracotta-600)] leading-none">
-                    {tour.pricePerPerson ? `₹${tour.pricePerPerson.toLocaleString('en-IN')}` : 'CUSTOM'}
-                  </span>
-                  <span className="text-[10px] font-mono font-bold text-[var(--color-ink-950)] uppercase">
-                    {tour.pricePerPerson ? '/ PAX' : 'QUOTE'}
+                  <span className="text-base sm:text-lg font-display font-bold text-[var(--color-terracotta-600)] leading-none">
+                    ON REQUEST
                   </span>
                 </div>
                 <span className="text-[10px] sm:text-[11px] font-mono font-bold text-[var(--color-terracotta-600)] tracking-wider uppercase mt-2 truncate">
-                  STAY & FOOD INCL.
+                  GET CURRENT QUOTE
                 </span>
               </div>
             </div>

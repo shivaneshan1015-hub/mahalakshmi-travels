@@ -46,7 +46,7 @@ export function TourVehicleOption() {
           </div>
 
           <div className="pt-4 border-t border-[var(--border-subtle)] flex items-center justify-between">
-            <span className="text-[11px] font-mono text-[var(--text-muted)]">Experienced Hill Driver</span>
+            <span className="text-[11px] font-mono text-[var(--text-muted)]">Hill Route Driver</span>
             <Link href="/vehicles/21-seater-van">
               <Button variant="secondary" size="sm" withArrow>
                 View Van Specs
@@ -75,7 +75,7 @@ export function TourVehicleOption() {
           </div>
 
           <div className="pt-4 border-t border-[var(--border-subtle)] flex items-center justify-between">
-            <span className="text-[11px] font-mono text-[var(--text-muted)]">24x7 Outstation Driver</span>
+            <span className="text-[11px] font-mono text-[var(--text-muted)]">Outstation Driver</span>
             <Link href="/vehicles/sedan-car">
               <Button variant="secondary" size="sm" withArrow>
                 View Sedan Specs
