@@ -128,7 +128,7 @@ export function PassengerFleetSelector() {
               <CheckCircle2 className="w-3.5 h-3.5" /> Quote: {activeData.rate}
             </span>
             <span className="flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)]" /> Driver Allowance: {activeData.allowance}
+              <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)]" /> Service: {activeData.allowance}
             </span>
             <span className="flex items-center gap-1">
               <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)]" /> {activeData.boot}

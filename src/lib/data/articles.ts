@@ -420,7 +420,7 @@ Driving another 18 km past Rameswaram town brings you to **Arichal Munai (Landâ€
   },
   {
     id: 'art-07',
-    title: 'Madurai to Kodaikanal 1-Day Trip Plan: Route, Sightseeing & Cab Charges',
+    title: 'Madurai to Kodaikanal 1-Day Trip Plan: Route, Sightseeing & Travel Tips',
     slug: 'madurai-to-kodaikanal-one-day-trip-plan',
     excerpt: 'The complete same-day return guide from Madurai to Kodaikanal covering 120 km road timing, breakfast halts, key viewpoints, and vehicle options for your journey.',
     featured: false,
@@ -447,7 +447,7 @@ Driving another 18 km past Rameswaram town brings you to **Arichal Munai (Landâ€
     tableOfContents: [
       { id: 'kodai-1day-schedule', title: '1-Day Hour-by-Hour Sightseeing Schedule', level: 2 },
       { id: 'kodai-route-timing', title: 'Driving Route & Ghat Ascent Timings', level: 2 },
-      { id: 'kodai-cab-charges', title: 'Vehicle Options for Your Journey', level: 2 },
+      { id: 'kodai-vehicle-options', title: 'Vehicle Options for Your Journey', level: 2 },
     ],
     content: `A **1-Day same-day return trip** from Madurai to Kodaikanal is the most popular quick escape for families, couples, and weekend travellers. Because Kodaikanal is located just **120 KM** from Madurai, you can comfortably spend 6 to 7 hours in the cool hills and return home by night.
 
@@ -467,7 +467,7 @@ Driving another 18 km past Rameswaram town brings you to **Arichal Munai (Landâ€
 ## Driving Route & Ghat Ascent Timings {#kodai-route-timing}
 The route from Madurai follows 4-lane highway up to Batlagundu (72 KM), followed by a smooth double-lane ghat road (48 KM) with 14 hairpin bends. Total driving time is **3 to 3.5 hours**.
 
-## Vehicle Options for Your Journey {#kodai-cab-charges}
+## Vehicle Options for Your Journey {#kodai-vehicle-options}
 - **Private AC Sedan**: Comfortable personal transport for small families (1-4 passengers).
 - **21-Seater AC Luxury Van**: Spacious group option with pushback seating and luggage bay for larger groups.`,
     coverImage: {
@@ -480,7 +480,7 @@ The route from Madurai follows 4-lane highway up to Batlagundu (72 KM), followed
     relatedDestinations: ['dest-kodaikanal'],
     relatedArticles: ['art-02', 'art-05'],
     seo: {
-      title: 'Madurai to Kodaikanal 1-Day Trip Plan & Cab Booking | Mahalakshmi',
+      title: 'Madurai to Kodaikanal 1-Day Trip Plan & Travel Guide | Mahalakshmi',
       description: 'Detailed 1-day Kodaikanal trip itinerary from Madurai. 120 km route timing, sightseeing places, Silver Cascade, Kodai Lake boating, and vehicle options.',
       canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/madurai-to-kodaikanal-one-day-trip-plan',
     },

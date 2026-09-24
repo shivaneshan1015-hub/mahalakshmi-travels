@@ -260,7 +260,11 @@ for (const file of publicScanFiles) {
   if (/\bpermit\b|\bpermits\b/i.test(content)) permitClaimsCount++;
   if (/\bcomprehensive insurance coverage\b|\bfull insurance guarantee\b/i.test(content)) unsupportedInsuranceCount++;
   if (/\bguaranteed availability\b|\bfabricated reviews\b/i.test(content)) otherUnsupportedClaimsCount++;
-  if (/transparent (taxi|rental) rates|best rates|lowest rates|cheap rates|affordable rates|fixed (rate|fare)|taxi (rates|fare)|fare calculated|rental (rates|pricing)/i.test(content)) publicPricingLanguageCount++;
+  if (
+    /transparent (taxi|rental) rates|best rates|lowest rates|cheap rates|affordable rates|fixed (rate|fare)|taxi (rates|fare)|fare calculated|fare calculation|rate calculated|rate calculation|rental (rates|pricing)|cab (charges|pricing)|taxi charges|driver (charge|charges|allowance|allowances|night allowance|day allowance)|fuel (charge|charges)|rental (charge|charges)|vehicle (charge|charges)|trip (charge|charges)|travel (charge|charges)/i.test(content)
+  ) {
+    publicPricingLanguageCount++;
+  }
 }
 
 // -----------------------------------------------------------------------------

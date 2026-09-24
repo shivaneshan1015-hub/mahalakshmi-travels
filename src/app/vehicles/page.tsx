@@ -238,7 +238,7 @@ export default function VehiclesPage() {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Quote Inclusions:</strong> Fuel, Vehicle AC, Driver Allowances & Music System</span>
+                    <span><strong>Quote Inclusions:</strong> Vehicle AC, Route Coordination & Music System</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
@@ -281,7 +281,7 @@ export default function VehiclesPage() {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Quote Inclusions:</strong> Fuel, Vehicle AC & Driver Allowances</span>
+                    <span><strong>Quote Inclusions:</strong> Vehicle AC & Route Coordination</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
