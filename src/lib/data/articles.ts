@@ -422,7 +422,7 @@ Driving another 18 km past Rameswaram town brings you to **Arichal Munai (Landâ€
     id: 'art-07',
     title: 'Madurai to Kodaikanal 1-Day Trip Plan: Route, Sightseeing & Cab Charges',
     slug: 'madurai-to-kodaikanal-one-day-trip-plan',
-    excerpt: 'The complete same-day return guide from Madurai to Kodaikanal covering 120 km road timing, breakfast halts, key viewpoints, and transparent taxi rates.',
+    excerpt: 'The complete same-day return guide from Madurai to Kodaikanal covering 120 km road timing, breakfast halts, key viewpoints, and vehicle options for your journey.',
     featured: false,
     category: 'itinerary',
     articleType: 'itinerary-guide',

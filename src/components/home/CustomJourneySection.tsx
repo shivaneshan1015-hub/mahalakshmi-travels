@@ -14,7 +14,7 @@ export function CustomJourneySection() {
     { num: '01', title: 'Origin: Madurai', desc: 'Starting point from our central depot' },
     { num: '02', title: 'Your Destination', desc: 'Tamil Nadu, Kerala, Karnataka or AP' },
     { num: '03', title: 'Your Dates & Group', desc: '21-seater van or private sedan' },
-    { num: '04', title: 'Your Journey', desc: 'Dedicated driver and tailored halts' },
+    { num: '04', title: 'Your Journey', desc: 'Vehicle service and tailored halts' },
   ];
 
   return (

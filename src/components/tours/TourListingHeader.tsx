@@ -21,7 +21,7 @@ export function TourListingHeader() {
           Explore Journeys.
         </h1>
         <p className="type-body-large text-[var(--text-secondary)] leading-relaxed">
-          Curated short-format hill escapes, coastal corridors, and group pilgrimages across South India—planned with local pacing, dedicated drivers, and vehicle options for every group size.
+          Curated short-format hill escapes, coastal corridors, and group pilgrimages across South India—planned with unhurried pacing, vehicle-with-driver arrangements, and options for every group size.
         </p>
       </div>
     </div>

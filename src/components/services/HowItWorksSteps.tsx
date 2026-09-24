@@ -20,7 +20,7 @@ export function HowItWorksSteps() {
     {
       num: '03',
       title: 'We Plan & Allocate',
-      desc: 'Our Madurai travel desk confirms the vehicle, route halts, and dedicated driver.',
+      desc: 'Our Madurai travel desk confirms the vehicle, route halts, and driver coordination.',
     },
     {
       num: '04',

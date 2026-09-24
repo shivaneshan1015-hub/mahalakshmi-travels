@@ -183,7 +183,7 @@ export default function DesignSystemPage() {
                 We organize journeys starting from Madurai across Tamil Nadu, Kerala, Karnataka, and Andhra Pradesh.
               </p>
               <p className="type-body text-[var(--text-secondary)]">
-                Our vehicles are maintained in-house with dedicated drivers experienced with mountain ghat passes and inter-state highway routes.
+                Our vehicles are maintained in-house with route coverage across mountain ghat passes and interstate highway corridors.
               </p>
             </div>
 

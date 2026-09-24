@@ -42,7 +42,7 @@ export const mockTravelServices: TravelService[] = [
     faqs: [
       {
         question: 'What is the seating capacity of your group van?',
-        answer: 'Our flagship van features 20 comfortable pushback passenger seats plus 1 dedicated driver seat (20+1 capacity) with full-cabin dual air conditioning.',
+        answer: 'Our flagship van features 20 comfortable pushback passenger seats plus 1 driver seat (20+1 capacity) with full-cabin dual air conditioning.',
       },
       {
         question: 'Do you cover interstate travel to Kerala, Karnataka, and Andhra Pradesh?',
@@ -131,7 +131,7 @@ export const mockTravelServices: TravelService[] = [
     slug: 'family-travel',
     title: 'Family Travel & Holiday Transport',
     serviceType: 'family-travel',
-    shortDescription: 'Comfortable, private travel for small families and multi-generational groups with unhurried pacing, polite drivers, and custom halts.',
+    shortDescription: 'Comfortable, private travel for small families and multi-generational groups with unhurried pacing, vehicle-with-driver services, and custom halts.',
     description: 'Traveling with children and senior citizens requires patience, clean vehicles, and unhurried rest stops. Whether you need a private sedan for a quiet family getaway or our 21-seater van for an extended family reunion, Mahalakshmi coordinates every mile with local Madurai care.',
     idealFor: ['family', 'couple'],
     vehicleOptions: ['sedan-car', '21-seater-van'],
@@ -145,8 +145,8 @@ export const mockTravelServices: TravelService[] = [
         description: 'Sedan cars for 1-4 passengers or the 21-seater van for extended joint family gatherings.',
       },
       {
-        title: 'Courteous Local Madurai Drivers',
-        description: 'Courteous drivers who know clean highway restaurants, scenic viewpoints, and safe hill routes.',
+        title: 'Local Madurai Route Expertise',
+        description: 'Route familiarity for clean highway rest stops, scenic viewpoints, and mountain roads.',
       },
       {
         title: 'Door-to-Door Convenience',
@@ -207,8 +207,8 @@ export const mockTravelServices: TravelService[] = [
         description: 'Private sedan cars for key family members and wedding guests.',
       },
       {
-        title: 'Local Madurai Road Knowledge',
-        description: 'Drivers familiar with Madurai mandapams, Meenakshi Temple corridors, and outstation venue routes.',
+        title: 'Local Madurai Venue Connections',
+        description: 'Familiarity with Madurai mandapams, Meenakshi Temple corridors, and outstation venue routes.',
       },
     ],
     typicalRoutes: [

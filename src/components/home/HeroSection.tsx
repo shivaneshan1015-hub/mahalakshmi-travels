@@ -36,7 +36,7 @@ export function HeroSection() {
             </h1>
 
             <p className="type-body-large text-[var(--color-ink-700)] mb-2 max-w-xl leading-relaxed font-medium">
-              Curated South India tour packages, outstation <strong>21-seater AC van rentals</strong>, and private sedan cab services—driven by verified local drivers from <strong>Madurai</strong>.
+              Curated South India tour packages, outstation <strong>21-seater AC van rentals</strong>, and private sedan cab services—with vehicle and driver arrangements managed from <strong>Madurai</strong>.
             </p>
 
             {/* Interactive Dual Intent Rental & Tour Booking Bar */}

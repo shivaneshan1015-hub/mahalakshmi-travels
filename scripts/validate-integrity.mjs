@@ -223,7 +223,7 @@ if (vehiclesContent.includes('tariff:') || vehiclesContent.includes('ratePerKm')
 if (schemaContent.includes('priceRange') || schemaContent.includes('tariff')) schemaPricingCount++;
 
 // -----------------------------------------------------------------------------
-// 5. UNSUPPORTED CLAIMS SCAN
+// 5. UNSUPPORTED CLAIMS & PUBLIC PRICING SCAN
 // -----------------------------------------------------------------------------
 const publicScanFiles = [];
 function scanPublicFiles(dir) {
@@ -246,6 +246,7 @@ let driverClaimsCount = 0;
 let permitClaimsCount = 0;
 let unsupportedInsuranceCount = 0;
 let otherUnsupportedClaimsCount = 0;
+let publicPricingLanguageCount = 0;
 
 for (const file of publicScanFiles) {
   const content = fs.readFileSync(file, 'utf-8');
@@ -255,10 +256,11 @@ for (const file of publicScanFiles) {
   if (relPath.includes('api/webhooks')) continue;
 
   if (/\b24\/7\b|\b24x7\b/i.test(content)) claims247Count++;
-  if (/\bexperienced driver\b|\bexperienced drivers\b|\bseasoned driver\b|\bseasoned drivers\b|\bverified driver\b|\bverified drivers\b|\bprofessional driver\b|\bprofessional drivers\b|\btrained driver\b|\bexpert driver\b|\btrusted driver\b/i.test(content)) driverClaimsCount++;
+  if (/\bexperienced driver\b|\bexperienced drivers\b|\bseasoned driver\b|\bseasoned drivers\b|\bverified driver\b|\bverified drivers\b|\bprofessional driver\b|\bprofessional drivers\b|\btrained driver\b|\bexpert driver\b|\btrusted driver\b|\bdedicated driver\b|\bdedicated drivers\b|\bpolite driver\b|\bpolite drivers\b/i.test(content)) driverClaimsCount++;
   if (/\bpermit\b|\bpermits\b/i.test(content)) permitClaimsCount++;
   if (/\bcomprehensive insurance coverage\b|\bfull insurance guarantee\b/i.test(content)) unsupportedInsuranceCount++;
   if (/\bguaranteed availability\b|\bfabricated reviews\b/i.test(content)) otherUnsupportedClaimsCount++;
+  if (/transparent (taxi|rental) rates|best rates|lowest rates|cheap rates|affordable rates|fixed (rate|fare)|taxi (rates|fare)|fare calculated|rental (rates|pricing)/i.test(content)) publicPricingLanguageCount++;
 }
 
 // -----------------------------------------------------------------------------
@@ -290,6 +292,7 @@ const allPassed =
   tourPricingCount === 0 &&
   vehiclePricingCount === 0 &&
   schemaPricingCount === 0 &&
+  publicPricingLanguageCount === 0 &&
   claims247Count === 0 &&
   driverClaimsCount === 0 &&
   permitClaimsCount === 0 &&

@@ -495,7 +495,7 @@ export const mockTours: Tour[] = [
     relatedArticles: [],
     seo: {
       title: 'Madurai to Kodaikanal Tour (1N/2D) | Mahalakshmi Tours and Travels',
-      description: 'Book 1 Night / 2 Days Kodaikanal tour package from Madurai. Best rates for 21-seater AC van and family sedan cars.',
+      description: 'Book 1 Night / 2 Days Kodaikanal tour package from Madurai. Vehicle options for families and groups travelling from Madurai.',
       keywords: ['madurai to kodaikanal tour', 'kodaikanal 2 days package', 'kodaikanal van rental madurai'],
       canonicalUrl: 'https://mahalakshmitravels.com/tours/kodaikanal',
     },
@@ -614,7 +614,7 @@ export const mockTours: Tour[] = [
       },
     ],
     inclusions: ['1 Night accommodation in Ooty', 'Breakfast', 'Dedicated AC vehicle for all transit', 'Tolls, parking and driver charges'],
-    exclusions: ['Garden entry tickets and toy train fares'],
+    exclusions: ['Garden entry tickets and toy train tickets'],
     relatedTours: ['tour-kodaikanal', 'tour-munnar', 'tour-wayanad'],
     relatedArticles: [],
     seo: {
@@ -941,7 +941,7 @@ export const mockTours: Tour[] = [
     idealFor: ['family', 'group', 'college'],
     travelOptions: ['21-seater-van', 'sedan-car'],
     shortDescription: 'Explore Edakkal pre-historic caves, Banasura Sagar earth dam, and Chembra Peak vistas.',
-    description: 'Immerse in the green canopy of Wayanad in northern Kerala. Visit Asia’s second largest earth dam, spice groves, and lush waterfalls with dedicated driver service.',
+    description: 'Immerse in the green canopy of Wayanad in northern Kerala. Visit Asia’s second largest earth dam, spice groves, and lush waterfalls with dedicated vehicle service.',
     heroImage: {
       url: '/images/tours/wayanad.png',
       alt: 'Banasura Sagar Dam reservoir and Wayanad tea hills',
@@ -1128,7 +1128,7 @@ export const mockTours: Tour[] = [
     idealFor: ['family', 'group'],
     travelOptions: ['21-seater-van', 'sedan-car'],
     shortDescription: 'Witness Triveni Sangam where three seas meet, Vivekananda Rock Memorial, and the 133-foot Thiruvalluvar Statue.',
-    description: 'Travel to India’s southernmost tip where the Arabian Sea, Bay of Bengal, and Indian Ocean merge. Enjoy spectacular sunrises and sunsets from our dedicated driver-accompanied vehicles.',
+    description: 'Travel to India’s southernmost tip where the Arabian Sea, Bay of Bengal, and Indian Ocean merge. Enjoy spectacular sunrises and sunsets from our dedicated tourist vehicles.',
     heroImage: {
       url: '/images/destinations/kanyakumari.png',
       alt: 'Vivekananda Rock Memorial and Thiruvalluvar Statue at Kanyakumari',

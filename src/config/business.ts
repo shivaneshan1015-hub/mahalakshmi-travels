@@ -16,7 +16,7 @@ export const businessPillars = {
   },
   vehicleAndTransport: {
     title: 'Vehicle Rental & Driver Services',
-    description: 'Outstation vehicle rental service with local drivers for families, college industrial visits, corporate events, and wedding functions from Madurai.',
+    description: 'Outstation vehicle rental service with driver for families, college industrial visits, corporate events, and wedding functions from Madurai.',
     fleetOverview: {
       van21Seater: {
         name: '21-Seater AC Group Travel Van (Tempo / Mini Bus)',

@@ -14,7 +14,7 @@ export function PassengerFleetSelector() {
       vehicleName: 'Private AC Sedan Car (Swift Dzire / Toyota Etios)',
       tag: 'Couples & Small Families',
       rate: 'Custom Quote',
-      bata: 'Included in Quote',
+      allowance: 'Included in Quote',
       boot: '400+ Litres Luggage Boot',
       slug: 'sedan-car',
       link: '/vehicles/sedan-car',
@@ -25,7 +25,7 @@ export function PassengerFleetSelector() {
       vehicleName: 'AC SUV / Premium Cabs (Ertiga / Innova Class)',
       tag: 'Family Groups & Temple Circuits',
       rate: 'Custom Quote',
-      bata: 'Included in Quote',
+      allowance: 'Included in Quote',
       boot: 'Comfortable Luggage Space',
       slug: 'sedan-car',
       link: '/vehicles/sedan-car',
@@ -36,7 +36,7 @@ export function PassengerFleetSelector() {
       vehicleName: '21-Seater Luxury AC Group Van (Tempo / Mini Coach)',
       tag: 'College IV • Pilgrimages • Wedding Fleets',
       rate: 'Custom Quote',
-      bata: 'Included in Quote',
+      allowance: 'Included in Quote',
       boot: 'Deep Rear Boot + Rooftop Carrier',
       slug: '21-seater-van',
       link: '/vehicles/21-seater-van',
@@ -125,10 +125,10 @@ export function PassengerFleetSelector() {
           </h4>
           <div className="flex flex-wrap items-center gap-4 text-xs text-[var(--text-secondary)] mt-2">
             <span className="flex items-center gap-1 font-semibold text-[var(--color-terracotta-600)]">
-              <CheckCircle2 className="w-3.5 h-3.5" /> Rate: {activeData.rate}
+              <CheckCircle2 className="w-3.5 h-3.5" /> Quote: {activeData.rate}
             </span>
             <span className="flex items-center gap-1">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)]" /> Bata: {activeData.bata}
+              <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)]" /> Driver Allowance: {activeData.allowance}
             </span>
             <span className="flex items-center gap-1">
               <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)]" /> {activeData.boot}

@@ -16,7 +16,7 @@ export const vehiclesRepository: Vehicle[] = [
     luggageCapacityText: 'Dedicated top carrier + deep rear boot for 21 passenger bags',
     tagline: 'PREMIER OUTSTATION GROUP VAN RENTAL FROM MADURAI.',
     rentalHeading: '21-Seater AC Van Rental in Madurai with Driver',
-    description: 'Hire our premium 21-seater passenger van in Madurai for family holidays, college industrial visits (IV), wedding guest transportation, corporate team outings, and South India temple pilgrimage circuits. Equipped with 20+1 pushback seats, individual AC vents, audio system, and local drivers.',
+    description: 'Hire our premium 21-seater passenger van in Madurai for family holidays, college industrial visits (IV), wedding guest transportation, corporate team outings, and South India temple pilgrimage circuits. Equipped with 20+1 pushback seats, individual AC vents, audio system, and vehicle support.',
     availabilityBadge: 'Available with Driver',
     features: [
       { iconName: 'Users', title: '20+1 Pushback Reclining Seats', description: 'Ergonomic 2x1 high-back seating layout with armrests and generous legroom for long-distance highway travel.' },
@@ -53,11 +53,11 @@ export const vehiclesRepository: Vehicle[] = [
       },
       {
         question: 'Is the 21-seater van suitable for college IV trips and student groups?',
-        answer: 'Yes, our 21-seater van is popular for college department industrial visits (IV) departing from Madurai. It offers music system, secure luggage carriers, and dedicated drivers.',
+        answer: 'Yes, our 21-seater van is popular for college department industrial visits (IV) departing from Madurai. It offers music system, secure luggage carriers, and dedicated vehicle service.',
       },
       {
         question: 'Can the 21-seater van travel across Tamil Nadu, Kerala, and Karnataka?',
-        answer: 'Yes. Our vehicles and local drivers operate across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.',
+        answer: 'Yes. Our vehicles operate across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.',
       },
     ],
     images: [
@@ -126,12 +126,12 @@ export const vehiclesRepository: Vehicle[] = [
         answer: 'Yes. Our private AC sedans are available for one-way drops, round trips, and multi-day outstation itineraries across Tamil Nadu, Kerala, and beyond.',
       },
       {
-        question: 'How is outstation sedan taxi fare calculated?',
-        answer: 'Fares are based on transparent journey quotes for your specific itinerary. Contact our Madurai travel desk for an all-inclusive quote.',
+        question: 'What information is needed to arrange an outstation sedan?',
+        answer: 'Outstation sedan arrangements depend on your travel date, origin, destination, duration, number of travellers and journey requirements. Share these details with us and we can help plan the appropriate vehicle arrangement.',
       },
       {
         question: 'Do you provide airport pickup and drops for Madurai Airport (IXM)?',
-        answer: 'Yes. We coordinate pickup times based on your flight arrival and ensure timely pickup from Madurai Airport with clean sedan cars and polite drivers.',
+        answer: 'Yes. We coordinate pickup times based on your flight arrival and ensure timely pickup from Madurai Airport with clean sedan cars.',
       },
     ],
     images: [

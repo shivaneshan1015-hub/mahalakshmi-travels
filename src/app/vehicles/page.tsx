@@ -34,7 +34,7 @@ import { PassengerFleetSelector } from '@/components/vehicles/PassengerFleetSele
 
 export const metadata: Metadata = constructMetadata({
   title: 'Vehicle Rental in Madurai | 21 Seater Van & Sedan Car Hire with Driver',
-  description: 'Book 21-seater AC van rentals and private sedan cars in Madurai for outstation family trips, college IV, wedding transportation, and temple pilgrimages. Transparent custom quotes and local drivers.',
+  description: 'Book 21-seater AC van rentals and private sedan cars in Madurai for outstation family trips, college IV, wedding transportation, and temple pilgrimages. Custom quotes and vehicle options with driver.',
   canonicalPath: '/vehicles',
 });
 
@@ -54,23 +54,23 @@ export default function VehiclesPage() {
     },
     {
       question: 'Do your rental vehicles cover travel to Kerala, Karnataka, and Andhra Pradesh?',
-      answer: 'Yes. All our vehicles and drivers operate across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana. Our drivers have extensive driving experience across Western Ghats mountain roads and interstate highways.',
+      answer: 'Yes. Vehicle and driver arrangements operate across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana, covering mountain roads and interstate highways.',
     },
     {
       question: 'Can we book vehicles for college industrial visits (IV) and department tours?',
       answer: 'Yes. Our 21-seater luxury AC passenger van is custom-fitted for college student groups with high-back pushback seats, individual AC vents, high-power music system, and heavy-duty luggage carriers with waterproof protection.',
     },
     {
-      question: 'Are the drivers experienced with hill stations like Kodaikanal, Munnar, and Ooty?',
-      answer: 'Absolutely. All our full-time drivers are familiar with mountain ghat sections including Batlagundu–Kodaikanal, Bodi Mettu–Munnar, Mettupalayam–Ooty, and Valparai passes.',
+      question: 'Are your vehicle and driver arrangements suitable for hill stations like Kodaikanal, Munnar, and Ooty?',
+      answer: 'Yes. Vehicle arrangements cover mountain ghat sections including Batlagundu–Kodaikanal, Bodi Mettu–Munnar, Mettupalayam–Ooty, and Valparai passes.',
     },
   ];
 
   const rentalFeatures = [
     {
       icon: <ShieldCheck className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
-      title: 'Local Drivers',
-      description: 'Courteous local drivers with deep route mastery across Tamil Nadu, Kerala, and Karnataka.',
+      title: 'Route Expertise',
+      description: 'Route coverage and journey arrangements across Tamil Nadu, Kerala, and Karnataka.',
     },
     {
       icon: <Coins className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
