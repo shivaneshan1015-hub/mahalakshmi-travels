@@ -155,7 +155,7 @@ export async function GET() {
       <div class="contact-block">
         <p><strong>Madurai Travel Desk:</strong></p>
         <p>${siteConfig.contact.phonePrimary}</p>
-        <p>WhatsApp: +91 98421 23456</p>
+        <p>WhatsApp: ${siteConfig.contact.phonePrimary}</p>
         <p>${siteConfig.contact.address.street}, ${siteConfig.contact.address.city}</p>
       </div>
     </div>
@@ -184,31 +184,31 @@ export async function GET() {
     <div class="card" style="margin-bottom: 28px;">
       <div class="fleet-item">
         <span><strong>21-Seater Executive Coach (AC)</strong> — College trips, family functions, pilgrim groups</span>
-        <span style="color: var(--terracotta); font-weight: 700;">From ₹28/km</span>
+        <span style="color: var(--terracotta); font-weight: 700;">Custom Quote</span>
       </div>
       <div class="fleet-item">
         <span><strong>Force Urbania Luxury Van (12+1)</strong> — Premium recliner seats, executive comfort</span>
-        <span style="color: var(--terracotta); font-weight: 700;">From ₹24/km</span>
+        <span style="color: var(--terracotta); font-weight: 700;">Custom Quote</span>
       </div>
       <div class="fleet-item">
         <span><strong>Toyota Innova Crysta (7+1)</strong> — Family hill station tours & airport transfers</span>
-        <span style="color: var(--terracotta); font-weight: 700;">From ₹18/km</span>
+        <span style="color: var(--terracotta); font-weight: 700;">Custom Quote</span>
       </div>
       <div class="fleet-item">
         <span><strong>Sedan (Swift Dzire / Etios)</strong> — Outstation 4-seater round trips</span>
-        <span style="color: var(--terracotta); font-weight: 700;">From ₹13/km</span>
+        <span style="color: var(--terracotta); font-weight: 700;">Custom Quote</span>
       </div>
     </div>
 
-    <h2>🛡️ The Mahalakshmi Guarantee</h2>
+    <h2>🛡️ The Mahalakshmi Assurance</h2>
     <p style="font-size: 13px; color: #444; margin-bottom: 12px;">
-      • Verified hill-experienced drivers familiar with Ghat road safety.<br>
-      • 100% transparent pricing with all permits, toll taxes, and driver allowances documented.<br>
-      • 24/7 Madurai Travel Desk helpline on every active journey.
+      • Experienced drivers familiar with South India routes.<br>
+      • Clear and transparent custom tour quotations.<br>
+      • Direct contact with Madurai Travel Desk for all journeys.
     </p>
 
     <div style="text-align: center;">
-      <a href="https://wa.me/919842123456?text=Hi%20Mahalakshmi%20Travels,%20I%20reviewed%20your%20brochure%20and%20would%20like%20to%20book%20a%20tour." class="cta-btn">
+      <a href="https://wa.me/${siteConfig.contact.whatsapp}?text=Hi%20Mahalakshmi%20Travels,%20I%20reviewed%20your%20brochure%20and%20would%20like%20to%20book%20a%20tour." class="cta-btn">
         💬 Chat With Travel Desk On WhatsApp
       </a>
     </div>

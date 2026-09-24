@@ -27,7 +27,7 @@ export function formatCapacity(seats: number): string {
 }
 
 /**
- * Clean phone number formatter for display (+91 98421 23456)
+ * Clean phone number formatter for display (+91 63801 92145)
  */
 export function formatPhoneNumber(phone: string): string {
   return phone;

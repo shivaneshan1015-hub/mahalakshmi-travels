@@ -12,7 +12,7 @@ export const mockTravelServices: TravelService[] = [
     title: 'Group Travel & Transportation',
     serviceType: 'group-travel',
     shortDescription: 'Dedicated 21-seater AC passenger van and coordinated travel arrangements for associations, pilgrimage batches, and large family groups.',
-    description: 'When traveling as a group, keeping everyone in a single spacious vehicle transforms the entire journey. Our flagship 21-seater (20+1) AC passenger van is based in Madurai and operated by seasoned drivers who understand outstation highways, temple corridors, and mountain routes across South India.',
+    description: 'When traveling as a group, keeping everyone in a single spacious vehicle transforms the entire journey. Our flagship 21-seater (20+1) AC passenger van is based in Madurai and operated by experienced drivers who understand outstation highways, temple corridors, and mountain routes across South India.',
     idealFor: ['group', 'family', 'corporate'],
     vehicleOptions: ['21-seater-van'],
     benefits: [
@@ -26,7 +26,7 @@ export const mockTravelServices: TravelService[] = [
       },
       {
         title: 'Experienced Interstate Drivers',
-        description: 'Drivers familiar with ghat roads, hill permits, and highway routes across Tamil Nadu, Kerala, Karnataka, and AP.',
+        description: 'Drivers familiar with ghat roads, hill permits, and highway routes across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.',
       },
       {
         title: 'Custom Pickups & Halts',
@@ -45,12 +45,12 @@ export const mockTravelServices: TravelService[] = [
         answer: 'Our flagship van features 20 comfortable pushback passenger seats plus 1 dedicated driver seat (20+1 capacity) with full-cabin dual air conditioning.',
       },
       {
-        question: 'Do you cover interstate travel to Kerala and Andhra Pradesh?',
-        answer: 'Yes. All our vehicles are licensed with valid commercial permits, comprehensive insurance, and interstate paperwork for Tamil Nadu, Kerala, Karnataka, and Andhra Pradesh.',
+        question: 'Do you cover interstate travel to Kerala, Karnataka, and Andhra Pradesh?',
+        answer: 'Yes. All our vehicles and experienced drivers operate across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.',
       },
       {
         question: 'How do we book or check availability for our dates?',
-        answer: 'You can check availability directly via WhatsApp or phone. Tell us your travel dates, passenger count, and destination, and our Madurai desk will confirm.',
+        answer: 'You can check availability directly via WhatsApp (+91 63801 92145) or phone. Tell us your travel dates, passenger count, and destination, and our Madurai desk will confirm.',
       },
     ],
     heroImage: {
@@ -59,11 +59,11 @@ export const mockTravelServices: TravelService[] = [
       width: 1200,
       height: 800,
     },
-    relatedVehicles: ['21-seater-van'],
-    relatedTours: ['madurai-to-munnar', 'madurai-to-rameswaram', 'madurai-to-kodaikanal'],
+    relatedVehicles: ['veh-21-seater'],
+    relatedTours: ['tour-munnar', 'tour-rameshwaram', 'tour-kodaikanal'],
     seo: {
       title: 'Group Travel & 21-Seater Van Hire in Madurai | Mahalakshmi Tours and Travels',
-      description: 'Spacious 21-seater AC van hire in Madurai for group tours, pilgrimage batches, and family excursions across South India. Experienced local drivers.',
+      description: 'Spacious 21-seater AC van hire in Madurai for group tours, pilgrimage batches, and family excursions across South India.',
       keywords: ['group travel madurai', '21 seater van hire madurai', 'tempo traveller madurai', 'group tour south india'],
       canonicalUrl: 'https://mahalakshmitravels.com/travel-services/group-travel',
     },
@@ -84,7 +84,7 @@ export const mockTravelServices: TravelService[] = [
       },
       {
         title: 'Safety-First Road Pacing',
-        description: 'Seasoned drivers trained in highway discipline and daylight hill ascent guidelines.',
+        description: 'Experienced drivers trained in highway discipline and daylight hill ascent guidelines.',
       },
       {
         title: 'Flexible Outstation Routing',
@@ -92,7 +92,7 @@ export const mockTravelServices: TravelService[] = [
       },
       {
         title: 'Institution Invoice Coordination',
-        description: 'Transparent trip documentation and fuel/toll billing for department reimbursement.',
+        description: 'Transparent trip documentation for department coordination.',
       },
     ],
     typicalRoutes: [
@@ -117,11 +117,11 @@ export const mockTravelServices: TravelService[] = [
       width: 1200,
       height: 800,
     },
-    relatedVehicles: ['21-seater-van'],
-    relatedTours: ['madurai-to-kodaikanal', 'madurai-to-munnar', 'madurai-to-ooty'],
+    relatedVehicles: ['veh-21-seater'],
+    relatedTours: ['tour-kodaikanal', 'tour-munnar', 'tour-ooty'],
     seo: {
       title: 'College Trips & IV Van Hire in Madurai | Mahalakshmi Tours and Travels',
-      description: 'Dedicated 21-seater AC van hire for college industrial visits (IV) and department tours from Madurai. Experienced drivers and flexible routing.',
+      description: 'Dedicated 21-seater AC van hire for college industrial visits (IV) and department tours from Madurai.',
       keywords: ['college trip van madurai', 'industrial visit transport madurai', 'student tour bus madurai'],
       canonicalUrl: 'https://mahalakshmitravels.com/travel-services/college-trips',
     },
@@ -145,7 +145,7 @@ export const mockTravelServices: TravelService[] = [
         description: 'Sedan cars for 1-4 passengers or the 21-seater van for extended joint family gatherings.',
       },
       {
-        title: 'Polite, Local Madurai Drivers',
+        title: 'Courteous Local Madurai Drivers',
         description: 'Courteous drivers who know clean highway restaurants, scenic viewpoints, and safe hill routes.',
       },
       {
@@ -175,11 +175,11 @@ export const mockTravelServices: TravelService[] = [
       width: 1200,
       height: 800,
     },
-    relatedVehicles: ['sedan-car', '21-seater-van'],
-    relatedTours: ['madurai-to-kodaikanal', 'madurai-to-munnar', 'madurai-to-rameswaram'],
+    relatedVehicles: ['veh-sedan-car', 'veh-21-seater'],
+    relatedTours: ['tour-kodaikanal', 'tour-munnar', 'tour-rameshwaram'],
     seo: {
       title: 'Family Travel & Car Hire in Madurai | Mahalakshmi Tours and Travels',
-      description: 'Private car and van hire in Madurai for family vacations across Tamil Nadu and Kerala. Safe drivers, clean vehicles, and unhurried family pacing.',
+      description: 'Private car and van hire in Madurai for family vacations across Tamil Nadu and Kerala.',
       keywords: ['family travel madurai', 'car rental for family madurai', 'madurai outstation car hire'],
       canonicalUrl: 'https://mahalakshmitravels.com/travel-services/family-travel',
     },
@@ -204,10 +204,10 @@ export const mockTravelServices: TravelService[] = [
       },
       {
         title: 'VIP Sedan Transfers',
-        description: 'Private sedan cars for bride/groom family and key wedding guests.',
+        description: 'Private sedan cars for key family members and wedding guests.',
       },
       {
-        title: 'Local Madurai Road Mastery',
+        title: 'Local Madurai Road Knowledge',
         description: 'Drivers familiar with Madurai mandapams, Meenakshi Temple corridors, and outstation venue routes.',
       },
     ],
@@ -223,7 +223,7 @@ export const mockTravelServices: TravelService[] = [
       },
       {
         question: 'Can we hire both the 21-seater van and sedan cars together?',
-        answer: 'Yes. Combining our 21-seater van for guest groups with sedan cars for key family members is a popular and cost-effective arrangement.',
+        answer: 'Yes. Combining our 21-seater van for guest groups with sedan cars for key family members is a popular arrangement.',
       },
     ],
     heroImage: {
@@ -232,11 +232,11 @@ export const mockTravelServices: TravelService[] = [
       width: 1200,
       height: 800,
     },
-    relatedVehicles: ['21-seater-van', 'sedan-car'],
-    relatedTours: ['madurai-to-rameswaram'],
+    relatedVehicles: ['veh-21-seater', 'veh-sedan-car'],
+    relatedTours: ['tour-rameshwaram', 'tour-madurai', 'tour-palani-murugan-temple'],
     seo: {
       title: 'Wedding & Function Van Hire in Madurai | Mahalakshmi Tours and Travels',
-      description: 'Punctual guest transportation and van hire for weddings, temple functions, and family events in Madurai. 21-seater AC van and private sedans.',
+      description: 'Punctual guest transportation and van hire for weddings, temple functions, and family events in Madurai.',
       keywords: ['wedding van hire madurai', 'function transport madurai', 'guest airport pickup madurai'],
       canonicalUrl: 'https://mahalakshmitravels.com/travel-services/function-travel',
     },
@@ -248,5 +248,5 @@ export function getAllTravelServices(): TravelService[] {
 }
 
 export function getTravelServiceBySlug(slug: string): TravelService | undefined {
-  return mockTravelServices.find((s) => s.slug === slug);
+  return mockTravelServices.find((s) => s.slug === slug || s.id === slug);
 }

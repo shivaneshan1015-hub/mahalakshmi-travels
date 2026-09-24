@@ -18,8 +18,8 @@ export const siteConfig = {
     phoneSecondary: '+91 63801 92145',
     phoneRaw: '916380192145', // For tel: and whatsapp links
     whatsapp: '916380192145',
-    email: 'contact@mahalakshmitravels.com',
-    googleMapsUrl: 'https://share.google/kweZPlga3uiRKgVsA',
+    email: 'mahalakshmitoursandtravels6@gmail.com',
+    googleMapsUrl: 'https://maps.app.goo.gl/EdEh3y8nD3HWSByc6',
     address: {
       doorNo: 'Door No: 3',
       building: 'RK MLA Plaza 28 D',
@@ -31,8 +31,8 @@ export const siteConfig = {
       fullAddress: 'Door No: 3, RK MLA Plaza 28 D, Alanganallur Main Road, Opposite to Sulthan Biriyani, Sikandharsavadi, Madurai, Tamil Nadu 625018, India',
     },
     geo: {
-      latitude: 9.9678,
-      longitude: 78.1065,
+      latitude: 9.973135,
+      longitude: 78.098129,
     },
   },
   social: {
@@ -44,5 +44,6 @@ export const siteConfig = {
     'Kerala',
     'Karnataka',
     'Andhra Pradesh',
+    'Telangana',
   ] as const,
 };

@@ -5,7 +5,7 @@
 export const businessPillars = {
   toursAndTravel: {
     title: 'Tours & Journeys',
-    description: 'Carefully curated short-format and destination journeys across Tamil Nadu, Kerala, Karnataka, and Andhra Pradesh.',
+    description: 'Carefully curated short-format and destination journeys across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.',
     formats: [
       '1 Night / 2 Days Journeys',
       'Weekend Escapes from Madurai',
@@ -16,16 +16,16 @@ export const businessPillars = {
   },
   vehicleAndTransport: {
     title: 'Vehicle Rental & Driver Services',
-    description: 'Premier outstation vehicle rental service with verified, seasoned drivers for families, college industrial visits, corporate events, and wedding functions from Madurai.',
+    description: 'Outstation vehicle rental service with local drivers for families, college industrial visits, corporate events, and wedding functions from Madurai.',
     fleetOverview: {
       van21Seater: {
         name: '21-Seater AC Group Travel Van (Tempo / Mini Bus)',
-        availability: 'On-Demand Dispatch with Commercial Permit',
+        availability: 'On-Demand Scheduled Dispatch',
         bestFor: ['College Industrial Visits & Trips', 'Family Functions & Weddings', 'Group Pilgrimages', 'Outstation Excursions'],
       },
       sedanCars: {
         name: 'Sedan Travel Cars (AC Prime Sedan)',
-        availability: '24/7 Outstation & City Booking',
+        availability: 'Outstation & City Booking',
         bestFor: ['Family Journeys', 'Outstation Drop & Pickups', 'Couple Tours', 'Airport Transfers'],
       },
     },

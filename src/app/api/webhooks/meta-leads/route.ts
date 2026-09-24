@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
             // Here we safely create and log the lead into our CRM repository
             await CrmRepository.createEnquiry({
               name: `Meta Lead (#${leadgenId?.slice(-4) || 'New'})`,
-              phone: '+91 98421 00000',
+              phone: '+91 94431 00000',
               destinations: ['South India Tour'],
               travellerCount: 4,
               groupType: 'family',

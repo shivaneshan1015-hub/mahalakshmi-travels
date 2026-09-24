@@ -51,7 +51,7 @@ export function MobileStickyBar() {
 
         {/* Plan Custom Journey */}
         <Link
-          href="/customised-tours"
+          href="/plan-your-journey"
           className="flex-1 min-h-[48px] flex items-center justify-center gap-2 py-2.5 px-4 rounded-[6px] bg-gradient-to-r from-[#EA580C] to-[#C85227] text-[#FFFFFF] shadow-md active:scale-95 transition-transform"
           aria-label="Plan Custom Trip"
           title="Plan Custom Trip"

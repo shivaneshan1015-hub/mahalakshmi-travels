@@ -43,6 +43,7 @@ export async function generateMetadata({ params }: DestinationPageProps): Promis
     description: destination.seo.description,
     canonicalPath: `/destinations/${destination.slug}`,
     ogImage: destination.heroImage.url,
+    noIndex: true,
   });
 }
 

@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const userColumnData = body.user_column_data || [];
 
     let name = 'Google Ad Lead';
-    let phone = '+91 98421 00000';
+    let phone = '+91 94431 00000';
     let email = '';
     let destinations = ['Munnar Tour'];
 

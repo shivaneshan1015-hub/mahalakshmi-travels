@@ -457,7 +457,7 @@ export function CustomJourneyBuilder() {
                     <input
                       type="tel"
                       required
-                      placeholder="e.g. 98421 23456"
+                      placeholder="e.g. 63801 92145"
                       value={quickQuoteData.phone}
                       onChange={(e) => setQuickQuoteData({ ...quickQuoteData, phone: e.target.value })}
                       className="w-full px-3.5 py-2.5 rounded-[3px] border border-[var(--border-default)] bg-white text-sm focus:outline-none focus:border-[var(--color-terracotta-500)]"
@@ -499,7 +499,7 @@ export function CustomJourneyBuilder() {
                       Request Quick Callback
                     </Button>
                     <a
-                      href={`https://wa.me/919842123456?text=${encodeURIComponent(
+                      href={`https://wa.me/916380192145?text=${encodeURIComponent(
                         `Hi Mahalakshmi Travels, I would like a quick quote for a trip to ${quickQuoteData.destination || 'South India'} (${quickQuoteData.passengers}).`
                       )}`}
                       target="_blank"

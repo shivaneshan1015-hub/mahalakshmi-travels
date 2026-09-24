@@ -269,8 +269,8 @@ export default function DesignSystemPage() {
               <div className="grid grid-cols-2 gap-4">
                 <Input
                   label="Contact Phone"
-                  placeholder="+91 98421 XXXXX"
-                  defaultValue="+91 98421 23456"
+                  placeholder="+91 63801 92145"
+                  defaultValue="+91 63801 92145"
                 />
                 <Select
                   label="Preferred Vehicle"

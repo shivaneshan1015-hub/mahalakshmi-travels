@@ -34,7 +34,7 @@ import { PassengerFleetSelector } from '@/components/vehicles/PassengerFleetSele
 
 export const metadata: Metadata = constructMetadata({
   title: 'Vehicle Rental in Madurai | 21 Seater Van & Sedan Car Hire with Driver',
-  description: 'Book 21-seater AC van rentals and private sedan cars in Madurai for outstation family trips, college IV, wedding transportation, and temple pilgrimages. Transparent per-KM rates, commercial permits, verified drivers.',
+  description: 'Book 21-seater AC van rentals and private sedan cars in Madurai for outstation family trips, college IV, wedding transportation, and temple pilgrimages. Transparent custom quotes and experienced local drivers.',
   canonicalPath: '/vehicles',
 });
 
@@ -46,15 +46,15 @@ export default function VehiclesPage() {
   const rentalFaqs = [
     {
       question: 'How do I rent a 21-seater van or sedan car from Mahalakshmi Tours and Travels in Madurai?',
-      answer: 'Booking is quick and straightforward. You can connect with our Madurai travel desk directly via WhatsApp (+91 98421 23456) or phone call. Share your travel dates, pickup location in Madurai, passenger count, and desired route. We will provide a quick, all-inclusive or per-KM tariff quote and reserve your vehicle immediately.',
+      answer: 'Booking is quick and straightforward. You can connect with our Madurai travel desk directly via WhatsApp (+91 63801 92145) or phone call. Share your travel dates, pickup location in Madurai, passenger count, and desired route. We will provide a quick journey quote and reserve your vehicle immediately.',
     },
     {
       question: 'What are the charges for outstation vehicle hire from Madurai?',
-      answer: 'Our outstation rentals follow transparent pricing: Private AC Sedans start from ₹12–₹14/KM (minimum 250 KM/day) + driver bata ₹400–₹500/day. The 21-Seater AC Group Van starts from ₹22–₹25/KM (minimum 250–300 KM/day) + driver bata ₹600/day. Tolls, state boundary permits, and parking charges are billed at actuals.',
+      answer: 'Our outstation rentals follow transparent journey quotes tailored to your route, duration, and group requirements. Contact our Madurai travel desk for a current quote.',
     },
     {
-      question: 'Do your rental vehicles have permits for Kerala, Karnataka, and Andhra Pradesh?',
-      answer: 'Yes. All our vehicles hold valid All-India Commercial Tourist Permits, updated fitness certificates, and comprehensive commercial passenger insurance. Our drivers have extensive driving experience across Western Ghats mountain roads and interstate national highways.',
+      question: 'Do your rental vehicles cover travel to Kerala, Karnataka, and Andhra Pradesh?',
+      answer: 'Yes. All our vehicles and experienced drivers operate across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana. Our drivers have extensive driving experience across Western Ghats mountain roads and interstate highways.',
     },
     {
       question: 'Can we book vehicles for college industrial visits (IV) and department tours?',
@@ -69,13 +69,13 @@ export default function VehiclesPage() {
   const rentalFeatures = [
     {
       icon: <ShieldCheck className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
-      title: 'Verified Commercial Drivers',
+      title: 'Experienced Local Drivers',
       description: 'Courteous, non-smoking local drivers with deep route mastery across Tamil Nadu, Kerala, and Karnataka.',
     },
     {
       icon: <Coins className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
-      title: 'Transparent Per-KM Tariffs',
-      description: 'Clear rate cards with zero hidden surprises. You pay only for actual kilometers, driver bata, and statutory tolls.',
+      title: 'Transparent Custom Quotes',
+      description: 'Clear route quotations with no hidden surprises. Tailored for your exact journey, halts, and schedule.',
     },
     {
       icon: <MapPin className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
@@ -234,19 +234,19 @@ export default function VehiclesPage() {
                 <ul className="space-y-2.5 text-xs text-[var(--text-secondary)]">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Outstation Rate:</strong> ₹22 – ₹25 / KM (AC)</span>
+                    <span><strong>Outstation Pricing:</strong> Custom Quote based on Route & Dates</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Driver Bata:</strong> ₹600 / Calendar Day</span>
+                    <span><strong>Pricing Inclusions:</strong> Fuel, Vehicle AC, Driver Charges & Music System</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Minimum Outstation:</strong> 250–300 KM / Day</span>
+                    <span><strong>Service Coverage:</strong> Tamil Nadu, Kerala, Karnataka, AP & Telangana</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Inclusions:</strong> Vehicle AC, Fuel, Driver Services, Music System</span>
+                    <span><strong>Booking Type:</strong> Dedicated Outstation Fleet Booking from Madurai</span>
                   </li>
                 </ul>
               </div>
@@ -277,19 +277,19 @@ export default function VehiclesPage() {
                 <ul className="space-y-2.5 text-xs text-[var(--text-secondary)]">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Outstation Rate:</strong> ₹12 – ₹14 / KM (AC)</span>
+                    <span><strong>Outstation Pricing:</strong> Custom Quote based on Route & Dates</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Driver Bata:</strong> ₹400 – ₹500 / Calendar Day</span>
+                    <span><strong>Pricing Inclusions:</strong> Fuel, Vehicle AC & Driver Charges</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Minimum Outstation:</strong> 250 KM / Day</span>
+                    <span><strong>Service Coverage:</strong> South India Outstation Circuits & Airport Transfers</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-terracotta-500)] shrink-0" />
-                    <span><strong>Inclusions:</strong> AC Sedan (Dzire/Etios), Fuel, Clean Driver</span>
+                    <span><strong>Booking Type:</strong> Private Car Hire with Driver from Madurai</span>
                   </li>
                 </ul>
               </div>
@@ -395,7 +395,7 @@ export default function VehiclesPage() {
 
           <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
             <p className="text-xs font-mono text-[var(--color-ink-400)]">
-              Direct Helpline: +91 98421 23456 • Available 24 Hours
+              Direct Helpline: +91 63801 92145 • Madurai Travel Desk
             </p>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               <Button variant="primary" size="md" icon={<MessageSquare className="w-4 h-4" />} iconPosition="left">

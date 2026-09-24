@@ -1,6 +1,6 @@
 /**
- * MAHALAKSHMI TOUR & TRAVEL — RELATIONAL DATA ACCESS LAYER
- * Interconnects Tours, Destinations, Vehicles, Services, and Articles.
+ * MAHALAKSHMI TOUR & TRAVEL — RELATIONAL DATA ACCESS LAYER & ADAPTERS
+ * Interconnects Tours, Destinations, Vehicles, Services, and Articles using Stable Internal IDs.
  */
 
 import { getAllTours, getTourBySlug } from './tours';
@@ -15,26 +15,75 @@ import { TravelArticle } from '@/types/article';
 import { TravelService } from '@/types/service';
 
 /**
- * Given a tour slug, resolve full related tour objects and destination object
+ * Stable ID & Slug Lookups
  */
-export function resolveTourRelations(slug: string): {
+
+export function getTourByIdOrSlug(idOrSlug: string): Tour | undefined {
+  const tours = getAllTours();
+  return (
+    tours.find((t) => t.id === idOrSlug) ||
+    tours.find((t) => t.slug === idOrSlug) ||
+    getTourBySlug(idOrSlug)
+  );
+}
+
+export function getVehicleByIdOrSlug(idOrSlug: string): Vehicle | undefined {
+  const vehicles = getAllVehicles();
+  return (
+    vehicles.find((v) => v.id === idOrSlug) ||
+    vehicles.find((v) => v.slug === idOrSlug) ||
+    getVehicleBySlug(idOrSlug)
+  );
+}
+
+export function getServiceByIdOrSlug(idOrSlug: string): TravelService | undefined {
+  const services = getAllTravelServices();
+  return (
+    services.find((s) => s.id === idOrSlug) ||
+    services.find((s) => s.slug === idOrSlug) ||
+    getTravelServiceBySlug(idOrSlug)
+  );
+}
+
+export function getDestinationByIdOrSlug(idOrSlug: string): Destination | undefined {
+  const destinations = getAllDestinations();
+  return (
+    destinations.find((d) => d.id === idOrSlug) ||
+    destinations.find((d) => d.slug === idOrSlug) ||
+    getDestinationBySlug(idOrSlug)
+  );
+}
+
+export function getArticleByIdOrSlug(idOrSlug: string): TravelArticle | undefined {
+  const articles = getAllArticles();
+  return (
+    articles.find((a) => a.id === idOrSlug) ||
+    articles.find((a) => a.slug === idOrSlug) ||
+    getArticleBySlug(idOrSlug)
+  );
+}
+
+/**
+ * Given a tour ID or slug, resolve full related tour objects and destination object
+ */
+export function resolveTourRelations(idOrSlug: string): {
   tour?: Tour;
   destination?: Destination;
   relatedTours: Tour[];
   relatedArticles: TravelArticle[];
   availableVehicles: Vehicle[];
 } {
-  const tour = getTourBySlug(slug);
+  const tour = getTourByIdOrSlug(idOrSlug);
   if (!tour) {
     return { relatedTours: [], relatedArticles: [], availableVehicles: [] };
   }
 
-  const destination = getDestinationBySlug(tour.destinationSlug);
-  const relatedTours = tour.relatedTours
-    .map((s) => getTourBySlug(s))
+  const destination = getDestinationByIdOrSlug(tour.destinationSlug);
+  const relatedTours = (tour.relatedTours || [])
+    .map((ref) => getTourByIdOrSlug(ref))
     .filter((t): t is Tour => Boolean(t));
-  const relatedArticles = tour.relatedArticles
-    .map((s) => getArticleBySlug(s))
+  const relatedArticles = (tour.relatedArticles || [])
+    .map((ref) => getArticleByIdOrSlug(ref))
     .filter((a): a is TravelArticle => Boolean(a));
   const availableVehicles = getAllVehicles();
 
@@ -48,20 +97,24 @@ export function resolveTourRelations(slug: string): {
 }
 
 /**
- * Given a destination slug, resolve associated tours and articles
+ * Given a destination ID or slug, resolve associated tours and articles
  */
-export function resolveDestinationRelations(slug: string): {
+export function resolveDestinationRelations(idOrSlug: string): {
   destination?: Destination;
   tours: Tour[];
   articles: TravelArticle[];
 } {
-  const destination = getDestinationBySlug(slug);
+  const destination = getDestinationByIdOrSlug(idOrSlug);
   if (!destination) {
     return { tours: [], articles: [] };
   }
 
-  const tours = getAllTours().filter((t) => t.destinationSlug === slug);
-  const articles = getAllArticles().filter((a) => a.destinationSlug === slug);
+  const tours = getAllTours().filter(
+    (t) => t.destinationSlug === destination.slug || t.destinationSlug === destination.id
+  );
+  const articles = getAllArticles().filter(
+    (a) => a.destinationSlug === destination.slug || a.destinationSlug === destination.id
+  );
 
   return {
     destination,
@@ -71,23 +124,23 @@ export function resolveDestinationRelations(slug: string): {
 }
 
 /**
- * Given a vehicle slug, resolve compatible services and popular tours
+ * Given a vehicle ID or slug, resolve compatible services and popular tours
  */
-export function resolveVehicleRelations(slug: string): {
+export function resolveVehicleRelations(idOrSlug: string): {
   vehicle?: Vehicle;
   services: TravelService[];
   popularTours: Tour[];
 } {
-  const vehicle = getVehicleBySlug(slug);
+  const vehicle = getVehicleByIdOrSlug(idOrSlug);
   if (!vehicle) {
     return { services: [], popularTours: [] };
   }
 
   const services = getAllTravelServices().filter((s) =>
-    s.vehicleOptions.includes(vehicle.category)
+    s.vehicleOptions?.includes(vehicle.category)
   );
   const popularTours = getAllTours().filter((t) =>
-    t.travelOptions.includes(vehicle.category)
+    t.travelOptions?.includes(vehicle.category)
   );
 
   return {
@@ -98,23 +151,23 @@ export function resolveVehicleRelations(slug: string): {
 }
 
 /**
- * Given a travel service slug, resolve compatible vehicles and tours
+ * Given a travel service ID or slug, resolve compatible vehicles and tours
  */
-export function resolveServiceRelations(slug: string): {
+export function resolveServiceRelations(idOrSlug: string): {
   service?: TravelService;
   vehicles: Vehicle[];
   tours: Tour[];
 } {
-  const service = getTravelServiceBySlug(slug);
+  const service = getServiceByIdOrSlug(idOrSlug);
   if (!service) {
     return { vehicles: [], tours: [] };
   }
 
-  const vehicles = service.relatedVehicles
-    .map((s) => getVehicleBySlug(s))
+  const vehicles = (service.relatedVehicles || [])
+    .map((ref) => getVehicleByIdOrSlug(ref))
     .filter((v): v is Vehicle => Boolean(v));
-  const tours = service.relatedTours
-    .map((s) => getTourBySlug(s))
+  const tours = (service.relatedTours || [])
+    .map((ref) => getTourByIdOrSlug(ref))
     .filter((t): t is Tour => Boolean(t));
 
   return {
@@ -125,36 +178,36 @@ export function resolveServiceRelations(slug: string): {
 }
 
 /**
- * Given an article slug, resolve connected tour, service, destination and related articles
+ * Given an article ID or slug, resolve connected tour, service, destination and related articles
  */
-export function resolveArticleRelations(slug: string): {
+export function resolveArticleRelations(idOrSlug: string): {
   article?: TravelArticle;
   connectedTour?: Tour;
   connectedService?: TravelService;
   destination?: Destination;
   relatedArticles: TravelArticle[];
 } {
-  const article = getArticleBySlug(slug);
+  const article = getArticleByIdOrSlug(idOrSlug);
   if (!article) {
     return { relatedArticles: [] };
   }
 
   const connectedTour = article.connectedTourSlug
-    ? getTourBySlug(article.connectedTourSlug)
-    : article.relatedTours.length > 0
-    ? getTourBySlug(article.relatedTours[0])
+    ? getTourByIdOrSlug(article.connectedTourSlug)
+    : article.relatedTours && article.relatedTours.length > 0
+    ? getTourByIdOrSlug(article.relatedTours[0])
     : undefined;
 
   const connectedService = article.connectedServiceSlug
-    ? getTravelServiceBySlug(article.connectedServiceSlug)
+    ? getServiceByIdOrSlug(article.connectedServiceSlug)
     : undefined;
 
   const destination = article.destinationSlug
-    ? getDestinationBySlug(article.destinationSlug)
+    ? getDestinationByIdOrSlug(article.destinationSlug)
     : undefined;
 
-  const relatedArticles = article.relatedArticles
-    .map((s) => getArticleBySlug(s))
+  const relatedArticles = (article.relatedArticles || [])
+    .map((ref) => getArticleByIdOrSlug(ref))
     .filter((a): a is TravelArticle => Boolean(a));
 
   return {

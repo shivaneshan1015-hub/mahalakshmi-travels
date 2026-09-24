@@ -72,7 +72,7 @@ export function CustomJourneySection() {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Link href="/customised-tours">
+              <Link href="/plan-your-journey">
                 <Button variant="primary" size="md" withArrow>
                   Build Your Journey
                 </Button>

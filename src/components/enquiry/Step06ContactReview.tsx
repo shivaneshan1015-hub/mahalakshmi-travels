@@ -193,7 +193,7 @@ export function Step06ContactReview({
             required
             value={enquiry.phone || ''}
             onChange={(e) => onChangePhone(e.target.value)}
-            placeholder="e.g. 98421 23456 (or with country code +91)"
+            placeholder="e.g. 63801 92145 (or with country code +91)"
             className={cn(
               'w-full px-3.5 py-2.5 text-xs rounded-[3px] border bg-[var(--color-paper-100)] text-[var(--color-ink-950)] focus:outline-none focus:ring-2 focus:ring-[var(--color-terracotta-500)]',
               errors.phone ? 'border-red-500 bg-red-50' : 'border-[var(--border-default)]'

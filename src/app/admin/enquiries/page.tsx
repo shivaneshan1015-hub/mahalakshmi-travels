@@ -471,7 +471,7 @@ export default function AdminEnquiriesPage() {
                     required
                     value={modalForm.phone}
                     onChange={(e) => setModalForm({ ...modalForm, phone: e.target.value })}
-                    placeholder="+91 98421 XXXXX"
+                    placeholder="+91 63801 XXXXX"
                     className="w-full px-3 py-2 bg-[#121211] border border-[#33332E] rounded text-white focus:outline-none focus:border-[#A65F43]"
                   />
                 </div>

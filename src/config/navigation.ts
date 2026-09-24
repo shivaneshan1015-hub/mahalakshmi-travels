@@ -11,7 +11,7 @@ export interface NavItem {
 export const mainNavItems: NavItem[] = [
   { label: 'Tour Packages', href: '/tours' },
   { label: 'Vehicle Rental Services', href: '/vehicles' },
-  { label: 'Customised Tours', href: '/customised-tours' },
+  { label: 'Plan Your Journey', href: '/plan-your-journey' },
   { label: 'Travel Guide', href: '/travel-guide' },
   { label: 'About Us', href: '/about' },
   { label: 'Contact', href: '/contact' },
@@ -26,7 +26,7 @@ export const footerNavSections = [
   {
     title: 'Tour Categories',
     items: [
-      { label: 'All 41 Tour Packages', href: '/tours' },
+      { label: 'All 39 Tour Packages', href: '/tours' },
       { label: 'Pilgrimage & Temple Tours', href: '/tours?category=pilgrimage-temple' },
       { label: 'Hill Stations & Nature', href: '/tours?category=hill-stations-nature' },
       { label: 'Coastal & Kerala Backwaters', href: '/tours?category=coastal-backwaters' },

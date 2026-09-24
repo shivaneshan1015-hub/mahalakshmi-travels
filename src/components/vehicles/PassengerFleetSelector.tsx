@@ -13,34 +13,34 @@ export function PassengerFleetSelector() {
       paxLabel: '1 - 4 Passengers',
       vehicleName: 'Private AC Sedan Car (Swift Dzire / Toyota Etios)',
       tag: 'Couples & Small Families',
-      rate: '₹12 – ₹14 / KM (AC)',
-      bata: '₹400 – ₹500 / Day',
+      rate: 'Custom Quote',
+      bata: 'Included in Quote',
       boot: '400+ Litres Luggage Boot',
       slug: 'sedan-car',
       link: '/vehicles/sedan-car',
-      whatsappMsg: 'Hi Mahalakshmi Travels, I want to book a Private AC Sedan Car (1-4 Passengers) from Madurai. Please send tariff quote.',
+      whatsappMsg: 'Hi Mahalakshmi Travels, I want to book a Private AC Sedan Car (1-4 Passengers) from Madurai. Please send custom quote.',
     },
     suv: {
       paxLabel: '5 - 7 Passengers',
       vehicleName: 'AC SUV / Premium Cabs (Ertiga / Innova Class)',
       tag: 'Family Groups & Temple Circuits',
-      rate: '₹18 – ₹20 / KM (AC)',
-      bata: '₹500 – ₹600 / Day',
+      rate: 'Custom Quote',
+      bata: 'Included in Quote',
       boot: 'Comfortable Luggage Space',
       slug: 'sedan-car',
       link: '/vehicles/sedan-car',
-      whatsappMsg: 'Hi Mahalakshmi Travels, I want to book an AC SUV Cab (5-7 Passengers) from Madurai. Please send tariff quote.',
+      whatsappMsg: 'Hi Mahalakshmi Travels, I want to book an AC SUV Cab (5-7 Passengers) from Madurai. Please send custom quote.',
     },
     van: {
       paxLabel: '8 - 21 Passengers',
       vehicleName: '21-Seater Luxury AC Group Van (Tempo / Mini Coach)',
       tag: 'College IV • Pilgrimages • Wedding Fleets',
-      rate: '₹22 – ₹25 / KM (AC)',
-      bata: '₹600 / Day',
+      rate: 'Custom Quote',
+      bata: 'Included in Quote',
       boot: 'Deep Rear Boot + Rooftop Carrier',
       slug: '21-seater-van',
       link: '/vehicles/21-seater-van',
-      whatsappMsg: 'Hi Mahalakshmi Travels, I want to book a 21-Seater AC Group Van (8-21 Passengers) from Madurai. Please send tariff quote.',
+      whatsappMsg: 'Hi Mahalakshmi Travels, I want to book a 21-Seater AC Group Van (8-21 Passengers) from Madurai. Please send custom quote.',
     },
   };
 
@@ -56,7 +56,7 @@ export function PassengerFleetSelector() {
           Find the Perfect Rental Vehicle for Your Group Size
         </h3>
         <p className="text-xs text-[var(--text-secondary)]">
-          Select how many travellers are in your party to view recommended vehicles, tariffs, and direct booking options.
+          Select how many travellers are in your party to view recommended vehicles and request a custom quote.
         </p>
       </div>
 
@@ -76,7 +76,7 @@ export function PassengerFleetSelector() {
             <span className="text-[10px] font-mono font-bold uppercase text-[var(--color-terracotta-600)]">1 - 4 Pax</span>
           </div>
           <p className="text-xs font-bold text-[var(--color-ink-950)]">AC Sedan Car</p>
-          <p className="text-[10px] text-[var(--text-muted)] mt-0.5">₹12 - ₹14 / KM</p>
+          <p className="text-[10px] text-[var(--text-muted)] mt-0.5">Custom Quote</p>
         </button>
 
         <button
@@ -93,7 +93,7 @@ export function PassengerFleetSelector() {
             <span className="text-[10px] font-mono font-bold uppercase text-[var(--color-terracotta-600)]">5 - 7 Pax</span>
           </div>
           <p className="text-xs font-bold text-[var(--color-ink-950)]">AC SUV / Taxi</p>
-          <p className="text-[10px] text-[var(--text-muted)] mt-0.5">₹18 - ₹20 / KM</p>
+          <p className="text-[10px] text-[var(--text-muted)] mt-0.5">Custom Quote</p>
         </button>
 
         <button
@@ -110,7 +110,7 @@ export function PassengerFleetSelector() {
             <span className="text-[10px] font-mono font-bold uppercase text-[var(--color-terracotta-600)]">8 - 21 Pax</span>
           </div>
           <p className="text-xs font-bold text-[var(--color-ink-950)]">21-Seater Group Van</p>
-          <p className="text-[10px] text-[var(--text-muted)] mt-0.5">₹22 - ₹25 / KM</p>
+          <p className="text-[10px] text-[var(--text-muted)] mt-0.5">Custom Quote</p>
         </button>
       </div>
 

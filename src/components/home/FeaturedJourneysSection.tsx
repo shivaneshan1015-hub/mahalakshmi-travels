@@ -58,11 +58,11 @@ export function FeaturedJourneysSection() {
         {/* Bottom Explore All Tours CTA Block (Visible on all devices) */}
         <div className="pt-6 text-center border-t border-[var(--border-default)] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs font-mono font-semibold text-[var(--color-ink-700)]">
-            Viewing 3 featured routes • 41 Total South India tour packages available from Madurai
+            Viewing 3 featured routes • 39 Total South India tour packages available from Madurai
           </p>
           <Link href="/tours" className="w-full sm:w-auto">
             <Button variant="primary" size="md" withArrow fullWidth>
-              Explore All 41 Tour Packages
+              Explore All 39 Tour Packages
             </Button>
           </Link>
         </div>

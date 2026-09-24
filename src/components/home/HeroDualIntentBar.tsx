@@ -89,12 +89,12 @@ export function HeroDualIntentBar() {
               <ShieldCheck className="w-4 h-4 text-[var(--color-terracotta-600)] shrink-0" />
               <span className="font-semibold text-[var(--color-ink-900)]">
                 {vehicleType === '21-seater'
-                  ? '21-Seater AC Van: ₹22 – ₹25 / KM • Bata: ₹600/Day'
-                  : 'Private AC Sedan: ₹12 – ₹14 / KM • Bata: ₹400/Day'}
+                  ? '21-Seater AC Van: Executive Group Van with High-Back Seats'
+                  : 'Private AC Sedan: Air-Conditioned Outstation Sedan'}
               </span>
             </div>
             <span className="font-mono text-[10px] uppercase font-extrabold text-[var(--color-terracotta-600)] bg-[#FFEDD5] px-2 py-0.5 rounded">
-              Madurai Origin • All India Permit
+              Madurai Origin • Custom Quote
             </span>
           </div>
 

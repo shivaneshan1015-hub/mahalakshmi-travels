@@ -248,7 +248,7 @@ export default function AdminSettingsPage() {
                         campaign_id: 'munnar_search_ad_campaign',
                         user_column_data: [
                           { column_id: 'FULL_NAME', string_value: 'Anand Ramasamy (Google Lead)' },
-                          { column_id: 'PHONE_NUMBER', string_value: '+91 98421 77665' },
+                          { column_id: 'PHONE_NUMBER', string_value: '+91 94431 77665' },
                           { column_id: 'EMAIL', string_value: 'anand.ramasamy@gmail.com' },
                         ],
                       }),

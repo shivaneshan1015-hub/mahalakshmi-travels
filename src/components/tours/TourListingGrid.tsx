@@ -39,7 +39,7 @@ export function TourListingGrid({ tours, onResetFilters }: TourListingGridProps)
           >
             Reset Filters
           </button>
-          <Link href="/customised-tours">
+          <Link href="/plan-your-journey">
             <Button variant="primary" size="md" withArrow>
               Build a Custom Journey
             </Button>
@@ -86,7 +86,7 @@ export function TourListingGrid({ tours, onResetFilters }: TourListingGridProps)
           </p>
         </div>
 
-        <Link href="/customised-tours" className="shrink-0">
+        <Link href="/plan-your-journey" className="shrink-0">
           <Button variant="primary" size="md" withArrow>
             Build a Custom Journey
           </Button>

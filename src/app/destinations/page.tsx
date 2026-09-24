@@ -12,6 +12,7 @@ export const metadata: Metadata = constructMetadata({
   title: 'South India Destinations from Madurai',
   description: 'Discover hill stations, coastal towns, and cultural hubs across Kerala, Tamil Nadu, Karnataka, and Andhra Pradesh reachable from Madurai.',
   canonicalPath: '/destinations',
+  noIndex: true,
 });
 
 export default function DestinationsPage() {
