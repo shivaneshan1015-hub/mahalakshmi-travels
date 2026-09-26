@@ -14,7 +14,7 @@ export type LeadStatus =
   | 'COMPLETED'
   | 'LOST';
 
-export type LeadPriority = 'HOT' | 'WARM' | 'COLD';
+export type LeadPriority = 'HOT' | 'WARM' | 'COLD' | 'UNQUALIFIED';
 
 export type AdSource =
   | 'website'
@@ -69,6 +69,7 @@ export interface CrmEnquiry extends StructuredEnquiry {
   // WhatsApp Automation
   whatsappSent: boolean;
   whatsappLastSentAt?: string;
+  isDemo?: boolean;
   
   createdAt: string;
   updatedAt: string;

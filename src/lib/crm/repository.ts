@@ -105,6 +105,7 @@ const initialEnquiries: CrmEnquiry[] = [
       landingPage: '/college-trips',
     },
     internalNotes: 'Advance of ₹20,000 received via GPay. All journey arrangements included. Assigned 21S Coach.',
+    isDemo: true,
     activityLog: [
       {
         id: 'act-4',
@@ -118,7 +119,7 @@ const initialEnquiries: CrmEnquiry[] = [
         timestamp: '2026-08-17T15:00:00.000Z',
         author: 'Owner (Madurai Desk)',
         type: 'call',
-        message: 'Called student rep. Finalized route and vehicle. Sent discount package.',
+        message: 'Called student rep. Finalized route and vehicle. Sent itinerary details.',
       },
       {
         id: 'act-6',
@@ -373,8 +374,8 @@ export class CrmRepository {
       email: payload.email,
       contactPreference: payload.contactPreference || 'whatsapp',
       status: payload.status || 'NEW_ENQUIRY',
-      priority: payload.priority || 'HOT',
-      estimatedValue: payload.estimatedValue || 25000,
+      priority: payload.priority || 'UNQUALIFIED',
+      estimatedValue: payload.estimatedValue,
       quotedAmount: payload.quotedAmount,
       advanceReceived: payload.advanceReceived || 0,
       balanceAmount: payload.balanceAmount,
@@ -525,11 +526,11 @@ export class CrmRepository {
       if (e.status === 'BOOKED' || e.status === 'COMPLETED') bookedLeads++;
       if (e.status === 'LOST') lostLeads++;
 
-      // Revenue counting
-      const val = e.quotedAmount || e.estimatedValue || 0;
+      // Revenue counting — verified quoted amount only
+      const val = e.quotedAmount || 0;
       totalPipelineValue += val;
       if (e.status === 'BOOKED' || e.status === 'COMPLETED') {
-        totalBookedRevenue += (e.quotedAmount || e.estimatedValue || 0);
+        totalBookedRevenue += (e.quotedAmount || 0);
       }
 
       // Ad Attribution breakdown
@@ -540,7 +541,7 @@ export class CrmRepository {
       sourceMap[src].count++;
       if (e.status === 'BOOKED' || e.status === 'COMPLETED') {
         sourceMap[src].bookedCount++;
-        sourceMap[src].revenue += (e.quotedAmount || e.estimatedValue || 0);
+        sourceMap[src].revenue += (e.quotedAmount || 0);
       }
     });
 

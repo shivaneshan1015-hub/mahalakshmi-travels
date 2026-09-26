@@ -179,20 +179,16 @@ export function CustomJourneyBuilder() {
       });
 
       const data = await res.json();
-      if (res.ok && data.success) {
+      if (res.ok && data.success && data.reference) {
         setSubmittedData({
           enquiry,
-          referenceCode: data.reference || 'ML-26-8492',
+          referenceCode: data.reference,
         });
       } else {
-        setErrors({ name: data.error || 'Failed to submit enquiry. Please try again.' });
+        setErrors({ name: data.error || 'Failed to submit enquiry. Please try again or contact our travel desk.' });
       }
     } catch (err) {
-      // Offline fallback: still show success with generated local reference
-      setSubmittedData({
-        enquiry,
-        referenceCode: `ML-26-${Math.floor(1000 + Math.random() * 9000)}`,
-      });
+      setErrors({ name: 'Unable to submit enquiry due to a network error. Please try again or contact our Madurai travel desk directly via WhatsApp or Phone.' });
     } finally {
       setIsSubmitting(false);
     }

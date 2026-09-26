@@ -268,6 +268,31 @@ for (const file of publicScanFiles) {
 }
 
 // -----------------------------------------------------------------------------
+// 5B. PHASE 11 CORRECTION & ACCEPTANCE AUDIT
+// -----------------------------------------------------------------------------
+let phase11PriorityPass = true;
+let phase11MonetaryFallbackPass = true;
+let phase11FalseSuccessPass = true;
+
+const enquiryRoutePath = path.join(rootDir, 'src', 'app', 'api', 'enquiry', 'route.ts');
+const enquiryRouteContent = fs.readFileSync(enquiryRoutePath, 'utf-8');
+if (enquiryRouteContent.includes("priority: 'HOT'") || enquiryRouteContent.includes("priority: 'WARM'")) {
+  phase11PriorityPass = false;
+}
+
+const crmRepoPath = path.join(rootDir, 'src', 'lib', 'crm', 'repository.ts');
+const crmRepoContent = fs.readFileSync(crmRepoPath, 'utf-8');
+if (crmRepoContent.includes('estimatedValue || 25000') || crmRepoContent.includes("priority || 'HOT'")) {
+  phase11MonetaryFallbackPass = false;
+}
+
+const customBuilderPath = path.join(rootDir, 'src', 'components', 'enquiry', 'CustomJourneyBuilder.tsx');
+const customBuilderContent = fs.readFileSync(customBuilderPath, 'utf-8');
+if (customBuilderContent.includes('Offline fallback') || customBuilderContent.includes('ML-26-8492')) {
+  phase11FalseSuccessPass = false;
+}
+
+// -----------------------------------------------------------------------------
 // 6. SCHEMA AUDIT
 // -----------------------------------------------------------------------------
 const businessSchemaPass = schemaContent.includes('LocalBusiness') || schemaContent.includes('TravelAgency');
@@ -305,7 +330,10 @@ const allPassed =
   businessSchemaPass &&
   businessHoursPass &&
   priceRangePass &&
-  vehicleSchemaPass;
+  vehicleSchemaPass &&
+  phase11PriorityPass &&
+  phase11MonetaryFallbackPass &&
+  phase11FalseSuccessPass;
 
 console.log('============================================================');
 console.log('PHASE 9C FINAL INTEGRITY TEST');

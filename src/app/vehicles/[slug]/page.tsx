@@ -332,7 +332,7 @@ export default async function VehicleDetailPage({ params }: VehiclePageProps) {
               Book {vehicle.name}
             </h2>
             <p className="text-sm text-[var(--color-ink-300)] leading-relaxed">
-              Connect directly with our Madurai travel desk for customized outstation itineraries, multi-day discounts, and prompt driver allocation.
+              Connect directly with our Madurai travel desk for customized outstation itineraries, vehicle availability, and schedule coordination.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-4 shrink-0 w-full md:w-auto">

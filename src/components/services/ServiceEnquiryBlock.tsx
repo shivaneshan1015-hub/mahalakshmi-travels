@@ -30,7 +30,7 @@ export function ServiceEnquiryBlock({ serviceTitle }: ServiceEnquiryBlockProps) 
         </h2>
 
         <p className="type-body text-[var(--color-ink-300)] mb-8 max-w-lg mx-auto leading-relaxed">
-          Tell us your dates, group count, and preferred destination. Our coordinators will assist with vehicle allocation and schedule planning.
+          Tell us your dates, group count, and preferred destination. Our coordinators will assist with vehicle options and schedule planning.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-4">

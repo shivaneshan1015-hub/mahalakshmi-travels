@@ -32,6 +32,8 @@ export async function sendMetaConversionEvent(payload: MetaConversionPayload) {
   try {
     const cleanPhone = payload.leadData.phone?.replace(/[^0-9]/g, '');
 
+    const verifiedValue = payload.value ?? payload.leadData.quotedAmount;
+
     const response = await fetch(
       `https://graph.facebook.com/v19.0/${pixelId}/events?access_token=${accessToken}`,
       {
@@ -50,8 +52,7 @@ export async function sendMetaConversionEvent(payload: MetaConversionPayload) {
                 fbc: payload.leadData.attribution?.fbclid,
               },
               custom_data: {
-                currency: 'INR',
-                value: payload.value || payload.leadData.quotedAmount || payload.leadData.estimatedValue || undefined,
+                ...(verifiedValue !== undefined ? { currency: 'INR', value: verifiedValue } : {}),
                 content_name: payload.leadData.destinations.join(' - '),
                 content_category: payload.leadData.intent,
               },
@@ -73,12 +74,12 @@ export async function sendMetaConversionEvent(payload: MetaConversionPayload) {
  * Formats a Google Ads Offline Conversion payload for Google Ads Upload API
  */
 export function buildGoogleOfflineConversion(lead: CrmEnquiry) {
+  const verifiedValue = lead.quotedAmount;
   return {
     gclid: lead.attribution?.gclid,
     conversionAction: 'customers/1234567890/conversionActions/confirmed_tour_booking',
     conversionDateTime: new Date().toISOString().replace('T', ' ').substring(0, 19) + '+05:30',
-    conversionValue: lead.quotedAmount || lead.estimatedValue || undefined,
-    currencyCode: 'INR',
+    ...(verifiedValue !== undefined ? { conversionValue: verifiedValue, currencyCode: 'INR' } : {}),
     orderId: lead.referenceCode,
   };
 }

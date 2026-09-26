@@ -84,8 +84,8 @@ export default function VehiclesPage() {
     },
     {
       icon: <Clock className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
-      title: 'On-Demand Dispatch',
-      description: 'Quick booking confirmations with backup driver coordination for uninterrupted outstation journeys.',
+      title: 'Journey Coordination',
+      description: 'Clear booking confirmations and itinerary coordination for outstation journeys.',
     },
   ];
 
@@ -139,7 +139,7 @@ export default function VehiclesPage() {
             Vehicle Rental Services in Madurai
           </h1>
           <p className="type-body-large text-[var(--text-secondary)] leading-relaxed">
-            Rent our verified commercial <strong>21-Seater AC passenger vans</strong> and <strong>private sedan cars</strong> with South Indian highway drivers. Transparent custom quotes, spotless hygiene, and prompt dispatch from our central Madurai depot.
+            Rent our <strong>21-Seater AC passenger vans</strong> and <strong>private sedan cars</strong> for South Indian travel. Transparent custom quotes, clean vehicles, and direct coordination from our central Madurai depot.
           </p>
 
           {/* Quick Action Buttons */}
@@ -376,7 +376,7 @@ export default function VehiclesPage() {
                 WhatsApp Quotation
               </h4>
               <p className="text-xs text-[var(--color-ink-300)] leading-relaxed">
-                Receive transparent journey quotes, driver details, and itinerary assistance within minutes on WhatsApp.
+                Receive transparent journey quotes and itinerary assistance on WhatsApp.
               </p>
             </div>
 
@@ -388,7 +388,7 @@ export default function VehiclesPage() {
                 Confirmed Doorstep Dispatch
               </h4>
               <p className="text-xs text-[var(--color-ink-300)] leading-relaxed">
-                Your clean, sanitized vehicle and driver arrive promptly at your Madurai doorstep.
+                Your clean, prepared vehicle arrives at your Madurai pickup location.
               </p>
             </div>
           </div>
