@@ -21,7 +21,7 @@ export function HeroSection() {
             Origin: Madurai
           </span>
           <span className="text-xs font-mono text-[var(--color-ink-700)] font-bold tracking-wider">
-            TAMIL NADU • KERALA • KARNATAKA • ANDHRA PRADESH
+            TAMIL NADU • KERALA • KARNATAKA • ANDHRA PRADESH • TELANGANA
           </span>
         </div>
 

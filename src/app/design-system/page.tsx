@@ -387,8 +387,8 @@ export default function DesignSystemPage() {
                   },
                   {
                     id: 'acc-2',
-                    title: 'Are mountain ghat drivers experienced with South Indian routes?',
-                    content: 'Yes, all our drivers have years of driving experience across Western Ghats passes including Bodi Mettu, Kodaikanal Ghats, and Nilgiris.',
+                    title: 'Are vehicle-with-driver services available for mountain ghat routes?',
+                    content: 'Yes, our vehicle-with-driver services operate across Western Ghats routes including Bodi Mettu, Kodaikanal Ghats, and Nilgiris.',
                   },
                 ]}
               />

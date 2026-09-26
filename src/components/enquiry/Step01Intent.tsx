@@ -44,7 +44,7 @@ export function Step01Intent({ selectedIntent, onSelect, onNext }: Step01IntentP
     {
       id: 'college',
       label: 'College / Industrial Visit (IV)',
-      description: 'Student batch tours and educational excursions with seasoned highway drivers.',
+      description: 'Student batch tours and educational excursions with vehicle and driver arrangements.',
       icon: <GraduationCap className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
     },
     {

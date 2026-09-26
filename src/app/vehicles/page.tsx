@@ -139,7 +139,7 @@ export default function VehiclesPage() {
             Vehicle Rental Services in Madurai
           </h1>
           <p className="type-body-large text-[var(--text-secondary)] leading-relaxed">
-            Rent our verified commercial <strong>21-Seater AC passenger vans</strong> and <strong>private sedan cars</strong> with South Indian highway drivers. Transparent per-kilometer billing, spotless hygiene, and prompt dispatch from our central Madurai depot.
+            Rent our verified commercial <strong>21-Seater AC passenger vans</strong> and <strong>private sedan cars</strong> with South Indian highway drivers. Transparent custom quotes, spotless hygiene, and prompt dispatch from our central Madurai depot.
           </p>
 
           {/* Quick Action Buttons */}

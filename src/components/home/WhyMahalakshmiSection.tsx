@@ -12,7 +12,7 @@ export function WhyMahalakshmiSection() {
       value: '01',
       unit: 'HQ',
       sublabel: 'MADURAI CENTRAL DEPOT',
-      description: 'Centrally based in Madurai, coordinating departures, pickups, and driver allocations directly without middlemen.',
+      description: 'Centrally based in Madurai, coordinating departures, pickups, and vehicle-with-driver services directly without middlemen.',
     },
     {
       value: '05',

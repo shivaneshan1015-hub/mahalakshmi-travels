@@ -28,7 +28,7 @@ export function Footer() {
             </div>
 
             <p className="type-body-small text-[#94A3B8] mt-2 max-w-sm leading-relaxed">
-              Curated short-format journeys and dedicated group transportation originating from Madurai across Tamil Nadu, Kerala, Karnataka, and Andhra Pradesh.
+              Curated short-format journeys and dedicated group transportation originating from Madurai across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.
             </p>
 
             <div className="mt-6 pt-4 border-t border-[#1E293B] text-xs text-[#94A3B8] space-y-2">
@@ -39,10 +39,19 @@ export function Footer() {
                 {siteConfig.contact.address.fullAddress}
               </p>
               
-              <div className="flex flex-wrap items-center gap-4 pt-1">
+              <div className="flex flex-col gap-1.5 pt-2 text-[#CBD5E1]">
+                <p>
+                  <strong className="text-[#94A3B8]">Business Hours:</strong> {siteConfig.businessHours.display} (Office)
+                </p>
+                <p>
+                  <strong className="text-[#94A3B8]">Email:</strong> {siteConfig.contact.email}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4 pt-2">
                 <a
                   href={`tel:${siteConfig.contact.phoneRaw}`}
-                  className="inline-flex items-center gap-1.5 text-[#F59E0B] hover:text-[#FFFFFF] font-mono font-bold transition-colors"
+                  className="inline-flex items-center gap-1.5 text-[#F59E0B] hover:text-[#FFFFFF] font-mono font-bold transition-colors text-sm"
                 >
                   <Phone className="w-3.5 h-3.5" />
                   <span>{siteConfig.contact.phonePrimary}</span>

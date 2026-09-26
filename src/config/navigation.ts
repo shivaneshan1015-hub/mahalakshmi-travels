@@ -9,11 +9,12 @@ export interface NavItem {
 }
 
 export const mainNavItems: NavItem[] = [
-  { label: 'Tour Packages', href: '/tours' },
-  { label: 'Vehicle Rental Services', href: '/vehicles' },
-  { label: 'Plan Your Journey', href: '/plan-your-journey' },
+  { label: 'Home', href: '/' },
+  { label: 'Vehicle Rental', href: '/vehicles' },
+  { label: 'Tours', href: '/tours' },
+  { label: 'Custom Journeys', href: '/plan-your-journey' },
   { label: 'Travel Guide', href: '/travel-guide' },
-  { label: 'About Us', href: '/about' },
+  { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];
 

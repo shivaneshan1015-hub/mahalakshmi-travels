@@ -41,7 +41,7 @@ export default function NotFound() {
           </Link>
           <Link href="/plan-your-journey">
             <Button
-              variant="paper-outline"
+              variant="ink-solid"
               size="md"
               icon={<Navigation className="w-4 h-4" />}
               iconPosition="left"

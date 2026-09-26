@@ -133,7 +133,7 @@ export default async function CustomerItineraryPage(props: {
         day: 'Day 01',
         title: `Madurai Departure & Journey to ${enquiry.destinations[0] || 'Destination'}`,
         description:
-          'Dedicated pickup by your verified Mahalakshmi driver. Comfortable highway and ghat road travel with scenic rest stops. Hotel check-in and evening local sightseeing.',
+          'Dedicated pickup by your Mahalakshmi vehicle and driver. Comfortable highway and ghat road travel with scenic rest stops. Hotel check-in and evening local sightseeing.',
       },
       {
         day: 'Day 02',

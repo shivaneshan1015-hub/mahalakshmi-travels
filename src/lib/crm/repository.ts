@@ -85,7 +85,7 @@ const initialEnquiries: CrmEnquiry[] = [
     vehicleRequirement: '21-seater-van',
     assignedVehicle: '21-Seater Executive Coach (AC)',
     assignedDriver: 'M. Pandian (Driver ID: MP-04)',
-    notes: 'KLN College final year department tour. Need experienced hill-station driver.',
+    notes: 'KLN College final year department tour. Need vehicle and driver for hill-station route.',
     name: 'V. Vignesh (Class Rep)',
     phone: '+91 97890 12345',
     email: 'vignesh.mech@klnce.edu',

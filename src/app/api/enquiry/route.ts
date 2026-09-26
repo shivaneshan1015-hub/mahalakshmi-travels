@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
       ...sanitizedEnquiry,
       referenceCode,
       status: 'NEW_ENQUIRY',
-      priority: 'HOT',
+      priority: 'WARM',
       attribution: {
         source,
         utm_source: rawBody.utm_source || 'website_direct',

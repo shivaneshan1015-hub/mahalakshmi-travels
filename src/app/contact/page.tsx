@@ -86,7 +86,7 @@ export default function ContactPage() {
             <div className="mt-3 pt-3 border-t border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
                 <Clock className="w-3.5 h-3.5 text-[var(--color-terracotta-500)]" />
-                <span>Desk Hours: Monday – Sunday • 6:00 AM – 10:00 PM</span>
+                <span>Desk Hours: Monday – Sunday • 9:00 AM – 7:00 PM</span>
               </div>
               <a
                 href={siteConfig.contact.googleMapsUrl}

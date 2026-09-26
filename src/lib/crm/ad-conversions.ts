@@ -51,7 +51,7 @@ export async function sendMetaConversionEvent(payload: MetaConversionPayload) {
               },
               custom_data: {
                 currency: 'INR',
-                value: payload.value || payload.leadData.quotedAmount || payload.leadData.estimatedValue || 25000,
+                value: payload.value || payload.leadData.quotedAmount || payload.leadData.estimatedValue || undefined,
                 content_name: payload.leadData.destinations.join(' - '),
                 content_category: payload.leadData.intent,
               },
@@ -77,7 +77,7 @@ export function buildGoogleOfflineConversion(lead: CrmEnquiry) {
     gclid: lead.attribution?.gclid,
     conversionAction: 'customers/1234567890/conversionActions/confirmed_tour_booking',
     conversionDateTime: new Date().toISOString().replace('T', ' ').substring(0, 19) + '+05:30',
-    conversionValue: lead.quotedAmount || lead.estimatedValue || 35000,
+    conversionValue: lead.quotedAmount || lead.estimatedValue || undefined,
     currencyCode: 'INR',
     orderId: lead.referenceCode,
   };
