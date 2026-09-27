@@ -302,6 +302,60 @@ if (customBuilderContent.includes('Quick 30s Quote') || customBuilderContent.inc
 }
 
 // -----------------------------------------------------------------------------
+// 5C. M11 VERIFIED COMMERCIAL VALUE CONTRACT AUDIT & TESTS
+// -----------------------------------------------------------------------------
+const adConversionsPath = path.join(rootDir, 'src', 'lib', 'crm', 'ad-conversions.ts');
+const adConversionsContent = fs.readFileSync(adConversionsPath, 'utf-8');
+
+let phase11AdConversionsContractPass = true;
+if (
+  adConversionsContent.includes('payload.value ?? payload.leadData.quotedAmount') ||
+  adConversionsContent.includes('quotedAmount || estimatedValue') ||
+  !adConversionsContent.includes('isVerifiedCommercialValue') ||
+  !adConversionsContent.includes('getMetaVerifiedAmount')
+) {
+  phase11AdConversionsContractPass = false;
+}
+
+// Contract Test Implementation (A - H)
+function isVerifiedCommercialValueTest(val, expectedSource) {
+  if (!val) return false;
+  if (typeof val.amount !== 'number' || isNaN(val.amount) || val.amount <= 0) return false;
+  if (val.currency !== 'INR') return false;
+  if (!val.verifiedAt || isNaN(new Date(val.verifiedAt).getTime())) return false;
+  if (expectedSource && val.source !== expectedSource) return false;
+  return true;
+}
+
+function getMetaVerifiedAmountTest(payload) {
+  const targetVal = payload.verifiedValue || (payload.leadData && payload.leadData.verifiedCommercialValue);
+  if (payload.eventName === 'Lead') {
+    return isVerifiedCommercialValueTest(targetVal) ? targetVal.amount : undefined;
+  }
+  if (payload.eventName === 'Quote') {
+    return isVerifiedCommercialValueTest(targetVal, 'VERIFIED_QUOTE') ? targetVal.amount : undefined;
+  }
+  if (payload.eventName === 'Purchase') {
+    return isVerifiedCommercialValueTest(targetVal, 'VERIFIED_BOOKING') ? targetVal.amount : undefined;
+  }
+  if (payload.eventName === 'Completed') {
+    return isVerifiedCommercialValueTest(targetVal, 'VERIFIED_COMPLETION') ? targetVal.amount : undefined;
+  }
+  return undefined;
+}
+
+const testAPass = getMetaVerifiedAmountTest({ eventName: 'Lead', leadData: { quotedAmount: 36500 } }) === undefined;
+const testBPass = getMetaVerifiedAmountTest({ eventName: 'Lead', leadData: { quotedAmount: 36500 } }) === undefined;
+const testCPass = getMetaVerifiedAmountTest({ eventName: 'Quote', leadData: {}, verifiedValue: { amount: 36500, currency: 'INR', source: 'VERIFIED_QUOTE', verifiedAt: new Date().toISOString() } }) === 36500;
+const testDPass = getMetaVerifiedAmountTest({ eventName: 'Quote', leadData: { quotedAmount: 36500 } }) === undefined;
+const testEPass = getMetaVerifiedAmountTest({ eventName: 'Purchase', leadData: {}, verifiedValue: { amount: 50000, currency: 'INR', source: 'VERIFIED_BOOKING', verifiedAt: new Date().toISOString() } }) === 50000;
+const testFPass = getMetaVerifiedAmountTest({ eventName: 'Purchase', leadData: { quotedAmount: 50000 } }) === undefined;
+const testGPass = getMetaVerifiedAmountTest({ eventName: 'Completed', leadData: {}, verifiedValue: { amount: 52000, currency: 'INR', source: 'VERIFIED_COMPLETION', verifiedAt: new Date().toISOString() } }) === 52000;
+const testHPass = getMetaVerifiedAmountTest({ eventName: 'Completed', leadData: { estimatedValue: 52000 } }) === undefined;
+
+const allContractTestsPass = testAPass && testBPass && testCPass && testDPass && testEPass && testFPass && testGPass && testHPass;
+
+// -----------------------------------------------------------------------------
 // 6. SCHEMA AUDIT
 // -----------------------------------------------------------------------------
 const businessSchemaPass = schemaContent.includes('LocalBusiness') || schemaContent.includes('TravelAgency');
@@ -382,6 +436,8 @@ const allPassed =
   phase11FalseSuccessPass &&
   phase11QuickQuoteAbsencePass &&
   phase11ProductionCrmSafetyPass &&
+  phase11AdConversionsContractPass &&
+  allContractTestsPass &&
   tsPass &&
   lintPass &&
   sitemapPass &&

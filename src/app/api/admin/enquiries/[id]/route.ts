@@ -59,7 +59,6 @@ export async function PATCH(
       sendMetaConversionEvent({
         eventName: 'Purchase',
         leadData: updated,
-        value: updated.quotedAmount || updated.estimatedValue || 35000,
       }).catch((err) => console.warn('Meta CAPI purchase notice:', err));
     }
 

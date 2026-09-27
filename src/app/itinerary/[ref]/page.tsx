@@ -58,7 +58,7 @@ export default async function CustomerItineraryPage(props: {
     day: 'numeric',
   }) : 'Flexible Dates';
 
-  const quote = enquiry.quotedAmount || enquiry.estimatedValue || 35000;
+  const quote = enquiry.quotedAmount || enquiry.estimatedValue || 0;
   const advance = enquiry.advanceReceived || 0;
   const balance = Math.max(0, quote - advance);
 

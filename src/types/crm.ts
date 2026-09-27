@@ -25,6 +25,15 @@ export type AdSource =
   | 'phone_call'
   | 'referral';
 
+export type VerifiedCommercialSource = 'VERIFIED_QUOTE' | 'VERIFIED_BOOKING' | 'VERIFIED_COMPLETION';
+
+export interface VerifiedCommercialValue {
+  amount: number;
+  currency: 'INR';
+  source: VerifiedCommercialSource;
+  verifiedAt: string;
+}
+
 export interface ActivityItem {
   id: string;
   timestamp: string;
@@ -57,6 +66,9 @@ export interface CrmEnquiry extends StructuredEnquiry {
   quotedAmount?: number;
   advanceReceived?: number;
   balanceAmount?: number;
+
+  // Verified Commercial Value Contract for Conversion Tracking
+  verifiedCommercialValue?: VerifiedCommercialValue;
   
   // Fulfillment Details
   assignedVehicle?: string; // e.g. "Force Urbania 12S", "Tempo Traveller 21S", "Innova Crysta"

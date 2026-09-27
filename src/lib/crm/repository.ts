@@ -33,6 +33,12 @@ const demoSeedEnquiries: CrmEnquiry[] = [
     quotedAmount: 36500,
     advanceReceived: 10000,
     balanceAmount: 26500,
+    verifiedCommercialValue: {
+      amount: 36500,
+      currency: 'INR',
+      source: 'VERIFIED_QUOTE',
+      verifiedAt: '2026-08-18T10:15:00.000Z',
+    },
     isDemo: true,
     attribution: {
       source: 'google_ads',
@@ -80,6 +86,12 @@ const demoSeedEnquiries: CrmEnquiry[] = [
     quotedAmount: 62000,
     advanceReceived: 20000,
     balanceAmount: 42000,
+    verifiedCommercialValue: {
+      amount: 62000,
+      currency: 'INR',
+      source: 'VERIFIED_BOOKING',
+      verifiedAt: '2026-08-17T14:30:00.000Z',
+    },
     isDemo: true,
     attribution: {
       source: 'meta_ads',
@@ -274,10 +286,39 @@ export class CrmRepository {
     const advance = updates.advanceReceived !== undefined ? updates.advanceReceived : existing.advanceReceived;
     const balance = quote && advance !== undefined ? Math.max(0, quote - advance) : existing.balanceAmount;
 
+    // Verified Commercial Value Contract derivation
+    let verifiedCommercialValue = updates.verifiedCommercialValue || existing.verifiedCommercialValue;
+    if (!updates.verifiedCommercialValue && quote && quote > 0) {
+      const targetStatus = updates.status || existing.status;
+      if (targetStatus === 'PROPOSAL_SENT') {
+        verifiedCommercialValue = {
+          amount: quote,
+          currency: 'INR',
+          source: 'VERIFIED_QUOTE',
+          verifiedAt: now,
+        };
+      } else if (targetStatus === 'BOOKED') {
+        verifiedCommercialValue = {
+          amount: quote,
+          currency: 'INR',
+          source: 'VERIFIED_BOOKING',
+          verifiedAt: now,
+        };
+      } else if (targetStatus === 'COMPLETED') {
+        verifiedCommercialValue = {
+          amount: quote,
+          currency: 'INR',
+          source: 'VERIFIED_COMPLETION',
+          verifiedAt: now,
+        };
+      }
+    }
+
     const updated: CrmEnquiry = {
       ...existing,
       ...updates,
       balanceAmount: balance,
+      verifiedCommercialValue,
       activityLog: newActivity,
       updatedAt: now,
     };
