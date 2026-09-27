@@ -84,7 +84,7 @@ export default function PlanYourJourneyPage() {
             Call or Message Our Madurai Coordinators
           </h3>
           <p className="type-body-small text-[var(--text-secondary)] max-w-md mx-auto mb-6">
-            If you already know your requirements or have urgent dates, contact our travel desk immediately.
+            If you already know your requirements or have urgent dates, contact our travel desk.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">

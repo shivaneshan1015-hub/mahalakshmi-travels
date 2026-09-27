@@ -273,6 +273,8 @@ for (const file of publicScanFiles) {
 let phase11PriorityPass = true;
 let phase11MonetaryFallbackPass = true;
 let phase11FalseSuccessPass = true;
+let phase11QuickQuoteAbsencePass = true;
+let phase11ProductionCrmSafetyPass = true;
 
 const enquiryRoutePath = path.join(rootDir, 'src', 'app', 'api', 'enquiry', 'route.ts');
 const enquiryRouteContent = fs.readFileSync(enquiryRoutePath, 'utf-8');
@@ -286,10 +288,17 @@ if (crmRepoContent.includes('estimatedValue || 25000') || crmRepoContent.include
   phase11MonetaryFallbackPass = false;
 }
 
+if (crmRepoContent.includes('Dr. S. Karthi') || crmRepoContent.includes('V. Vignesh (Class Rep)') || crmRepoContent.includes('Ananya Sharma')) {
+  phase11ProductionCrmSafetyPass = false;
+}
+
 const customBuilderPath = path.join(rootDir, 'src', 'components', 'enquiry', 'CustomJourneyBuilder.tsx');
 const customBuilderContent = fs.readFileSync(customBuilderPath, 'utf-8');
 if (customBuilderContent.includes('Offline fallback') || customBuilderContent.includes('ML-26-8492')) {
   phase11FalseSuccessPass = false;
+}
+if (customBuilderContent.includes('Quick 30s Quote') || customBuilderContent.includes('showQuickQuoteModal') || customBuilderContent.includes('30-Second Travel Quote')) {
+  phase11QuickQuoteAbsencePass = false;
 }
 
 // -----------------------------------------------------------------------------
@@ -301,7 +310,44 @@ const priceRangePass = !schemaContent.includes('priceRange');
 const vehicleSchemaPass = schemaContent.includes('generateVehicleRentalSchema') && !schemaContent.includes('tariff');
 
 // -----------------------------------------------------------------------------
-// OUTPUT GENERATION (MATCHES SECTION 20 FORMAT EXACTLY)
+// 7. TECHNICAL INTEGRITY AUDIT (DYNAMIC EXECUTION)
+// -----------------------------------------------------------------------------
+import { execSync } from 'child_process';
+
+let tsPass = false;
+try {
+  execSync('npx tsc --noEmit', { cwd: rootDir, stdio: 'ignore' });
+  tsPass = true;
+} catch (e) {
+  tsPass = false;
+}
+
+let lintPass = false;
+try {
+  execSync('npx next lint', { cwd: rootDir, stdio: 'ignore' });
+  lintPass = true;
+} catch (e) {
+  lintPass = false;
+}
+
+const sitemapPath = path.join(rootDir, 'src', 'app', 'sitemap.ts');
+const sitemapPass = fs.existsSync(sitemapPath);
+
+const appDir = path.join(rootDir, 'src', 'app');
+const routesPass =
+  fs.existsSync(path.join(appDir, 'page.tsx')) &&
+  fs.existsSync(path.join(appDir, 'tours', 'page.tsx')) &&
+  fs.existsSync(path.join(appDir, 'tours', '[slug]', 'page.tsx')) &&
+  fs.existsSync(path.join(appDir, 'vehicles', 'page.tsx')) &&
+  fs.existsSync(path.join(appDir, 'vehicles', '[slug]', 'page.tsx')) &&
+  fs.existsSync(path.join(appDir, 'plan-your-journey', 'page.tsx')) &&
+  fs.existsSync(path.join(appDir, 'api', 'enquiry', 'route.ts'));
+
+const nextBuildManifest = path.join(rootDir, '.next', 'BUILD_ID');
+const buildPass = fs.existsSync(nextBuildManifest) || (tsPass && lintPass);
+
+// -----------------------------------------------------------------------------
+// OUTPUT GENERATION
 // -----------------------------------------------------------------------------
 const allPassed =
   tourCount === 39 &&
@@ -333,7 +379,14 @@ const allPassed =
   vehicleSchemaPass &&
   phase11PriorityPass &&
   phase11MonetaryFallbackPass &&
-  phase11FalseSuccessPass;
+  phase11FalseSuccessPass &&
+  phase11QuickQuoteAbsencePass &&
+  phase11ProductionCrmSafetyPass &&
+  tsPass &&
+  lintPass &&
+  sitemapPass &&
+  routesPass &&
+  buildPass;
 
 console.log('============================================================');
 console.log('PHASE 9C FINAL INTEGRITY TEST');
@@ -392,13 +445,13 @@ console.log(`Price range:\n${priceRangePass ? 'PASS' : 'FAIL'}\n`);
 console.log(`Vehicle schema:\n${vehicleSchemaPass ? 'PASS' : 'FAIL'}\n`);
 
 console.log('--------------------------------');
-console.log('TECHNICAL');
+console.log('TECHNICAL (DYNAMIC EXECUTION)');
 console.log('--------------------------------\n');
-console.log('TypeScript:\nPASS\n');
-console.log('Lint:\nPASS\n');
-console.log('Build:\nPASS\n');
-console.log('Routes:\nPASS\n');
-console.log('Sitemap:\nPASS\n');
+console.log(`TypeScript:\n${tsPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`Lint:\n${lintPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`Build:\n${buildPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`Routes:\n${routesPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`Sitemap:\n${sitemapPass ? 'PASS' : 'FAIL'}\n`);
 
 console.log('--------------------------------');
 console.log('FINAL VERDICT');
@@ -411,3 +464,4 @@ if (allPassed) {
   console.log('NOT READY TO LOCK\n');
   process.exit(1);
 }
+

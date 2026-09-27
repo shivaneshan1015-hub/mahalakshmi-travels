@@ -52,7 +52,7 @@ export default function ContactPage() {
               Direct Phone Lines
             </h3>
             <p className="text-sm text-[var(--text-secondary)] mb-4">
-              Call our travel coordinators directly for immediate booking confirmations.
+              Call our travel coordinators directly for booking assistance.
             </p>
             <div className="space-y-1 font-mono text-sm font-semibold text-[var(--color-ink-950)]">
               <p>{siteConfig.contact.phonePrimary}</p>

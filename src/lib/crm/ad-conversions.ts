@@ -25,14 +25,16 @@ export async function sendMetaConversionEvent(payload: MetaConversionPayload) {
       success: true,
       simulated: true,
       event: payload.eventName,
-      message: 'Meta CAPI tokens unconfigured. Conversion simulated.',
     };
   }
 
   try {
     const cleanPhone = payload.leadData.phone?.replace(/[^0-9]/g, '');
 
-    const verifiedValue = payload.value ?? payload.leadData.quotedAmount;
+    // For fresh Lead events, do not attach monetary value unless explicitly passed as a verified value
+    const verifiedValue = payload.eventName === 'Lead'
+      ? payload.value
+      : (payload.value ?? payload.leadData.quotedAmount);
 
     const response = await fetch(
       `https://graph.facebook.com/v19.0/${pixelId}/events?access_token=${accessToken}`,

@@ -46,7 +46,7 @@ export default function VehiclesPage() {
   const rentalFaqs = [
     {
       question: 'How do I rent a 21-seater van or sedan car from Mahalakshmi Tours and Travels in Madurai?',
-      answer: 'Booking is quick and straightforward. You can connect with our Madurai travel desk directly via WhatsApp (+91 63801 92145) or phone call. Share your travel dates, pickup location in Madurai, passenger count, and desired route. We will provide a quick journey quote and reserve your vehicle immediately.',
+      answer: 'Booking is straightforward. You can connect with our Madurai travel desk directly via WhatsApp (+91 63801 92145) or phone call. Share your travel dates, pickup location in Madurai, passenger count, and desired route. We will provide a custom journey quote and coordinate your vehicle reservation.',
     },
     {
       question: 'What are the charges for outstation vehicle hire from Madurai?',

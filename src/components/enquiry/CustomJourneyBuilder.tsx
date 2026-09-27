@@ -29,7 +29,6 @@ import { Step05VehicleRequirements } from './Step05VehicleRequirements';
 import { Step06ContactReview } from './Step06ContactReview';
 import { EnquirySuccessCard } from './EnquirySuccessCard';
 import { Button } from '@/components/ui/Button';
-import { Zap, X, Clock, CheckCircle } from 'lucide-react';
 
 export function CustomJourneyBuilder() {
   const searchParams = useSearchParams();
@@ -37,14 +36,6 @@ export function CustomJourneyBuilder() {
   // Master State
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [showQuickQuoteModal, setShowQuickQuoteModal] = useState<boolean>(false);
-  const [quickQuoteSubmitted, setQuickQuoteSubmitted] = useState<boolean>(false);
-  const [quickQuoteData, setQuickQuoteData] = useState({
-    name: '',
-    phone: '',
-    destination: '',
-    passengers: '4-7 Passengers',
-  });
   const [submittedData, setSubmittedData] = useState<{
     enquiry: StructuredEnquiry;
     referenceCode: string;
@@ -229,33 +220,6 @@ export function CustomJourneyBuilder() {
 
   return (
     <div className="max-w-3xl mx-auto relative">
-      {/* Quick-Quote Shortcut Helper Prompt */}
-      <div className="mb-6 px-4 py-3 bg-[var(--color-terracotta-50)] border border-[var(--color-terracotta-200)] rounded-[4px] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-editorial-sm">
-        <div className="flex items-center gap-2 text-xs text-[var(--color-terracotta-800)] font-medium">
-          <Zap className="w-4 h-4 text-[var(--color-terracotta-600)] shrink-0" />
-          <span>In a hurry? Get a direct travel quote without 6 steps:</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setShowQuickQuoteModal(true)}
-            className="text-xs font-semibold text-[var(--color-terracotta-700)] underline hover:text-[var(--color-terracotta-800)] cursor-pointer"
-          >
-            Quick 30s Quote
-          </button>
-          <span className="text-[var(--color-terracotta-300)]">•</span>
-          <a
-            href={getQuickWhatsAppLink('Quick Quote Prompt')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs font-semibold text-[var(--color-terracotta-700)] flex items-center gap-1 hover:text-[var(--color-terracotta-800)]"
-          >
-            <MessageSquare className="w-3.5 h-3.5" />
-            WhatsApp
-          </a>
-        </div>
-      </div>
-
       {/* Route Line Progress Indicator */}
       <JourneyLineProgress
         currentStep={currentStep}
@@ -388,150 +352,6 @@ export function CustomJourneyBuilder() {
           >
             {currentStep === 5 ? 'Review Your Journey' : 'Continue to Next Step'}
           </Button>
-        </div>
-      )}
-
-      {/* Quick 1-Step Quote Modal */}
-      {showQuickQuoteModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-step-enter">
-          <div className="bg-[var(--color-paper-100)] border border-[var(--border-default)] rounded-[4px] p-6 md:p-8 max-w-lg w-full shadow-editorial-lift relative">
-            <button
-              type="button"
-              onClick={() => setShowQuickQuoteModal(false)}
-              className="absolute top-4 right-4 text-[var(--color-ink-600)] hover:text-[var(--color-ink-950)] p-1 cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {!quickQuoteSubmitted ? (
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Zap className="w-4 h-4 text-[var(--color-terracotta-500)]" />
-                  <span className="type-eyebrow text-[var(--color-terracotta-500)]">Fast Callback</span>
-                </div>
-                <h3 className="type-h3 text-[var(--color-ink-950)] mb-2">
-                  Get a 30-Second Travel Quote
-                </h3>
-                <p className="type-body-small text-[var(--text-secondary)] mb-6">
-                  Leave your travel destination and number. Our Madurai travel desk will WhatsApp your itinerary estimate within 15 minutes.
-                </p>
-
-                <form
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    if (!quickQuoteData.phone) return;
-                    setIsSubmitting(true);
-                    try {
-                      const attribution = getStoredAttribution();
-                      await fetch('/api/enquiry', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                          name: quickQuoteData.name || 'Quick Quote Guest',
-                          phone: quickQuoteData.phone,
-                          destinations: [quickQuoteData.destination || 'South India Trip'],
-                          intent: 'custom',
-                          origin: 'Madurai',
-                          notes: `Quick Quote request for ${quickQuoteData.passengers}`,
-                          contactPreference: 'whatsapp',
-                          ...attribution,
-                        }),
-                      });
-                    } catch (err) {
-                      // offline fallback
-                    } finally {
-                      setIsSubmitting(false);
-                      setQuickQuoteSubmitted(true);
-                    }
-                  }}
-                  className="space-y-4"
-                >
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-ink-800)] mb-1">
-                      Your WhatsApp / Phone *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder="e.g. 63801 92145"
-                      value={quickQuoteData.phone}
-                      onChange={(e) => setQuickQuoteData({ ...quickQuoteData, phone: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-[3px] border border-[var(--border-default)] bg-white text-sm focus:outline-none focus:border-[var(--color-terracotta-500)]"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-ink-800)] mb-1">
-                        Destination
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="e.g. Munnar / Ooty"
-                        value={quickQuoteData.destination}
-                        onChange={(e) => setQuickQuoteData({ ...quickQuoteData, destination: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-[3px] border border-[var(--border-default)] bg-white text-sm focus:outline-none focus:border-[var(--color-terracotta-500)]"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold uppercase tracking-wider text-[var(--color-ink-800)] mb-1">
-                        Group Size
-                      </label>
-                      <select
-                        value={quickQuoteData.passengers}
-                        onChange={(e) => setQuickQuoteData({ ...quickQuoteData, passengers: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-[3px] border border-[var(--border-default)] bg-white text-sm focus:outline-none focus:border-[var(--color-terracotta-500)]"
-                      >
-                        <option value="1-4 Passengers">1–4 (Sedan)</option>
-                        <option value="5-7 Passengers">5–7 (Innova/SUV)</option>
-                        <option value="8-14 Passengers">8–14 (Tempo Traveller)</option>
-                        <option value="15-21 Passengers">15–21 (Minibus)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="pt-2 flex flex-col sm:flex-row gap-3">
-                    <Button type="submit" variant="primary" size="md" fullWidth isLoading={isSubmitting}>
-                      Request Quick Callback
-                    </Button>
-                    <a
-                      href={`https://wa.me/916380192145?text=${encodeURIComponent(
-                        `Hi Mahalakshmi Travels, I would like a quick quote for a trip to ${quickQuoteData.destination || 'South India'} (${quickQuoteData.passengers}).`
-                      )}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full"
-                    >
-                      <Button type="button" variant="secondary" size="md" fullWidth icon={<MessageSquare className="w-4 h-4 text-emerald-700" />} iconPosition="left">
-                        Open in WhatsApp
-                      </Button>
-                    </a>
-                  </div>
-                </form>
-              </div>
-            ) : (
-              <div className="text-center py-4">
-                <CheckCircle className="w-12 h-12 text-[var(--color-status-success)] mx-auto mb-3" />
-                <h4 className="type-h3 text-[var(--color-ink-950)] mb-2">
-                  Callback Request Received!
-                </h4>
-                <p className="type-body-small text-[var(--text-secondary)] mb-6">
-                  Our Madurai travel coordinator will reach out on WhatsApp ({quickQuoteData.phone}) shortly.
-                </p>
-                <Button
-                  type="button"
-                  variant="primary"
-                  size="md"
-                  onClick={() => {
-                    setShowQuickQuoteModal(false);
-                    setQuickQuoteSubmitted(false);
-                  }}
-                >
-                  Done
-                </Button>
-              </div>
-            )}
-          </div>
         </div>
       )}
     </div>
