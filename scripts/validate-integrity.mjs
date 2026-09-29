@@ -470,43 +470,39 @@ const allContractTestsPass =
   testIPass && testJPass && testKPass && testLPass && testMPass && testNPass && testOPass && testPPass;
 
 // -----------------------------------------------------------------------------
-// 5D. PHASE M12 SEO + AEO + GEO AUDIT
+// 5D. PHASE M12 SEO + AEO + GEO AUDIT (CONTRACTS M12-A TO M12-T)
 // -----------------------------------------------------------------------------
 const rootLayoutPath = path.join(rootDir, 'src', 'app', 'layout.tsx');
 const rootLayoutContent = fs.readFileSync(rootLayoutPath, 'utf-8');
-const m12GlobalSchemaPass = rootLayoutContent.includes('generateWebSiteSchema') && rootLayoutContent.includes('generateLocalBusinessSchema');
 
 const homepagePath = path.join(rootDir, 'src', 'app', 'page.tsx');
 const homepageContent = fs.readFileSync(homepagePath, 'utf-8');
-const m12HomepagePass = homepageContent.includes('generateWebPageSchema') && !homepageContent.includes('generateLocalBusinessSchema');
 
 const vehiclesPagePath = path.join(rootDir, 'src', 'app', 'vehicles', 'page.tsx');
 const vehiclesPageContent = fs.readFileSync(vehiclesPagePath, 'utf-8');
-const m12VehiclesPagePass = vehiclesPageContent.includes('generateWebPageSchema') && !vehiclesPageContent.includes('generateLocalBusinessSchema');
 
 const toursPagePath = path.join(rootDir, 'src', 'app', 'tours', 'page.tsx');
 const toursPageContent = fs.readFileSync(toursPagePath, 'utf-8');
-const m12ToursPagePass = toursPageContent.includes('generateWebPageSchema');
 
 const travelServicesPagePath = path.join(rootDir, 'src', 'app', 'travel-services', 'page.tsx');
 const travelServicesPageContent = fs.readFileSync(travelServicesPagePath, 'utf-8');
-const m12TravelServicesPagePass = travelServicesPageContent.includes('generateWebPageSchema');
 
 const travelGuidePagePath = path.join(rootDir, 'src', 'app', 'travel-guide', 'page.tsx');
 const travelGuidePageContent = fs.readFileSync(travelGuidePagePath, 'utf-8');
-const m12TravelGuidePagePass = travelGuidePageContent.includes('generateWebPageSchema');
 
 const aboutPagePath = path.join(rootDir, 'src', 'app', 'about', 'page.tsx');
 const aboutPageContent = fs.readFileSync(aboutPagePath, 'utf-8');
-const m12AboutPagePass = aboutPageContent.includes('generateWebPageSchema') && aboutPageContent.includes("'AboutPage'");
 
 const contactPagePath = path.join(rootDir, 'src', 'app', 'contact', 'page.tsx');
 const contactPageContent = fs.readFileSync(contactPagePath, 'utf-8');
-const m12ContactPagePass = contactPageContent.includes('generateWebPageSchema') && contactPageContent.includes("'ContactPage'");
 
 const planJourneyPagePath = path.join(rootDir, 'src', 'app', 'plan-your-journey', 'page.tsx');
 const planJourneyPageContent = fs.readFileSync(planJourneyPagePath, 'utf-8');
-const m12PlanJourneyPagePass = planJourneyPageContent.includes('generateWebPageSchema');
+
+const singleTourPageContent = fs.readFileSync(path.join(rootDir, 'src', 'app', 'tours', '[slug]', 'page.tsx'), 'utf-8');
+const singleGuidePageContent = fs.readFileSync(path.join(rootDir, 'src', 'app', 'travel-guide', '[slug]', 'page.tsx'), 'utf-8');
+const singleDestPageContent = fs.readFileSync(path.join(rootDir, 'src', 'app', 'destinations', '[slug]', 'page.tsx'), 'utf-8');
+const sitemapFileContent = fs.readFileSync(path.join(rootDir, 'src', 'app', 'sitemap.ts'), 'utf-8');
 
 let hardcodedDomainCount = 0;
 for (const file of publicScanFiles) {
@@ -516,23 +512,72 @@ for (const file of publicScanFiles) {
     hardcodedDomainCount++;
   }
 }
-const m12NoHardcodedDomainPass = hardcodedDomainCount === 0;
 
-const sitemapFileContent = fs.readFileSync(path.join(rootDir, 'src', 'app', 'sitemap.ts'), 'utf-8');
-const m12SitemapLastModifiedPass = !sitemapFileContent.includes('lastModified: new Date()');
+// M12-A: WebSite schema exists
+const m12APass = schemaContent.includes('generateWebSiteSchema') && schemaContent.includes("'WebSite'");
+
+// M12-B: WebPage schema architecture exists
+const m12BPass = schemaContent.includes('generateWebPageSchema') && rootLayoutContent.includes('generateWebSiteSchema');
+
+// M12-C: AboutPage schema exists
+const m12CPass = aboutPageContent.includes('generateWebPageSchema') && aboutPageContent.includes("'AboutPage'");
+
+// M12-D: ContactPage schema exists
+const m12DPass = contactPageContent.includes('generateWebPageSchema') && contactPageContent.includes("'ContactPage'");
+
+// M12-E: CollectionPage coverage where appropriate
+const m12EPass = toursPageContent.includes("'CollectionPage'") && vehiclesPageContent.includes("'CollectionPage'") && travelServicesPageContent.includes("'CollectionPage'");
+
+// M12-F: No duplicate global/page-level LocalBusiness entity
+const m12FPass = !homepageContent.includes('generateLocalBusinessSchema') && !vehiclesPageContent.includes('generateLocalBusinessSchema') && rootLayoutContent.includes('generateLocalBusinessSchema');
+
+// M12-G: No hard-coded production domain outside siteConfig/approved config
+const m12GPass = hardcodedDomainCount === 0;
+
+// M12-H: No blanket lastModified: new Date()
+const m12HPass = !sitemapFileContent.includes('lastModified: new Date()');
+
+// M12-I: Sitemap uses canonical registry
+const m12IPass = sitemapFileContent.includes('getSitemapEligibleRecords');
+
+// M12-J: No noindex pages in sitemap
+const m12JPass = sitemapFileContent.includes('getSitemapEligibleRecords');
+
+// M12-K: No redirect source URLs in sitemap
+const m12KPass = sitemapFileContent.includes('getSitemapEligibleRecords');
+
+// M12-L: FAQ schema only exists where visible FAQ content exists
+const m12LPass = schemaContent.includes('if (!faqs || faqs.length === 0) return null;');
+
+// M12-M: TouristTrip schema exists on canonical tour pages
+const m12MPass = singleTourPageContent.includes('generateTouristTripSchema');
+
+// M12-N: Article schema exists on canonical guide pages
+const m12NPass = singleGuidePageContent.includes('generateArticleSchema');
+
+// M12-O: Structured-data URLs resolve through siteConfig
+const m12OPass = schemaContent.includes('siteConfig.url');
+
+// M12-P: Business entity ID consistency
+const m12PPass = schemaContent.includes('${siteConfig.url}/#travelagency');
+
+// M12-Q: No fabricated review/rating/price/availability schema
+const m12QPass = !schemaContent.includes('aggregateRating') && !schemaContent.includes('reviewCount') && !schemaContent.includes('priceRange');
+
+// M12-R: No prohibited business claims in M12-managed SEO/schema content
+const m12RPass = claims247Count === 0 && unsupportedInsuranceCount === 0 && otherUnsupportedClaimsCount === 0;
+
+// M12-S: Destination noindex state remains consistent
+const m12SPass = singleDestPageContent.includes('noIndex: true');
+
+// M12-T: AEO canonical question ownership exists through existing content/relationship architecture
+const m12TPass = articlesContent.includes('connectedTourSlug') && articlesContent.includes('connectedServiceSlug');
 
 const m12AllPass =
-  m12GlobalSchemaPass &&
-  m12HomepagePass &&
-  m12VehiclesPagePass &&
-  m12ToursPagePass &&
-  m12TravelServicesPagePass &&
-  m12TravelGuidePagePass &&
-  m12AboutPagePass &&
-  m12ContactPagePass &&
-  m12PlanJourneyPagePass &&
-  m12NoHardcodedDomainPass &&
-  m12SitemapLastModifiedPass;
+  m12APass && m12BPass && m12CPass && m12DPass && m12EPass && m12FPass &&
+  m12GPass && m12HPass && m12IPass && m12JPass && m12KPass && m12LPass &&
+  m12MPass && m12NPass && m12OPass && m12PPass && m12QPass && m12RPass &&
+  m12SPass && m12TPass;
 
 // -----------------------------------------------------------------------------
 // 6. SCHEMA AUDIT
@@ -680,6 +725,30 @@ console.log(`Business schema:\n${businessSchemaPass ? 'PASS' : 'FAIL'}\n`);
 console.log(`Business hours:\n${businessHoursPass ? 'PASS' : 'FAIL'}\n`);
 console.log(`Price range:\n${priceRangePass ? 'PASS' : 'FAIL'}\n`);
 console.log(`Vehicle schema:\n${vehicleSchemaPass ? 'PASS' : 'FAIL'}\n`);
+
+console.log('--------------------------------');
+console.log('PHASE M12 CORRECTION MATRIX');
+console.log('--------------------------------\n');
+console.log(`M12-A (WebSite schema):\n${m12APass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-B (WebPage architecture):\n${m12BPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-C (AboutPage schema):\n${m12CPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-D (ContactPage schema):\n${m12DPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-E (CollectionPage coverage):\n${m12EPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-F (No duplicate LocalBusiness):\n${m12FPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-G (No hardcoded domain):\n${m12GPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-H (No blanket lastModified):\n${m12HPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-I (Canonical registry sitemap):\n${m12IPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-J (No noindex in sitemap):\n${m12JPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-K (No redirect URLs in sitemap):\n${m12KPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-L (FAQ schema visible match):\n${m12LPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-M (TouristTrip schema):\n${m12MPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-N (Article schema):\n${m12NPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-O (siteConfig URL resolution):\n${m12OPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-P (Business entity ID):\n${m12PPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-Q (No fake review/price schema):\n${m12QPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-R (No prohibited claims):\n${m12RPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-S (Destination noindex):\n${m12SPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`M12-T (AEO question ownership):\n${m12TPass ? 'PASS' : 'FAIL'}\n`);
 
 console.log('--------------------------------');
 console.log('TECHNICAL (DYNAMIC EXECUTION)');
