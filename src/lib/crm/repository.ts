@@ -217,6 +217,7 @@ export class CrmRepository {
       quotedAmount: payload.quotedAmount,
       advanceReceived: payload.advanceReceived || 0,
       balanceAmount: payload.balanceAmount,
+      verifiedCommercialValue: payload.verifiedCommercialValue,
       assignedVehicle: payload.assignedVehicle,
       assignedDriver: payload.assignedDriver,
       attribution: payload.attribution || {
@@ -286,33 +287,14 @@ export class CrmRepository {
     const advance = updates.advanceReceived !== undefined ? updates.advanceReceived : existing.advanceReceived;
     const balance = quote && advance !== undefined ? Math.max(0, quote - advance) : existing.balanceAmount;
 
-    // Verified Commercial Value Contract derivation
-    let verifiedCommercialValue = updates.verifiedCommercialValue || existing.verifiedCommercialValue;
-    if (!updates.verifiedCommercialValue && quote && quote > 0) {
-      const targetStatus = updates.status || existing.status;
-      if (targetStatus === 'PROPOSAL_SENT') {
-        verifiedCommercialValue = {
-          amount: quote,
-          currency: 'INR',
-          source: 'VERIFIED_QUOTE',
-          verifiedAt: now,
-        };
-      } else if (targetStatus === 'BOOKED') {
-        verifiedCommercialValue = {
-          amount: quote,
-          currency: 'INR',
-          source: 'VERIFIED_BOOKING',
-          verifiedAt: now,
-        };
-      } else if (targetStatus === 'COMPLETED') {
-        verifiedCommercialValue = {
-          amount: quote,
-          currency: 'INR',
-          source: 'VERIFIED_COMPLETION',
-          verifiedAt: now,
-        };
-      }
-    }
+    // Verified Commercial Value Contract derivation:
+    // MUST ONLY BE populated when explicitly provided in updates.
+    // Status changes alone (PROPOSAL_SENT, BOOKED, COMPLETED) or quotedAmount changes alone
+    // MUST NEVER automatically manufacture or modify verifiedCommercialValue.
+    const verifiedCommercialValue =
+      updates.verifiedCommercialValue !== undefined
+        ? updates.verifiedCommercialValue
+        : existing.verifiedCommercialValue;
 
     const updated: CrmEnquiry = {
       ...existing,

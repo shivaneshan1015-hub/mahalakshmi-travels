@@ -275,6 +275,7 @@ let phase11MonetaryFallbackPass = true;
 let phase11FalseSuccessPass = true;
 let phase11QuickQuoteAbsencePass = true;
 let phase11ProductionCrmSafetyPass = true;
+let phase11StatusManufacturePass = true;
 
 const enquiryRoutePath = path.join(rootDir, 'src', 'app', 'api', 'enquiry', 'route.ts');
 const enquiryRouteContent = fs.readFileSync(enquiryRoutePath, 'utf-8');
@@ -286,6 +287,17 @@ const crmRepoPath = path.join(rootDir, 'src', 'lib', 'crm', 'repository.ts');
 const crmRepoContent = fs.readFileSync(crmRepoPath, 'utf-8');
 if (crmRepoContent.includes('estimatedValue || 25000') || crmRepoContent.includes("priority || 'HOT'")) {
   phase11MonetaryFallbackPass = false;
+}
+
+// Hardening check: Status changes alone MUST NOT manufacture verifiedCommercialValue
+if (
+  crmRepoContent.includes("targetStatus === 'PROPOSAL_SENT'") ||
+  crmRepoContent.includes("targetStatus === 'BOOKED'") ||
+  crmRepoContent.includes("targetStatus === 'COMPLETED'") ||
+  crmRepoContent.includes('!updates.verifiedCommercialValue && quote') ||
+  crmRepoContent.includes('!updates.verifiedCommercialValue && quote && quote > 0')
+) {
+  phase11StatusManufacturePass = false;
 }
 
 if (crmRepoContent.includes('Dr. S. Karthi') || crmRepoContent.includes('V. Vignesh (Class Rep)') || crmRepoContent.includes('Ananya Sharma')) {
@@ -302,7 +314,7 @@ if (customBuilderContent.includes('Quick 30s Quote') || customBuilderContent.inc
 }
 
 // -----------------------------------------------------------------------------
-// 5C. M11 VERIFIED COMMERCIAL VALUE CONTRACT AUDIT & TESTS
+// 5C. M11 VERIFIED COMMERCIAL VALUE CONTRACT AUDIT & TESTS (A - P)
 // -----------------------------------------------------------------------------
 const adConversionsPath = path.join(rootDir, 'src', 'lib', 'crm', 'ad-conversions.ts');
 const adConversionsContent = fs.readFileSync(adConversionsPath, 'utf-8');
@@ -344,16 +356,118 @@ function getMetaVerifiedAmountTest(payload) {
   return undefined;
 }
 
+function updateEnquiryTest(existing, updates) {
+  const quote = updates.quotedAmount !== undefined ? updates.quotedAmount : existing.quotedAmount;
+  const advance = updates.advanceReceived !== undefined ? updates.advanceReceived : existing.advanceReceived;
+  const balance = quote && advance !== undefined ? Math.max(0, quote - advance) : existing.balanceAmount;
+  const verifiedCommercialValue =
+    updates.verifiedCommercialValue !== undefined
+      ? updates.verifiedCommercialValue
+      : existing.verifiedCommercialValue;
+
+  return {
+    ...existing,
+    ...updates,
+    balanceAmount: balance,
+    verifiedCommercialValue,
+  };
+}
+
+// A. Lead with quotedAmount only → undefined monetary value
 const testAPass = getMetaVerifiedAmountTest({ eventName: 'Lead', leadData: { quotedAmount: 36500 } }) === undefined;
-const testBPass = getMetaVerifiedAmountTest({ eventName: 'Lead', leadData: { quotedAmount: 36500 } }) === undefined;
-const testCPass = getMetaVerifiedAmountTest({ eventName: 'Quote', leadData: {}, verifiedValue: { amount: 36500, currency: 'INR', source: 'VERIFIED_QUOTE', verifiedAt: new Date().toISOString() } }) === 36500;
+
+// B. Lead with an explicitly unverified quotedAmount → undefined monetary value
+const testBPass = getMetaVerifiedAmountTest({
+  eventName: 'Lead',
+  leadData: {
+    quotedAmount: 36500,
+    verifiedCommercialValue: { amount: 0, currency: 'INR', source: 'VERIFIED_QUOTE', verifiedAt: 'invalid' },
+  },
+}) === undefined;
+
+// C. Verified Quote → verified amount returned
+const testCPass = getMetaVerifiedAmountTest({
+  eventName: 'Quote',
+  leadData: {},
+  verifiedValue: { amount: 36500, currency: 'INR', source: 'VERIFIED_QUOTE', verifiedAt: new Date().toISOString() },
+}) === 36500;
+
+// D. Quote with quotedAmount only → undefined
 const testDPass = getMetaVerifiedAmountTest({ eventName: 'Quote', leadData: { quotedAmount: 36500 } }) === undefined;
-const testEPass = getMetaVerifiedAmountTest({ eventName: 'Purchase', leadData: {}, verifiedValue: { amount: 50000, currency: 'INR', source: 'VERIFIED_BOOKING', verifiedAt: new Date().toISOString() } }) === 50000;
+
+// E. Verified Booking → verified amount returned
+const testEPass = getMetaVerifiedAmountTest({
+  eventName: 'Purchase',
+  leadData: {},
+  verifiedValue: { amount: 50000, currency: 'INR', source: 'VERIFIED_BOOKING', verifiedAt: new Date().toISOString() },
+}) === 50000;
+
+// F. Booking with quotedAmount only → undefined
 const testFPass = getMetaVerifiedAmountTest({ eventName: 'Purchase', leadData: { quotedAmount: 50000 } }) === undefined;
-const testGPass = getMetaVerifiedAmountTest({ eventName: 'Completed', leadData: {}, verifiedValue: { amount: 52000, currency: 'INR', source: 'VERIFIED_COMPLETION', verifiedAt: new Date().toISOString() } }) === 52000;
+
+// G. Verified Completion → verified amount returned
+const testGPass = getMetaVerifiedAmountTest({
+  eventName: 'Completed',
+  leadData: {},
+  verifiedValue: { amount: 52000, currency: 'INR', source: 'VERIFIED_COMPLETION', verifiedAt: new Date().toISOString() },
+}) === 52000;
+
+// H. Completed with estimatedValue only → undefined
 const testHPass = getMetaVerifiedAmountTest({ eventName: 'Completed', leadData: { estimatedValue: 52000 } }) === undefined;
 
-const allContractTestsPass = testAPass && testBPass && testCPass && testDPass && testEPass && testFPass && testGPass && testHPass;
+// I. quotedAmount + PROPOSAL_SENT → verifiedCommercialValue remains undefined
+const testIPass = updateEnquiryTest({ status: 'NEW_ENQUIRY' }, { quotedAmount: 35000, status: 'PROPOSAL_SENT' }).verifiedCommercialValue === undefined;
+
+// J. quotedAmount + BOOKED → verifiedCommercialValue remains undefined
+const testJPass = updateEnquiryTest({ status: 'NEW_ENQUIRY' }, { quotedAmount: 35000, status: 'BOOKED' }).verifiedCommercialValue === undefined;
+
+// K. quotedAmount + COMPLETED → verifiedCommercialValue remains undefined
+const testKPass = updateEnquiryTest({ status: 'NEW_ENQUIRY' }, { quotedAmount: 35000, status: 'COMPLETED' }).verifiedCommercialValue === undefined;
+
+// L. explicit VERIFIED_QUOTE update → verifiedCommercialValue is stored
+const testLPass = (() => {
+  const res = updateEnquiryTest(
+    { status: 'NEW_ENQUIRY' },
+    { status: 'PROPOSAL_SENT', verifiedCommercialValue: { amount: 35000, currency: 'INR', source: 'VERIFIED_QUOTE', verifiedAt: '2026-09-29T10:00:00.000Z' } }
+  );
+  return res.verifiedCommercialValue?.amount === 35000 && res.verifiedCommercialValue?.source === 'VERIFIED_QUOTE';
+})();
+
+// M. explicit VERIFIED_BOOKING update → verifiedCommercialValue is stored
+const testMPass = (() => {
+  const res = updateEnquiryTest(
+    { status: 'NEW_ENQUIRY' },
+    { status: 'BOOKED', verifiedCommercialValue: { amount: 50000, currency: 'INR', source: 'VERIFIED_BOOKING', verifiedAt: '2026-09-29T10:00:00.000Z' } }
+  );
+  return res.verifiedCommercialValue?.amount === 50000 && res.verifiedCommercialValue?.source === 'VERIFIED_BOOKING';
+})();
+
+// N. explicit VERIFIED_COMPLETION update → verifiedCommercialValue is stored
+const testNPass = (() => {
+  const res = updateEnquiryTest(
+    { status: 'NEW_ENQUIRY' },
+    { status: 'COMPLETED', verifiedCommercialValue: { amount: 55000, currency: 'INR', source: 'VERIFIED_COMPLETION', verifiedAt: '2026-09-29T10:00:00.000Z' } }
+  );
+  return res.verifiedCommercialValue?.amount === 55000 && res.verifiedCommercialValue?.source === 'VERIFIED_COMPLETION';
+})();
+
+// O. existing VERIFIED_BOOKING + unrelated status/notes update → verified value remains intact
+const testOPass = (() => {
+  const existing = { status: 'BOOKED', verifiedCommercialValue: { amount: 50000, currency: 'INR', source: 'VERIFIED_BOOKING', verifiedAt: '2026-09-29T10:00:00.000Z' } };
+  const res = updateEnquiryTest(existing, { status: 'COMPLETED', internalNotes: 'Trip completed safely' });
+  return res.verifiedCommercialValue?.amount === 50000 && res.verifiedCommercialValue?.source === 'VERIFIED_BOOKING';
+})();
+
+// P. quotedAmount changed after an existing verified value → verified value must not silently change
+const testPPass = (() => {
+  const existing = { status: 'BOOKED', quotedAmount: 50000, verifiedCommercialValue: { amount: 50000, currency: 'INR', source: 'VERIFIED_BOOKING', verifiedAt: '2026-09-29T10:00:00.000Z' } };
+  const res = updateEnquiryTest(existing, { quotedAmount: 65000 });
+  return res.verifiedCommercialValue?.amount === 50000 && res.verifiedCommercialValue?.source === 'VERIFIED_BOOKING';
+})();
+
+const allContractTestsPass =
+  testAPass && testBPass && testCPass && testDPass && testEPass && testFPass && testGPass && testHPass &&
+  testIPass && testJPass && testKPass && testLPass && testMPass && testNPass && testOPass && testPPass;
 
 // -----------------------------------------------------------------------------
 // 6. SCHEMA AUDIT
@@ -433,6 +547,7 @@ const allPassed =
   vehicleSchemaPass &&
   phase11PriorityPass &&
   phase11MonetaryFallbackPass &&
+  phase11StatusManufacturePass &&
   phase11FalseSuccessPass &&
   phase11QuickQuoteAbsencePass &&
   phase11ProductionCrmSafetyPass &&
