@@ -620,7 +620,7 @@ export const mockTours: Tour[] = [
     relatedArticles: [],
     seo: {
       title: 'Madurai to Ooty Tour (1N/2D) | Mahalakshmi Tours and Travels',
-      description: 'Book 1 Night / 2 Days Ooty & Coonoor tour from Madurai. Best package for family and group travellers.',
+      description: 'Book 1 Night / 2 Days Ooty & Coonoor tour from Madurai. Tour package for family and group travellers.',
       keywords: ['madurai to ooty package', 'ooty 2 days trip from madurai', 'ooty van hire'],
       canonicalUrl: `${siteConfig.url}/tours/ooty`,
     },

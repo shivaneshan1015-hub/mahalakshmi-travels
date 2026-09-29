@@ -349,7 +349,7 @@ Mahalakshmi provides formal trip estimates and clear vehicle documentation to en
     relatedArticles: ['art-01', 'art-07'],
     seo: {
       title: 'Top Weekend Getaways from Madurai (Within 200 KM) | Mahalakshmi',
-      description: 'Explore the best 1-day and 2-day short trips from Madurai. Hill stations, coastal drives, and wildlife sanctuaries with travel times.',
+      description: 'Explore 1-day and 2-day short trips from Madurai. Hill stations, coastal drives, and wildlife sanctuaries with travel times.',
       canonicalUrl: `${siteConfig.url}/travel-guide/weekend-getaways-from-madurai`,
     },
   },

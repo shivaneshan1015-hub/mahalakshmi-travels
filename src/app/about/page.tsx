@@ -54,10 +54,10 @@ export default function AboutPage() {
 
           <div className="space-y-6 type-body-large text-[var(--text-secondary)] leading-relaxed">
             <p>
-              Based in the historic temple city of <strong>Madurai, Tamil Nadu</strong>, <strong>Mahalakshmi Tours and Travels</strong> was established with a singular principle: travel is not merely about reaching a destination—it is about the human experience of the journey itself.
+              Based in the historic temple city of <strong>Madurai, Tamil Nadu</strong>, <strong>Mahalakshmi Tours and Travels</strong> has been operating since 2021 with a singular principle: travel is about the human experience of the journey itself.
             </p>
             <p>
-              We operate our own dedicated fleet of vehicles—including our signature <strong>21-seater passenger van</strong> for group travel and <strong>sedan cars</strong> for families. By owning and maintaining our fleet directly, we ensure safety standards, cleanliness, and local route coverage across South Indian highways.
+              Our owned fleet includes <strong>21-seater tourist vans</strong> for group travel and <strong>sedan cars</strong> for small families. Additional vehicle arrangements are coordinated through local vehicle/driver partners across South India based on your travel requirement.
             </p>
             <p id="madurai-origin">
               From our depot in Madurai, our journeys expand into the mist-covered hills of Munnar and Kodaikanal, the coastal shores of Rameswaram and Kanyakumari, and the cultural circuits of Kerala, Karnataka, Andhra Pradesh, and Telangana.
@@ -69,13 +69,13 @@ export default function AboutPage() {
           <div className="p-6 bg-[var(--color-paper-100)] rounded-[4px] border border-[var(--border-default)]">
             <h4 className="type-h4 mb-2">Origin: Madurai</h4>
             <p className="type-body-small text-[var(--text-secondary)]">
-              Deep roots in Madurai with an intimate understanding of South Indian highway corridors and ghat roads.
+              Madurai-based travel partner with route coverage across South Indian highways and mountain passes.
             </p>
           </div>
           <div className="p-6 bg-[var(--color-paper-100)] rounded-[4px] border border-[var(--border-default)]">
-            <h4 className="type-h4 mb-2">Dedicated Fleet</h4>
+            <h4 className="type-h4 mb-2">Vehicle Rental & Care</h4>
             <p className="type-body-small text-[var(--text-secondary)]">
-              In-house 21-seater group van and sedan cars maintained to safety and comfort standards.
+              Owned 21-seater tourist vans and sedan cars alongside partner vehicle arrangements for outstation journeys.
             </p>
           </div>
           <div className="p-6 bg-[var(--color-paper-100)] rounded-[4px] border border-[var(--border-default)]">
