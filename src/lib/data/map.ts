@@ -300,7 +300,7 @@ export const southIndiaMapData: SouthIndiaMapData = {
       highwayBadge: 'NH 38 / NH 71',
       terrain: 'Seshachalam Sacred Hills (853m MSL)',
       highlightTag: '480 KM • Sacred Tirumala Balaji Pilgrimage',
-      shortDescription: 'Dedicated private charters and luxury group AC vans for the sacred Sri Venkateswara Swamy pilgrimage in the ancient Seshachalam Hills of Andhra Pradesh.',
+      shortDescription: 'Dedicated private charters and group AC vans for the sacred Sri Venkateswara Swamy pilgrimage in the ancient Seshachalam Hills of Andhra Pradesh.',
       keyHalts: ['Trichy Kaveri Basin', 'Villupuram Junction', 'Vellore Golden Temple', 'Tirumala Ghat Road'],
       waypoints: [
         { name: 'Madurai Depot', type: 'origin' },

@@ -10,7 +10,7 @@ import { getAllVehicles } from '@/lib/data/vehicles';
 import { VehicleInfoBlock } from '@/components/ui/VehicleInfoBlock';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { generateBreadcrumbSchema, generateFaqSchema, generateLocalBusinessSchema } from '@/lib/seo/schema';
+import { generateBreadcrumbSchema, generateFaqSchema, generateWebPageSchema } from '@/lib/seo/schema';
 import { Button } from '@/components/ui/Button';
 import { getQuickWhatsAppLink } from '@/lib/conversion/whatsapp';
 import { getPrimaryPhoneTelUrl } from '@/lib/conversion/phone';
@@ -58,7 +58,7 @@ export default function VehiclesPage() {
     },
     {
       question: 'Can we book vehicles for college industrial visits (IV) and department tours?',
-      answer: 'Yes. Our 21-seater luxury AC passenger van is custom-fitted for college student groups with high-back pushback seats, individual AC vents, high-power music system, and heavy-duty luggage carriers with waterproof protection.',
+      answer: 'Yes. Our 21-seater AC passenger van is fitted for college student groups with high-back pushback seats, vehicle AC, music system, and luggage storage with waterproof protection.',
     },
     {
       question: 'Are your vehicle and driver arrangements suitable for hill stations like Kodaikanal, Munnar, and Ooty?',
@@ -69,7 +69,7 @@ export default function VehiclesPage() {
   const rentalFeatures = [
     {
       icon: <ShieldCheck className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
-      title: 'Route Expertise',
+      title: 'Route Knowledge',
       description: 'Route coverage and journey arrangements across Tamil Nadu, Kerala, and Karnataka.',
     },
     {
@@ -105,7 +105,7 @@ export default function VehiclesPage() {
     {
       icon: <HeartHandshake className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
       title: 'Wedding & Function Transport',
-      description: 'Punctual guest shuttles between Madurai Airport, railway stations, mandapams, and outstation venues.',
+      description: 'Guest shuttles between Madurai Airport, railway stations, mandapams, and outstation venues.',
       href: '/travel-services/function-travel',
     },
     {
@@ -121,11 +121,19 @@ export default function VehiclesPage() {
     { name: 'Vehicle Rentals', itemUrl: '/vehicles', position: 2 },
   ];
 
+  const webPageSchema = generateWebPageSchema({
+    name: 'Vehicle Rental in Madurai | 21 Seater Van & Sedan Car Hire with Driver',
+    description: 'Book 21-seater AC van rentals and private sedan cars in Madurai for outstation family trips, college IV, wedding transportation, and temple pilgrimages. Custom quotes and vehicle options with driver.',
+    url: '/vehicles',
+    pageType: 'CollectionPage',
+    breadcrumbId: `${siteConfig.url}/vehicles#breadcrumb`,
+  });
+
   return (
     <div className="py-12 md:py-16">
-      <JsonLd data={generateLocalBusinessSchema()} />
-      <JsonLd data={generateBreadcrumbSchema(breadcrumbs)} />
-      <JsonLd data={generateFaqSchema(rentalFaqs)} />
+      <JsonLd data={webPageSchema} />
+      <JsonLd data={generateBreadcrumbSchema(breadcrumbs, '/vehicles')} />
+      <JsonLd data={generateFaqSchema(rentalFaqs, '/vehicles')} />
 
       <div className="container-editorial">
         <BreadcrumbNav items={breadcrumbs} className="mb-8" />
@@ -139,7 +147,7 @@ export default function VehiclesPage() {
             Vehicle Rental Services in Madurai
           </h1>
           <p className="type-body-large text-[var(--text-secondary)] leading-relaxed">
-            Rent our <strong>21-Seater AC passenger vans</strong> and <strong>private sedan cars</strong> for South Indian travel. Transparent custom quotes, clean vehicles, and direct coordination from our central Madurai depot.
+            Rent our <strong>21-Seater AC passenger vans</strong> and <strong>private sedan cars</strong> for South Indian travel. Transparent custom quotes, clean vehicles, and direct coordination from our Madurai location.
           </p>
 
           {/* Quick Action Buttons */}

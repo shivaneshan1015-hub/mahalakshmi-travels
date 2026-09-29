@@ -8,7 +8,8 @@ import { notFound } from 'next/navigation';
 import { getAllTours, getTourBySlug } from '@/lib/data/tours';
 import { resolveTourRelations } from '@/lib/data/relationships';
 import { constructMetadata } from '@/lib/seo/metadata';
-import { generateTouristTripSchema, generateBreadcrumbSchema } from '@/lib/seo/schema';
+import { generateTouristTripSchema, generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo/schema';
+import { siteConfig } from '@/config/site';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
 import { TourDetailHero } from '@/components/tours/TourDetailHero';
@@ -62,14 +63,26 @@ export default async function TourDetailPage({ params }: TourPageProps) {
 
   const touristTripSchema = generateTouristTripSchema(tour);
 
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Home', itemUrl: 'https://mahalakshmitravels.com', position: 1 },
-    { name: 'Tours', itemUrl: 'https://mahalakshmitravels.com/tours', position: 2 },
-    { name: tour.title, itemUrl: `https://mahalakshmitravels.com/tours/${tour.slug}`, position: 3 },
-  ]);
+  const breadcrumbs = [
+    { name: 'Home', itemUrl: '/', position: 1 },
+    { name: 'Tours', itemUrl: '/tours', position: 2 },
+    { name: tour.title, itemUrl: `/tours/${tour.slug}`, position: 3 },
+  ];
+
+  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs, `/tours/${tour.slug}`);
+
+  const webPageSchema = generateWebPageSchema({
+    name: `${tour.title} (${tour.duration.text})`,
+    description: tour.shortDescription,
+    url: `/tours/${tour.slug}`,
+    pageType: 'WebPage',
+    mainEntityId: `${siteConfig.url}/tours/${tour.slug}#tour`,
+    breadcrumbId: `${siteConfig.url}/tours/${tour.slug}#breadcrumb`,
+  });
 
   return (
     <>
+      <JsonLd data={webPageSchema} />
       <JsonLd data={touristTripSchema} />
       <JsonLd data={breadcrumbSchema} />
 

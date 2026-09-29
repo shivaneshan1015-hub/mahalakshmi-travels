@@ -12,7 +12,7 @@ import { Footer } from '@/components/layout/Footer';
 import { MobileStickyBar } from '@/components/home/MobileStickyBar';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { AttributionTracker } from '@/components/seo/AttributionTracker';
-import { generateLocalBusinessSchema } from '@/lib/seo/schema';
+import { generateLocalBusinessSchema, generateWebSiteSchema } from '@/lib/seo/schema';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -71,10 +71,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const localBusinessSchema = generateLocalBusinessSchema();
+  const webSiteSchema = generateWebSiteSchema();
 
   return (
     <html lang="en" className={`${playfair.variable} ${plusJakarta.variable}`}>
       <head>
+        <JsonLd data={webSiteSchema} />
         <JsonLd data={localBusinessSchema} />
       </head>
       <body className="min-h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] antialiased selection:bg-[var(--color-terracotta-100)] selection:text-[var(--color-ink-950)]">

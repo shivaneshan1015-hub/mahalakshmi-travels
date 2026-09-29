@@ -8,7 +8,8 @@ import Image from 'next/image';
 import { getAllDestinations, getDestinationBySlug } from '@/lib/data/destinations';
 import { resolveDestinationRelations } from '@/lib/data/relationships';
 import { constructMetadata } from '@/lib/seo/metadata';
-import { generateTouristDestinationSchema } from '@/lib/seo/schema';
+import { generateBreadcrumbSchema, generateTouristDestinationSchema, generateWebPageSchema } from '@/lib/seo/schema';
+import { siteConfig } from '@/config/site';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
 import { DataAnchor } from '@/components/ui/DataAnchor';
@@ -57,8 +58,25 @@ export default async function DestinationDetailPage({ params }: DestinationPageP
 
   const destSchema = generateTouristDestinationSchema(destination);
 
+  const breadcrumbs = [
+    { name: 'Home', itemUrl: '/', position: 1 },
+    { name: 'Destinations', itemUrl: '/destinations', position: 2 },
+    { name: destination.name, itemUrl: `/destinations/${destination.slug}`, position: 3 },
+  ];
+
+  const webPageSchema = generateWebPageSchema({
+    name: destination.seo.title,
+    description: destination.seo.description,
+    url: `/destinations/${destination.slug}`,
+    pageType: 'WebPage',
+    mainEntityId: `${siteConfig.url}/destinations/${destination.slug}#destination`,
+    breadcrumbId: `${siteConfig.url}/destinations/${destination.slug}#breadcrumb`,
+  });
+
   return (
     <>
+      <JsonLd data={webPageSchema} />
+      <JsonLd data={generateBreadcrumbSchema(breadcrumbs, `/destinations/${destination.slug}`)} />
       <JsonLd data={destSchema} />
       <div className="container-editorial py-12 md:py-16">
         <BreadcrumbNav

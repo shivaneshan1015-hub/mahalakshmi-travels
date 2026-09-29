@@ -4,6 +4,7 @@
  */
 
 import { TravelService } from '@/types/service';
+import { siteConfig } from '@/config/site';
 
 export const mockTravelServices: TravelService[] = [
   {
@@ -65,7 +66,7 @@ export const mockTravelServices: TravelService[] = [
       title: 'Group Travel & 21-Seater Van Hire in Madurai | Mahalakshmi Tours and Travels',
       description: 'Spacious 21-seater AC van hire in Madurai for group tours, pilgrimage batches, and family excursions across South India.',
       keywords: ['group travel madurai', '21 seater van hire madurai', 'tempo traveller madurai', 'group tour south india'],
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-services/group-travel',
+      canonicalUrl: `${siteConfig.url}/travel-services/group-travel`,
     },
   },
   {
@@ -123,7 +124,7 @@ export const mockTravelServices: TravelService[] = [
       title: 'College Trips & IV Van Hire in Madurai | Mahalakshmi Tours and Travels',
       description: 'Dedicated 21-seater AC van hire for college industrial visits (IV) and department tours from Madurai.',
       keywords: ['college trip van madurai', 'industrial visit transport madurai', 'student tour bus madurai'],
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-services/college-trips',
+      canonicalUrl: `${siteConfig.url}/travel-services/college-trips`,
     },
   },
   {
@@ -181,7 +182,7 @@ export const mockTravelServices: TravelService[] = [
       title: 'Family Travel & Car Hire in Madurai | Mahalakshmi Tours and Travels',
       description: 'Private car and van hire in Madurai for family vacations across Tamil Nadu and Kerala.',
       keywords: ['family travel madurai', 'car rental for family madurai', 'madurai outstation car hire'],
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-services/family-travel',
+      canonicalUrl: `${siteConfig.url}/travel-services/family-travel`,
     },
   },
   {
@@ -190,12 +191,12 @@ export const mockTravelServices: TravelService[] = [
     title: 'Wedding & Function Transportation',
     serviceType: 'function-travel',
     shortDescription: 'Coordinated guest transportation, airport/station pickups, and venue transfers for weddings, family functions, and temple events.',
-    description: 'Managing guest movement for weddings, temple ceremonies, and family gatherings in Madurai requires punctuality and dedicated vehicles. Mahalakshmi provides airport shuttles, railway station pickups, and venue transfers using our 21-seater passenger van and private sedan cars.',
+    description: 'Managing guest movement for weddings, temple ceremonies, and family gatherings in Madurai requires careful coordination and dedicated vehicles. Mahalakshmi provides airport shuttles, railway station pickups, and venue transfers using our 21-seater passenger van and private sedan cars.',
     idealFor: ['function', 'family', 'group'],
     vehicleOptions: ['21-seater-van', 'sedan-car'],
     benefits: [
       {
-        title: 'Punctual Guest Transfers',
+        title: 'Guest Transfers',
         description: 'Reliable shuttles between Madurai Airport (IXM), Madurai Junction railway station, and wedding halls.',
       },
       {
@@ -236,9 +237,9 @@ export const mockTravelServices: TravelService[] = [
     relatedTours: ['tour-rameshwaram', 'tour-madurai', 'tour-palani-murugan-temple'],
     seo: {
       title: 'Wedding & Function Van Hire in Madurai | Mahalakshmi Tours and Travels',
-      description: 'Punctual guest transportation and van hire for weddings, temple functions, and family events in Madurai.',
+      description: 'Guest transportation and van hire for weddings, temple functions, and family events in Madurai.',
       keywords: ['wedding van hire madurai', 'function transport madurai', 'guest airport pickup madurai'],
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-services/function-travel',
+      canonicalUrl: `${siteConfig.url}/travel-services/function-travel`,
     },
   },
 ];

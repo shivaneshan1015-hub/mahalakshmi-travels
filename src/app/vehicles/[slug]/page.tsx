@@ -17,6 +17,7 @@ import {
   generateBreadcrumbSchema,
   generateFaqSchema,
   generateVehicleRentalSchema,
+  generateWebPageSchema,
 } from '@/lib/seo/schema';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
@@ -85,6 +86,15 @@ export default async function VehicleDetailPage({ params }: VehiclePageProps) {
     { name: vehicle.name, itemUrl: `/vehicles/${vehicle.slug}`, position: 3 },
   ];
 
+  const webPageSchema = generateWebPageSchema({
+    name: vehicle.seo.title,
+    description: vehicle.seo.description,
+    url: `/vehicles/${vehicle.slug}`,
+    pageType: 'WebPage',
+    mainEntityId: `${siteConfig.url}/vehicles/${vehicle.slug}#autorental`,
+    breadcrumbId: `${siteConfig.url}/vehicles/${vehicle.slug}#breadcrumb`,
+  });
+
   const iconMap: Record<string, React.ReactNode> = {
     Users: <Users className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
     Wind: <Wind className="w-5 h-5 text-[var(--color-terracotta-500)]" />,
@@ -94,10 +104,11 @@ export default async function VehicleDetailPage({ params }: VehiclePageProps) {
 
   return (
     <div className="py-12 md:py-16">
-      <JsonLd data={generateBreadcrumbSchema(breadcrumbs)} />
+      <JsonLd data={webPageSchema} />
+      <JsonLd data={generateBreadcrumbSchema(breadcrumbs, `/vehicles/${vehicle.slug}`)} />
       <JsonLd data={generateVehicleRentalSchema(vehicle)} />
       {vehicle.faqs && vehicle.faqs.length > 0 && (
-        <JsonLd data={generateFaqSchema(vehicle.faqs)} />
+        <JsonLd data={generateFaqSchema(vehicle.faqs, `/vehicles/${vehicle.slug}`)} />
       )}
 
       <div className="container-editorial">

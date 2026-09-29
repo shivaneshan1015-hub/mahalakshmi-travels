@@ -10,6 +10,9 @@ import React, { useState, useMemo, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { getAllTours } from '@/lib/data/tours';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo/schema';
+import { siteConfig } from '@/config/site';
 import { TourListingHeader } from '@/components/tours/TourListingHeader';
 import { TourFilterBar, TourFiltersState } from '@/components/tours/TourFilterBar';
 import { TourListingGrid } from '@/components/tours/TourListingGrid';
@@ -20,6 +23,19 @@ function ToursContent() {
   const categoryParam = searchParams.get('category');
 
   const allTours = getAllTours();
+
+  const breadcrumbs = [
+    { name: 'Home', itemUrl: '/', position: 1 },
+    { name: 'Explore Journeys', itemUrl: '/tours', position: 2 },
+  ];
+
+  const webPageSchema = generateWebPageSchema({
+    name: 'South India Tour Packages from Madurai | Temple, Hill Station & Heritage Journeys',
+    description: 'Explore 39 curated outstation tour packages from Madurai across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.',
+    url: '/tours',
+    pageType: 'CollectionPage',
+    breadcrumbId: `${siteConfig.url}/tours#breadcrumb`,
+  });
 
   const [filters, setFilters] = useState<TourFiltersState>({
     category: categoryParam || 'all',
@@ -101,15 +117,15 @@ function ToursContent() {
   }, [allTours, filters]);
 
   return (
-    <div className="container-editorial py-10 md:py-16">
-      {/* Breadcrumb Navigation */}
-      <BreadcrumbNav
-        items={[
-          { name: 'Home', itemUrl: '/', position: 1 },
-          { name: 'Explore Journeys', itemUrl: '/tours', position: 2 },
-        ]}
-        className="mb-8"
-      />
+    <>
+      <JsonLd data={webPageSchema} />
+      <JsonLd data={generateBreadcrumbSchema(breadcrumbs, '/tours')} />
+      <div className="container-editorial py-10 md:py-16">
+        {/* Breadcrumb Navigation */}
+        <BreadcrumbNav
+          items={breadcrumbs}
+          className="mb-8"
+        />
 
       {/* Header */}
       <TourListingHeader />
@@ -128,7 +144,8 @@ function ToursContent() {
         onResetFilters={handleResetFilters}
       />
     </div>
-  );
+  </>
+);
 }
 
 export default function ToursPage() {

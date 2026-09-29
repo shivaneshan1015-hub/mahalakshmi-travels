@@ -5,6 +5,7 @@
  */
 
 import { CrmEnquiry, VerifiedCommercialValue, VerifiedCommercialSource } from '@/types/crm';
+import { siteConfig } from '@/config/site';
 
 /**
  * Validates if a commercial value object satisfies the verified commercial value contract.
@@ -88,7 +89,7 @@ export async function sendMetaConversionEvent(payload: MetaConversionPayload) {
             {
               event_name: payload.eventName,
               event_time: Math.floor(Date.now() / 1000),
-              event_source_url: payload.eventSourceUrl || payload.leadData.attribution?.landingPage || 'https://mahalakshmitravels.com',
+              event_source_url: payload.eventSourceUrl || payload.leadData.attribution?.landingPage || siteConfig.url,
               action_source: 'website',
               user_data: {
                 ph: cleanPhone ? [cleanPhone] : undefined,

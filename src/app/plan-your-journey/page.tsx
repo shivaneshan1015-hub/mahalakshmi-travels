@@ -7,7 +7,8 @@ import React, { Suspense } from 'react';
 import { Metadata } from 'next';
 import { Phone, MessageSquare, Compass, ShieldCheck } from 'lucide-react';
 import { constructMetadata } from '@/lib/seo/metadata';
-import { generateBreadcrumbSchema } from '@/lib/seo/schema';
+import { generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo/schema';
+import { siteConfig } from '@/config/site';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
 import { Badge } from '@/components/ui/Badge';
@@ -23,10 +24,18 @@ export const metadata: Metadata = constructMetadata({
 });
 
 export default function PlanYourJourneyPage() {
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Home', itemUrl: 'https://mahalakshmitravels.com', position: 1 },
-    { name: 'Plan Your Journey', itemUrl: 'https://mahalakshmitravels.com/plan-your-journey', position: 2 },
-  ]);
+  const breadcrumbs = [
+    { name: 'Home', itemUrl: '/', position: 1 },
+    { name: 'Plan Your Journey', itemUrl: '/plan-your-journey', position: 2 },
+  ];
+
+  const webPageSchema = generateWebPageSchema({
+    name: 'Plan Your Journey — Custom South India Tour & Vehicle Planner | Mahalakshmi',
+    description: 'Design your own custom tour itinerary across Tamil Nadu, Kerala, Karnataka, and Andhra Pradesh starting from Madurai. 21-seater van and family sedan options.',
+    url: '/plan-your-journey',
+    pageType: 'WebPage',
+    breadcrumbId: `${siteConfig.url}/plan-your-journey#breadcrumb`,
+  });
 
   const whatsappUrl = getQuickWhatsAppLink('Plan Your Journey Page Direct Chat');
   const phoneUrl = getPrimaryPhoneTelUrl();
@@ -34,7 +43,8 @@ export default function PlanYourJourneyPage() {
 
   return (
     <>
-      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={webPageSchema} />
+      <JsonLd data={generateBreadcrumbSchema(breadcrumbs, '/plan-your-journey')} />
 
       <div className="container-editorial py-10 md:py-16">
         {/* Breadcrumb Navigation */}

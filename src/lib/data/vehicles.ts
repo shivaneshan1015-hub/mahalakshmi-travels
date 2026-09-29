@@ -3,6 +3,7 @@
  */
 
 import { Vehicle } from '@/types/vehicle';
+import { siteConfig } from '@/config/site';
 
 export const vehiclesRepository: Vehicle[] = [
   {
@@ -81,7 +82,7 @@ export const vehiclesRepository: Vehicle[] = [
         'madurai to kodaikanal van hire',
         'madurai to munnar 21 seater van',
       ],
-      canonicalUrl: 'https://mahalakshmitravels.com/vehicles/21-seater-van',
+      canonicalUrl: `${siteConfig.url}/vehicles/21-seater-van`,
     },
   },
   {
@@ -154,7 +155,7 @@ export const vehiclesRepository: Vehicle[] = [
         'madurai to rameshwaram cab',
         'family car rental madurai',
       ],
-      canonicalUrl: 'https://mahalakshmitravels.com/vehicles/sedan-car',
+      canonicalUrl: `${siteConfig.url}/vehicles/sedan-car`,
     },
   },
 ];

@@ -192,7 +192,7 @@ const operatingSincePass = siteConfigContent.includes('operatingSince: 2021') ||
 
 const schemaPath = path.join(rootDir, 'src', 'lib', 'seo', 'schema.ts');
 const schemaContent = fs.readFileSync(schemaPath, 'utf-8');
-const hoursPass = schemaContent.includes("opens: '09:00'") && schemaContent.includes("closes: '19:00'");
+const hoursPass = (schemaContent.includes("opens: '09:00'") || schemaContent.includes("siteConfig.businessHours.opens")) && (schemaContent.includes("closes: '19:00'") || schemaContent.includes("siteConfig.businessHours.closes"));
 
 const tourTypePath = path.join(rootDir, 'src', 'types', 'tour.ts');
 const tourTypeContent = fs.readFileSync(tourTypePath, 'utf-8');
@@ -470,6 +470,71 @@ const allContractTestsPass =
   testIPass && testJPass && testKPass && testLPass && testMPass && testNPass && testOPass && testPPass;
 
 // -----------------------------------------------------------------------------
+// 5D. PHASE M12 SEO + AEO + GEO AUDIT
+// -----------------------------------------------------------------------------
+const rootLayoutPath = path.join(rootDir, 'src', 'app', 'layout.tsx');
+const rootLayoutContent = fs.readFileSync(rootLayoutPath, 'utf-8');
+const m12GlobalSchemaPass = rootLayoutContent.includes('generateWebSiteSchema') && rootLayoutContent.includes('generateLocalBusinessSchema');
+
+const homepagePath = path.join(rootDir, 'src', 'app', 'page.tsx');
+const homepageContent = fs.readFileSync(homepagePath, 'utf-8');
+const m12HomepagePass = homepageContent.includes('generateWebPageSchema') && !homepageContent.includes('generateLocalBusinessSchema');
+
+const vehiclesPagePath = path.join(rootDir, 'src', 'app', 'vehicles', 'page.tsx');
+const vehiclesPageContent = fs.readFileSync(vehiclesPagePath, 'utf-8');
+const m12VehiclesPagePass = vehiclesPageContent.includes('generateWebPageSchema') && !vehiclesPageContent.includes('generateLocalBusinessSchema');
+
+const toursPagePath = path.join(rootDir, 'src', 'app', 'tours', 'page.tsx');
+const toursPageContent = fs.readFileSync(toursPagePath, 'utf-8');
+const m12ToursPagePass = toursPageContent.includes('generateWebPageSchema');
+
+const travelServicesPagePath = path.join(rootDir, 'src', 'app', 'travel-services', 'page.tsx');
+const travelServicesPageContent = fs.readFileSync(travelServicesPagePath, 'utf-8');
+const m12TravelServicesPagePass = travelServicesPageContent.includes('generateWebPageSchema');
+
+const travelGuidePagePath = path.join(rootDir, 'src', 'app', 'travel-guide', 'page.tsx');
+const travelGuidePageContent = fs.readFileSync(travelGuidePagePath, 'utf-8');
+const m12TravelGuidePagePass = travelGuidePageContent.includes('generateWebPageSchema');
+
+const aboutPagePath = path.join(rootDir, 'src', 'app', 'about', 'page.tsx');
+const aboutPageContent = fs.readFileSync(aboutPagePath, 'utf-8');
+const m12AboutPagePass = aboutPageContent.includes('generateWebPageSchema') && aboutPageContent.includes("'AboutPage'");
+
+const contactPagePath = path.join(rootDir, 'src', 'app', 'contact', 'page.tsx');
+const contactPageContent = fs.readFileSync(contactPagePath, 'utf-8');
+const m12ContactPagePass = contactPageContent.includes('generateWebPageSchema') && contactPageContent.includes("'ContactPage'");
+
+const planJourneyPagePath = path.join(rootDir, 'src', 'app', 'plan-your-journey', 'page.tsx');
+const planJourneyPageContent = fs.readFileSync(planJourneyPagePath, 'utf-8');
+const m12PlanJourneyPagePass = planJourneyPageContent.includes('generateWebPageSchema');
+
+let hardcodedDomainCount = 0;
+for (const file of publicScanFiles) {
+  if (file.endsWith('site.ts') || file.endsWith('validate-integrity.mjs')) continue;
+  const content = fs.readFileSync(file, 'utf-8');
+  if (content.includes('https://mahalakshmitravels.com')) {
+    hardcodedDomainCount++;
+  }
+}
+const m12NoHardcodedDomainPass = hardcodedDomainCount === 0;
+
+const sitemapFileContent = fs.readFileSync(path.join(rootDir, 'src', 'app', 'sitemap.ts'), 'utf-8');
+const m12SitemapLastModifiedPass = !sitemapFileContent.includes('lastModified: new Date()');
+
+const m12AllPass =
+  m12GlobalSchemaPass &&
+  m12HomepagePass &&
+  m12VehiclesPagePass &&
+  m12ToursPagePass &&
+  m12TravelServicesPagePass &&
+  m12TravelGuidePagePass &&
+  m12AboutPagePass &&
+  m12ContactPagePass &&
+  m12PlanJourneyPagePass &&
+  m12NoHardcodedDomainPass &&
+  m12SitemapLastModifiedPass;
+
+// -----------------------------------------------------------------------------
 // 6. SCHEMA AUDIT
 // -----------------------------------------------------------------------------
 const businessSchemaPass = schemaContent.includes('LocalBusiness') || schemaContent.includes('TravelAgency');
@@ -557,7 +622,8 @@ const allPassed =
   lintPass &&
   sitemapPass &&
   routesPass &&
-  buildPass;
+  buildPass &&
+  m12AllPass;
 
 console.log('============================================================');
 console.log('PHASE 9C FINAL INTEGRITY TEST');

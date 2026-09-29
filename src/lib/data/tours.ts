@@ -5,6 +5,7 @@
  */
 
 import { Tour, TourCategory } from '@/types/tour';
+import { siteConfig } from '@/config/site';
 
 export interface CategoryMeta {
   id: TourCategory;
@@ -123,7 +124,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Rameshwaram Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Rameshwaram package from Madurai. Pamban bridge, 22 theerthams, Dhanushkodi with comfortable 21-seater van or sedan.',
       keywords: ['madurai to rameshwaram package', 'rameshwaram 2 days tour', 'dhanushkodi tour'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/rameshwaram',
+      canonicalUrl: `${siteConfig.url}/tours/rameshwaram`,
     },
   },
   {
@@ -184,7 +185,7 @@ export const mockTours: Tour[] = [
       title: 'Tiruchendur & Rameshwaram Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Tiruchendur Murugan and Rameshwaram tour from Madurai. Ideal for families and devotional groups.',
       keywords: ['tiruchendur rameshwaram package', 'murugan temple tour from madurai'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/tiruchendur-and-rameshwaram',
+      canonicalUrl: `${siteConfig.url}/tours/tiruchendur-and-rameshwaram`,
     },
   },
   {
@@ -245,7 +246,7 @@ export const mockTours: Tour[] = [
       title: 'Padmanabhaswamy Temple Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Sree Padmanabhaswamy Temple tour from Madurai with Kovalam beach visit.',
       keywords: ['padmanabhaswamy temple package', 'trivandrum tour from madurai'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/padmanabhaswamy-temple',
+      canonicalUrl: `${siteConfig.url}/tours/padmanabhaswamy-temple`,
     },
   },
 
@@ -307,7 +308,7 @@ export const mockTours: Tour[] = [
       title: 'Palani Murugan Temple Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Palani Murugan Temple pilgrimage from Madurai with comfortable AC van or car.',
       keywords: ['palani temple package', 'madurai to palani cab', 'palani murugan tour'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/palani-murugan-temple',
+      canonicalUrl: `${siteConfig.url}/tours/palani-murugan-temple`,
     },
   },
   {
@@ -368,7 +369,7 @@ export const mockTours: Tour[] = [
       title: 'Tirupathi Balaji Temple Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Tirupathi Balaji package from Madurai. Dedicated AC van or sedan.',
       keywords: ['madurai to tirupati package', 'tirumala balaji tour from madurai'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/tirupathi-balaji-temple',
+      canonicalUrl: `${siteConfig.url}/tours/tirupathi-balaji-temple`,
     },
   },
   {
@@ -429,7 +430,7 @@ export const mockTours: Tour[] = [
       title: 'Velankanni Shrine Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Velankanni Church pilgrimage package from Madurai with comfortable 21-seater van or car.',
       keywords: ['velankanni tour package', 'madurai to velankanni cab', 'velankanni church trip'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/velankanni-shrine',
+      canonicalUrl: `${siteConfig.url}/tours/velankanni-shrine`,
     },
   },
 
@@ -497,7 +498,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Kodaikanal Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Kodaikanal tour package from Madurai. Vehicle options for families and groups travelling from Madurai.',
       keywords: ['madurai to kodaikanal tour', 'kodaikanal 2 days package', 'kodaikanal van rental madurai'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/kodaikanal',
+      canonicalUrl: `${siteConfig.url}/tours/kodaikanal`,
     },
   },
   {
@@ -560,7 +561,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Munnar Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Madurai to Munnar tour package. Dedicated 21-seater AC van or sedan cars via Bodi Mettu route.',
       keywords: ['madurai to munnar tour', 'munnar 2 days package', 'madurai to munnar van hire'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/munnar',
+      canonicalUrl: `${siteConfig.url}/tours/munnar`,
     },
   },
   {
@@ -621,7 +622,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Ooty Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Ooty & Coonoor tour from Madurai. Best package for family and group travellers.',
       keywords: ['madurai to ooty package', 'ooty 2 days trip from madurai', 'ooty van hire'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/ooty',
+      canonicalUrl: `${siteConfig.url}/tours/ooty`,
     },
   },
   {
@@ -682,7 +683,7 @@ export const mockTours: Tour[] = [
       title: 'Courtallam Waterfalls Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Courtallam spa & waterfalls tour package from Madurai.',
       keywords: ['courtallam tour package', 'madurai to courtallam van', 'courtallam falls trip'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/courtallam',
+      canonicalUrl: `${siteConfig.url}/tours/courtallam`,
     },
   },
   {
@@ -735,7 +736,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Yercaud 1 Day Tour | Mahalakshmi Tours and Travels',
       description: 'Book 1 Day Yercaud hill station tour package from Madurai with AC van or private sedan.',
       keywords: ['madurai to yercaud 1 day tour', 'yercaud day trip package', 'yercaud cab from madurai'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/yercaud',
+      canonicalUrl: `${siteConfig.url}/tours/yercaud`,
     },
   },
   {
@@ -796,7 +797,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Thekkady Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Thekkady Periyar wildlife package from Madurai with 21-seater van or sedan.',
       keywords: ['madurai to thekkady package', 'thekkady 2 days trip', 'periyar lake tour'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/thekkady',
+      canonicalUrl: `${siteConfig.url}/tours/thekkady`,
     },
   },
   {
@@ -857,7 +858,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Vagamon Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Vagamon hill station tour package from Madurai with AC van or private sedan.',
       keywords: ['madurai to vagamon tour', 'vagamon 2 days package', 'vagamon van hire'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/vagamon',
+      canonicalUrl: `${siteConfig.url}/tours/vagamon`,
     },
   },
   {
@@ -918,7 +919,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Athirapally Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Athirapally waterfalls tour package from Madurai.',
       keywords: ['athirapally tour package', 'madurai to athirapally van', 'athirapally waterfalls trip'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/athirapally',
+      canonicalUrl: `${siteConfig.url}/tours/athirapally`,
     },
   },
   {
@@ -979,7 +980,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Wayanad Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Wayanad tour package from Madurai with 21-seater AC van or family car.',
       keywords: ['madurai to wayanad package', 'wayanad 2 days trip from madurai', 'wayanad van hire'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/wayanad',
+      canonicalUrl: `${siteConfig.url}/tours/wayanad`,
     },
   },
   {
@@ -1040,7 +1041,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Coorg Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Coorg tour package from Madurai with comfortable 21-seater van or sedan.',
       keywords: ['madurai to coorg package', 'coorg 2 days tour from madurai', 'coorg van rental'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/coorg',
+      canonicalUrl: `${siteConfig.url}/tours/coorg`,
     },
   },
   {
@@ -1101,7 +1102,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Chikmagalur Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Chikmagalur coffee hills tour from Madurai.',
       keywords: ['madurai to chikmagalur package', 'chikmagalur 2 days trip', 'mullayanagiri tour'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/chikmagalur',
+      canonicalUrl: `${siteConfig.url}/tours/chikmagalur`,
     },
   },
 
@@ -1166,7 +1167,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Kanyakumari Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Kanyakumari tour package from Madurai with 21-seater van or sedan.',
       keywords: ['madurai to kanyakumari package', 'kanyakumari 2 days tour', 'kanyakumari cab madurai'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/kanyakumari',
+      canonicalUrl: `${siteConfig.url}/tours/kanyakumari`,
     },
   },
   {
@@ -1227,7 +1228,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Alappuzha Houseboat Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Alleppey backwater and houseboat package from Madurai.',
       keywords: ['madurai to alleppey package', 'alappuzha houseboat tour from madurai', 'alleppey van hire'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/alappuzha',
+      canonicalUrl: `${siteConfig.url}/tours/alappuzha`,
     },
   },
   {
@@ -1288,7 +1289,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Kochi Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Kochi Fort & Harbor tour package from Madurai with 21-seater van or sedan.',
       keywords: ['madurai to kochi package', 'kochi 2 days tour from madurai', 'fort kochi cab'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/kochi',
+      canonicalUrl: `${siteConfig.url}/tours/kochi`,
     },
   },
   {
@@ -1349,7 +1350,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Varkala Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Varkala Cliff & beach tour package from Madurai.',
       keywords: ['madurai to varkala package', 'varkala cliff 2 days trip', 'varkala cab from madurai'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/varkala',
+      canonicalUrl: `${siteConfig.url}/tours/varkala`,
     },
   },
   {
@@ -1410,7 +1411,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Thiruvananthapuram Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Trivandrum & Kovalam tour package from Madurai.',
       keywords: ['trivandrum tour package', 'madurai to kovalam cab', 'trivandrum 2 days trip'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/thiruvananthapuram',
+      canonicalUrl: `${siteConfig.url}/tours/thiruvananthapuram`,
     },
   },
   {
@@ -1471,7 +1472,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Pondicherry Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Pondicherry & Auroville tour package from Madurai.',
       keywords: ['madurai to pondicherry tour', 'pondicherry 2 days package', 'pondicherry van hire'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/pondicherry',
+      canonicalUrl: `${siteConfig.url}/tours/pondicherry`,
     },
   },
   {
@@ -1532,7 +1533,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Gokarna Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Gokarna beach & temple tour package from Madurai.',
       keywords: ['madurai to gokarna tour', 'gokarna 2 days package', 'om beach trip'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/gokarna',
+      canonicalUrl: `${siteConfig.url}/tours/gokarna`,
     },
   },
   {
@@ -1593,7 +1594,7 @@ export const mockTours: Tour[] = [
       title: 'Varkala & Jatayu Earth Center Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Varkala & Jatayu Nature Park tour from Madurai.',
       keywords: ['jatayu earth center tour', 'varkala jatayu package from madurai'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/varkala-jatayu-earths-center',
+      canonicalUrl: `${siteConfig.url}/tours/varkala-jatayu-earths-center`,
     },
   },
   {
@@ -1670,7 +1671,7 @@ export const mockTours: Tour[] = [
       title: 'Varkala & Munroe Island Tour (3N/4D) | Mahalakshmi Tours and Travels',
       description: 'Book 3 Nights / 4 Days Varkala, Munroe Island and Kovalam holiday package from Madurai.',
       keywords: ['varkala munroe island package', 'kerala 4 days tour from madurai', 'munroe island canoe trip'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/varkala-and-munroe',
+      canonicalUrl: `${siteConfig.url}/tours/varkala-and-munroe`,
     },
   },
 
@@ -1735,7 +1736,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai City Heritage Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Madurai local sightseeing and heritage tour package.',
       keywords: ['madurai sightseeing package', 'madurai city tour cab', 'madurai heritage 2 days'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/madurai',
+      canonicalUrl: `${siteConfig.url}/tours/madurai`,
     },
   },
   {
@@ -1796,7 +1797,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Thanjavur Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Thanjavur heritage tour package from Madurai.',
       keywords: ['thanjavur heritage tour', 'madurai to thanjavur cab', 'tanjore palace tour'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/thanjavur',
+      canonicalUrl: `${siteConfig.url}/tours/thanjavur`,
     },
   },
   {
@@ -1857,7 +1858,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Mysore Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Mysore Palace & heritage tour package from Madurai with 21-seater van or car.',
       keywords: ['madurai to mysore package', 'mysore palace 2 days trip', 'mysore van rental madurai'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/mysore',
+      canonicalUrl: `${siteConfig.url}/tours/mysore`,
     },
   },
   {
@@ -1918,7 +1919,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Bangalore Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Bangalore sightseeing tour package from Madurai.',
       keywords: ['madurai to bangalore package', 'bangalore city tour cab', 'bangalore van hire'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/bangalore',
+      canonicalUrl: `${siteConfig.url}/tours/bangalore`,
     },
   },
   {
@@ -1979,7 +1980,7 @@ export const mockTours: Tour[] = [
       title: 'Madurai to Hyderabad Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Hyderabad Nizami heritage tour package from Madurai with AC van or car.',
       keywords: ['madurai to hyderabad tour', 'hyderabad 2 days package', 'charminar tour package'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/hyderabad',
+      canonicalUrl: `${siteConfig.url}/tours/hyderabad`,
     },
   },
 
@@ -2044,7 +2045,7 @@ export const mockTours: Tour[] = [
       title: 'Ramoji Film City Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Ramoji Film City tour package from Madurai with comfortable AC van.',
       keywords: ['ramoji film city package', 'madurai to ramoji film city tour', 'hyderabad film city van hire'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/ramoji-film-city',
+      canonicalUrl: `${siteConfig.url}/tours/ramoji-film-city`,
     },
   },
   {
@@ -2105,7 +2106,7 @@ export const mockTours: Tour[] = [
       title: 'Wonderla Amusement Park Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Wonderla Kochi/Bangalore amusement park tour package from Madurai.',
       keywords: ['wonderla tour package', 'madurai to wonderla van', 'wonderla college trip'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/wonderla',
+      canonicalUrl: `${siteConfig.url}/tours/wonderla`,
     },
   },
   {
@@ -2166,7 +2167,7 @@ export const mockTours: Tour[] = [
       title: 'Black Thunder Water Park Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Black Thunder theme park package from Madurai with 21-seater van or car.',
       keywords: ['black thunder tour package', 'madurai to black thunder cab', 'black thunder college iv trip'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/black-thunder',
+      canonicalUrl: `${siteConfig.url}/tours/black-thunder`,
     },
   },
   {
@@ -2227,7 +2228,7 @@ export const mockTours: Tour[] = [
       title: 'Vagamon Adventure & Glass Bridge Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Vagamon glass bridge and off-road adventure tour from Madurai.',
       keywords: ['vagamon glass bridge tour', 'vagamon adventure package from madurai', 'vagamon jeep safari'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/vagamon-adventure',
+      canonicalUrl: `${siteConfig.url}/tours/vagamon-adventure`,
     },
   },
   {
@@ -2288,7 +2289,7 @@ export const mockTours: Tour[] = [
       title: 'Kanthalloor Adventure & Orchard Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Kanthalloor orchard and waterfall adventure tour package from Madurai.',
       keywords: ['kanthalloor tour package', 'marayoor kanthalloor trip from madurai', 'kashmir of kerala tour'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/kanthalloor-adventure',
+      canonicalUrl: `${siteConfig.url}/tours/kanthalloor-adventure`,
     },
   },
   {
@@ -2320,7 +2321,7 @@ export const mockTours: Tour[] = [
     highlights: [
       'Kolukkumalai Sunrise 4x4 rugged Jeep safari above cloud bed',
       'Trek to Phantom Rock and Meesapulimala base corridor',
-      'Tent camping or luxury mountain resort experience',
+      'Tent camping or mountain resort experience',
       'High-speed valley zipline and suspension bridge walk',
     ],
     itinerary: [
@@ -2349,7 +2350,7 @@ export const mockTours: Tour[] = [
       title: 'Munnar Trekking & Kolukkumalai Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Munnar trekking and Kolukkumalai sunrise jeep tour package from Madurai.',
       keywords: ['munnar trekking package', 'kolukkumalai sunrise jeep tour from madurai', 'munnar adventure trip'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/munnar-trekking',
+      canonicalUrl: `${siteConfig.url}/tours/munnar-trekking`,
     },
   },
   {
@@ -2410,7 +2411,7 @@ export const mockTours: Tour[] = [
       title: 'Mysore Adventure Tour (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Mysore adventure, Ranganathittu & water park tour from Madurai.',
       keywords: ['mysore adventure tour', 'ranganathittu safari from madurai', 'grs fantasy park trip'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/mysore-adventure',
+      canonicalUrl: `${siteConfig.url}/tours/mysore-adventure`,
     },
   },
   {
@@ -2471,7 +2472,7 @@ export const mockTours: Tour[] = [
       title: 'Kanakapura Nature Adventure Camp (1N/2D) | Mahalakshmi Tours and Travels',
       description: 'Book 1 Night / 2 Days Kanakapura adventure camp package from Madurai with 21-seater van.',
       keywords: ['kanakapura adventure camp', 'madurai to kanakapura package', 'college adventure trip'],
-      canonicalUrl: 'https://mahalakshmitravels.com/tours/kanakapura-adventure',
+      canonicalUrl: `${siteConfig.url}/tours/kanakapura-adventure`,
     },
   },
 ];

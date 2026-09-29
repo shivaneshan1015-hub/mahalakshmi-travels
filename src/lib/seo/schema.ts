@@ -1,6 +1,6 @@
 /**
  * MAHALAKSHMI TOUR & TRAVEL — STRUCTURED DATA (JSON-LD) GENERATOR
- * Standard Schema.org schemas for LocalBusiness, TouristTrip, TouristDestination, Article, FAQ.
+ * Standard Schema.org schemas for WebSite, LocalBusiness, WebPage, TouristTrip, TouristDestination, Article, AutoRental, FAQ.
  */
 
 import { siteConfig } from '@/config/site';
@@ -8,6 +8,71 @@ import { Tour } from '@/types/tour';
 import { Destination } from '@/types/destination';
 import { TravelArticle } from '@/types/article';
 import { BreadcrumbItem } from '@/types/seo';
+
+/**
+ * WebSite Schema
+ */
+export function generateWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${siteConfig.url}/#website`,
+    url: siteConfig.url,
+    name: siteConfig.name,
+    inLanguage: 'en-IN',
+    publisher: {
+      '@type': 'TravelAgency',
+      '@id': `${siteConfig.url}/#travelagency`,
+    },
+  };
+}
+
+export type WebPageType = 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage';
+
+export interface WebPageSchemaOptions {
+  name: string;
+  description: string;
+  url: string;
+  pageType?: WebPageType;
+  mainEntityId?: string;
+  aboutId?: string;
+  breadcrumbId?: string;
+}
+
+/**
+ * WebPage Schema Architecture Layer
+ */
+export function generateWebPageSchema({
+  name,
+  description,
+  url,
+  pageType = 'WebPage',
+  mainEntityId,
+  aboutId,
+  breadcrumbId,
+}: WebPageSchemaOptions) {
+  const fullUrl = url.startsWith('http') ? url : `${siteConfig.url}${url.startsWith('/') ? url : `/${url}`}`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': pageType,
+    '@id': `${fullUrl}#webpage`,
+    url: fullUrl,
+    name,
+    description,
+    inLanguage: 'en-IN',
+    isPartOf: {
+      '@type': 'WebSite',
+      '@id': `${siteConfig.url}/#website`,
+    },
+    publisher: {
+      '@type': 'TravelAgency',
+      '@id': `${siteConfig.url}/#travelagency`,
+    },
+    ...(mainEntityId ? { mainEntity: { '@id': mainEntityId } } : {}),
+    ...(aboutId ? { about: { '@id': aboutId } } : {}),
+    ...(breadcrumbId ? { breadcrumb: { '@id': breadcrumbId } } : {}),
+  };
+}
 
 /**
  * LocalBusiness / TravelAgency Schema
@@ -53,8 +118,8 @@ export function generateLocalBusinessSchema() {
           'Saturday',
           'Sunday',
         ],
-        opens: '09:00',
-        closes: '19:00',
+        opens: siteConfig.businessHours.opens,
+        closes: siteConfig.businessHours.closes,
       },
     ],
   };
@@ -64,12 +129,15 @@ export function generateLocalBusinessSchema() {
  * TouristTrip Schema for Tours
  */
 export function generateTouristTripSchema(tour: Tour) {
+  const tourUrl = `${siteConfig.url}/tours/${tour.slug}`;
   return {
     '@context': 'https://schema.org',
     '@type': 'TouristTrip',
+    '@id': `${tourUrl}#tour`,
     name: tour.title,
     description: tour.shortDescription,
     touristType: tour.idealFor,
+    url: tourUrl,
     itinerary: {
       '@type': 'ItemList',
       numberOfItems: tour.itinerary.length,
@@ -82,6 +150,7 @@ export function generateTouristTripSchema(tour: Tour) {
     },
     provider: {
       '@type': 'TravelAgency',
+      '@id': `${siteConfig.url}/#travelagency`,
       name: siteConfig.name,
       url: siteConfig.url,
     },
@@ -95,6 +164,7 @@ export function generateTouristDestinationSchema(dest: Destination) {
   return {
     '@context': 'https://schema.org',
     '@type': 'TouristDestination',
+    '@id': `${siteConfig.url}/destinations/${dest.slug}#destination`,
     name: dest.name,
     description: dest.shortDescription,
     geo: {
@@ -110,12 +180,17 @@ export function generateTouristDestinationSchema(dest: Destination) {
  * Article Schema for Travel Guides
  */
 export function generateArticleSchema(article: TravelArticle) {
+  const articleUrl = `${siteConfig.url}/travel-guide/${article.slug}`;
+  const imageUrl = article.coverImage.url.startsWith('http')
+    ? article.coverImage.url
+    : `${siteConfig.url}${article.coverImage.url.startsWith('/') ? article.coverImage.url : `/${article.coverImage.url}`}`;
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
+    '@id': `${articleUrl}#article`,
     headline: article.title,
     description: article.excerpt,
-    image: article.coverImage.url,
+    image: imageUrl,
     datePublished: article.publishedDate,
     dateModified: article.updatedDate || article.publishedDate,
     author: {
@@ -125,15 +200,16 @@ export function generateArticleSchema(article: TravelArticle) {
     },
     publisher: {
       '@type': 'Organization',
+      '@id': `${siteConfig.url}/#travelagency`,
       name: siteConfig.name,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteConfig.url}/brand/logo-primary.svg`,
+        url: `${siteConfig.url}/brand/logo-horizontal.png`,
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${siteConfig.url}/travel-guide/${article.slug}`,
+      '@id': `${articleUrl}#webpage`,
     },
   };
 }
@@ -141,15 +217,21 @@ export function generateArticleSchema(article: TravelArticle) {
 /**
  * BreadcrumbList Schema
  */
-export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
+export function generateBreadcrumbSchema(items: BreadcrumbItem[], canonicalPath?: string) {
+  const listId = canonicalPath
+    ? `${siteConfig.url}${canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`}#breadcrumb`
+    : undefined;
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
+    ...(listId ? { '@id': listId } : {}),
     itemListElement: items.map((item) => ({
       '@type': 'ListItem',
       position: item.position,
       name: item.name,
-      item: item.itemUrl.startsWith('http') ? item.itemUrl : `${siteConfig.url}${item.itemUrl}`,
+      item: item.itemUrl.startsWith('http')
+        ? item.itemUrl
+        : `${siteConfig.url}${item.itemUrl.startsWith('/') ? item.itemUrl : `/${item.itemUrl}`}`,
     })),
   };
 }
@@ -165,18 +247,25 @@ export function generateVehicleRentalSchema(vehicle: {
   category: string;
   images: Array<{ url: string }>;
 }) {
+  const vehicleUrl = `${siteConfig.url}/vehicles/${vehicle.slug}`;
+  const imageUrl = vehicle.images[0]?.url
+    ? vehicle.images[0].url.startsWith('http')
+      ? vehicle.images[0].url
+      : `${siteConfig.url}${vehicle.images[0].url.startsWith('/') ? vehicle.images[0].url : `/${vehicle.images[0].url}`}`
+    : undefined;
+
   return {
     '@context': 'https://schema.org',
     '@type': 'AutoRental',
-    '@id': `${siteConfig.url}/vehicles/${vehicle.slug}#autorental`,
+    '@id': `${vehicleUrl}#autorental`,
     name: `${vehicle.name} in Madurai`,
     description: vehicle.description,
-    image: vehicle.images[0]?.url,
-    url: `${siteConfig.url}/vehicles/${vehicle.slug}`,
+    ...(imageUrl ? { image: imageUrl } : {}),
+    url: vehicleUrl,
     telephone: siteConfig.contact.phonePrimary,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: siteConfig.contact.address.street,
+      streetAddress: siteConfig.contact.address.fullAddress,
       addressLocality: siteConfig.contact.address.city,
       addressRegion: siteConfig.contact.address.state,
       postalCode: siteConfig.contact.address.pincode,
@@ -192,7 +281,8 @@ export function generateVehicleRentalSchema(vehicle: {
       name: s,
     })),
     provider: {
-      '@type': 'LocalBusiness',
+      '@type': 'TravelAgency',
+      '@id': `${siteConfig.url}/#travelagency`,
       name: siteConfig.name,
       telephone: siteConfig.contact.phonePrimary,
       url: siteConfig.url,
@@ -203,10 +293,15 @@ export function generateVehicleRentalSchema(vehicle: {
 /**
  * FAQPage Schema
  */
-export function generateFaqSchema(faqs: Array<{ question: string; answer: string }>) {
+export function generateFaqSchema(faqs?: Array<{ question: string; answer: string }>, canonicalPath?: string) {
+  if (!faqs || faqs.length === 0) return null;
+  const pageUrl = canonicalPath
+    ? `${siteConfig.url}${canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`}`
+    : siteConfig.url;
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    '@id': `${pageUrl}#faq`,
     mainEntity: faqs.map((faq) => ({
       '@type': 'Question',
       name: faq.question,
@@ -217,4 +312,3 @@ export function generateFaqSchema(faqs: Array<{ question: string; answer: string
     })),
   };
 }
-

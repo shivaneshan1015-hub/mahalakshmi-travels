@@ -6,7 +6,7 @@
 import { Metadata } from 'next';
 import { siteConfig } from '@/config/site';
 import { constructMetadata } from '@/lib/seo/metadata';
-import { generateLocalBusinessSchema } from '@/lib/seo/schema';
+import { generateWebPageSchema } from '@/lib/seo/schema';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { HeroSection } from '@/components/home/HeroSection';
 import { JourneyDiscoverySection } from '@/components/home/JourneyDiscoverySection';
@@ -26,11 +26,17 @@ export const metadata: Metadata = constructMetadata({
 });
 
 export default function HomePage() {
-  const localBusinessSchema = generateLocalBusinessSchema();
+  const webPageSchema = generateWebPageSchema({
+    name: `${siteConfig.name} — ${siteConfig.tagline}`,
+    description: siteConfig.description,
+    url: '/',
+    pageType: 'WebPage',
+    aboutId: `${siteConfig.url}/#travelagency`,
+  });
 
   return (
     <>
-      <JsonLd data={localBusinessSchema} />
+      <JsonLd data={webPageSchema} />
       <div className="flex flex-col min-h-screen pb-16 md:pb-0">
         {/* 01 — Hero / Origin */}
         <HeroSection />

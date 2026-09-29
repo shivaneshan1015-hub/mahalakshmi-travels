@@ -4,6 +4,7 @@
  */
 
 import { TravelArticle } from '@/types/article';
+import { siteConfig } from '@/config/site';
 
 export const travelArticlesRepository: TravelArticle[] = [
   {
@@ -84,7 +85,7 @@ Because the Bodi Mettu to Munnar stretch involves steep gradients and narrow mou
     seo: {
       title: 'Madurai to Munnar Road Trip Guide: Route, Stops & Ghat Pacing | Mahalakshmi',
       description: 'Discover the scenic Bodi Mettu route from Madurai to Munnar. Detailed 157 km road breakdown, recommended breakfast halts, and hill driving tips.',
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/best-routes-madurai-to-munnar',
+      canonicalUrl: `${siteConfig.url}/travel-guide/best-routes-madurai-to-munnar`,
     },
   },
   {
@@ -151,7 +152,7 @@ The drive from Madurai to the base of the hills (Batlagundu) takes about 75 minu
     seo: {
       title: 'Family Trip to Kodaikanal from Madurai: Sightseeing & Pacing Guide | Mahalakshmi',
       description: 'Planning a family holiday to Kodaikanal from Madurai? Practical travel pacing, child & senior-friendly spots, and vehicle recommendations.',
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/kodaikanal-family-travel-guide',
+      canonicalUrl: `${siteConfig.url}/travel-guide/kodaikanal-family-travel-guide`,
     },
   },
   {
@@ -219,7 +220,7 @@ The drive from Madurai to the base of the hills (Batlagundu) takes about 75 minu
     seo: {
       title: '1 Night / 2 Days Munnar Itinerary from Madurai | Mahalakshmi Tour & Travel',
       description: 'The definitive 2-day Munnar weekend itinerary starting from Madurai. Sightseeing schedule, tea museum, Mattupetty dam, and route timings.',
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/madurai-to-munnar-1-night-2-days-itinerary',
+      canonicalUrl: `${siteConfig.url}/travel-guide/madurai-to-munnar-1-night-2-days-itinerary`,
     },
   },
   {
@@ -283,7 +284,7 @@ Mahalakshmi provides formal trip estimates and clear vehicle documentation to en
     seo: {
       title: 'College Industrial Visit (IV) Planning Guide from Madurai | Mahalakshmi',
       description: 'Complete guide for college student and faculty coordinators planning industrial visits and department tours across South India from Madurai.',
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/how-to-plan-college-industrial-visit-trip',
+      canonicalUrl: `${siteConfig.url}/travel-guide/how-to-plan-college-industrial-visit-trip`,
     },
   },
   {
@@ -349,7 +350,7 @@ Mahalakshmi provides formal trip estimates and clear vehicle documentation to en
     seo: {
       title: 'Top Weekend Getaways from Madurai (Within 200 KM) | Mahalakshmi',
       description: 'Explore the best 1-day and 2-day short trips from Madurai. Hill stations, coastal drives, and wildlife sanctuaries with travel times.',
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/weekend-getaways-from-madurai',
+      canonicalUrl: `${siteConfig.url}/travel-guide/weekend-getaways-from-madurai`,
     },
   },
   {
@@ -415,7 +416,7 @@ Driving another 18 km past Rameswaram town brings you to **Arichal Munai (Landâ€
     seo: {
       title: 'Madurai to Rameswaram & Dhanushkodi Road Trip Guide | Mahalakshmi',
       description: 'Complete road trip guide from Madurai to Rameswaram and Dhanushkodi. Pamban bridge crossing, temple timings, and 1-day itinerary breakdown.',
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/rameswaram-dhanushkodi-day-trip-guide',
+      canonicalUrl: `${siteConfig.url}/travel-guide/rameswaram-dhanushkodi-day-trip-guide`,
     },
   },
   {
@@ -482,7 +483,7 @@ The route from Madurai follows 4-lane highway up to Batlagundu (72 KM), followed
     seo: {
       title: 'Madurai to Kodaikanal 1-Day Trip Plan & Travel Guide | Mahalakshmi',
       description: 'Detailed 1-day Kodaikanal trip itinerary from Madurai. 120 km route timing, sightseeing places, Silver Cascade, Kodai Lake boating, and vehicle options.',
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/madurai-to-kodaikanal-one-day-trip-plan',
+      canonicalUrl: `${siteConfig.url}/travel-guide/madurai-to-kodaikanal-one-day-trip-plan`,
     },
   },
   {
@@ -548,7 +549,7 @@ For joint family yatras and senior citizen groups:
     seo: {
       title: 'Madurai to Tiruchendur & Rameshwaram Temple Tour Guide | Mahalakshmi',
       description: 'Complete pilgrimage travel guide from Madurai to Tiruchendur Murugan temple and Rameshwaram 22 theerthams. Route map, timings, and van hire.',
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/madurai-to-tiruchendur-rameshwaram-temple-tour-guide',
+      canonicalUrl: `${siteConfig.url}/travel-guide/madurai-to-tiruchendur-rameshwaram-temple-tour-guide`,
     },
   },
   {
@@ -606,7 +607,7 @@ For joint family yatras and senior citizen groups:
     seo: {
       title: 'Madurai Airport (IXM) Outstation Taxi & Group Van Hire | Mahalakshmi',
       description: 'Book reliable outstation taxi and 21-seater van pickups from Madurai Airport (IXM) to Kodaikanal, Munnar, and Rameshwaram.',
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/madurai-airport-ixm-outstation-cab-travel-guide',
+      canonicalUrl: `${siteConfig.url}/travel-guide/madurai-airport-ixm-outstation-cab-travel-guide`,
     },
   },
   {
@@ -663,7 +664,7 @@ Our dedicated event coordinators manage continuous pickup shuttles from Madurai 
     seo: {
       title: 'Wedding Guest Transport & Marriage Hall Van Hire in Madurai | Mahalakshmi',
       description: 'Book 21-seater AC vans and private sedan cabs for wedding guest transportation in Madurai. Airport & station shuttles, marriage mandapam transit.',
-      canonicalUrl: 'https://mahalakshmitravels.com/travel-guide/wedding-guest-transportation-madurai-marriage-halls',
+      canonicalUrl: `${siteConfig.url}/travel-guide/wedding-guest-transportation-madurai-marriage-halls`,
     },
   },
 ];

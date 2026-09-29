@@ -6,6 +6,7 @@
 import { MetadataRoute } from 'next';
 import { siteConfig } from '@/config/site';
 import { getSitemapEligibleRecords } from '@/config/canonical-registry';
+import { travelArticlesRepository } from '@/lib/data/articles';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = siteConfig.url;
@@ -14,6 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return eligibleRecords.map((record) => {
     let priority = 0.7;
     let changeFrequency: 'daily' | 'weekly' | 'monthly' = 'weekly';
+    let lastModified: Date | undefined = undefined;
 
     if (record.canonicalPath === '/') {
       priority = 1.0;
@@ -27,11 +29,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     } else if (record.contentType === 'guide') {
       priority = 0.7;
       changeFrequency = 'monthly';
+      const slug = record.canonicalPath.replace('/travel-guide/', '');
+      const article = travelArticlesRepository.find((a) => a.slug === slug);
+      if (article) {
+        lastModified = new Date(article.updatedDate || article.publishedDate);
+      }
     }
 
     return {
       url: `${baseUrl}${record.canonicalPath}`,
-      lastModified: new Date(),
+      ...(lastModified ? { lastModified } : {}),
       changeFrequency,
       priority,
     };

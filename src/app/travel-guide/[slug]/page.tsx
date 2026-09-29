@@ -8,7 +8,8 @@ import { notFound } from 'next/navigation';
 import { getAllArticles, getArticleBySlug } from '@/lib/data/articles';
 import { resolveArticleRelations } from '@/lib/data/relationships';
 import { constructMetadata } from '@/lib/seo/metadata';
-import { generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo/schema';
+import { generateArticleSchema, generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo/schema';
+import { siteConfig } from '@/config/site';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
 import { ArticleHero } from '@/components/guide/ArticleHero';
@@ -85,14 +86,27 @@ export default async function TravelArticleDetailPage({ params }: ArticlePagePro
   }
 
   const articleSchema = generateArticleSchema(article);
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Home', itemUrl: 'https://mahalakshmitravels.com', position: 1 },
-    { name: 'Travel Guide', itemUrl: 'https://mahalakshmitravels.com/travel-guide', position: 2 },
-    { name: article.title, itemUrl: `https://mahalakshmitravels.com/travel-guide/${article.slug}`, position: 3 },
-  ]);
+
+  const breadcrumbs = [
+    { name: 'Home', itemUrl: '/', position: 1 },
+    { name: 'Travel Guide', itemUrl: '/travel-guide', position: 2 },
+    { name: article.title, itemUrl: `/travel-guide/${article.slug}`, position: 3 },
+  ];
+
+  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs, `/travel-guide/${article.slug}`);
+
+  const webPageSchema = generateWebPageSchema({
+    name: article.seo.title,
+    description: article.seo.description,
+    url: `/travel-guide/${article.slug}`,
+    pageType: 'WebPage',
+    mainEntityId: `${siteConfig.url}/travel-guide/${article.slug}#article`,
+    breadcrumbId: `${siteConfig.url}/travel-guide/${article.slug}#breadcrumb`,
+  });
 
   return (
     <>
+      <JsonLd data={webPageSchema} />
       <JsonLd data={articleSchema} />
       <JsonLd data={breadcrumbSchema} />
 

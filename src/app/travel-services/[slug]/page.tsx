@@ -8,7 +8,8 @@ import { notFound } from 'next/navigation';
 import { getAllTravelServices, getTravelServiceBySlug } from '@/lib/data/services';
 import { resolveServiceRelations } from '@/lib/data/relationships';
 import { constructMetadata } from '@/lib/seo/metadata';
-import { generateBreadcrumbSchema } from '@/lib/seo/schema';
+import { generateBreadcrumbSchema, generateFaqSchema, generateWebPageSchema } from '@/lib/seo/schema';
+import { siteConfig } from '@/config/site';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
 import { ServiceDetailHero } from '@/components/services/ServiceDetailHero';
@@ -55,15 +56,29 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   const { tours: relatedTours } = resolveServiceRelations(service.slug);
 
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Home', itemUrl: 'https://mahalakshmitravels.com', position: 1 },
-    { name: 'Travel Services', itemUrl: 'https://mahalakshmitravels.com/travel-services', position: 2 },
-    { name: service.title, itemUrl: `https://mahalakshmitravels.com/travel-services/${service.slug}`, position: 3 },
-  ]);
+  const breadcrumbs = [
+    { name: 'Home', itemUrl: '/', position: 1 },
+    { name: 'Travel Services', itemUrl: '/travel-services', position: 2 },
+    { name: service.title, itemUrl: `/travel-services/${service.slug}`, position: 3 },
+  ];
+
+  const breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs, `/travel-services/${service.slug}`);
+
+  const webPageSchema = generateWebPageSchema({
+    name: `${service.title} in Madurai`,
+    description: service.shortDescription,
+    url: `/travel-services/${service.slug}`,
+    pageType: 'WebPage',
+    breadcrumbId: `${siteConfig.url}/travel-services/${service.slug}#breadcrumb`,
+  });
 
   return (
     <>
+      <JsonLd data={webPageSchema} />
       <JsonLd data={breadcrumbSchema} />
+      {service.faqs && service.faqs.length > 0 && (
+        <JsonLd data={generateFaqSchema(service.faqs, `/travel-services/${service.slug}`)} />
+      )}
 
       <div className="container-editorial py-10 md:py-16">
         {/* Breadcrumb Navigation */}

@@ -5,7 +5,8 @@
 
 import { Metadata } from 'next';
 import { constructMetadata } from '@/lib/seo/metadata';
-import { generateBreadcrumbSchema } from '@/lib/seo/schema';
+import { generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo/schema';
+import { siteConfig } from '@/config/site';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
 import { getAllArticles, getFeaturedArticle } from '@/lib/data/articles';
@@ -21,14 +22,23 @@ export default function TravelGuidePage() {
   const articles = getAllArticles();
   const featuredArticle = getFeaturedArticle();
 
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Home', itemUrl: 'https://mahalakshmitravels.com', position: 1 },
-    { name: 'Travel Guide', itemUrl: 'https://mahalakshmitravels.com/travel-guide', position: 2 },
-  ]);
+  const breadcrumbs = [
+    { name: 'Home', itemUrl: '/', position: 1 },
+    { name: 'Travel Guide', itemUrl: '/travel-guide', position: 2 },
+  ];
+
+  const webPageSchema = generateWebPageSchema({
+    name: 'South India Travel Guide & Route Insights from Madurai | Mahalakshmi',
+    description: 'Editorial guides, mountain highway route insights, and family travel planning tips across Munnar, Kodaikanal, Rameswaram, and South India.',
+    url: '/travel-guide',
+    pageType: 'CollectionPage',
+    breadcrumbId: `${siteConfig.url}/travel-guide#breadcrumb`,
+  });
 
   return (
     <>
-      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={webPageSchema} />
+      <JsonLd data={generateBreadcrumbSchema(breadcrumbs, '/travel-guide')} />
 
       <div className="container-editorial py-10 md:py-16">
         {/* Breadcrumb Navigation */}

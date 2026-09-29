@@ -28,6 +28,7 @@ import {
   generateWhatsAppMessage,
   WhatsAppTemplateOptions,
 } from '@/lib/crm/whatsapp-templates';
+import { siteConfig } from '@/config/site';
 
 export default function EnquiryDetailPage() {
   const params = useParams();
@@ -578,7 +579,7 @@ export default function EnquiryDetailPage() {
                   type="button"
                   onClick={() =>
                     handleAppendSnippet(
-                      `🌐 *View Your Day-Wise Itinerary Dossier:*\nhttps://mahalakshmitravels.com/itinerary/${enquiry.referenceCode}`
+                      `🌐 *View Your Day-Wise Itinerary Dossier:*\n${siteConfig.url}/itinerary/${enquiry.referenceCode}`
                     )
                   }
                   className="px-2.5 py-1 rounded bg-[#242422] hover:bg-[#333330] text-[#D3957C] border border-[#3D3D39] transition-colors cursor-pointer"
