@@ -25,7 +25,7 @@ The validator script `scripts/validate-integrity.mjs` validates 35 distinct chec
 - Zero broken or legacy slug references.
 
 ### B. Business Truth & Pricing
-- Mandatory business identity, phone, email, operating since (2014), hours, coverage, and owned fleet metrics.
+- Mandatory business identity, phone, email, operating since (2021), hours, coverage, and owned fleet metrics.
 - Enforces ZERO public pricing exposure on tours/vehicles/schemas to prevent unverified quote commitments.
 
 ### C. Unsupported Claims
