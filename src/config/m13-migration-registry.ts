@@ -118,20 +118,20 @@ export const m13MigrationRegistry: M13MigrationRecord[] = [
   // ---------------------------------------------------------------------------
   // ALL 14 M13 PERMANENT REDIRECTS (REDIRECT)
   // ---------------------------------------------------------------------------
-  { sourcePath: '/customised-tours', action: 'REDIRECT', redirectTarget: '/plan-your-journey', reason: 'Legacy custom tour path redirected to canonical Custom Journey Builder' },
-  { sourcePath: '/group-travel', action: 'REDIRECT', redirectTarget: '/travel-services/group-travel', reason: 'Legacy group travel path redirected to canonical service path' },
-  { sourcePath: '/college-trips', action: 'REDIRECT', redirectTarget: '/travel-services/college-trips', reason: 'Legacy college trips path redirected to canonical service path' },
-  { sourcePath: '/family-travel', action: 'REDIRECT', redirectTarget: '/travel-services/family-travel', reason: 'Legacy family travel path redirected to canonical service path' },
-  { sourcePath: '/function-travel', action: 'REDIRECT', redirectTarget: '/travel-services/function-travel', reason: 'Legacy function travel path redirected to canonical service path' },
-  { sourcePath: '/tours/madurai-meenakshi-amman-temple', action: 'REDIRECT', redirectTarget: '/tours/madurai', reason: 'Legacy tour slug redirected to canonical Madurai tour' },
-  { sourcePath: '/tours/thanjavur-big-temple', action: 'REDIRECT', redirectTarget: '/tours/thanjavur', reason: 'Legacy tour slug redirected to canonical Thanjavur tour' },
-  { sourcePath: '/travel-guide/college-industrial-visit-planning-guide', action: 'REDIRECT', redirectTarget: '/travel-guide/how-to-plan-college-industrial-visit-trip', reason: 'Legacy article slug redirected to canonical guide' },
-  { sourcePath: '/travel-guide/temple-tour-etiquette-and-darshan-tips', action: 'REDIRECT', redirectTarget: '/travel-guide/weekend-getaways-from-madurai', reason: 'Legacy article slug redirected to canonical guide' },
-  { sourcePath: '/travel-guide/choosing-between-van-and-sedan-for-group-travel', action: 'REDIRECT', redirectTarget: '/travel-guide/rameswaram-dhanushkodi-day-trip-guide', reason: 'Legacy article slug redirected to canonical guide' },
-  { sourcePath: '/travel-guide/rameshwaram-dhanushkodi-1-day-trip-guide', action: 'REDIRECT', redirectTarget: '/travel-guide/madurai-to-kodaikanal-one-day-trip-plan', reason: 'Legacy article slug redirected to canonical guide' },
-  { sourcePath: '/travel-guide/south-india-hill-station-packing-checklist', action: 'REDIRECT', redirectTarget: '/travel-guide/madurai-to-tiruchendur-rameshwaram-temple-tour-guide', reason: 'Legacy article slug redirected to canonical guide' },
-  { sourcePath: '/travel-guide/monsoon-travel-tips-western-ghats', action: 'REDIRECT', redirectTarget: '/travel-guide/madurai-airport-ixm-outstation-cab-travel-guide', reason: 'Legacy article slug redirected to canonical guide' },
-  { sourcePath: '/travel-guide/madurai-sightseeing-food-culture-guide', action: 'REDIRECT', redirectTarget: '/travel-guide/wedding-guest-transportation-madurai-marriage-halls', reason: 'Legacy article slug redirected to canonical guide' },
+  { sourcePath: '/customised-tours', action: 'REDIRECT', redirectTarget: '/plan-your-journey', canonicalPath: '/plan-your-journey', reason: 'Legacy custom tour path redirected to canonical Custom Journey Builder' },
+  { sourcePath: '/group-travel', action: 'REDIRECT', redirectTarget: '/travel-services/group-travel', canonicalPath: '/travel-services/group-travel', reason: 'Legacy group travel path redirected to canonical service path' },
+  { sourcePath: '/college-trips', action: 'REDIRECT', redirectTarget: '/travel-services/college-trips', canonicalPath: '/travel-services/college-trips', reason: 'Legacy college trips path redirected to canonical service path' },
+  { sourcePath: '/family-travel', action: 'REDIRECT', redirectTarget: '/travel-services/family-travel', canonicalPath: '/travel-services/family-travel', reason: 'Legacy family travel path redirected to canonical service path' },
+  { sourcePath: '/function-travel', action: 'REDIRECT', redirectTarget: '/travel-services/function-travel', canonicalPath: '/travel-services/function-travel', reason: 'Legacy function travel path redirected to canonical service path' },
+  { sourcePath: '/tours/madurai-meenakshi-amman-temple', action: 'REDIRECT', redirectTarget: '/tours/madurai', canonicalPath: '/tours/madurai', reason: 'Legacy tour slug redirected to canonical Madurai tour' },
+  { sourcePath: '/tours/thanjavur-big-temple', action: 'REDIRECT', redirectTarget: '/tours/thanjavur', canonicalPath: '/tours/thanjavur', reason: 'Legacy tour slug redirected to canonical Thanjavur tour' },
+  { sourcePath: '/travel-guide/college-industrial-visit-planning-guide', action: 'REDIRECT', redirectTarget: '/travel-guide/how-to-plan-college-industrial-visit-trip', canonicalPath: '/travel-guide/how-to-plan-college-industrial-visit-trip', reason: 'Legacy article slug redirected to canonical guide' },
+  { sourcePath: '/travel-guide/temple-tour-etiquette-and-darshan-tips', action: 'REDIRECT', redirectTarget: '/travel-guide/weekend-getaways-from-madurai', canonicalPath: '/travel-guide/weekend-getaways-from-madurai', reason: 'Legacy article slug redirected to canonical guide' },
+  { sourcePath: '/travel-guide/choosing-between-van-and-sedan-for-group-travel', action: 'REDIRECT', redirectTarget: '/travel-guide/rameswaram-dhanushkodi-day-trip-guide', canonicalPath: '/travel-guide/rameswaram-dhanushkodi-day-trip-guide', reason: 'Legacy article slug redirected to canonical guide' },
+  { sourcePath: '/travel-guide/rameshwaram-dhanushkodi-1-day-trip-guide', action: 'REDIRECT', redirectTarget: '/travel-guide/madurai-to-kodaikanal-one-day-trip-plan', canonicalPath: '/travel-guide/madurai-to-kodaikanal-one-day-trip-plan', reason: 'Legacy article slug redirected to canonical guide' },
+  { sourcePath: '/travel-guide/south-india-hill-station-packing-checklist', action: 'REDIRECT', redirectTarget: '/travel-guide/madurai-to-tiruchendur-rameshwaram-temple-tour-guide', canonicalPath: '/travel-guide/madurai-to-tiruchendur-rameshwaram-temple-tour-guide', reason: 'Legacy article slug redirected to canonical guide' },
+  { sourcePath: '/travel-guide/monsoon-travel-tips-western-ghats', action: 'REDIRECT', redirectTarget: '/travel-guide/madurai-airport-ixm-outstation-cab-travel-guide', canonicalPath: '/travel-guide/madurai-airport-ixm-outstation-cab-travel-guide', reason: 'Legacy article slug redirected to canonical guide' },
+  { sourcePath: '/travel-guide/madurai-sightseeing-food-culture-guide', action: 'REDIRECT', redirectTarget: '/travel-guide/wedding-guest-transportation-madurai-marriage-halls', canonicalPath: '/travel-guide/wedding-guest-transportation-madurai-marriage-halls', reason: 'Legacy article slug redirected to canonical guide' },
 ];
 
 /**

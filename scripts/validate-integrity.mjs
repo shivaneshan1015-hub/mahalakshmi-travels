@@ -580,9 +580,91 @@ const m13MigrationContent = m13MigrationExists ? fs.readFileSync(m13MigrationPat
 const nextConfigPath = path.join(rootDir, 'next.config.ts');
 const nextConfigContent = fs.readFileSync(nextConfigPath, 'utf-8');
 
+// Parse next.config.ts redirects
 const redirectMatches = [...nextConfigContent.matchAll(/{\s*source:\s*['"]([^'"]+)['"],\s*destination:\s*['"]([^'"]+)['"],\s*permanent:\s*true\s*}/g)];
 const redirectSources = redirectMatches.map(m => m[1]);
 const redirectDestinations = redirectMatches.map(m => m[2]);
+
+// Parse m13MigrationRegistry records (order-independent)
+const matrixBlockRegex = /{\s*sourcePath:\s*['"]([^'"]+)['"][\s\S]*?}/g;
+
+const matrixRecords = [];
+let matrixBlockMatch;
+while ((matrixBlockMatch = matrixBlockRegex.exec(m13MigrationContent)) !== null) {
+  const block = matrixBlockMatch[0];
+  const sourcePath = matrixBlockMatch[1];
+  const actionMatch = block.match(/action:\s*['"]([^'"]+)['"]/);
+  const canonicalMatch = block.match(/canonicalPath:\s*['"]([^'"]+)['"]/);
+  const targetMatch = block.match(/redirectTarget:\s*['"]([^'"]+)['"]/);
+  const indexabilityMatch = block.match(/indexability:\s*['"]([^'"]+)['"]/);
+  const reasonMatch = block.match(/reason:\s*['"]([^'"]+)['"]/);
+
+  matrixRecords.push({
+    sourcePath,
+    action: actionMatch ? actionMatch[1] : '',
+    canonicalPath: canonicalMatch ? canonicalMatch[1] : undefined,
+    redirectTarget: targetMatch ? targetMatch[1] : undefined,
+    indexability: indexabilityMatch ? indexabilityMatch[1] : undefined,
+    reason: reasonMatch ? reasonMatch[1] : '',
+  });
+}
+
+let matrixFieldErrors = [];
+let matrixDuplicateSources = [];
+const seenSources = new Set();
+
+for (const rec of matrixRecords) {
+  if (seenSources.has(rec.sourcePath)) {
+    matrixDuplicateSources.push(rec.sourcePath);
+  }
+  seenSources.add(rec.sourcePath);
+
+  // Field & action validations
+  if (!['KEEP', 'RESTRUCTURE', 'REDIRECT', 'REMOVE', 'CREATE'].includes(rec.action)) {
+    matrixFieldErrors.push(`Invalid action '${rec.action}' for sourcePath ${rec.sourcePath}`);
+  }
+
+  if (!rec.reason || rec.reason.trim().length === 0) {
+    matrixFieldErrors.push(`Missing reason for sourcePath ${rec.sourcePath}`);
+  }
+
+  if (rec.action === 'REDIRECT') {
+    if (!rec.redirectTarget) {
+      matrixFieldErrors.push(`REDIRECT record for ${rec.sourcePath} missing redirectTarget`);
+    }
+    if (!rec.canonicalPath) {
+      matrixFieldErrors.push(`REDIRECT record for ${rec.sourcePath} missing canonicalPath`);
+    }
+    if (rec.redirectTarget && !allRegistryPaths.includes(rec.redirectTarget)) {
+      matrixFieldErrors.push(`REDIRECT target ${rec.redirectTarget} for ${rec.sourcePath} does not exist in canonical registry`);
+    }
+    if (rec.redirectTarget && redirectSources.includes(rec.redirectTarget)) {
+      matrixFieldErrors.push(`REDIRECT target ${rec.redirectTarget} for ${rec.sourcePath} is itself a redirect source (chain detected)`);
+    }
+    // Single Source of Truth check against next.config.ts
+    const nextConfigTarget = redirectDestinations[redirectSources.indexOf(rec.sourcePath)];
+    if (nextConfigTarget && rec.redirectTarget !== nextConfigTarget) {
+      matrixFieldErrors.push(
+        `M13 MIGRATION MATRIX FAILURE\nSource:\n  ${rec.sourcePath}\nProblem:\n  redirectTarget does not match next.config.ts\nExpected:\n  ${nextConfigTarget}\nActual:\n  ${rec.redirectTarget}`
+      );
+    }
+  }
+
+  if (rec.action === 'KEEP') {
+    if (!rec.canonicalPath) {
+      matrixFieldErrors.push(`KEEP record for ${rec.sourcePath} missing canonicalPath`);
+    }
+  }
+}
+
+// Check single-source-of-truth alignment: All next.config.ts redirect sources must be in migration registry
+const matrixRedirectRecords = matrixRecords.filter(r => r.action === 'REDIRECT');
+let missingRedirectsInMatrix = [];
+for (const src of redirectSources) {
+  if (!matrixRedirectRecords.some(r => r.sourcePath === src)) {
+    missingRedirectsInMatrix.push(src);
+  }
+}
 
 let m13ChainsOrLoopsCount = 0;
 for (const dest of redirectDestinations) {
@@ -618,7 +700,6 @@ function auditInternalLinksInDir(dir) {
     if (entry.isDirectory()) {
       auditInternalLinksInDir(fullPath);
     } else if (/\.(ts|tsx|js|mjs)$/.test(entry.name)) {
-      // Exclude migration matrix & canonical registry definitions themselves
       if (
         relPath === 'src/config/m13-migration-registry.ts' ||
         relPath === 'src/config/canonical-registry.ts'
@@ -635,7 +716,6 @@ function auditInternalLinksInDir(dir) {
           const src = redirectSources[s];
           const target = redirectDestinations[s];
 
-          // Look for direct string or route usage of legacy path
           const pattern = new RegExp(`['"\`]${src}['"\`]`, 'g');
           if (pattern.test(line)) {
             m13InternalLinkFailures.push(
@@ -656,7 +736,6 @@ if (m13InternalLinkFailures.length > 0) {
   }
 }
 
-
 // Duplicate Redirect Ownership Audit (ensure no page-level redirect files exist in src/app)
 let m13DuplicateRedirectCount = 0;
 for (const src of redirectSources) {
@@ -668,10 +747,52 @@ for (const src of redirectSources) {
   }
 }
 
+// Complete Route Coverage Validation (Fix C)
+let unexplainedRoutes = [];
+const appDirRoutes = [];
+
+function scanAppRoutes(dir, currentRoute = '') {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      if (['admin', 'api', 'design-system', '_next'].includes(entry.name)) continue;
+      scanAppRoutes(fullPath, `${currentRoute}/${entry.name}`);
+    } else if (entry.name === 'page.tsx') {
+      const route = currentRoute === '' ? '/' : currentRoute;
+      appDirRoutes.push(route);
+    }
+  }
+}
+
+scanAppRoutes(path.join(rootDir, 'src', 'app'));
+
+for (const route of appDirRoutes) {
+  const isDynamic = route.includes('[');
+  if (!isDynamic) {
+    const inMatrix = matrixRecords.some(r => r.sourcePath === route);
+    const inCanonical = allRegistryPaths.includes(route);
+    if (!inMatrix && !inCanonical) {
+      unexplainedRoutes.push(route);
+    }
+  }
+}
+
 const m13MigrationMatrixPass =
   m13MigrationExists &&
-  m13MigrationContent.includes('m13MigrationRegistry') &&
-  redirectSources.every(src => m13MigrationContent.includes(`'${src}'`) || m13MigrationContent.includes(`"${src}"`));
+  matrixRecords.length >= 70 &&
+  matrixFieldErrors.length === 0 &&
+  matrixDuplicateSources.length === 0 &&
+  missingRedirectsInMatrix.length === 0 &&
+  unexplainedRoutes.length === 0;
+
+if (!m13MigrationMatrixPass) {
+  if (matrixFieldErrors.length > 0) console.error('Matrix Field Errors:', matrixFieldErrors);
+  if (matrixDuplicateSources.length > 0) console.error('Matrix Duplicate Sources:', matrixDuplicateSources);
+  if (missingRedirectsInMatrix.length > 0) console.error('Missing Redirects in Matrix:', missingRedirectsInMatrix);
+  if (unexplainedRoutes.length > 0) console.error('Unexplained Routes:', unexplainedRoutes);
+}
+
 
 const m13Pass =
   redirectMatches.length >= 14 &&
@@ -682,6 +803,7 @@ const m13Pass =
   m13InternalLinkFailures.length === 0 &&
   m13DuplicateRedirectCount === 0 &&
   m13MigrationMatrixPass;
+
 
 
 // -----------------------------------------------------------------------------
