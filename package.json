@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "integrity": "node scripts/validate-integrity.mjs"
+    "integrity": "node scripts/validate-integrity.mjs",
+    "m13:redirect-smoke": "node scripts/smoke-test-m13-redirects.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

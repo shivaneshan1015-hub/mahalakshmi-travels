@@ -19,10 +19,10 @@ export function TravelTogetherSection() {
   const sedan = vehicles.find((v) => v.category === 'sedan-car') || vehicles[1];
 
   const useCases = [
-    { label: 'Family Travel', href: '/family-travel' },
-    { label: 'College Trips', href: '/college-trips' },
-    { label: 'Group Travel', href: '/group-travel' },
-    { label: 'Function & Weddings', href: '/function-travel' },
+    { label: 'Family Travel', href: '/travel-services/family-travel' },
+    { label: 'College Trips', href: '/travel-services/college-trips' },
+    { label: 'Group Travel', href: '/travel-services/group-travel' },
+    { label: 'Function & Weddings', href: '/travel-services/function-travel' },
   ];
 
   return (

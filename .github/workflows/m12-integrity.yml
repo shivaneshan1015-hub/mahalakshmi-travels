@@ -1,4 +1,4 @@
-name: M12 Integrity & Build Validation
+name: M12/M13 Integrity & Build Validation
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   validate:
-    name: M12 CI Integrity Suite
+    name: M12/M13 CI Integrity & Migration Suite
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run M12 Integrity Validator
+      - name: Run Integrity Validator
         run: npm run integrity
 
       - name: Run TypeScript Type Check
@@ -35,3 +35,6 @@ jobs:
 
       - name: Run Next.js Production Build
         run: npm run build
+
+      - name: Run M13 HTTP Redirect Smoke Test
+        run: npm run m13:redirect-smoke

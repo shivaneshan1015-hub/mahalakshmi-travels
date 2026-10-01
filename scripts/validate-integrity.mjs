@@ -573,6 +573,10 @@ const m12AllPass =
 // -----------------------------------------------------------------------------
 // 5D. PHASE M13 ROUTE / MIGRATION INTEGRITY AUDIT
 // -----------------------------------------------------------------------------
+const m13MigrationPath = path.join(rootDir, 'src', 'config', 'm13-migration-registry.ts');
+const m13MigrationExists = fs.existsSync(m13MigrationPath);
+const m13MigrationContent = m13MigrationExists ? fs.readFileSync(m13MigrationPath, 'utf-8') : '';
+
 const nextConfigPath = path.join(rootDir, 'next.config.ts');
 const nextConfigContent = fs.readFileSync(nextConfigPath, 'utf-8');
 
@@ -601,14 +605,73 @@ const m13CustomJourneyPass =
 
 const m13ToursPass = tourCount === 39 && tourRegistry.every(t => t.canonicalPath.startsWith('/tours/'));
 
-const navFilePath = path.join(rootDir, 'src', 'config', 'navigation.ts');
-const navContent = fs.readFileSync(navFilePath, 'utf-8');
-let m13InternalLinkRedirectCount = 0;
-for (const src of redirectSources) {
-  if (navContent.includes(`'${src}'`) || navContent.includes(`"${src}"`)) {
-    m13InternalLinkRedirectCount++;
+// Application-Wide Internal Link Audit across src/**
+const srcDir = path.join(rootDir, 'src');
+let m13InternalLinkFailures = [];
+
+function auditInternalLinksInDir(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    const relPath = path.relative(rootDir, fullPath).replace(/\\/g, '/');
+
+    if (entry.isDirectory()) {
+      auditInternalLinksInDir(fullPath);
+    } else if (/\.(ts|tsx|js|mjs)$/.test(entry.name)) {
+      // Exclude migration matrix & canonical registry definitions themselves
+      if (
+        relPath === 'src/config/m13-migration-registry.ts' ||
+        relPath === 'src/config/canonical-registry.ts'
+      ) {
+        continue;
+      }
+
+      const fileContent = fs.readFileSync(fullPath, 'utf-8');
+      const lines = fileContent.split('\n');
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        for (let s = 0; s < redirectSources.length; s++) {
+          const src = redirectSources[s];
+          const target = redirectDestinations[s];
+
+          // Look for direct string or route usage of legacy path
+          const pattern = new RegExp(`['"\`]${src}['"\`]`, 'g');
+          if (pattern.test(line)) {
+            m13InternalLinkFailures.push(
+              `M13 INTERNAL LINK FAILURE Legacy route referenced internally: ${src} Found in: ${relPath}:${i + 1} Expected canonical route: ${target}`
+            );
+          }
+        }
+      }
+    }
   }
 }
+
+auditInternalLinksInDir(srcDir);
+
+if (m13InternalLinkFailures.length > 0) {
+  for (const failMsg of m13InternalLinkFailures) {
+    console.error(failMsg);
+  }
+}
+
+
+// Duplicate Redirect Ownership Audit (ensure no page-level redirect files exist in src/app)
+let m13DuplicateRedirectCount = 0;
+for (const src of redirectSources) {
+  const appPathPart = src.startsWith('/') ? src.slice(1) : src;
+  const potentialPagePath = path.join(rootDir, 'src', 'app', appPathPart, 'page.tsx');
+  if (fs.existsSync(potentialPagePath)) {
+    m13DuplicateRedirectCount++;
+    console.error(`M13 DUPLICATE REDIRECT FAILURE Page file exists for next.config redirect source: ${potentialPagePath}`);
+  }
+}
+
+const m13MigrationMatrixPass =
+  m13MigrationExists &&
+  m13MigrationContent.includes('m13MigrationRegistry') &&
+  redirectSources.every(src => m13MigrationContent.includes(`'${src}'`) || m13MigrationContent.includes(`"${src}"`));
 
 const m13Pass =
   redirectMatches.length >= 14 &&
@@ -616,7 +679,10 @@ const m13Pass =
   m13InvalidTargetsCount === 0 &&
   m13CustomJourneyPass &&
   m13ToursPass &&
-  m13InternalLinkRedirectCount === 0;
+  m13InternalLinkFailures.length === 0 &&
+  m13DuplicateRedirectCount === 0 &&
+  m13MigrationMatrixPass;
+
 
 // -----------------------------------------------------------------------------
 // 6. TECHNICAL INTEGRITY AUDIT (DYNAMIC EXECUTION)
@@ -735,11 +801,14 @@ console.log(`- Next.js Production Build: ${buildPass ? 'PASS' : 'FAIL'}\n`);
 console.log('------------------------------------------------------------');
 console.log('GROUP G: M13 ROUTE / MIGRATION INTEGRITY');
 console.log('------------------------------------------------------------');
+console.log(`- M13 Migration Registry Matrix: ${m13MigrationMatrixPass ? 'PASS' : 'FAIL'}`);
 console.log(`- One-Step Redirect Matrix (${redirectMatches.length} Redirects): ${m13ChainsOrLoopsCount === 0 && m13InvalidTargetsCount === 0 ? 'PASS (0 chains/loops)' : 'FAIL'}`);
+console.log(`- Duplicate Redirect Ownership (0 duplicate implementations): ${m13DuplicateRedirectCount === 0 ? 'PASS' : 'FAIL'}`);
 console.log(`- Canonical Custom Journey Route (/plan-your-journey): ${m13CustomJourneyPass ? 'PASS' : 'FAIL'}`);
 console.log(`- Exactly 39 Canonical Tour Routes: ${m13ToursPass ? 'PASS' : 'FAIL'}`);
-console.log(`- Internal Link Hygiene (0 links to legacy redirects): ${m13InternalLinkRedirectCount === 0 ? 'PASS' : 'FAIL'}`);
+console.log(`- Application-Wide Internal Link Scan (0 links to legacy redirects): ${m13InternalLinkFailures.length === 0 ? 'PASS' : 'FAIL'}`);
 console.log(`- M13 Migration Suite Overall: ${m13Pass ? 'PASS' : 'FAIL'}\n`);
+
 
 
 console.log('------------------------------------------------------------');
