@@ -8,7 +8,7 @@ on:
 
 jobs:
   validate:
-    name: Validate M12 Integrity, Types & Build
+    name: M12 CI Integrity Suite
     runs-on: ubuntu-latest
 
     steps:
@@ -24,14 +24,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run M12 Integrity Validation (M12-01 to M12-35)
+      - name: Run M12 Integrity Validator
         run: npm run integrity
 
-      - name: Run TypeScript typecheck
-        run: npm run typecheck
+      - name: Run TypeScript Type Check
+        run: npx tsc --noEmit
 
-      - name: Run ESLint
-        run: npm run lint
+      - name: Run Next.js Linter
+        run: npx next lint
 
-      - name: Run production build
+      - name: Run Next.js Production Build
         run: npm run build

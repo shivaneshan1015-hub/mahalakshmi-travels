@@ -602,8 +602,7 @@ const routesPass =
   fs.existsSync(path.join(appDir, 'plan-your-journey', 'page.tsx')) &&
   fs.existsSync(path.join(appDir, 'api', 'enquiry', 'route.ts'));
 
-const nextBuildManifest = path.join(rootDir, '.next', 'BUILD_ID');
-const buildPass = fs.existsSync(nextBuildManifest) || (tsPass && lintPass);
+const buildPass = tsPass && lintPass;
 
 // -----------------------------------------------------------------------------
 // OUTPUT GENERATION — RESPONSIBILITY GROUPS (A THROUGH F)
