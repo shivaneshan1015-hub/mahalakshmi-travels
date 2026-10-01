@@ -24,7 +24,7 @@ export const aeoQuestionRegistry: AEOQuestionOwnership[] = [
     entityType: 'vehicle',
     entityId: 'veh-21-seater',
     status: 'CONFIRMED',
-    answerText: 'Our 21-seater AC passenger van (20+1 pushback seats) is ideal for group trips, family functions, college industrial visits (IV), and outstation pilgrimages from Madurai.',
+    answerText: 'Our 21-seater AC passenger van accommodates 20 passengers plus a driver with pushback seating, rooftop luggage carrier, and rear boot space for outstation group travel from Madurai.',
   },
   {
     id: 'aeo-02',
@@ -34,7 +34,7 @@ export const aeoQuestionRegistry: AEOQuestionOwnership[] = [
     entityType: 'vehicle',
     entityId: 'veh-sedan-car',
     status: 'CONFIRMED',
-    answerText: 'AC sedan cars (4 passengers + driver) are best suited for small family vacations, couples, outstation drops, and airport transfers from Madurai.',
+    answerText: 'Our sedan cars accommodate 4 passengers plus a driver with AC cabin and 400+ litre boot space for small family trips, outstation travel, and Madurai airport transfers.',
   },
   {
     id: 'aeo-03',
@@ -44,7 +44,7 @@ export const aeoQuestionRegistry: AEOQuestionOwnership[] = [
     entityType: 'conversion',
     entityId: 'core-plan-your-journey',
     status: 'CONFIRMED',
-    answerText: 'You can design a custom itinerary using our 6-step Custom Journey Builder on /plan-your-journey or contact our Madurai travel desk directly via WhatsApp (+91 63801 92145) or phone call.',
+    answerText: 'You can plan a custom itinerary using the 6-step Custom Journey Builder on /plan-your-journey or contact our Madurai travel desk by phone (+91 63801 92145) or WhatsApp.',
   },
   {
     id: 'aeo-04',
@@ -54,7 +54,7 @@ export const aeoQuestionRegistry: AEOQuestionOwnership[] = [
     entityType: 'service',
     entityId: 'service-college-trips',
     status: 'CONFIRMED',
-    answerText: 'College industrial visits can be planned by selecting your route and student count for our 21-seater AC passenger van equipped with pushback seating, luggage bay, and institutional billing support.',
+    answerText: 'College industrial visits can be planned by selecting your route and student batch count for our 21-seater AC passenger van with pushback seating, luggage storage, and outstation route coordination.',
   },
   {
     id: 'aeo-05',
@@ -64,7 +64,7 @@ export const aeoQuestionRegistry: AEOQuestionOwnership[] = [
     entityType: 'guide',
     entityId: 'art-01',
     status: 'CONFIRMED',
-    answerText: 'The primary driving route follows NH 85 via Usilampatti, Theni, Bodinayakanur, and the Bodi Mettu mountain pass (157 KM, approx. 4.5 to 5 hours driving time).',
+    answerText: 'The driving route from Madurai to Munnar follows NH 85 via Usilampatti, Theni, Bodinayakanur, and the Bodi Mettu mountain pass, spanning 157 KM with approximately 4.5 to 5 hours driving time.',
   },
   {
     id: 'aeo-06',
@@ -74,7 +74,7 @@ export const aeoQuestionRegistry: AEOQuestionOwnership[] = [
     entityType: 'guide',
     entityId: 'art-02',
     status: 'CONFIRMED',
-    answerText: 'Planning a family trip to Kodaikanal (120 KM from Madurai) involves an early morning departure (6:30–7:30 AM), driving via Batlagundu ghat road, and visiting child and senior-friendly spots like Coaker’s Walk, Kodai Lake, and Bryant Park.',
+    answerText: 'Planning a family trip to Kodaikanal (120 KM from Madurai) involves driving via the Batlagundu ghat road and visiting locations such as Coaker’s Walk, Kodaikanal Lake promenade, and Bryant Park.',
   },
   {
     id: 'aeo-07',
@@ -84,7 +84,7 @@ export const aeoQuestionRegistry: AEOQuestionOwnership[] = [
     entityType: 'core',
     entityId: 'core-contact',
     status: 'CONFIRMED',
-    answerText: 'Reach our Madurai travel desk directly by phone at +91 63801 92145, WhatsApp (+91 63801 92145), or email (mahalakshmitoursandtravels6@gmail.com). Office hours are 9:00 AM to 7:00 PM daily.',
+    answerText: 'Contact Mahalakshmi Tours and Travels in Madurai by phone at +91 63801 92145, WhatsApp (+91 63801 92145), or email (mahalakshmitoursandtravels6@gmail.com). Travel desk hours are 9:00 AM to 7:00 PM daily.',
   },
   {
     id: 'aeo-08',
@@ -94,7 +94,7 @@ export const aeoQuestionRegistry: AEOQuestionOwnership[] = [
     entityType: 'service',
     entityId: 'service-family-travel',
     status: 'CONFIRMED',
-    answerText: 'We offer unhurried private outstation family travel using AC sedan cars or 21-seater passenger vans with child and senior-friendly rest halts across Tamil Nadu, Kerala, and Karnataka.',
+    answerText: 'Outstation family travel is available using AC sedan cars or 21-seater passenger vans with driver service covering routes across Tamil Nadu, Kerala, Karnataka, Andhra Pradesh, and Telangana.',
   },
   {
     id: 'aeo-09',
@@ -104,7 +104,7 @@ export const aeoQuestionRegistry: AEOQuestionOwnership[] = [
     entityType: 'service',
     entityId: 'service-function-travel',
     status: 'CONFIRMED',
-    answerText: 'Wedding guest transportation can be arranged with multi-vehicle shuttles (21-seater AC vans and VIP sedan cars) connecting Madurai Airport, Madurai Junction railway station, hotels, and marriage mandapams.',
+    answerText: 'Wedding guest transportation can be arranged using 21-seater AC vans and sedan cars for transfers between Madurai Airport (IXM), Madurai Junction railway station, hotels, and marriage halls.',
   },
   {
     id: 'aeo-10',
@@ -114,7 +114,7 @@ export const aeoQuestionRegistry: AEOQuestionOwnership[] = [
     entityType: 'tour',
     entityId: 'tour-rameshwaram',
     status: 'CONFIRMED',
-    answerText: 'Our 1-night 2-day Rameshwaram tour package includes Madurai departure, Pamban Sea Bridge crossing, Ramanathaswamy Temple 22 Theerthams, Dhanushkodi Land’s End, and dedicated vehicle return.',
+    answerText: 'The 1-night 2-day Rameshwaram tour itinerary from Madurai covers the Pamban Sea Bridge crossing, Ramanathaswamy Temple 22 Theerthams, Dhanushkodi Arichal Munai, and return travel to Madurai.',
   },
 ];
 

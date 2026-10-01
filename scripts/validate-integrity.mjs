@@ -501,23 +501,65 @@ while ((aeoMatch = aeoEntryRegex.exec(aeoRegistryContent)) !== null) {
   });
 }
 
-const aeoQuestionsHaveSuperlatives = aeoEntries.some(e => /\b(best|cheapest|No\.1|largest)\b/i.test(e.question));
+// Prohibited evaluative/promotional terms regex for questions AND answers
+const prohibitedEvaluativeRegex = /\b(best|ideal|best suited|most suitable|perfectly suited|premium|VIP|No\.1|number one|cheapest|largest|guaranteed|guarantee|always available|24\/7|child-friendly|senior-friendly|institutional billing support)\b/i;
+
+const aeoQuestionsHaveSuperlatives = aeoEntries.some(e => prohibitedEvaluativeRegex.test(e.question));
+const aeoAnswersHaveSuperlatives = aeoEntries.some(e => prohibitedEvaluativeRegex.test(e.answerText));
+
 const aeoQuestionsList = aeoEntries.map(e => e.question.toLowerCase().trim());
 const duplicateAEOQuestions = aeoQuestionsList.filter((q, i) => aeoQuestionsList.indexOf(q) !== i);
+
+const aeoCanonicalPathsList = aeoEntries.map(e => e.canonicalPath);
+const duplicateAEOCanonicalPaths = aeoCanonicalPathsList.filter((p, i) => aeoCanonicalPathsList.indexOf(p) !== i);
+
 const invalidAEOCanonicalPaths = aeoEntries.filter(e => {
   const record = registryEntries.find(r => r.canonicalPath === e.canonicalPath);
   return !record || !record.indexable;
 });
+
 const visibleAEOBlockPath = path.join(rootDir, 'src', 'components', 'seo', 'VisibleAEOAnswerBlock.tsx');
 const visibleAEOBlockExists = fs.existsSync(visibleAEOBlockPath);
+
+// Deterministic verification of actual page integration for every declared AEO canonical owner
+let unintegratedAEOCount = 0;
+for (const entry of aeoEntries) {
+  let targetPageFile = '';
+  if (entry.canonicalPath.startsWith('/vehicles/')) {
+    targetPageFile = path.join(rootDir, 'src', 'app', 'vehicles', '[slug]', 'page.tsx');
+  } else if (entry.canonicalPath.startsWith('/travel-services/')) {
+    targetPageFile = path.join(rootDir, 'src', 'app', 'travel-services', '[slug]', 'page.tsx');
+  } else if (entry.canonicalPath.startsWith('/travel-guide/')) {
+    targetPageFile = path.join(rootDir, 'src', 'app', 'travel-guide', '[slug]', 'page.tsx');
+  } else if (entry.canonicalPath.startsWith('/tours/')) {
+    targetPageFile = path.join(rootDir, 'src', 'app', 'tours', '[slug]', 'page.tsx');
+  } else if (entry.canonicalPath === '/contact') {
+    targetPageFile = path.join(rootDir, 'src', 'app', 'contact', 'page.tsx');
+  } else if (entry.canonicalPath === '/plan-your-journey') {
+    targetPageFile = path.join(rootDir, 'src', 'app', 'plan-your-journey', 'page.tsx');
+  }
+
+  if (!targetPageFile || !fs.existsSync(targetPageFile)) {
+    unintegratedAEOCount++;
+    continue;
+  }
+
+  const pageContent = fs.readFileSync(targetPageFile, 'utf-8');
+  if (!pageContent.includes('VisibleAEOAnswerBlock')) {
+    unintegratedAEOCount++;
+  }
+}
 
 const m12QPass =
   fs.existsSync(aeoRegistryPath) &&
   aeoEntries.length >= 10 &&
   !aeoQuestionsHaveSuperlatives &&
+  !aeoAnswersHaveSuperlatives &&
   duplicateAEOQuestions.length === 0 &&
+  duplicateAEOCanonicalPaths.length === 0 &&
   invalidAEOCanonicalPaths.length === 0 &&
-  visibleAEOBlockExists;
+  visibleAEOBlockExists &&
+  unintegratedAEOCount === 0;
 const m12RPass = schemaContent.includes('#travelagency') && schemaContent.includes('#website');
 const m12SPass = singleDestPageContent.includes('noIndex: true');
 const m12TPass = allContractTestsPass;
