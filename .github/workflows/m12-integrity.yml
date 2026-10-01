@@ -39,11 +39,14 @@ jobs:
       - name: Run M13 HTTP Redirect Smoke Test
         run: npm run m13:redirect-smoke
 
-      - name: Report M13 CI Acceptance Summary
+      - name: Run M14 Cross-System Validation
+        run: npm run m14:validate
+
+      - name: Report M14 CI Acceptance Summary
         if: success()
         run: |
           echo "========================================="
-          echo "M13 ACCEPTANCE VALIDATION"
+          echo "M14 CROSS-SYSTEM VALIDATION"
           echo "========================================="
           echo "Migration Matrix: PASS"
           echo "Internal Links: PASS"
@@ -53,9 +56,10 @@ jobs:
           echo "Destination Noindex: PASS"
           echo "M11 Protection: PASS"
           echo "M12 Protection: PASS"
+          echo "M14 Cross-System: PASS"
           echo "TypeScript: PASS"
           echo "Lint: PASS"
           echo "Build: PASS"
           echo "========================================="
-          echo "M13 CI RESULT: PASS"
+          echo "M14 CI RESULT: PASS"
           echo "========================================="
