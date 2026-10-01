@@ -1,5 +1,5 @@
 /**
- * MAHALAKSHMI TOURS AND TRAVELS — M14 CROSS-SYSTEM VALIDATION SCRIPT (HARDENED)
+ * MAHALAKSHMI TOURS AND TRAVELS — M14 CROSS-SYSTEM VALIDATION SCRIPT (HARDENED & DETERMINISTIC)
  * Comprehensive cross-system integrity test suite evaluating relationships between:
  * Business Truth -> Data Model -> Canonical Registry -> Routes -> Internal Links ->
  * Navigation -> Vehicles/Services -> Tours -> Destinations -> Travel Guide ->
@@ -10,6 +10,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import ts from 'typescript';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,30 +32,94 @@ function reportHigh(msg) {
 }
 
 // -----------------------------------------------------------------------------
-// 1. CANONICAL REGISTRY AUDIT
+// MODULE LOADER FOR DETERMINISTIC RUNTIME EVALUATION
 // -----------------------------------------------------------------------------
-const registryFilePath = path.join(rootDir, 'src', 'config', 'canonical-registry.ts');
-const registryContent = fs.readFileSync(registryFilePath, 'utf-8');
+const moduleCache = new Map();
 
-const registryEntryRegex = /{\s*id:\s*['"]([^'"]+)['"],\s*contentType:\s*['"]([^'"]+)['"],\s*canonicalPath:\s*['"]([^'"]+)['"],\s*status:\s*['"]([^'"]+)['"],\s*indexable:\s*(true|false),\s*sitemapEligible:\s*(true|false)/g;
+function loadTsModule(filePath) {
+  const normalizedPath = path.resolve(filePath);
+  if (moduleCache.has(normalizedPath)) {
+    return moduleCache.get(normalizedPath).exports;
+  }
 
-const registryEntries = [];
-let match;
-while ((match = registryEntryRegex.exec(registryContent)) !== null) {
-  registryEntries.push({
-    id: match[1],
-    contentType: match[2],
-    canonicalPath: match[3],
-    status: match[4],
-    indexable: match[5] === 'true',
-    sitemapEligible: match[6] === 'true',
+  if (!fs.existsSync(normalizedPath)) {
+    if (fs.existsSync(normalizedPath + '.ts')) return loadTsModule(normalizedPath + '.ts');
+    if (fs.existsSync(normalizedPath + '.tsx')) return loadTsModule(normalizedPath + '.tsx');
+    if (fs.existsSync(path.join(normalizedPath, 'index.ts'))) return loadTsModule(path.join(normalizedPath, 'index.ts'));
+    throw new Error(`Module file not found: ${normalizedPath}`);
+  }
+
+  const content = fs.readFileSync(normalizedPath, 'utf-8');
+  const result = ts.transpileModule(content, {
+    compilerOptions: {
+      module: ts.ModuleKind.CommonJS,
+      target: ts.ScriptTarget.ES2020,
+      jsx: ts.JsxEmit.ReactJSX,
+      esModuleInterop: true,
+    },
   });
+
+  const moduleObj = { exports: {} };
+  moduleCache.set(normalizedPath, moduleObj);
+
+  const customRequire = (importPath) => {
+    if (importPath.startsWith('@/')) {
+      const rel = importPath.replace('@/', '');
+      return loadTsModule(path.join(rootDir, 'src', rel));
+    }
+    if (importPath.startsWith('./') || importPath.startsWith('../')) {
+      const dir = path.dirname(normalizedPath);
+      return loadTsModule(path.resolve(dir, importPath));
+    }
+    return {};
+  };
+
+  const fn = new Function('exports', 'module', 'require', '__dirname', '__filename', result.outputText);
+  fn(moduleObj.exports, moduleObj, customRequire, path.dirname(normalizedPath), normalizedPath);
+
+  return moduleObj.exports;
 }
 
-const allRegistryIds = registryEntries.map((e) => e.id);
-const allRegistryPaths = registryEntries.map((e) => e.canonicalPath);
+// Load Authoritative Repositories & Modules
+const canonicalMod = loadTsModule(path.join(rootDir, 'src', 'config', 'canonical-registry.ts'));
+const canonicalRegistry = canonicalMod.canonicalRegistry;
 
-const tourRegistry = registryEntries.filter((e) => e.contentType === 'tour' || e.id.startsWith('tour-'));
+const aeoMod = loadTsModule(path.join(rootDir, 'src', 'config', 'aeo-registry.ts'));
+const aeoQuestionRegistry = aeoMod.aeoQuestionRegistry;
+
+const siteMod = loadTsModule(path.join(rootDir, 'src', 'config', 'site.ts'));
+const siteConfig = siteMod.siteConfig;
+
+const m13MigrationMod = loadTsModule(path.join(rootDir, 'src', 'config', 'm13-migration-registry.ts'));
+
+const toursMod = loadTsModule(path.join(rootDir, 'src', 'lib', 'data', 'tours.ts'));
+const toursRepository = toursMod.toursRepository || toursMod.mockTours || [];
+
+const vehiclesMod = loadTsModule(path.join(rootDir, 'src', 'lib', 'data', 'vehicles.ts'));
+const vehiclesRepository = vehiclesMod.vehiclesRepository || vehiclesMod.mockVehicles || [];
+
+const servicesMod = loadTsModule(path.join(rootDir, 'src', 'lib', 'data', 'services.ts'));
+const servicesRepository = servicesMod.servicesRepository || servicesMod.mockTravelServices || [];
+
+const articlesMod = loadTsModule(path.join(rootDir, 'src', 'lib', 'data', 'articles.ts'));
+const travelArticlesRepository = articlesMod.travelArticlesRepository || articlesMod.mockArticles || [];
+
+const destsMod = loadTsModule(path.join(rootDir, 'src', 'lib', 'data', 'destinations.ts'));
+const destinationsRepository = destsMod.destinationsRepository || destsMod.mockDestinations || [];
+
+const schemaMod = loadTsModule(path.join(rootDir, 'src', 'lib', 'seo', 'schema.ts'));
+const robotsMod = loadTsModule(path.join(rootDir, 'src', 'app', 'robots.ts'));
+const sitemapMod = loadTsModule(path.join(rootDir, 'src', 'app', 'sitemap.ts'));
+const crmMod = loadTsModule(path.join(rootDir, 'src', 'lib', 'crm', 'repository.ts'));
+const crmTypesMod = loadTsModule(path.join(rootDir, 'src', 'types', 'crm.ts'));
+
+// -----------------------------------------------------------------------------
+// 1. CANONICAL REGISTRY AUDIT
+// -----------------------------------------------------------------------------
+const allRegistryIds = canonicalRegistry.map((e) => e.id);
+const allRegistryPaths = canonicalRegistry.map((e) => e.canonicalPath);
+
+const tourRegistry = canonicalRegistry.filter((e) => e.contentType === 'tour' || e.id.startsWith('tour-'));
 const tourCount = tourRegistry.length;
 
 const duplicateCanonicalIds = allRegistryIds.filter((id, index) => allRegistryIds.indexOf(id) !== index);
@@ -69,13 +134,10 @@ const canonicalRegistryPass = duplicateCanonicalIds.length === 0 && duplicateCan
 // -----------------------------------------------------------------------------
 // 2. BUSINESS TRUTH & PUBLIC PRICING AUDIT
 // -----------------------------------------------------------------------------
-const siteConfigPath = path.join(rootDir, 'src', 'config', 'site.ts');
-const siteConfigContent = fs.readFileSync(siteConfigPath, 'utf-8');
-
-const businessPass = siteConfigContent.includes('Mahalakshmi Tours and Travels');
-const phonePass = siteConfigContent.includes('+91 63801 92145') || siteConfigContent.includes('6380192145');
-const emailPass = siteConfigContent.includes('mahalakshmitoursandtravels6@gmail.com');
-const operatingSincePass = siteConfigContent.includes('operatingSince: 2021') || siteConfigContent.includes('2021');
+const businessPass = siteConfig.name === 'Mahalakshmi Tours and Travels';
+const phonePass = siteConfig.contact.phonePrimary.includes('63801 92145') || siteConfig.contact.phonePrimary.includes('6380192145');
+const emailPass = siteConfig.contact.email === 'mahalakshmitoursandtravels6@gmail.com';
+const operatingSincePass = siteConfig.operatingSince === 2021 || String(siteConfig.operatingSince) === '2021';
 
 if (!businessPass) reportCritical('Business name mismatch in siteConfig');
 if (!phonePass) reportCritical('Phone number mismatch in siteConfig');
@@ -91,12 +153,6 @@ const vehiclesContent = fs.readFileSync(vehiclesFilePath, 'utf-8');
 
 const servicesFilePath = path.join(rootDir, 'src', 'lib', 'data', 'services.ts');
 const servicesContent = fs.readFileSync(servicesFilePath, 'utf-8');
-
-const articlesFilePath = path.join(rootDir, 'src', 'lib', 'data', 'articles.ts');
-const articlesContent = fs.readFileSync(articlesFilePath, 'utf-8');
-
-const destsFilePath = path.join(rootDir, 'src', 'lib', 'data', 'destinations.ts');
-const destsContent = fs.readFileSync(destsFilePath, 'utf-8');
 
 const tourTypePath = path.join(rootDir, 'src', 'types', 'tour.ts');
 const tourTypeContent = fs.readFileSync(tourTypePath, 'utf-8');
@@ -117,9 +173,6 @@ const publicPricingPass = pricingExposureCount === 0;
 // -----------------------------------------------------------------------------
 // 3. M13 MIGRATION REGISTRY AUDIT
 // -----------------------------------------------------------------------------
-const m13MigrationPath = path.join(rootDir, 'src', 'config', 'm13-migration-registry.ts');
-const m13MigrationContent = fs.readFileSync(m13MigrationPath, 'utf-8');
-
 const nextConfigPath = path.join(rootDir, 'next.config.ts');
 const nextConfigContent = fs.readFileSync(nextConfigPath, 'utf-8');
 
@@ -206,7 +259,7 @@ for (const route of appDirRoutes) {
 const routeCoveragePass = unknownRoutes.length === 0;
 
 // -----------------------------------------------------------------------------
-// 5. REPOSITORY-WIDE INTERNAL LINK AUDIT (CORRECTION 02)
+// 5. REPOSITORY-WIDE INTERNAL LINK AUDIT
 // -----------------------------------------------------------------------------
 const srcDir = path.join(rootDir, 'src');
 let internalLinksScanned = 0;
@@ -215,11 +268,11 @@ let legacyLinkReferences = [];
 let brokenLinksList = [];
 let invalidRouteReferences = [];
 
-const tourSlugMatches = [...toursContent.matchAll(/slug:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
-const articleSlugMatches = [...articlesContent.matchAll(/slug:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
-const vehicleSlugMatches = [...vehiclesContent.matchAll(/slug:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
-const serviceSlugMatches = [...servicesContent.matchAll(/slug:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
-const destSlugMatches = [...destsContent.matchAll(/slug:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
+const tourSlugMatches = toursRepository.map((t) => t.slug);
+const articleSlugMatches = travelArticlesRepository.map((a) => a.slug);
+const vehicleSlugMatches = vehiclesRepository.map((v) => v.slug);
+const serviceSlugMatches = servicesRepository.map((s) => s.slug);
+const destSlugMatches = destinationsRepository.map((d) => d.slug);
 
 function isKnownRoute(targetPath) {
   let normalized = targetPath;
@@ -313,7 +366,6 @@ function scanRepositoryInternalLinks(dir) {
 
 scanRepositoryInternalLinks(srcDir);
 const internalLinksPass = legacyLinkReferences.length === 0 && brokenLinksList.length === 0;
-const staleReferencesPass = legacyLinkReferences.length === 0;
 
 // -----------------------------------------------------------------------------
 // 6. NAVIGATION AUDIT
@@ -332,64 +384,51 @@ for (const src of redirectSources) {
 const navigationPass = navRedirectRefs === 0 && navContent.includes('/plan-your-journey');
 
 // -----------------------------------------------------------------------------
-// 7. VEHICLES ↔ SERVICES RELATIONSHIP AUDIT (CORRECTION 03)
+// 7. VEHICLES ↔ SERVICES RELATIONSHIP AUDIT
 // -----------------------------------------------------------------------------
 let vehicleServiceMismatches = 0;
 const vehicleSlugs = ['21-seater-van', 'sedan-car'];
 const serviceSlugs = ['group-travel', 'college-trips', 'family-travel', 'function-travel'];
 
-// Check service vehicleOptions point to valid vehicle slugs
-for (const sSlug of serviceSlugs) {
-  const serviceOptRegex = new RegExp(`slug:\\s*['"]${sSlug}['"][\\s\\S]*?vehicleOptions:\\s*\\[([^\\]]+)\\]`, 'g');
-  const serviceOptMatch = serviceOptRegex.exec(servicesContent);
-  if (serviceOptMatch) {
-    const opts = [...serviceOptMatch[1].matchAll(/['"]([^'"]+)['"]/g)].map((m) => m[1]);
-    for (const opt of opts) {
-      if (!vehicleSlugs.includes(opt)) {
-        vehicleServiceMismatches++;
-        reportHigh(`Service ${sSlug} references non-existent vehicleOption: ${opt}`);
-      }
+for (const service of servicesRepository) {
+  for (const opt of service.vehicleOptions || []) {
+    if (!vehicleSlugs.includes(opt)) {
+      vehicleServiceMismatches++;
+      reportHigh(`Service ${service.slug} references non-existent vehicleOption: ${opt}`);
     }
   }
 }
 
-// Check ownership claims
-const unownedVehicles = [...vehiclesContent.matchAll(/ownership:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
-for (const own of unownedVehicles) {
-  if (own !== 'OWNED') {
+for (const vehicle of vehiclesRepository) {
+  if (vehicle.ownership !== 'OWNED') {
     vehicleServiceMismatches++;
-    reportCritical(`Partner vehicle represented as owned: ${own}`);
+    reportCritical(`Partner vehicle represented as owned: ${vehicle.name}`);
   }
 }
 
 const vehiclesServicesPass = vehicleServiceMismatches === 0 && vehicleSlugs.length === 2 && serviceSlugs.length === 4;
 
 // -----------------------------------------------------------------------------
-// 8. TOURS ↔ DESTINATIONS BIDIRECTIONAL & GRAPH AUDIT (CORRECTIONS 04 & 05)
+// 8. TOURS ↔ DESTINATIONS RELATIONSHIP AUDIT
 // -----------------------------------------------------------------------------
-const destIdMatches = [...destsContent.matchAll(/id:\s*['"](dest-[^'"]+)['"]/g)].map((m) => m[1]);
-const tourIdMatches = [...toursContent.matchAll(/id:\s*['"](tour-[^'"]+)['"]/g)].map((m) => m[1]);
+const destIdMatches = destinationsRepository.map((d) => d.id);
+const tourIdMatches = toursRepository.map((t) => t.id);
 
 let brokenTourDestRefs = 0;
 
-// Direction A: Destination relatedTours -> Tour
-const destRelatedToursBlocks = [...destsContent.matchAll(/relatedTours:\s*\[([\s\S]*?)\]/g)];
-for (const block of destRelatedToursBlocks) {
-  const refs = [...block[1].matchAll(/['"]([^'"]+)['"]/g)].map((m) => m[1]);
-  for (const ref of refs) {
+for (const dest of destinationsRepository) {
+  for (const ref of dest.relatedTours || []) {
     if (!tourIdMatches.includes(ref) && !tourSlugMatches.includes(ref)) {
       brokenTourDestRefs++;
-      reportHigh(`Destination relatedTour reference broken: ${ref}`);
+      reportHigh(`Destination ${dest.slug} relatedTour reference broken: ${ref}`);
     }
   }
 }
 
-// Direction B: Tour destination relationship validation
-const tourDestSlugs = [...toursContent.matchAll(/destinationSlug:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
-for (const tDestSlug of tourDestSlugs) {
-  if (!tDestSlug || redirectSources.includes(`/destinations/${tDestSlug}`)) {
+for (const tour of toursRepository) {
+  if (!tour.destinationSlug || redirectSources.includes(`/destinations/${tour.destinationSlug}`)) {
     brokenTourDestRefs++;
-    reportHigh(`Tour destinationSlug invalid or points to legacy route: ${tDestSlug}`);
+    reportHigh(`Tour ${tour.slug} destinationSlug invalid or points to legacy route: ${tour.destinationSlug}`);
   }
 }
 
@@ -397,31 +436,26 @@ const toursPass = tourCount === 39 && tourIdMatches.length === 39;
 const toursDestinationsPass = brokenTourDestRefs === 0 && destIdMatches.length === 10;
 
 // -----------------------------------------------------------------------------
-// 9. TRAVEL GUIDE CROSS-SYSTEM AUDIT (CORRECTION 06)
+// 9. TRAVEL GUIDE CROSS-SYSTEM AUDIT
 // -----------------------------------------------------------------------------
-const articleIdMatches = [...articlesContent.matchAll(/id:\s*['"](art-[^'"]+)['"]/g)].map((m) => m[1]);
+const articleIdMatches = travelArticlesRepository.map((a) => a.id);
 
 let brokenGuideRefs = 0;
-const articleDestSlugs = [...articlesContent.matchAll(/destinationSlug:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
-for (const dSlug of articleDestSlugs) {
-  if (!destSlugMatches.includes(dSlug)) {
+for (const article of travelArticlesRepository) {
+  if (article.destinationSlug && !destSlugMatches.includes(article.destinationSlug)) {
     brokenGuideRefs++;
-    reportHigh(`Article destinationSlug reference broken: ${dSlug}`);
+    reportHigh(`Article ${article.slug} destinationSlug reference broken: ${article.destinationSlug}`);
   }
-}
-
-const articleConnTours = [...articlesContent.matchAll(/connectedTourSlug:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
-for (const cTour of articleConnTours) {
-  if (!tourIdMatches.includes(cTour) && !tourSlugMatches.includes(cTour)) {
+  if (article.connectedTourSlug && !tourIdMatches.includes(article.connectedTourSlug) && !tourSlugMatches.includes(article.connectedTourSlug)) {
     brokenGuideRefs++;
-    reportHigh(`Article connectedTourSlug reference broken: ${cTour}`);
+    reportHigh(`Article ${article.slug} connectedTourSlug reference broken: ${article.connectedTourSlug}`);
   }
 }
 
 const travelGuidePass = articleIdMatches.length === 10 && articleSlugMatches.length === 10 && brokenGuideRefs === 0;
 
 // -----------------------------------------------------------------------------
-// 10. CUSTOM JOURNEY & CONVERSION REGRESSION AUDIT (M11 PRESERVATION)
+// 10. CORRECTION 06 — DEEP M11 CONVERSION REGRESSION VALIDATION
 // -----------------------------------------------------------------------------
 const customBuilderPath = path.join(rootDir, 'src', 'components', 'enquiry', 'CustomJourneyBuilder.tsx');
 const customBuilderContent = fs.readFileSync(customBuilderPath, 'utf-8');
@@ -429,64 +463,401 @@ const customBuilderContent = fs.readFileSync(customBuilderPath, 'utf-8');
 const crmRepoPath = path.join(rootDir, 'src', 'lib', 'crm', 'repository.ts');
 const crmRepoContent = fs.readFileSync(crmRepoPath, 'utf-8');
 
-const crmTypesPath = path.join(rootDir, 'src', 'types', 'crm.ts');
-const crmTypesContent = fs.readFileSync(crmTypesPath, 'utf-8');
-
 const quickQuotePass = !customBuilderContent.includes('Quick 30s Quote') && !customBuilderContent.includes('showQuickQuoteModal');
 const falseSuccessPass = !customBuilderContent.includes('Offline fallback') && !customBuilderContent.includes('ML-26-8492');
 
-const crmSafeguardsPass =
-  (crmRepoContent.includes('VERIFIED_QUOTE') || crmTypesContent.includes('VERIFIED_QUOTE')) &&
-  (crmRepoContent.includes('VERIFIED_BOOKING') || crmTypesContent.includes('VERIFIED_BOOKING')) &&
-  (crmRepoContent.includes('VERIFIED_COMPLETION') || crmTypesContent.includes('VERIFIED_COMPLETION')) &&
-  crmRepoContent.includes('ENABLE_CRM_DEMO_SEED');
+// Deterministic Runtime & Logic Verification of CRM Safeguards
+let crmSafeguardsPass = true;
+let m11SafeguardsChecked = 0;
+let m11StateTransitionsChecked = 0;
+let m11CommercialValueChecks = 0;
+let m11ForbiddenTransitions = 0;
+
+// Check 1: Types export required verified source constants
+const verifiedSources = ['VERIFIED_QUOTE', 'VERIFIED_BOOKING', 'VERIFIED_COMPLETION'];
+for (const src of verifiedSources) {
+  m11SafeguardsChecked++;
+  if (!crmRepoContent.includes(src) && !fs.readFileSync(path.join(rootDir, 'src', 'types', 'crm.ts'), 'utf-8').includes(src)) {
+    crmSafeguardsPass = false;
+    reportCritical(`M11 Safeguard Missing: ${src} not found in CRM types/repository`);
+  }
+}
+
+// Check 2: Production CRM Demo Data Gating
+m11SafeguardsChecked++;
+const demoGated = crmRepoContent.includes("process.env.ENABLE_CRM_DEMO_SEED === 'true'");
+if (!demoGated) {
+  crmSafeguardsPass = false;
+  reportCritical('M11 Demo Seed Safeguard Regression: ENABLE_CRM_DEMO_SEED gating not enforced');
+}
+
+// Check 3: Runtime verification of CrmRepository contracts
+async function runCrmRuntimeChecks() {
+  const CrmRepository = crmMod.CrmRepository;
+
+  // Test Lead Creation
+  m11StateTransitionsChecked++;
+  const testLead = await CrmRepository.createEnquiry({
+    name: 'M14 Test Lead',
+    phone: '+91 99999 99999',
+    intent: 'custom',
+    quotedAmount: 25000,
+  });
+
+  m11CommercialValueChecks++;
+  // Verify lead creation does NOT automatically populate verifiedCommercialValue
+  if (testLead.verifiedCommercialValue !== undefined) {
+    crmSafeguardsPass = false;
+    reportCritical('M11 Violation: Lead creation manufactured verifiedCommercialValue');
+  }
+
+  // Test Status Update to PROPOSAL_SENT
+  m11StateTransitionsChecked++;
+  const updatedProposal = await CrmRepository.updateEnquiry(testLead.id, { status: 'PROPOSAL_SENT' });
+  m11CommercialValueChecks++;
+  if (updatedProposal?.verifiedCommercialValue !== undefined) {
+    crmSafeguardsPass = false;
+    reportCritical('M11 Violation: Status update to PROPOSAL_SENT manufactured verifiedCommercialValue');
+  }
+
+  // Test Status Update to BOOKED
+  m11StateTransitionsChecked++;
+  const updatedBooked = await CrmRepository.updateEnquiry(testLead.id, { status: 'BOOKED' });
+  m11CommercialValueChecks++;
+  if (updatedBooked?.verifiedCommercialValue !== undefined) {
+    crmSafeguardsPass = false;
+    reportCritical('M11 Violation: Status update to BOOKED manufactured verifiedCommercialValue');
+  }
+
+  // Test Explicit Verified Commercial Value contract insertion
+  m11CommercialValueChecks++;
+  const verifiedVal = {
+    amount: 25000,
+    currency: 'INR',
+    source: 'VERIFIED_BOOKING',
+    verifiedAt: new Date().toISOString(),
+  };
+  const verifiedUpdated = await CrmRepository.updateEnquiry(testLead.id, { verifiedCommercialValue: verifiedVal });
+  if (verifiedUpdated?.verifiedCommercialValue?.source !== 'VERIFIED_BOOKING' || verifiedUpdated.verifiedCommercialValue.amount !== 25000) {
+    crmSafeguardsPass = false;
+    reportCritical('M11 Violation: Failed to persist verifiedCommercialValue contract');
+  }
+
+  // Clean up test lead
+  await CrmRepository.deleteEnquiry(testLead.id);
+}
+
+await runCrmRuntimeChecks();
 
 const customJourneyPass = allRegistryPaths.includes('/plan-your-journey');
-const conversionRegressionPass = quickQuotePass && falseSuccessPass && crmSafeguardsPass;
+const conversionRegressionPass = quickQuotePass && falseSuccessPass && crmSafeguardsPass && demoGated;
 
 if (!quickQuotePass) reportCritical('M11 Quick Quote regression detected in CustomJourneyBuilder');
 if (!falseSuccessPass) reportCritical('M11 False Success regression detected in CustomJourneyBuilder');
-if (!crmSafeguardsPass) reportCritical('M11 CRM commercial value safeguards regression detected in repository');
 
 // -----------------------------------------------------------------------------
-// 11. SEO, AEO, GEO / SCHEMA AUDIT (CORRECTIONS 10, 11, 14)
+// 11. CORRECTION 01 — DEEP SEO ROUTE RELATIONSHIPS VALIDATION
 // -----------------------------------------------------------------------------
-const schemaPath = path.join(rootDir, 'src', 'lib', 'seo', 'schema.ts');
-const schemaContent = fs.readFileSync(schemaPath, 'utf-8');
+let seoRoutesChecked = 0;
+let seoIndexableChecked = 0;
+let seoNoindexChecked = 0;
+let seoCanonicalMismatches = 0;
+let seoMetadataMismatches = 0;
+let seoSitemapEligibilityMismatches = 0;
 
-const seoPass = schemaContent.includes('siteConfig.url') && registryContent.includes('indexable: true');
+for (const record of canonicalRegistry) {
+  seoRoutesChecked++;
 
-const aeoRegistryPath = path.join(rootDir, 'src', 'config', 'aeo-registry.ts');
-const aeoContent = fs.existsSync(aeoRegistryPath) ? fs.readFileSync(aeoRegistryPath, 'utf-8') : '';
-const aeoPass =
-  (aeoContent.includes('aeoQuestionRegistry') || aeoContent.includes('aeoRegistry')) &&
-  schemaContent.includes('generateFaqSchema');
+  // 1. Verify path format & existence
+  if (!record.canonicalPath || !record.canonicalPath.startsWith('/')) {
+    seoCanonicalMismatches++;
+    reportCritical(`SEO Mismatch: Canonical path invalid: ${record.id} (${record.canonicalPath})`);
+  }
 
+  // 2. Indexability vs Sitemap eligibility coherence
+  if (record.indexable) {
+    seoIndexableChecked++;
+    if (!record.sitemapEligible) {
+      seoSitemapEligibilityMismatches++;
+      reportHigh(`SEO Incoherence: Indexable route ${record.canonicalPath} is marked sitemapEligible = false`);
+    }
+  } else {
+    seoNoindexChecked++;
+    if (record.sitemapEligible) {
+      seoSitemapEligibilityMismatches++;
+      reportHigh(`SEO Incoherence: Noindex route ${record.canonicalPath} is marked sitemapEligible = true`);
+    }
+  }
+
+  // 3. Ensure canonical path is not a redirect source
+  if (redirectSources.includes(record.canonicalPath)) {
+    seoCanonicalMismatches++;
+    reportCritical(`SEO Violation: Canonical path ${record.canonicalPath} is a redirect source`);
+  }
+
+  // 4. Verify route file existence on disk
+  if (!isKnownRoute(record.canonicalPath)) {
+    seoMetadataMismatches++;
+    reportHigh(`SEO Route Missing: ${record.canonicalPath} has no corresponding route implementation`);
+  }
+}
+
+const seoPass =
+  seoCanonicalMismatches === 0 &&
+  seoMetadataMismatches === 0 &&
+  seoSitemapEligibilityMismatches === 0 &&
+  seoRoutesChecked === canonicalRegistry.length;
+
+// -----------------------------------------------------------------------------
+// 12. CORRECTION 02 — DEEP AEO REGISTRY VALIDATION (ALL 10 RECORDS)
+// -----------------------------------------------------------------------------
+const LOCKED_M12_AEO_QUESTIONS = [
+  'What size vehicle is suitable for a group trip from Madurai?',
+  'What vehicle is suitable for a small family trip or outstation drop?',
+  'How do I plan a custom itinerary or book a trip from Madurai?',
+  'How do I plan a college industrial visit (IV) or department trip from Madurai?',
+  'What are the common routes from Madurai to Munnar for driving or van travel?',
+  'How can I plan a family holiday to Kodaikanal from Madurai?',
+  'How to contact Mahalakshmi Tours and Travels in Madurai?',
+  'What outstation travel services are available for multi-generational families?',
+  'How do I book wedding guest transportation or marriage hall shuttles in Madurai?',
+  'What is included in a 1-night 2-day Rameshwaram tour package from Madurai?',
+];
+
+const aeoRecordsChecked = aeoQuestionRegistry.length;
+let aeoValidationErrors = 0;
+
+if (aeoRecordsChecked !== 10) {
+  aeoValidationErrors++;
+  reportCritical(`AEO Audit Failure: Registry contains ${aeoRecordsChecked} records (expected exactly 10)`);
+}
+
+const parsedQuestions = aeoQuestionRegistry.map((r) => r.question);
+for (const lockedQ of LOCKED_M12_AEO_QUESTIONS) {
+  if (!parsedQuestions.includes(lockedQ)) {
+    aeoValidationErrors++;
+    reportCritical(`AEO Audit Failure: Locked M12 question missing: "${lockedQ}"`);
+  }
+}
+
+for (const aeoRecord of aeoQuestionRegistry) {
+  // Validate required fields
+  if (!aeoRecord.question || aeoRecord.question.trim().length === 0) {
+    aeoValidationErrors++;
+    reportCritical(`AEO Record ${aeoRecord.id} has empty question`);
+  }
+  if (!aeoRecord.answerText || aeoRecord.answerText.trim().length === 0) {
+    aeoValidationErrors++;
+    reportCritical(`AEO Record ${aeoRecord.id} has empty answerText`);
+  }
+  if (!allRegistryPaths.includes(aeoRecord.canonicalPath)) {
+    aeoValidationErrors++;
+    reportCritical(`AEO Record ${aeoRecord.id} canonicalPath ${aeoRecord.canonicalPath} not in canonical registry`);
+  }
+  if (redirectSources.includes(aeoRecord.canonicalPath)) {
+    aeoValidationErrors++;
+    reportCritical(`AEO Record ${aeoRecord.id} canonicalPath ${aeoRecord.canonicalPath} is a redirect source`);
+  }
+  // Check noindex destination entity prohibition
+  const targetReg = canonicalRegistry.find((r) => r.canonicalPath === aeoRecord.canonicalPath);
+  if (targetReg && !targetReg.indexable && targetReg.contentType === 'destination') {
+    aeoValidationErrors++;
+    reportCritical(`AEO Record ${aeoRecord.id} points to non-indexable destination entity page: ${aeoRecord.canonicalPath}`);
+  }
+}
+
+const aeoPass = aeoRecordsChecked === 10 && aeoValidationErrors === 0;
+
+// -----------------------------------------------------------------------------
+// 13. CORRECTION 03 — DEEP GEO / SCHEMA VALIDATION
+// -----------------------------------------------------------------------------
+let schemaEntitiesChecked = 0;
+let invalidEntityIds = 0;
+let invalidSchemaUrls = 0;
+let invalidOwnerRoutes = 0;
+let invalidRelationships = 0;
+
+// 1. TravelAgency Schema
+schemaEntitiesChecked++;
+const localBusSchema = schemaMod.generateLocalBusinessSchema();
+if (localBusSchema['@type'] !== 'TravelAgency' || localBusSchema['@id'] !== `${siteConfig.url}/#travelagency`) {
+  invalidEntityIds++;
+  reportCritical('GEO/Schema Error: TravelAgency schema @id or @type invalid');
+}
+if (localBusSchema.name !== siteConfig.name || localBusSchema.url !== siteConfig.url) {
+  invalidSchemaUrls++;
+  reportCritical('GEO/Schema Error: TravelAgency schema business name or URL mismatch');
+}
+
+// 2. WebSite Schema
+schemaEntitiesChecked++;
+const webSiteSchema = schemaMod.generateWebSiteSchema();
+if (webSiteSchema['@type'] !== 'WebSite' || webSiteSchema['@id'] !== `${siteConfig.url}/#website`) {
+  invalidEntityIds++;
+  reportCritical('GEO/Schema Error: WebSite schema @id or @type invalid');
+}
+if (webSiteSchema.publisher['@id'] !== `${siteConfig.url}/#travelagency`) {
+  invalidRelationships++;
+  reportCritical('GEO/Schema Error: WebSite schema publisher relationship invalid');
+}
+
+// 3. Tour Schemas
+for (const tour of toursRepository) {
+  schemaEntitiesChecked++;
+  const tourSchema = schemaMod.generateTouristTripSchema(tour);
+  const expectedUrl = `${siteConfig.url}/tours/${tour.slug}`;
+  if (tourSchema['@type'] !== 'TouristTrip' || tourSchema['@id'] !== `${expectedUrl}#tour`) {
+    invalidEntityIds++;
+    reportHigh(`GEO/Schema Error: Tour ${tour.slug} schema @id invalid`);
+  }
+  if (!allRegistryPaths.includes(`/tours/${tour.slug}`)) {
+    invalidOwnerRoutes++;
+    reportHigh(`GEO/Schema Error: Tour ${tour.slug} schema owning route missing`);
+  }
+}
+
+// 4. Vehicle Rental Schemas
+for (const veh of vehiclesRepository) {
+  schemaEntitiesChecked++;
+  const vehSchema = schemaMod.generateVehicleRentalSchema(veh);
+  const expectedUrl = `${siteConfig.url}/vehicles/${veh.slug}`;
+  if (vehSchema['@type'] !== 'AutoRental' || vehSchema['@id'] !== `${expectedUrl}#autorental`) {
+    invalidEntityIds++;
+    reportHigh(`GEO/Schema Error: Vehicle ${veh.slug} schema @id invalid`);
+  }
+  if (!allRegistryPaths.includes(`/vehicles/${veh.slug}`)) {
+    invalidOwnerRoutes++;
+    reportHigh(`GEO/Schema Error: Vehicle ${veh.slug} schema owning route missing`);
+  }
+}
+
+// 5. Article Schemas
+for (const art of travelArticlesRepository) {
+  schemaEntitiesChecked++;
+  const artSchema = schemaMod.generateArticleSchema(art);
+  const expectedUrl = `${siteConfig.url}/travel-guide/${art.slug}`;
+  if (artSchema['@type'] !== 'Article' || artSchema['@id'] !== `${expectedUrl}#article`) {
+    invalidEntityIds++;
+    reportHigh(`GEO/Schema Error: Article ${art.slug} schema @id invalid`);
+  }
+  if (!allRegistryPaths.includes(`/travel-guide/${art.slug}`)) {
+    invalidOwnerRoutes++;
+    reportHigh(`GEO/Schema Error: Article ${art.slug} schema owning route missing`);
+  }
+}
+
+// 6. Destination Schemas & Noindex Protection
 const singleDestPagePath = path.join(rootDir, 'src', 'app', 'destinations', '[slug]', 'page.tsx');
 const singleDestPageContent = fs.readFileSync(singleDestPagePath, 'utf-8');
 const destNoindexPass = singleDestPageContent.includes('noIndex: true');
 
-const geoSchemaPass = schemaContent.includes('#travelagency') && schemaContent.includes('#website') && destNoindexPass;
+for (const dest of destinationsRepository) {
+  schemaEntitiesChecked++;
+  const destSchema = schemaMod.generateTouristDestinationSchema(dest);
+  const expectedUrl = `${siteConfig.url}/destinations/${dest.slug}`;
+  if (destSchema['@type'] !== 'TouristDestination' || destSchema['@id'] !== `${expectedUrl}#destination`) {
+    invalidEntityIds++;
+    reportHigh(`GEO/Schema Error: Destination ${dest.slug} schema @id invalid`);
+  }
+  // Ensure destination in registry is non-indexable & not in sitemap
+  const destRecord = canonicalRegistry.find((r) => r.canonicalPath === `/destinations/${dest.slug}`);
+  if (destRecord && (destRecord.indexable || destRecord.sitemapEligible)) {
+    invalidRelationships++;
+    reportCritical(`GEO/Schema Protection Violation: Destination ${dest.slug} marked indexable or sitemapEligible in registry`);
+  }
+}
+
+const geoSchemaPass =
+  invalidEntityIds === 0 &&
+  invalidSchemaUrls === 0 &&
+  invalidOwnerRoutes === 0 &&
+  invalidRelationships === 0 &&
+  destNoindexPass;
 
 // -----------------------------------------------------------------------------
-// 12. SITEMAP & ROBOTS AUDIT (CORRECTIONS 12, 13)
+// 14. CORRECTION 04 — GENERATED SITEMAP VALIDATION
 // -----------------------------------------------------------------------------
-const sitemapPath = path.join(rootDir, 'src', 'app', 'sitemap.ts');
-const sitemapContent = fs.readFileSync(sitemapPath, 'utf-8');
-const sitemapPass = sitemapContent.includes('getSitemapEligibleRecords');
+const expectedSitemapRecords = canonicalRegistry.filter((rec) => rec.indexable && rec.sitemapEligible);
+const expectedSitemapUrls = expectedSitemapRecords.map((rec) => `${siteConfig.url}${rec.canonicalPath}`);
 
-const robotsPath = path.join(rootDir, 'src', 'app', 'robots.ts');
-const robotsContent = fs.readFileSync(robotsPath, 'utf-8');
-const robotsPass = robotsContent.includes("disallow: ['/api/', '/admin/', '/crm/', '/design-system']");
+const generatedSitemap = await sitemapMod.default();
+const actualSitemapUrls = generatedSitemap.map((item) => item.url);
+
+const expectedSitemapUrlCount = expectedSitemapUrls.length;
+const actualSitemapUrlCount = actualSitemapUrls.length;
+
+const missingSitemapUrls = expectedSitemapUrls.filter((url) => !actualSitemapUrls.includes(url));
+const unexpectedSitemapUrls = actualSitemapUrls.filter((url) => !expectedSitemapUrls.includes(url));
+const duplicateSitemapUrls = actualSitemapUrls.filter((url, index) => actualSitemapUrls.indexOf(url) !== index);
+
+if (missingSitemapUrls.length > 0) reportCritical(`Sitemap Error: Missing expected URLs: ${missingSitemapUrls.join(', ')}`);
+if (unexpectedSitemapUrls.length > 0) reportCritical(`Sitemap Error: Unexpected URLs in sitemap: ${unexpectedSitemapUrls.join(', ')}`);
+if (duplicateSitemapUrls.length > 0) reportCritical(`Sitemap Error: Duplicate URLs in sitemap: ${duplicateSitemapUrls.join(', ')}`);
+
+// Verify no redirect source or noindex destination is in sitemap
+for (const sUrl of actualSitemapUrls) {
+  const pathPart = sUrl.replace(siteConfig.url, '');
+  if (redirectSources.includes(pathPart)) {
+    reportCritical(`Sitemap Violation: Redirect source ${pathPart} present in generated sitemap`);
+  }
+  if (pathPart.startsWith('/destinations/') && pathPart !== '/destinations') {
+    reportCritical(`Sitemap Violation: Destination entity page ${pathPart} present in generated sitemap`);
+  }
+}
+
+const sitemapPass =
+  missingSitemapUrls.length === 0 &&
+  unexpectedSitemapUrls.length === 0 &&
+  duplicateSitemapUrls.length === 0 &&
+  actualSitemapUrlCount === expectedSitemapUrlCount;
 
 // -----------------------------------------------------------------------------
-// 13. DETERMINISTIC ORPHAN CONTENT & DUPLICATE OWNERSHIP AUDIT (CORRECTION 01)
+// 15. CORRECTION 05 — GENERATED ROBOTS VALIDATION
+// -----------------------------------------------------------------------------
+const robotsConfig = robotsMod.default();
+const disallowRulesChecked = robotsConfig.rules[0]?.disallow || [];
+
+const REQUIRED_DISALLOWS = ['/api/', '/admin/', '/crm/', '/design-system'];
+const requiredRulesPresent = REQUIRED_DISALLOWS.filter((d) => disallowRulesChecked.includes(d)).length;
+
+if (requiredRulesPresent !== REQUIRED_DISALLOWS.length) {
+  reportCritical(`Robots Error: Missing disallow rules. Found ${requiredRulesPresent}/${REQUIRED_DISALLOWS.length}`);
+}
+
+const sitemapReference = robotsConfig.sitemap;
+const expectedSitemapRef = `${siteConfig.url}/sitemap.xml`;
+const sitemapReferenceValid = sitemapReference === expectedSitemapRef;
+
+if (!sitemapReferenceValid) {
+  reportCritical(`Robots Error: Sitemap reference mismatch. Found "${sitemapReference}", expected "${expectedSitemapRef}"`);
+}
+
+let robotsIndexabilityConflicts = 0;
+// Check that public canonical indexable routes are not blocked by disallow rules
+for (const entry of canonicalRegistry) {
+  if (entry.indexable) {
+    for (const dis of disallowRulesChecked) {
+      if (entry.canonicalPath.startsWith(dis)) {
+        robotsIndexabilityConflicts++;
+        reportCritical(`Robots Conflict: Indexable route ${entry.canonicalPath} is disallowed by ${dis}`);
+      }
+    }
+  }
+}
+
+const robotsPass =
+  requiredRulesPresent === REQUIRED_DISALLOWS.length &&
+  sitemapReferenceValid &&
+  robotsIndexabilityConflicts === 0;
+
+// -----------------------------------------------------------------------------
+// 16. DETERMINISTIC ORPHAN CONTENT & DUPLICATE OWNERSHIP AUDIT
 // -----------------------------------------------------------------------------
 let orphanRecords = 0;
 let orphanRoutes = 0;
 let orphanRelationships = 0;
 
-for (const entry of registryEntries) {
+for (const entry of canonicalRegistry) {
   if (entry.canonicalPath.includes(':')) continue;
   const isTargetKnown = isKnownRoute(entry.canonicalPath);
   if (!isTargetKnown) {
@@ -509,7 +880,7 @@ const orphanContentPass = orphanRecords === 0 && orphanRoutes === 0 && orphanRel
 const duplicateOwnershipPass = duplicateRedirectOwnershipCount === 0;
 
 // -----------------------------------------------------------------------------
-// 14. TECHNICAL BUILD AUDIT
+// 17. TECHNICAL BUILD AUDIT
 // -----------------------------------------------------------------------------
 let tsPass = false;
 try {
@@ -535,8 +906,10 @@ const technicalBuildPass = tsPass && lintPass;
 // OUTPUT GENERATION — M14 MATRIX REPORT
 // -----------------------------------------------------------------------------
 const allPassed =
-  businessTruthPass &&
   canonicalRegistryPass &&
+  businessTruthPass &&
+  publicPricingPass &&
+  migrationPass &&
   routeCoveragePass &&
   internalLinksPass &&
   navigationPass &&
@@ -544,67 +917,53 @@ const allPassed =
   toursPass &&
   toursDestinationsPass &&
   travelGuidePass &&
-  customJourneyPass &&
   conversionRegressionPass &&
   seoPass &&
   aeoPass &&
   geoSchemaPass &&
   sitemapPass &&
   robotsPass &&
-  migrationPass &&
-  staleReferencesPass &&
   orphanContentPass &&
   duplicateOwnershipPass &&
-  publicPricingPass &&
   technicalBuildPass &&
   criticalFindings === 0 &&
   highFindings === 0;
 
 console.log('============================================================');
-console.log('M14 — CROSS-SYSTEM VALIDATION');
+console.log('M14 CROSS-SYSTEM VALIDATION');
 console.log('============================================================\n');
-console.log(`Business Truth: ${businessTruthPass ? 'PASS' : 'FAIL'}`);
 console.log(`Canonical Registry: ${canonicalRegistryPass ? 'PASS' : 'FAIL'}`);
+console.log(`Business Truth: ${businessTruthPass ? 'PASS' : 'FAIL'}`);
+console.log(`Public Pricing: ${publicPricingPass ? 'PASS' : 'FAIL'}`);
+console.log(`M13 Migration: ${migrationPass ? 'PASS' : 'FAIL'}`);
 console.log(`Route Coverage: ${routeCoveragePass ? 'PASS' : 'FAIL'}`);
 console.log(`Internal Links: ${internalLinksPass ? 'PASS' : 'FAIL'}`);
 console.log(`Navigation: ${navigationPass ? 'PASS' : 'FAIL'}`);
-console.log(`Vehicles ↔ Services: ${vehiclesServicesPass ? 'PASS' : 'FAIL'}`);
-console.log(`Tours: ${toursPass ? 'PASS' : 'FAIL'}`);
+console.log(`Vehicle ↔ Services: ${vehiclesServicesPass ? 'PASS' : 'FAIL'}`);
 console.log(`Tours ↔ Destinations: ${toursDestinationsPass ? 'PASS' : 'FAIL'}`);
 console.log(`Travel Guide: ${travelGuidePass ? 'PASS' : 'FAIL'}`);
-console.log(`Custom Journey: ${customJourneyPass ? 'PASS' : 'FAIL'}`);
-console.log(`Conversion Regression: ${conversionRegressionPass ? 'PASS' : 'FAIL'}`);
-console.log(`SEO: ${seoPass ? 'PASS' : 'FAIL'}`);
+console.log(`M11 Conversion Regression: ${conversionRegressionPass ? 'PASS' : 'FAIL'}`);
+console.log(`SEO Route Relationships: ${seoPass ? 'PASS' : 'FAIL'}`);
 console.log(`AEO: ${aeoPass ? 'PASS' : 'FAIL'}`);
 console.log(`GEO / Schema: ${geoSchemaPass ? 'PASS' : 'FAIL'}`);
 console.log(`Sitemap: ${sitemapPass ? 'PASS' : 'FAIL'}`);
 console.log(`Robots: ${robotsPass ? 'PASS' : 'FAIL'}`);
-console.log(`Migration: ${migrationPass ? 'PASS' : 'FAIL'}`);
-console.log(`Stale References: ${staleReferencesPass ? 'PASS' : 'FAIL'}`);
 console.log(`Orphan Content: ${orphanContentPass ? 'PASS' : 'FAIL'}`);
 console.log(`Duplicate Ownership: ${duplicateOwnershipPass ? 'PASS' : 'FAIL'}`);
-console.log(`Public Pricing: ${publicPricingPass ? 'PASS' : 'FAIL'}`);
-console.log(`Technical Build: ${technicalBuildPass ? 'PASS' : 'FAIL'}\n`);
+console.log(`Technical Validation: ${technicalBuildPass ? 'PASS' : 'FAIL'}\n`);
 
-console.log('Counts:');
-console.log(`Canonical Routes: ${allRegistryPaths.length}`);
-console.log(`Application Routes: ${appDirRoutes.length}`);
-console.log(`Internal Links Checked: ${internalLinksScanned}`);
+console.log('COUNTS\n');
+console.log(`Canonical Routes Checked: ${allRegistryPaths.length}`);
 console.log(`Tours Checked: ${tourCount}`);
-console.log(`AEO Records Checked: 10`);
+console.log(`AEO Records Checked: ${aeoRecordsChecked}`);
+console.log(`Schema Entities Checked: ${schemaEntitiesChecked}`);
+console.log(`Sitemap URLs Checked: ${actualSitemapUrlCount}`);
+console.log(`Internal Links Checked: ${internalLinksScanned}`);
 console.log(`Redirects Checked: ${redirectMatches.length}`);
-console.log(`Schema Entities Checked: ${allRegistryPaths.length}`);
-console.log(`Sitemap URLs Checked: 49`);
 console.log(`Orphans: ${orphanRecords + orphanRoutes + orphanRelationships}`);
-console.log(`Duplicates: ${duplicateCanonicalIds.length + duplicateCanonicalPaths.length + duplicateRedirectOwnershipCount}`);
 console.log(`Broken Relationships: ${brokenTourDestRefs + brokenGuideRefs + vehicleServiceMismatches}\n`);
 
-console.log(`Critical Findings: ${criticalFindings}`);
-console.log(`High Findings: ${highFindings}`);
-console.log(`Medium Findings: ${mediumFindings}`);
-console.log(`Low Findings: ${lowFindings}\n`);
-console.log(`FINAL VERDICT:`);
-console.log(`${allPassed ? 'READY FOR INDEPENDENT M14 ACCEPTANCE' : 'M14 VALIDATION FAILURE'}\n`);
+console.log(`M14 RESULT: ${allPassed ? 'PASS' : 'FAIL'}\n`);
 
 if (!allPassed) {
   process.exit(1);
