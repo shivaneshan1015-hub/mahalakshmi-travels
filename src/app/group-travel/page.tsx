@@ -1,5 +1,7 @@
-import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 
 export default function GroupTravelRedirectPage() {
-  redirect('/travel-services/group-travel');
+  permanentRedirect('/travel-services/group-travel');
 }
+
+

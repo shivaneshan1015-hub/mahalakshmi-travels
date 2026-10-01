@@ -3,8 +3,10 @@
  * Redirects to the single canonical journey planning experience: /plan-your-journey
  */
 
-import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 
 export default function CustomisedToursRedirectPage() {
-  redirect('/plan-your-journey');
+  permanentRedirect('/plan-your-journey');
 }
+
+

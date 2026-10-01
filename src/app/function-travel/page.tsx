@@ -1,5 +1,7 @@
-import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 
 export default function FunctionTravelRedirectPage() {
-  redirect('/travel-services/function-travel');
+  permanentRedirect('/travel-services/function-travel');
 }
+
+

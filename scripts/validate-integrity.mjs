@@ -571,6 +571,54 @@ const m12AllPass =
   m12SPass && m12TPass;
 
 // -----------------------------------------------------------------------------
+// 5D. PHASE M13 ROUTE / MIGRATION INTEGRITY AUDIT
+// -----------------------------------------------------------------------------
+const nextConfigPath = path.join(rootDir, 'next.config.ts');
+const nextConfigContent = fs.readFileSync(nextConfigPath, 'utf-8');
+
+const redirectMatches = [...nextConfigContent.matchAll(/{\s*source:\s*['"]([^'"]+)['"],\s*destination:\s*['"]([^'"]+)['"],\s*permanent:\s*true\s*}/g)];
+const redirectSources = redirectMatches.map(m => m[1]);
+const redirectDestinations = redirectMatches.map(m => m[2]);
+
+let m13ChainsOrLoopsCount = 0;
+for (const dest of redirectDestinations) {
+  if (redirectSources.includes(dest)) {
+    m13ChainsOrLoopsCount++;
+  }
+}
+
+let m13InvalidTargetsCount = 0;
+for (const dest of redirectDestinations) {
+  if (!allRegistryPaths.includes(dest)) {
+    m13InvalidTargetsCount++;
+  }
+}
+
+const m13CustomJourneyPass =
+  allRegistryPaths.includes('/plan-your-journey') &&
+  redirectSources.includes('/customised-tours') &&
+  redirectDestinations[redirectSources.indexOf('/customised-tours')] === '/plan-your-journey';
+
+const m13ToursPass = tourCount === 39 && tourRegistry.every(t => t.canonicalPath.startsWith('/tours/'));
+
+const navFilePath = path.join(rootDir, 'src', 'config', 'navigation.ts');
+const navContent = fs.readFileSync(navFilePath, 'utf-8');
+let m13InternalLinkRedirectCount = 0;
+for (const src of redirectSources) {
+  if (navContent.includes(`'${src}'`) || navContent.includes(`"${src}"`)) {
+    m13InternalLinkRedirectCount++;
+  }
+}
+
+const m13Pass =
+  redirectMatches.length >= 14 &&
+  m13ChainsOrLoopsCount === 0 &&
+  m13InvalidTargetsCount === 0 &&
+  m13CustomJourneyPass &&
+  m13ToursPass &&
+  m13InternalLinkRedirectCount === 0;
+
+// -----------------------------------------------------------------------------
 // 6. TECHNICAL INTEGRITY AUDIT (DYNAMIC EXECUTION)
 // -----------------------------------------------------------------------------
 let tsPass = false;
@@ -605,7 +653,7 @@ const routesPass =
 const buildPass = tsPass && lintPass;
 
 // -----------------------------------------------------------------------------
-// OUTPUT GENERATION — RESPONSIBILITY GROUPS (A THROUGH F)
+// OUTPUT GENERATION — RESPONSIBILITY GROUPS (A THROUGH G)
 // -----------------------------------------------------------------------------
 const phase9Pass =
   tourCount === 39 &&
@@ -622,7 +670,7 @@ const geoPass = m12RPass && coveragePass && destIdMatches.length > 0;
 const businessTruthPass = businessPass && phonePass && emailPass && operatingSincePass && hoursPass && coveragePass && fleetPass && m12PPass;
 const crossSystemPass = routesPass && sitemapPass && m12OPass && m12TPass && tsPass && lintPass && buildPass;
 
-const allPassed = phase9Pass && seoPass && aeoPass && geoPass && businessTruthPass && crossSystemPass && m12AllPass;
+const allPassed = phase9Pass && seoPass && aeoPass && geoPass && businessTruthPass && crossSystemPass && m12AllPass && m13Pass;
 
 console.log('============================================================');
 console.log('PHASE 9 — DATA / CONTENT MODEL & SYSTEM INTEGRITY TEST');
@@ -683,6 +731,16 @@ console.log(`- M11 Commercial Value Contract Protection: ${m12TPass ? 'PASS' : '
 console.log(`- Strict TypeScript Compiler: ${tsPass ? 'PASS' : 'FAIL'}`);
 console.log(`- ESLint Code Quality: ${lintPass ? 'PASS' : 'FAIL'}`);
 console.log(`- Next.js Production Build: ${buildPass ? 'PASS' : 'FAIL'}\n`);
+
+console.log('------------------------------------------------------------');
+console.log('GROUP G: M13 ROUTE / MIGRATION INTEGRITY');
+console.log('------------------------------------------------------------');
+console.log(`- One-Step Redirect Matrix (${redirectMatches.length} Redirects): ${m13ChainsOrLoopsCount === 0 && m13InvalidTargetsCount === 0 ? 'PASS (0 chains/loops)' : 'FAIL'}`);
+console.log(`- Canonical Custom Journey Route (/plan-your-journey): ${m13CustomJourneyPass ? 'PASS' : 'FAIL'}`);
+console.log(`- Exactly 39 Canonical Tour Routes: ${m13ToursPass ? 'PASS' : 'FAIL'}`);
+console.log(`- Internal Link Hygiene (0 links to legacy redirects): ${m13InternalLinkRedirectCount === 0 ? 'PASS' : 'FAIL'}`);
+console.log(`- M13 Migration Suite Overall: ${m13Pass ? 'PASS' : 'FAIL'}\n`);
+
 
 console.log('------------------------------------------------------------');
 console.log('PHASE M12 TEST MATRIX (M12-01 TO M12-35)');
