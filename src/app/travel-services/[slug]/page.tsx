@@ -12,6 +12,7 @@ import { generateBreadcrumbSchema, generateFaqSchema, generateWebPageSchema } fr
 import { siteConfig } from '@/config/site';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
+import { VisibleAEOAnswerBlock } from '@/components/seo/VisibleAEOAnswerBlock';
 import { ServiceDetailHero } from '@/components/services/ServiceDetailHero';
 import { ServiceFaqAccordion } from '@/components/services/ServiceFaqAccordion';
 import { ServiceEnquiryBlock } from '@/components/services/ServiceEnquiryBlock';
@@ -93,6 +94,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
         {/* 01 — Hero */}
         <ServiceDetailHero service={service} />
+
+        {/* 01B — Verified AEO Answer Block */}
+        <VisibleAEOAnswerBlock canonicalPath={`/travel-services/${service.slug}`} />
 
         {/* 02 — Related Tour Circuits */}
         <ServiceRelatedTours relatedTours={relatedTours} />

@@ -12,6 +12,7 @@ import { generateArticleSchema, generateBreadcrumbSchema, generateWebPageSchema 
 import { siteConfig } from '@/config/site';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
+import { VisibleAEOAnswerBlock } from '@/components/seo/VisibleAEOAnswerBlock';
 import { ArticleHero } from '@/components/guide/ArticleHero';
 import { ArticleKeyFacts } from '@/components/guide/ArticleKeyFacts';
 import { ArticleTableOfContents } from '@/components/guide/ArticleTableOfContents';
@@ -128,6 +129,9 @@ export default async function TravelArticleDetailPage({ params }: ArticlePagePro
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start my-10">
           {/* Main Article Body Column */}
           <article className="lg:col-span-8">
+            {/* Verified AEO Answer Block */}
+            <VisibleAEOAnswerBlock canonicalPath={`/travel-guide/${article.slug}`} />
+
             {/* Key Facts Summary Panel */}
             <ArticleKeyFacts keyFacts={article.keyFacts} />
 

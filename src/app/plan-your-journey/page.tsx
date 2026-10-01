@@ -11,6 +11,7 @@ import { generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo/schem
 import { siteConfig } from '@/config/site';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
+import { VisibleAEOAnswerBlock } from '@/components/seo/VisibleAEOAnswerBlock';
 import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
 import { CustomJourneyBuilder } from '@/components/enquiry/CustomJourneyBuilder';
@@ -72,6 +73,8 @@ export default function PlanYourJourneyPage() {
           <p className="type-body-large text-[var(--text-secondary)] leading-relaxed">
             Tell us what you have in mind. We&apos;ll help shape the route around your people, time, and destination across South India.
           </p>
+
+          <VisibleAEOAnswerBlock canonicalPath="/plan-your-journey" />
         </div>
 
         {/* Master Interactive Progressive Form */}

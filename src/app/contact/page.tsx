@@ -9,6 +9,7 @@ import { generateBreadcrumbSchema, generateWebPageSchema } from '@/lib/seo/schem
 import { JsonLd } from '@/components/seo/JsonLd';
 import { siteConfig } from '@/config/site';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
+import { VisibleAEOAnswerBlock } from '@/components/seo/VisibleAEOAnswerBlock';
 import { Button } from '@/components/ui/Button';
 import { getQuickWhatsAppLink } from '@/lib/conversion/whatsapp';
 import { getPrimaryPhoneTelUrl } from '@/lib/conversion/phone';
@@ -55,6 +56,7 @@ export default function ContactPage() {
           <p className="type-body text-[var(--text-secondary)]">
             Our team in Madurai is ready to assist with group van reservations, customized family itineraries, and outstation travel plans.
           </p>
+          <VisibleAEOAnswerBlock canonicalPath="/contact" />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">

@@ -489,7 +489,35 @@ const m12MPass = schemaContent.includes('siteConfig.url');
 const m12NPass = !schemaContent.includes('aggregateRating') && !schemaContent.includes('reviewCount') && !schemaContent.includes('priceRange');
 const m12OPass = schemaContent.includes('${siteConfig.url}/#travelagency');
 const m12PPass = claims247Count === 0 && unsupportedInsuranceCount === 0 && otherUnsupportedClaimsCount === 0 && publicPricingLanguageCount === 0;
-const m12QPass = fs.existsSync(aeoRegistryPath) && aeoRegistryContent.includes('aeoQuestionRegistry') && aeoRegistryContent.includes('canonicalPath');
+const aeoEntryRegex = /{\s*id:\s*['"]([^'"]+)['"],\s*question:\s*['"]([^'"]+)['"],\s*canonicalPath:\s*['"]([^'"]+)['"],[\s\S]*?answerText:\s*['"]([^'"]+)['"]/g;
+const aeoEntries = [];
+let aeoMatch;
+while ((aeoMatch = aeoEntryRegex.exec(aeoRegistryContent)) !== null) {
+  aeoEntries.push({
+    id: aeoMatch[1],
+    question: aeoMatch[2],
+    canonicalPath: aeoMatch[3],
+    answerText: aeoMatch[4],
+  });
+}
+
+const aeoQuestionsHaveSuperlatives = aeoEntries.some(e => /\b(best|cheapest|No\.1|largest)\b/i.test(e.question));
+const aeoQuestionsList = aeoEntries.map(e => e.question.toLowerCase().trim());
+const duplicateAEOQuestions = aeoQuestionsList.filter((q, i) => aeoQuestionsList.indexOf(q) !== i);
+const invalidAEOCanonicalPaths = aeoEntries.filter(e => {
+  const record = registryEntries.find(r => r.canonicalPath === e.canonicalPath);
+  return !record || !record.indexable;
+});
+const visibleAEOBlockPath = path.join(rootDir, 'src', 'components', 'seo', 'VisibleAEOAnswerBlock.tsx');
+const visibleAEOBlockExists = fs.existsSync(visibleAEOBlockPath);
+
+const m12QPass =
+  fs.existsSync(aeoRegistryPath) &&
+  aeoEntries.length >= 10 &&
+  !aeoQuestionsHaveSuperlatives &&
+  duplicateAEOQuestions.length === 0 &&
+  invalidAEOCanonicalPaths.length === 0 &&
+  visibleAEOBlockExists;
 const m12RPass = schemaContent.includes('#travelagency') && schemaContent.includes('#website');
 const m12SPass = singleDestPageContent.includes('noIndex: true');
 const m12TPass = allContractTestsPass;

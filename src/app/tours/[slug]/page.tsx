@@ -12,6 +12,7 @@ import { generateTouristTripSchema, generateBreadcrumbSchema, generateWebPageSch
 import { siteConfig } from '@/config/site';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
+import { VisibleAEOAnswerBlock } from '@/components/seo/VisibleAEOAnswerBlock';
 import { TourDetailHero } from '@/components/tours/TourDetailHero';
 import { TourHighlights } from '@/components/tours/TourHighlights';
 import { TourItineraryTimeline } from '@/components/tours/TourItineraryTimeline';
@@ -99,6 +100,9 @@ export default async function TourDetailPage({ params }: TourPageProps) {
 
         {/* 01 — Hero & Facts */}
         <TourDetailHero tour={tour} />
+
+        {/* 01B — Verified AEO Answer Block */}
+        <VisibleAEOAnswerBlock canonicalPath={`/tours/${tour.slug}`} />
 
         {/* 02 — Highlights */}
         <TourHighlights highlights={tour.highlights} />

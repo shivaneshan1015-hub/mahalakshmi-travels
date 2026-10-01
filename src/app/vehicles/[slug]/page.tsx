@@ -11,6 +11,7 @@ import { getAllVehicles, getVehicleBySlug } from '@/lib/data/vehicles';
 import { resolveVehicleRelations } from '@/lib/data/relationships';
 import { constructMetadata } from '@/lib/seo/metadata';
 import { BreadcrumbNav } from '@/components/seo/BreadcrumbNav';
+import { VisibleAEOAnswerBlock } from '@/components/seo/VisibleAEOAnswerBlock';
 import { JourneyCard } from '@/components/ui/Card';
 import { JsonLd } from '@/components/seo/JsonLd';
 import {
@@ -304,6 +305,9 @@ export default async function VehicleDetailPage({ params }: VehiclePageProps) {
             </div>
           </div>
         )}
+
+        {/* Verified AEO Answer Block */}
+        <VisibleAEOAnswerBlock canonicalPath={`/vehicles/${vehicle.slug}`} />
 
         {/* Vehicle Specific FAQs */}
         {vehicle.faqs && vehicle.faqs.length > 0 && (
