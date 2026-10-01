@@ -495,7 +495,7 @@ The route from Madurai follows 4-lane highway up to Batlagundu (72 KM), followed
     category: 'route-insight',
     articleType: 'route-guide',
     destination: 'Tiruchendur & Rameshwaram',
-    destinationSlug: 'rameshwaram',
+    destinationSlug: 'rameswaram',
     author: {
       name: 'Mahalakshmi Pilgrimage Desk',
       role: 'Temple Tour Specialist',

@@ -416,7 +416,7 @@ export default function DesignSystemPage() {
                   durationText="1 Night / 2 Days"
                   distanceKm={157}
                   imageUrl="https://images.unsplash.com/photo-1596176530529-78163a4f7af2?q=80&w=1200&auto=format&fit=crop"
-                  href="/tours/madurai-to-munnar"
+                  href="/tours/munnar"
                   tags={['FAMILY', 'GROUP', 'CUSTOMISABLE']}
                 />
               </div>

@@ -45,7 +45,7 @@ const demoSeedEnquiries: CrmEnquiry[] = [
       utm_source: 'google',
       utm_medium: 'cpc',
       utm_campaign: 'munnar_family_tours_madurai',
-      landingPage: '/tours/munnar-hill-escape',
+      landingPage: '/tours/munnar',
     },
     internalNotes: 'Demo record for admin UI testing.',
     activityLog: [
