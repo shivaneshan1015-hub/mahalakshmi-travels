@@ -375,11 +375,22 @@ export class CrmRepository {
       if (e.status === 'BOOKED' || e.status === 'COMPLETED') bookedLeads++;
       if (e.status === 'LOST') lostLeads++;
 
-      // Revenue counting — verified quoted amount only
-      const val = e.quotedAmount || 0;
-      totalPipelineValue += val;
-      if (e.status === 'BOOKED' || e.status === 'COMPLETED') {
-        totalBookedRevenue += (e.quotedAmount || 0);
+      // Financial counting — authoritative verified commercial value contract only
+      const verifiedVal = e.verifiedCommercialValue?.amount || 0;
+      const verifiedSource = e.verifiedCommercialValue?.source;
+
+      // Pipeline value includes all active verified commercial values
+      if (e.verifiedCommercialValue && e.status !== 'LOST') {
+        totalPipelineValue += verifiedVal;
+      }
+
+      // Booked revenue requires verified booking or completion contract
+      const isVerifiedRevenue =
+        (e.status === 'BOOKED' || e.status === 'COMPLETED') &&
+        (verifiedSource === 'VERIFIED_BOOKING' || verifiedSource === 'VERIFIED_COMPLETION');
+
+      if (isVerifiedRevenue) {
+        totalBookedRevenue += verifiedVal;
       }
 
       // Ad Attribution breakdown
@@ -388,9 +399,9 @@ export class CrmRepository {
         sourceMap[src] = { count: 0, bookedCount: 0, revenue: 0 };
       }
       sourceMap[src].count++;
-      if (e.status === 'BOOKED' || e.status === 'COMPLETED') {
+      if (isVerifiedRevenue) {
         sourceMap[src].bookedCount++;
-        sourceMap[src].revenue += (e.quotedAmount || 0);
+        sourceMap[src].revenue += verifiedVal;
       }
     });
 
