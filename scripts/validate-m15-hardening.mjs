@@ -573,14 +573,76 @@ for (const sUrl of actualSitemapUrls) {
 const sitemapContractPass = sitemapFailures === 0 && sitemapGeneratedCount === sitemapEligibleCount;
 
 // -----------------------------------------------------------------------------
-// 7. STRENGTHEN AEO VALIDATION (ALL FIELDS, UNIQUE OWNERSHIP & RENDERING)
+// 7. STRENGTHEN AEO VALIDATION (M15-A09 ACTUAL PAGE OWNERSHIP & RENDERING)
 // -----------------------------------------------------------------------------
-const aeoRecordCount = aeoQuestionRegistry.length;
-let aeoCompleteRecordCount = 0;
-let aeoInvalidRecordsCount = 0;
+const aeoRecordsDiscovered = aeoQuestionRegistry.length;
+let aeoRecordsValidated = 0;
+let canonicalOwnerRoutesValidated = 0;
+let actualRenderingPathsValidated = 0;
+let questionOwnershipChecksPass = 0;
+let answerOwnershipChecksPass = 0;
+let orphanAeoRecordsCount = 0;
+let unregisteredAeoOwnersCount = 0;
+let crossOwnedAeoRecordsCount = 0;
+let invalidOwnerRoutesCount = 0;
+
 const VALID_ANSWER_TYPES = ['vehicle', 'tour', 'service', 'guide', 'core', 'conversion'];
 const seenAeoIds = new Set();
 const seenAeoQuestions = new Set();
+
+function resolvePageFileForPath(canonicalPath) {
+  if (canonicalPath === '/') return path.join(rootDir, 'src', 'app', 'page.tsx');
+
+  const directPath = path.join(rootDir, 'src', 'app', canonicalPath.slice(1), 'page.tsx');
+  if (fs.existsSync(directPath)) return directPath;
+
+  if (canonicalPath.startsWith('/vehicles/')) {
+    const p = path.join(rootDir, 'src', 'app', 'vehicles', '[slug]', 'page.tsx');
+    if (fs.existsSync(p)) return p;
+  }
+  if (canonicalPath.startsWith('/tours/')) {
+    const p = path.join(rootDir, 'src', 'app', 'tours', '[slug]', 'page.tsx');
+    if (fs.existsSync(p)) return p;
+  }
+  if (canonicalPath.startsWith('/travel-services/')) {
+    const p = path.join(rootDir, 'src', 'app', 'travel-services', '[slug]', 'page.tsx');
+    if (fs.existsSync(p)) return p;
+  }
+  if (canonicalPath.startsWith('/travel-guide/')) {
+    const p = path.join(rootDir, 'src', 'app', 'travel-guide', '[slug]', 'page.tsx');
+    if (fs.existsSync(p)) return p;
+  }
+  if (canonicalPath.startsWith('/destinations/')) {
+    const p = path.join(rootDir, 'src', 'app', 'destinations', '[slug]', 'page.tsx');
+    if (fs.existsSync(p)) return p;
+  }
+
+  return null;
+}
+
+function pageRendersAEOBlockForPath(pageFilePath, canonicalPath) {
+  if (!pageFilePath || !fs.existsSync(pageFilePath)) return false;
+  
+  const aeoItems = aeoMod.getAEOQuestionsForPath(canonicalPath);
+  if (!aeoItems || aeoItems.length === 0) {
+    return false;
+  }
+
+  const content = fs.readFileSync(pageFilePath, 'utf-8');
+
+  if (content.includes('VisibleAEOAnswerBlock')) {
+    if (content.includes(`canonicalPath="${canonicalPath}"`) || content.includes(`canonicalPath='${canonicalPath}'`)) {
+      return true;
+    }
+    if (canonicalPath.startsWith('/vehicles/') && content.includes('canonicalPath={`/vehicles/${vehicle.slug}`}')) return true;
+    if (canonicalPath.startsWith('/tours/') && content.includes('canonicalPath={`/tours/${tour.slug}`}')) return true;
+    if (canonicalPath.startsWith('/travel-services/') && content.includes('canonicalPath={`/travel-services/${service.slug}`}')) return true;
+    if (canonicalPath.startsWith('/travel-guide/') && content.includes('canonicalPath={`/travel-guide/${article.slug}`}')) return true;
+    if (canonicalPath.startsWith('/destinations/') && content.includes('canonicalPath={`/destinations/${destination.slug}`}')) return true;
+  }
+
+  return false;
+}
 
 for (const record of aeoQuestionRegistry) {
   const hasId = record.id && record.id.trim().length > 0;
@@ -606,21 +668,71 @@ for (const record of aeoQuestionRegistry) {
     validAnswerType &&
     hasEntityType &&
     hasEntityId &&
-    validPath &&
-    notRedirect &&
-    notNoindexDest &&
     record.status === 'CONFIRMED' &&
     uniqueId &&
     uniqueQuestion
   ) {
-    aeoCompleteRecordCount++;
+    aeoRecordsValidated++;
   } else {
-    aeoInvalidRecordsCount++;
-    reportBlocker(`AEO Record Invalid: ${record.id} (${record.question})`);
+    reportBlocker(`AEO Record Invalid/Incomplete: ${record.id} (${record.question})`);
+  }
+
+  if (validPath && notRedirect && notNoindexDest) {
+    canonicalOwnerRoutesValidated++;
+  } else {
+    invalidOwnerRoutesCount++;
+    reportBlocker(`AEO Owner Route Invalid: ${record.canonicalPath} for ${record.id}`);
+  }
+
+  const pageFile = resolvePageFileForPath(record.canonicalPath);
+  if (pageFile && pageRendersAEOBlockForPath(pageFile, record.canonicalPath)) {
+    actualRenderingPathsValidated++;
+
+    const matchedQuestions = aeoMod.getAEOQuestionsForPath(record.canonicalPath);
+    const hasQuestionMatch = matchedQuestions.some((q) => q.question.trim() === record.question.trim());
+    if (hasQuestionMatch) {
+      questionOwnershipChecksPass++;
+    } else {
+      reportBlocker(`AEO Question Ownership Mismatch: ${record.id} on ${record.canonicalPath}`);
+    }
+
+    const hasAnswerMatch = matchedQuestions.some((q) => q.answerText.trim() === record.answerText.trim());
+    if (hasAnswerMatch) {
+      answerOwnershipChecksPass++;
+    } else {
+      reportBlocker(`AEO Answer Ownership Mismatch: ${record.id} on ${record.canonicalPath}`);
+    }
+  } else {
+    orphanAeoRecordsCount++;
+    reportBlocker(`AEO Orphan Record: ${record.id} declared on ${record.canonicalPath} has no rendered page block`);
   }
 }
 
-const aeoPageOwnershipPass = aeoRecordCount === 10 && aeoCompleteRecordCount === 10 && aeoInvalidRecordsCount === 0;
+const registeredCanonicalPaths = new Set(aeoQuestionRegistry.map((r) => r.canonicalPath));
+for (const entry of canonicalRegistry) {
+  const pageFile = resolvePageFileForPath(entry.canonicalPath);
+  if (pageFile && pageRendersAEOBlockForPath(pageFile, entry.canonicalPath)) {
+    if (!registeredCanonicalPaths.has(entry.canonicalPath)) {
+      const recordForPath = aeoQuestionRegistry.filter((r) => r.canonicalPath === entry.canonicalPath);
+      if (recordForPath.length === 0) {
+        unregisteredAeoOwnersCount++;
+        reportBlocker(`AEO Unregistered Owner: Route ${entry.canonicalPath} renders AEO block without registry record`);
+      }
+    }
+  }
+}
+
+const aeoA09Pass =
+  aeoRecordsDiscovered === 10 &&
+  aeoRecordsValidated === 10 &&
+  canonicalOwnerRoutesValidated === 10 &&
+  actualRenderingPathsValidated === 10 &&
+  questionOwnershipChecksPass === 10 &&
+  answerOwnershipChecksPass === 10 &&
+  orphanAeoRecordsCount === 0 &&
+  unregisteredAeoOwnersCount === 0 &&
+  crossOwnedAeoRecordsCount === 0 &&
+  invalidOwnerRoutesCount === 0;
 
 // -----------------------------------------------------------------------------
 // 8. DEEP SECURITY HARDENING & DEBUG CLEANUP
@@ -1012,7 +1124,7 @@ const overallHardeningPass =
   legacyLinksCount === 0 &&
   unknownRoutesCount === 0 &&
   seoPass &&
-  aeoPageOwnershipPass &&
+  aeoA09Pass &&
   geoSchemaPass &&
   sitemapContractPass &&
   robotsPass &&
@@ -1062,10 +1174,23 @@ console.log(`- Robots: ${robotsPass ? 'PASS' : 'FAIL'}`);
 console.log(`- Schema: ${geoSchemaPass ? 'PASS' : 'FAIL'}\n`);
 
 console.log('AEO');
-console.log(`- Records: ${aeoRecordCount}`);
-console.log(`- Complete records: ${aeoCompleteRecordCount}`);
-console.log(`- Page ownership: ${aeoPageOwnershipPass ? 'PASS' : 'FAIL'}`);
-console.log(`- Invalid records: ${aeoInvalidRecordsCount}\n`);
+console.log(`- Records: ${aeoRecordsDiscovered}`);
+console.log(`- Complete records: ${aeoRecordsValidated}`);
+console.log(`- Page ownership: ${aeoA09Pass ? 'PASS' : 'FAIL'}`);
+console.log(`- Invalid records: ${orphanAeoRecordsCount + unregisteredAeoOwnersCount + crossOwnedAeoRecordsCount + invalidOwnerRoutesCount}\n`);
+
+console.log('M15-A09 — AEO ACTUAL PAGE OWNERSHIP');
+console.log(`AEO records discovered: ${aeoRecordsDiscovered}`);
+console.log(`AEO records validated: ${aeoRecordsValidated}`);
+console.log(`Canonical owner routes validated: ${canonicalOwnerRoutesValidated}`);
+console.log(`Actual AEO rendering paths validated: ${actualRenderingPathsValidated}`);
+console.log(`Question ownership checks: ${questionOwnershipChecksPass}/${aeoRecordsDiscovered}`);
+console.log(`Answer ownership checks: ${answerOwnershipChecksPass}/${aeoRecordsDiscovered}`);
+console.log(`Orphan AEO records: ${orphanAeoRecordsCount}`);
+console.log(`Unregistered AEO owners: ${unregisteredAeoOwnersCount}`);
+console.log(`Cross-owned AEO records: ${crossOwnedAeoRecordsCount}`);
+console.log(`Invalid owner routes: ${invalidOwnerRoutesCount}`);
+console.log(`M15-A09 STATUS: ${aeoA09Pass ? 'PASS' : 'FAIL'}\n`);
 
 console.log('GEO/SCHEMA');
 console.log(`- Entity integrity: ${geoSchemaPass ? 'PASS' : 'FAIL'}`);
