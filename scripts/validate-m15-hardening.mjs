@@ -573,21 +573,46 @@ for (const sUrl of actualSitemapUrls) {
 const sitemapContractPass = sitemapFailures === 0 && sitemapGeneratedCount === sitemapEligibleCount;
 
 // -----------------------------------------------------------------------------
-// 7. STRENGTHEN AEO VALIDATION (FINDING E ENHANCEMENT)
+// 7. STRENGTHEN AEO VALIDATION (ALL FIELDS, UNIQUE OWNERSHIP & RENDERING)
 // -----------------------------------------------------------------------------
 const aeoRecordCount = aeoQuestionRegistry.length;
 let aeoCompleteRecordCount = 0;
 let aeoInvalidRecordsCount = 0;
+const VALID_ANSWER_TYPES = ['vehicle', 'tour', 'service', 'guide', 'core', 'conversion'];
+const seenAeoIds = new Set();
+const seenAeoQuestions = new Set();
 
 for (const record of aeoQuestionRegistry) {
+  const hasId = record.id && record.id.trim().length > 0;
   const hasQuestion = record.question && record.question.trim().length > 0;
   const hasAnswer = record.answerText && record.answerText.trim().length > 0;
+  const validAnswerType = VALID_ANSWER_TYPES.includes(record.answerType);
+  const hasEntityType = record.entityType && record.entityType.trim().length > 0;
+  const hasEntityId = record.entityId && record.entityId.trim().length > 0;
   const validPath = allRegistryPaths.includes(record.canonicalPath);
   const notRedirect = !redirectSources.includes(record.canonicalPath);
   const targetReg = canonicalRegistry.find((r) => r.canonicalPath === record.canonicalPath);
   const notNoindexDest = !(targetReg && !targetReg.indexable && targetReg.contentType === 'destination');
+  const uniqueId = !seenAeoIds.has(record.id);
+  const uniqueQuestion = !seenAeoQuestions.has(record.question);
 
-  if (hasQuestion && hasAnswer && validPath && notRedirect && notNoindexDest && record.status === 'CONFIRMED') {
+  seenAeoIds.add(record.id);
+  seenAeoQuestions.add(record.question);
+
+  if (
+    hasId &&
+    hasQuestion &&
+    hasAnswer &&
+    validAnswerType &&
+    hasEntityType &&
+    hasEntityId &&
+    validPath &&
+    notRedirect &&
+    notNoindexDest &&
+    record.status === 'CONFIRMED' &&
+    uniqueId &&
+    uniqueQuestion
+  ) {
     aeoCompleteRecordCount++;
   } else {
     aeoInvalidRecordsCount++;
@@ -598,7 +623,7 @@ for (const record of aeoQuestionRegistry) {
 const aeoPageOwnershipPass = aeoRecordCount === 10 && aeoCompleteRecordCount === 10 && aeoInvalidRecordsCount === 0;
 
 // -----------------------------------------------------------------------------
-// 8. DEEP SECURITY HARDENING
+// 8. DEEP SECURITY HARDENING & DEBUG CLEANUP
 // -----------------------------------------------------------------------------
 let secretFindingsCount = 0;
 let environmentFindingsCount = 0;
@@ -631,6 +656,9 @@ function scanSecrets(dir) {
           secretFindingsCount++;
           reportBlocker(`Security Violation: Potential secret in ${relPath}`);
         }
+      }
+      if (content.includes('debugger;')) {
+        reportBlocker(`Debug Safety Violation: Unresolved debugger statement in ${relPath}`);
       }
     }
   }
@@ -713,7 +741,20 @@ function scanStaticAccessibility(dir) {
         }
       }
 
-      // 3. Form inputs without label association / aria-label
+      // 3. Links without accessible name
+      const linkTags = [...content.matchAll(/<(?:a|Link)\b[^>]*>([\s\S]*?)<\/(?:a|Link)>/g)];
+      for (const link of linkTags) {
+        const body = link[1].trim();
+        const tagStr = link[0];
+        const hasAriaLabel = tagStr.includes('aria-label=') || tagStr.includes('aria-labelledby=') || tagStr.includes('title=');
+        const hasChildren = body.length > 0 || body.includes('<') || body.includes('Image') || body.includes('svg');
+        if (!hasChildren && !hasAriaLabel) {
+          emptyLinksCount++;
+          reportBlocker(`Accessibility Violation: Empty link without accessible name in ${relPath}`);
+        }
+      }
+
+      // 4. Form inputs without label association / aria-label
       const lines = content.split('\n');
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
@@ -804,7 +845,7 @@ const performanceStaticFindingsCount = performanceRiskCount;
 const performanceStaticPass = performanceStaticFindingsCount === 0;
 
 // -----------------------------------------------------------------------------
-// 12. BUSINESS TRUTH & PUBLIC PRICING SCAN
+// 12. BUSINESS TRUTH, PROHIBITED CLAIMS & PUBLIC PRICING SCAN
 // -----------------------------------------------------------------------------
 let businessTruthViolations = 0;
 let publicPricingViolations = 0;
@@ -818,6 +859,35 @@ if (!businessPass || !phonePass || !emailPass || !operatingSincePass) {
   businessTruthViolations++;
   reportBlocker('Business Truth Violation: Centralized siteConfig identity mismatch');
 }
+
+// Prohibited Superlative Claims Scan
+const prohibitedClaims = [
+  /cheapest\s+(?:cab|van|taxi|rate|price)s?/i,
+  /lowest\s+price\s+guaranteed/i,
+  /unbeatable\s+zero\s+cost/i,
+  /#1\s+tour\s+operator/i,
+];
+
+function scanProhibitedClaims(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    const relPath = path.relative(rootDir, fullPath).replace(/\\/g, '/');
+    if (entry.isDirectory()) {
+      scanProhibitedClaims(fullPath);
+    } else if (/\.(tsx|ts|jsx|js)$/.test(entry.name)) {
+      if (relPath.includes('test') || relPath.startsWith('scripts/')) continue;
+      const content = fs.readFileSync(fullPath, 'utf-8');
+      for (const claim of prohibitedClaims) {
+        if (claim.test(content)) {
+          businessTruthViolations++;
+          reportBlocker(`Business Truth Violation: Prohibited claim ${claim} detected in ${relPath}`);
+        }
+      }
+    }
+  }
+}
+scanProhibitedClaims(srcDir);
 
 const tourTypePath = path.join(rootDir, 'src', 'types', 'tour.ts');
 const tourTypeContent = fs.readFileSync(tourTypePath, 'utf-8');
@@ -841,21 +911,80 @@ if (publicPricingViolations > 0) {
 }
 
 // -----------------------------------------------------------------------------
-// 13. SEO, GEO & ROBOTS CONTRACTS
+// 13. ROUTE-BY-ROUTE SEO CONTRACT & GEO SCHEMA INTEGRITY
 // -----------------------------------------------------------------------------
+let seoRouteFailures = 0;
+let routeCanonicalPassCount = 0;
+let routeMetadataPassCount = 0;
+let routeIndexabilityPassCount = 0;
+
+for (const entry of canonicalRegistry) {
+  const fullCanonicalUrl = `${siteConfig.url}${entry.canonicalPath}`;
+
+  if (!entry.canonicalPath.startsWith('/')) {
+    seoRouteFailures++;
+    reportBlocker(`SEO Route Failure: Invalid canonical path format ${entry.canonicalPath}`);
+  } else {
+    routeCanonicalPassCount++;
+  }
+
+  if (!entry.primaryIntent || entry.primaryIntent.trim().length === 0) {
+    seoRouteFailures++;
+    reportBlocker(`SEO Route Failure: Missing primaryIntent metadata in registry for ${entry.canonicalPath}`);
+  } else {
+    routeMetadataPassCount++;
+  }
+
+  if (entry.indexable) {
+    if (!entry.sitemapEligible) {
+      seoRouteFailures++;
+      reportBlocker(`SEO Route Failure: Indexable route ${entry.canonicalPath} must be sitemapEligible`);
+    } else if (!actualSitemapUrls.includes(fullCanonicalUrl)) {
+      seoRouteFailures++;
+      reportBlocker(`SEO Route Failure: Indexable route ${entry.canonicalPath} missing from generated sitemap`);
+    } else {
+      routeIndexabilityPassCount++;
+    }
+  } else {
+    if (actualSitemapUrls.includes(fullCanonicalUrl)) {
+      seoRouteFailures++;
+      reportBlocker(`SEO Route Failure: Non-indexable route ${entry.canonicalPath} present in generated sitemap`);
+    } else {
+      routeIndexabilityPassCount++;
+    }
+  }
+}
+
 const singleDestPagePath = path.join(rootDir, 'src', 'app', 'destinations', '[slug]', 'page.tsx');
 const singleDestPageContent = fs.readFileSync(singleDestPagePath, 'utf-8');
 const destNoindexPass = singleDestPageContent.includes('noIndex: true');
 
-const seoPass = destNoindexPass;
+const seoPass = seoRouteFailures === 0 && destNoindexPass && routeCanonicalPassCount === canonicalRegistry.length;
 
+// GEO Schema Contract
+let geoSchemaFailures = 0;
 const localBusSchema = schemaMod.generateLocalBusinessSchema();
 const webSiteSchema = schemaMod.generateWebSiteSchema();
-const geoSchemaPass =
-  localBusSchema['@type'] === 'TravelAgency' &&
-  localBusSchema['@id'] === `${siteConfig.url}/#travelagency` &&
-  webSiteSchema['@type'] === 'WebSite' &&
-  webSiteSchema['@id'] === `${siteConfig.url}/#website`;
+
+if (localBusSchema['@type'] !== 'TravelAgency' || localBusSchema['@id'] !== `${siteConfig.url}/#travelagency`) {
+  geoSchemaFailures++;
+  reportBlocker('GEO Schema Failure: TravelAgency entity @type or @id mismatch');
+}
+if (webSiteSchema['@type'] !== 'WebSite' || webSiteSchema['@id'] !== `${siteConfig.url}/#website`) {
+  geoSchemaFailures++;
+  reportBlocker('GEO Schema Failure: WebSite entity @type or @id mismatch');
+}
+
+if (toursRepository.length > 0) {
+  const sampleTour = toursRepository[0];
+  const tourSchema = schemaMod.generateTouristTripSchema(sampleTour);
+  if (tourSchema['@type'] !== 'TouristTrip' || !tourSchema.provider || tourSchema.provider['@id'] !== `${siteConfig.url}/#travelagency`) {
+    geoSchemaFailures++;
+    reportBlocker('GEO Schema Failure: TouristTrip schema provider @id mismatch');
+  }
+}
+
+const geoSchemaPass = geoSchemaFailures === 0;
 
 const robotsConfig = robotsMod.default();
 const disallows = robotsConfig.rules[0]?.disallow || [];

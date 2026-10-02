@@ -45,26 +45,9 @@ jobs:
       - name: Run M15 Hardening Validation
         run: npm run m15:validate
 
-      - name: Report M15 CI Acceptance Summary
+      - name: Log CI Suite Completion
         if: success()
         run: |
-          echo "========================================="
-          echo "M15 HARDENING VALIDATION"
-          echo "========================================="
-          echo "Build Integrity: PASS"
-          echo "TypeScript: PASS"
-          echo "Lint: PASS"
-          echo "Production Build: PASS"
-          echo "Migration Matrix: PASS"
-          echo "Internal Links: PASS"
-          echo "39 Tours: PASS"
-          echo "Destination Noindex: PASS"
-          echo "M11 Protection: PASS"
-          echo "M12 Protection: PASS"
-          echo "M13 Protection: PASS"
-          echo "M14 Protection: PASS"
-          echo "M15 Hardening: PASS"
-          echo "========================================="
-          echo "M15 CI RESULT: PASS"
-          echo "========================================="
+          echo "CI Pipeline executed all steps successfully: install -> integrity -> tsc -> lint -> build -> m13:redirect-smoke -> m14:validate -> m15:validate."
+
 
