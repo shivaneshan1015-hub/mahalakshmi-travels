@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "integrity": "node scripts/validate-integrity.mjs",
     "m13:redirect-smoke": "node scripts/smoke-test-m13-redirects.mjs",
-    "m14:validate": "node scripts/validate-m14-cross-system.mjs"
+    "m14:validate": "node scripts/validate-m14-cross-system.mjs",
+    "m15:validate": "node scripts/validate-m15-hardening.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

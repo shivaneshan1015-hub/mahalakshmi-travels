@@ -42,24 +42,29 @@ jobs:
       - name: Run M14 Cross-System Validation
         run: npm run m14:validate
 
-      - name: Report M14 CI Acceptance Summary
+      - name: Run M15 Hardening Validation
+        run: npm run m15:validate
+
+      - name: Report M15 CI Acceptance Summary
         if: success()
         run: |
           echo "========================================="
-          echo "M14 CROSS-SYSTEM VALIDATION"
+          echo "M15 HARDENING VALIDATION"
           echo "========================================="
+          echo "Build Integrity: PASS"
+          echo "TypeScript: PASS"
+          echo "Lint: PASS"
+          echo "Production Build: PASS"
           echo "Migration Matrix: PASS"
           echo "Internal Links: PASS"
-          echo "Redirect Configuration: PASS"
-          echo "Redirect Runtime Test: PASS"
           echo "39 Tours: PASS"
           echo "Destination Noindex: PASS"
           echo "M11 Protection: PASS"
           echo "M12 Protection: PASS"
-          echo "M14 Cross-System: PASS"
-          echo "TypeScript: PASS"
-          echo "Lint: PASS"
-          echo "Build: PASS"
+          echo "M13 Protection: PASS"
+          echo "M14 Protection: PASS"
+          echo "M15 Hardening: PASS"
           echo "========================================="
-          echo "M14 CI RESULT: PASS"
+          echo "M15 CI RESULT: PASS"
           echo "========================================="
+
