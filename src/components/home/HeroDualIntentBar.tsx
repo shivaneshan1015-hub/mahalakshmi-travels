@@ -59,6 +59,7 @@ export function HeroDualIntentBar() {
               <select
                 value={vehicleType}
                 onChange={(e) => setVehicleType(e.target.value)}
+                aria-label="Select Vehicle Type"
                 className="w-full text-xs font-semibold text-[var(--color-ink-950)] bg-[#F8FAFC] border border-[#CBD5E1] rounded-[6px] p-3 focus:outline-none focus:ring-2 focus:ring-[var(--color-terracotta-500)] min-h-[44px]"
               >
                 <option value="21-seater">21-Seater AC Luxury Van (Group / IV / Outstation)</option>
@@ -74,6 +75,7 @@ export function HeroDualIntentBar() {
               <select
                 value={passengerCount}
                 onChange={(e) => setPassengerCount(e.target.value)}
+                aria-label="Passenger Count"
                 className="w-full text-xs font-semibold text-[var(--color-ink-950)] bg-[#F8FAFC] border border-[#CBD5E1] rounded-[6px] p-3 focus:outline-none focus:ring-2 focus:ring-[var(--color-terracotta-500)] min-h-[44px]"
               >
                 <option value="1-4">1 - 4 Passengers (Sedan Recommended)</option>

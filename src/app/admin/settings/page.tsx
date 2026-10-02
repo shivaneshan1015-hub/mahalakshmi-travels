@@ -66,12 +66,14 @@ export default function AdminSettingsPage() {
 
           <div className="space-y-3 text-xs">
             <div>
-              <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+              <label htmlFor="meta-webhook-url-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                 Meta Webhook Callback URL
               </label>
               <div className="flex items-center gap-2">
                 <input
                   type="text"
+                  id="meta-webhook-url-input"
+                  aria-label="Meta Webhook Callback URL"
                   readOnly
                   value={metaWebhookUrl}
                   className="flex-1 px-3 py-2 bg-[#121211] border border-[#33332E] rounded text-white font-mono text-xs select-all"
@@ -124,12 +126,14 @@ export default function AdminSettingsPage() {
 
           <div className="space-y-3 text-xs">
             <div>
-              <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+              <label htmlFor="google-webhook-url-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                 Google Ads Webhook Endpoint
               </label>
               <div className="flex items-center gap-2">
                 <input
                   type="text"
+                  id="google-webhook-url-input"
+                  aria-label="Google Ads Webhook Endpoint"
                   readOnly
                   value={googleWebhookUrl}
                   className="flex-1 px-3 py-2 bg-[#121211] border border-[#33332E] rounded text-white font-mono text-xs select-all"
@@ -170,12 +174,14 @@ export default function AdminSettingsPage() {
 
           <div className="space-y-4 text-xs">
             <div>
-              <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+              <label htmlFor="brochure-url-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                 Official Mahalakshmi Tours PDF Brochure Link
               </label>
               <div className="flex items-center gap-2">
                 <input
                   type="text"
+                  id="brochure-url-input"
+                  aria-label="Official Mahalakshmi Tours PDF Brochure Link"
                   readOnly
                   value={brochureUrl}
                   className="flex-1 px-3 py-2 bg-[#121211] border border-[#33332E] rounded text-white font-mono text-xs select-all"
@@ -399,7 +405,9 @@ export default function AdminSettingsPage() {
               <div>
                 <input
                   type="password"
+                  id="current-password-input"
                   name="currentPassword"
+                  aria-label="Current Password"
                   required
                   placeholder="Current Password"
                   className="w-full px-3 py-2 bg-[#121211] border border-[#33332E] rounded text-white font-mono focus:outline-none focus:border-[#A65F43]"
@@ -408,7 +416,9 @@ export default function AdminSettingsPage() {
               <div>
                 <input
                   type="password"
+                  id="new-password-input"
                   name="newPassword"
+                  aria-label="New Password"
                   required
                   minLength={6}
                   placeholder="New Password (min 6 chars)"

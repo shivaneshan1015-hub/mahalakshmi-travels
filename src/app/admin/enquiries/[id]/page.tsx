@@ -348,11 +348,13 @@ export default function EnquiryDetailPage() {
             <form onSubmit={handleSaveFinancials} className="space-y-4 text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="quoted-amount-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Quoted Package (₹)
                   </label>
                   <input
                     type="number"
+                    id="quoted-amount-input"
+                    aria-label="Quoted Package Amount in INR"
                     value={quotedAmount}
                     onChange={(e) => setQuotedAmount(e.target.value)}
                     placeholder="35000"
@@ -361,11 +363,13 @@ export default function EnquiryDetailPage() {
                 </div>
 
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="advance-received-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Advance Paid (₹)
                   </label>
                   <input
                     type="number"
+                    id="advance-received-input"
+                    aria-label="Advance Paid Amount in INR"
                     value={advanceReceived}
                     onChange={(e) => setAdvanceReceived(e.target.value)}
                     placeholder="10000"
@@ -374,9 +378,9 @@ export default function EnquiryDetailPage() {
                 </div>
 
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <span className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Balance Due on Boarding (₹)
-                  </label>
+                  </span>
                   <div className="px-3 py-2 bg-[#141413] border border-[#2C2C29] rounded text-white font-mono text-sm font-bold">
                     ₹{Math.max(0, balance).toLocaleString('en-IN')}
                   </div>
@@ -385,11 +389,13 @@ export default function EnquiryDetailPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="assigned-vehicle-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Assigned Vehicle
                   </label>
                   <input
                     type="text"
+                    id="assigned-vehicle-input"
+                    aria-label="Assigned Vehicle Details"
                     value={assignedVehicle}
                     onChange={(e) => setAssignedVehicle(e.target.value)}
                     placeholder="e.g. 21-Seater Executive Coach (TN 58 AA 1234)"
@@ -398,11 +404,13 @@ export default function EnquiryDetailPage() {
                 </div>
 
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="assigned-driver-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Assigned Driver & Mobile
                   </label>
                   <input
                     type="text"
+                    id="assigned-driver-input"
+                    aria-label="Assigned Driver Name and Mobile"
                     value={assignedDriver}
                     onChange={(e) => setAssignedDriver(e.target.value)}
                     placeholder="e.g. M. Pandian (+91 94421 XXXXX)"
@@ -413,10 +421,12 @@ export default function EnquiryDetailPage() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="lead-status-select" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Pipeline Stage / Status
                   </label>
                   <select
+                    id="lead-status-select"
+                    aria-label="Pipeline Stage Status"
                     value={status}
                     onChange={(e) => setStatus(e.target.value as LeadStatus)}
                     className="w-full px-3 py-2 bg-[#121211] border border-[#33332E] rounded text-white focus:outline-none focus:border-[#A65F43]"
@@ -432,10 +442,12 @@ export default function EnquiryDetailPage() {
                 </div>
 
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="lead-priority-select" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Lead Priority
                   </label>
                   <select
+                    id="lead-priority-select"
+                    aria-label="Lead Priority"
                     value={priority}
                     onChange={(e) => setPriority(e.target.value as LeadPriority)}
                     className="w-full px-3 py-2 bg-[#121211] border border-[#33332E] rounded text-white focus:outline-none focus:border-[#A65F43]"
@@ -470,6 +482,8 @@ export default function EnquiryDetailPage() {
             <form onSubmit={handleAddNote} className="flex gap-2">
               <input
                 type="text"
+                id="new-note-input"
+                aria-label="Add internal note or call log"
                 value={newNote}
                 onChange={(e) => setNewNote(e.target.value)}
                 placeholder="Log a call, payment note, or special requirement..."
@@ -615,10 +629,12 @@ export default function EnquiryDetailPage() {
 
             {/* Live Editable Message Box */}
             <div className="space-y-1 pt-1">
-              <label className="block text-[11px] text-[#8A8780] font-mono uppercase">
+              <label htmlFor="custom-whatsapp-textarea" className="block text-[11px] text-[#8A8780] font-mono uppercase">
                 3. Editable Message Content
               </label>
               <textarea
+                id="custom-whatsapp-textarea"
+                aria-label="Editable WhatsApp Message Content"
                 rows={6}
                 value={customMessage}
                 onChange={(e) => setCustomMessage(e.target.value)}

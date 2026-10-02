@@ -70,6 +70,7 @@ export function Step02Destinations({
               type="text"
               value={tempOrigin}
               onChange={(e) => setTempOrigin(e.target.value)}
+              aria-label="Starting point origin"
               className="px-2 py-1 text-xs font-bold border border-[var(--color-terracotta-500)] rounded bg-white"
               autoFocus
             />

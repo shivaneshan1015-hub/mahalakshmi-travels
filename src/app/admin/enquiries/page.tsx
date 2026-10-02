@@ -234,6 +234,8 @@ export default function AdminEnquiriesPage() {
           <form onSubmit={handleSearchSubmit} className="flex-1 relative">
             <input
               type="text"
+              id="search-query-input"
+              aria-label="Search by customer name, phone, ref code, or destination"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by customer name, phone, ref code, or destination..."
@@ -250,8 +252,10 @@ export default function AdminEnquiriesPage() {
 
           {/* Ad Source Filter */}
           <div className="flex items-center gap-2 shrink-0">
-            <span className="text-xs text-[#8A8780] font-mono">Source:</span>
+            <label htmlFor="source-filter-select" className="text-xs text-[#8A8780] font-mono">Source:</label>
             <select
+              id="source-filter-select"
+              aria-label="Filter leads by Ad Source channel"
               value={selectedSource}
               onChange={(e) => setSelectedSource(e.target.value as AdSource | 'ALL')}
               className="px-2.5 py-1.5 bg-[#121211] border border-[#33332E] rounded text-xs text-[#C2BFBA] focus:outline-none focus:border-[#A65F43]"
@@ -374,6 +378,7 @@ export default function AdminEnquiriesPage() {
                     {/* Status Dropdown */}
                     <td className="py-3.5 px-4">
                       <select
+                        aria-label="Update Lead Status"
                         value={lead.status}
                         onChange={(e) => handleStatusChange(lead.id, e.target.value as LeadStatus)}
                         className="px-2 py-1 bg-[#121211] border border-[#33332E] rounded text-xs text-white focus:outline-none focus:border-[#A65F43] cursor-pointer"
@@ -450,11 +455,13 @@ export default function AdminEnquiriesPage() {
             <form onSubmit={handleCreateManualLead} className="space-y-3.5 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="modal-name-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Customer Name *
                   </label>
                   <input
                     type="text"
+                    id="modal-name-input"
+                    aria-label="Customer Name"
                     required
                     value={modalForm.name}
                     onChange={(e) => setModalForm({ ...modalForm, name: e.target.value })}
@@ -463,11 +470,13 @@ export default function AdminEnquiriesPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="modal-phone-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Phone Number *
                   </label>
                   <input
                     type="text"
+                    id="modal-phone-input"
+                    aria-label="Phone Number"
                     required
                     value={modalForm.phone}
                     onChange={(e) => setModalForm({ ...modalForm, phone: e.target.value })}
@@ -479,11 +488,13 @@ export default function AdminEnquiriesPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="modal-dest-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Destinations
                   </label>
                   <input
                     type="text"
+                    id="modal-dest-input"
+                    aria-label="Destinations"
                     value={modalForm.destinations}
                     onChange={(e) => setModalForm({ ...modalForm, destinations: e.target.value })}
                     placeholder="e.g. Munnar, Thekkady"
@@ -491,11 +502,13 @@ export default function AdminEnquiriesPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="modal-date-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Travel Date
                   </label>
                   <input
                     type="date"
+                    id="modal-date-input"
+                    aria-label="Travel Date"
                     value={modalForm.travelDate}
                     onChange={(e) => setModalForm({ ...modalForm, travelDate: e.target.value })}
                     className="w-full px-3 py-2 bg-[#121211] border border-[#33332E] rounded text-white focus:outline-none focus:border-[#A65F43]"
@@ -505,11 +518,13 @@ export default function AdminEnquiriesPage() {
 
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="modal-pax-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Pax Count
                   </label>
                   <input
                     type="number"
+                    id="modal-pax-input"
+                    aria-label="Pax Count"
                     min="1"
                     value={modalForm.travellerCount}
                     onChange={(e) => setModalForm({ ...modalForm, travellerCount: Number(e.target.value) })}
@@ -517,10 +532,12 @@ export default function AdminEnquiriesPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="modal-source-select" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Lead Source
                   </label>
                   <select
+                    id="modal-source-select"
+                    aria-label="Lead Source"
                     value={modalForm.source}
                     onChange={(e) => setModalForm({ ...modalForm, source: e.target.value as AdSource })}
                     className="w-full px-3 py-2 bg-[#121211] border border-[#33332E] rounded text-white focus:outline-none focus:border-[#A65F43]"
@@ -533,11 +550,13 @@ export default function AdminEnquiriesPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                  <label htmlFor="modal-quote-input" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                     Quote (₹)
                   </label>
                   <input
                     type="number"
+                    id="modal-quote-input"
+                    aria-label="Quoted Amount in INR"
                     placeholder="35000"
                     value={modalForm.quotedAmount}
                     onChange={(e) => setModalForm({ ...modalForm, quotedAmount: e.target.value })}
@@ -547,10 +566,12 @@ export default function AdminEnquiriesPage() {
               </div>
 
               <div>
-                <label className="block text-[#A8A59E] mb-1 font-mono uppercase">
+                <label htmlFor="modal-notes-textarea" className="block text-[#A8A59E] mb-1 font-mono uppercase">
                   Internal Notes
                 </label>
                 <textarea
+                  id="modal-notes-textarea"
+                  aria-label="Internal Notes"
                   rows={2}
                   value={modalForm.notes}
                   onChange={(e) => setModalForm({ ...modalForm, notes: e.target.value })}

@@ -80,6 +80,9 @@ export default function AdminLoginPage() {
               </label>
               <input
                 type="email"
+                id="owner-email"
+                name="email"
+                aria-label="Owner Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -90,7 +93,7 @@ export default function AdminLoginPage() {
 
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-xs font-mono uppercase text-[#A8A59E] tracking-wider">
+                <label htmlFor="owner-password" className="block text-xs font-mono uppercase text-[#A8A59E] tracking-wider">
                   Access Password / PIN
                 </label>
                 <span className="text-[10px] text-[#78756F] font-mono">
@@ -100,6 +103,9 @@ export default function AdminLoginPage() {
               <div className="relative">
                 <input
                   type="password"
+                  id="owner-password"
+                  name="password"
+                  aria-label="Access Password / PIN"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
