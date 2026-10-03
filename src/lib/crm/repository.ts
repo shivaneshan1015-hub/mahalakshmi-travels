@@ -118,7 +118,6 @@ const demoSeedEnquiries: CrmEnquiry[] = [
 
 // Global in-memory storage singleton for Next.js runtime
 declare global {
-  // eslint-disable-next-line no-var
   var __mahalakshmi_crm_enquiries: CrmEnquiry[] | undefined;
 }
 

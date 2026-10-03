@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import {
@@ -56,7 +56,7 @@ export default function EnquiryDetailPage() {
   const [selectedTemplate, setSelectedTemplate] = useState<WhatsAppTemplateOptions['type']>('welcome');
   const [customMessage, setCustomMessage] = useState<string>('');
 
-  const fetchEnquiry = async () => {
+  const fetchEnquiry = useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch(`/api/admin/enquiries/${id}`);
@@ -85,7 +85,7 @@ export default function EnquiryDetailPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
   const handleTemplateSelect = (type: WhatsAppTemplateOptions['type']) => {
     if (!enquiry) return;
@@ -107,7 +107,7 @@ export default function EnquiryDetailPage() {
 
   useEffect(() => {
     if (id) fetchEnquiry();
-  }, [id]);
+  }, [id, fetchEnquiry]);
 
   const handleSaveFinancials = async (e: React.FormEvent) => {
     e.preventDefault();

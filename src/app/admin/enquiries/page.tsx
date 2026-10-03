@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import {
@@ -48,7 +48,7 @@ export default function AdminEnquiriesPage() {
   });
   const [submittingModal, setSubmittingModal] = useState(false);
 
-  const fetchEnquiries = async () => {
+  const fetchEnquiries = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams();
@@ -66,11 +66,11 @@ export default function AdminEnquiriesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedStatus, selectedSource, searchQuery]);
 
   useEffect(() => {
     fetchEnquiries();
-  }, [selectedStatus, selectedSource]);
+  }, [fetchEnquiries]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
